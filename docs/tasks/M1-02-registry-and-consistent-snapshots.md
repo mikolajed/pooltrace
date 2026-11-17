@@ -160,9 +160,10 @@ documentation files changed; foundation files and the user's Git HEAD `db70dbf` 
 
 ## M1-03 validation plan
 
-All cases below are **planned**, not executed tests. Accepted ADR-0005 defines the preparatory
-registry/snapshot boundary; M1-03 still needs separate implementation approval and its required
-live evidence. M1-03 does not implement quotation, finite-size qualification, storage, a public CLI/API,
+This is the validation plan prepared by M1-02, rather than its test report. M1-03 was subsequently
+approved and completed; its [task record](M1-03-registry-and-consistent-snapshots.md#evidence-and-handoff)
+owns executed checks and live evidence. Accepted ADR-0005 defines the preparatory registry/snapshot
+boundary. M1-03 does not implement quotation, finite-size qualification, storage, a public CLI/API,
 UI, or an always-running collection process. Adding test tooling belongs to that approved scope.
 
 ### Offline checks with explicit fixtures and controlled RPC responses

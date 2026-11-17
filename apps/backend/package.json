@@ -1,0 +1,9 @@
+{
+  "name": "@pooltrace/backend",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@pooltrace/protocols": "workspace:*"
+  }
+}

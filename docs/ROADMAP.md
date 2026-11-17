@@ -1,6 +1,6 @@
 # Proposed roadmap
 
-M1-01 and the M1-02 design task are complete. ADR-0005 is accepted; further
+M1-01, the M1-02 design task, and M1-03's registry/snapshot slice are complete. Further
 implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
@@ -31,8 +31,9 @@ Extend and revise the sequence as the product develops.
 
 The separately approved [M1-01 foundation](tasks/M1-01-tooling-and-workspaces.md) is complete under
 accepted ADR-0001. [M1-02](tasks/M1-02-registry-and-consistent-snapshots.md) produced accepted
-[ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md). Review the bounded
-[M1-03 implementation scope](tasks/M1-03-registry-and-consistent-snapshots.md) before approving it.
+[ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md). The separately approved
+[M1-03 implementation](tasks/M1-03-registry-and-consistent-snapshots.md) has offline and live evidence
+for identity, structural screening, and consistent snapshots; finite-size qualification remains open.
 Quotation/profit semantics also need their own design and
 implementation approvals. Remaining tasks await their own approvals. Detailed work
 and acceptance criteria live in the [backlog](BACKLOG.md) and its linked task records.

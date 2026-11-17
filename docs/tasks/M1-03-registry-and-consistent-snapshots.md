@@ -1,6 +1,6 @@
 # M1-03: Registry verification and consistent snapshots
 
-- State: Proposed
+- State: Done
 - Milestone: M1 — local read-only research application
 - Related ADRs: [ADR-0001](../adr/0001-project-boundaries-and-tooling.md),
   [ADR-0004](../adr/0004-local-processes-and-gated-deployment.md),
@@ -23,7 +23,7 @@ M1-03 must not claim that its preliminary screens establish all of CR-02.
 
 ## Scope
 
-If approved, implement the accepted ADR-0005 policy without changing its technical decisions.
+The implementation follows the accepted ADR-0005 policy without changing its consistency or admission decisions.
 The ADR owns candidate identities/fees, thresholds, defaults, consistency rules, and failure semantics.
 
 | Deliverable | Bounded implementation |
@@ -42,7 +42,8 @@ packages; the M1-01 scripts-only type-check cannot stand in for application veri
 
 The live gate may make read-only RPC calls to the explicitly configured endpoint once this task
 is approved. The user selected Alchemy for the initial Ethereum workload and reports configuring
-an endpoint; its chain/capabilities and availability are still unverified. Do not record credentials in
+an endpoint. Its chain/capabilities were unverified during preparation and have now been checked
+below. Do not record credentials in
 chat, reports, fixtures, or logs; configuration instructions should use the ignored backend
 environment file. Check current official APIs again during implementation, especially the pinned
 viem release's behavior with the existing Node.js/TypeScript toolchain.
@@ -79,8 +80,9 @@ will evaluate extracting that boundary into a separate blockchain gateway proces
 consumers and independent operation. No gateway process, service API, or additional application
 process is part of this task; ADR-0004's initial topology remains in effect.
 
-Actual pool addresses, provider capability/availability, observed liquidity, and runtime compatibility
-remain unverified until the approved work produces evidence. A missing RPC endpoint does not prevent
+Actual pool addresses, provider capabilities, observed structural state, and runtime compatibility
+were unverified at preparation. The implementation evidence below records their actual results.
+A missing RPC endpoint does not prevent
 useful offline implementation/verification, but it prevents satisfying the proposed live completion
 gate. Unsupported consistency capabilities require an explicit failure; they do not authorize a
 weaker fallback. A material departure from ADR-0005 needs a reviewed design change.
@@ -88,25 +90,25 @@ weaker fallback. A material departure from ADR-0005 needs a reviewed design chan
 ## Acceptance criteria
 
 - [x] The user has accepted the governing design in ADR-0005.
-- [ ] The user has explicitly approved this bounded implementation scope.
-- [ ] The necessary packages install reproducibly with Bun and its lockfile, and documented
+- [x] The user has explicitly approved this bounded implementation scope.
+- [x] The necessary packages install reproducibly with Bun and its lockfile, and documented
   verification commands cover the actual application code and preserve the foundation checks.
-- [ ] Source-backed candidates are discovered/verified at a recorded block hash; incorrect or
+- [x] Source-backed candidates are discovered/verified at a recorded block hash; incorrect or
   unavailable chain/contract/token/pool/liquidity evidence produces the accepted explicit outcomes.
-- [ ] Every state read and retry carries the required hash/canonical selector, and fresh
+- [x] Every state read and retry carries the required hash/canonical selector, and fresh
   post-validation, temporal gates, invalidation, and unavailable-validation behavior are demonstrated.
-- [ ] Actual request counts/concurrency/cancellation behavior satisfy the accepted operational limits;
+- [x] Actual request counts/concurrency/cancellation behavior satisfy the accepted operational limits;
   missing results and failed reads never become fabricated zero-valued successes.
-- [ ] Meaningful offline checks cover V01–V18 in the existing validation plan, including boundary
+- [x] Meaningful offline checks cover V01–V18 in the existing validation plan, including boundary
   values, rejected/partial observations, reorganization responses, origin, and credential sanitization.
-- [ ] The required read-only live gate records a usable registry/snapshot run and honest unavailable/
+- [x] The required read-only live gate records a usable registry/snapshot run and honest unavailable/
   expired-use evidence with real provenance. Missing/failed required integration keeps the task
   incomplete unless the user explicitly revises its scope; fixtures cannot count as live evidence.
-- [ ] Observation and lifecycle information preserve exact quantities/units, source/policy revisions,
+- [x] Observation and lifecycle information preserve exact quantities/units, source/policy revisions,
   times, read outcomes, and the distinction between structural screens and finite-size suitability.
-- [ ] The handoff reports structural evidence only, with finite-size suitability/full CR-02 evidence
+- [x] The handoff reports structural evidence only, with finite-size suitability/full CR-02 evidence
   still pending M1-04/05; no pool substitution or premature workload admission is hidden.
-- [ ] Actual commands/results and limitations are recorded here, setup guidance is usable, and the
+- [x] Actual commands/results and limitations are recorded here, setup guidance is usable, and the
   backlog/current state are updated without starting another task.
 
 ## Planned validation
@@ -131,20 +133,23 @@ that an apparent opportunity could have been captured.
 - Review preparation: Prepared after ADR-0005 acceptance as the concrete next implementation scope.
   This task record does not manufacture implementation approval.
 - Design acceptance: Granted on 2026-11-17 when the user said “i accept adr5”; recorded in ADR-0005.
-- Implementation approval: Not granted.
-- Approved implementation scope and user instruction: None recorded.
+- Implementation approval: Granted on 2026-11-17 for M1-03 only.
+- Approved implementation scope and user instruction: “i accept m1-03”. This authorizes the bounded
+  registry/snapshot implementation, dependency installation, offline tests, and configured read-only
+  live integration gate. It does not authorize subsequent tasks, a gateway process, commits, or pushes.
 
-The user's endpoint/future-direction clarification supplies configuration context, not approval to
-implement this task. M1-03 remains Proposed while the user reviews it.
+The earlier endpoint/future-direction clarification supplied configuration context, not approval to
+implement this task. The subsequent explicit M1-03 approval above authorizes this implementation.
 
 On 2026-11-17 the user replied “ok” to the recommendation to isolate RPC access inside the backend
 now and evaluate a separate gateway process in RPC-01. This accepts the direction described above;
-it does not approve M1-03 implementation or a future gateway implementation.
+that earlier direction acceptance did not itself approve implementation. M1-03 was approved
+separately as recorded above; a future gateway remains unapproved.
 
-## Evidence and handoff
+## Preparation history
 
-Implementation has not started. This Proposed task record is ready for user review. No application
-code, package/dependency changes, tests, live RPC calls, commits, or pushes were performed to prepare it.
+These notes describe earlier documentation-only handoffs, before the explicit implementation approval.
+No application code, dependencies, tests, or live RPC calls were introduced during preparation.
 
 Preparation checks passed on 2026-11-17: local links/anchors, whitespace, and CR references across
 29 Markdown files; `git diff --check`; accepted-design/proposed-task approval states; and confirmation
@@ -166,5 +171,114 @@ Links/anchors, whitespace, and CR checks passed across 29 Markdown files; `git d
 passed. M1-03 remains Proposed with implementation unapproved; cumulative changes remain six
 documentation files and Git HEAD `172a81c` is unchanged.
 
-The next action is user approval or amendment of this scope. Only then implement M1-03 and record
-its actual verification evidence here. Completion does not authorize another task.
+## Evidence and handoff
+
+Completed on 2026-11-17 under the explicit approval above. No subsequent task was started; all
+changes remain uncommitted. Git HEAD remains the user's `dee5c07`; no commit or push was made.
+
+### Implemented behavior and use
+
+- [`packages/protocols`](../../packages/protocols/src/index.ts) implements sourced expectations,
+  factory discovery, code hashes, observed decimals/identity, V2 reserves, full V3 `slot0` and current
+  liquidity, and independent identity/structural check outcomes. No pool address is hardcoded as a
+  verified deployment; the configured factories discover all three candidates at the selected hash.
+- [`apps/backend`](../../apps/backend/src/index.ts) implements validated private configuration,
+  one-attempt collection, deep-frozen observations, eligibility calculation, and append-only
+  revalidation events in newly returned observations. Confirmed invalidation is terminal for that
+  attempt; unavailable validation can recover without rewriting history.
+- All contract/code reads, including retries, require `blockHash` plus `requireCanonical: true`.
+  Both methods undergo positive and constructed unknown-hash probes. Unknown probe inputs are
+  retained as test inputs, never described as observed chain blocks. No number/latest state fallback,
+  alternate endpoint, substituted candidate, automatic fixture mode, or transaction path exists.
+- The bounded HTTP reader owns the four-request semaphore, 5 s request timeout, 20 s attempt deadline,
+  one transient retry with 250 ms minimum/valid longer Retry-After, and cancellation/late-result handling.
+  viem's custom transport has retries disabled; direct fresh chain/header requests share those limits.
+  This refines ADR-0005's HTTP/getBlock plumbing without changing its consistency or policy decisions.
+- Observation metadata includes source/configuration/policy/implementation/dependency revisions,
+  chain/block/timing, checks, runtime code hashes, exact bigint quantities, sanitized per-send outcomes,
+  and nonsecret provider labels. JSON uses decimal strings for bigint. Token addresses/observed decimals
+  identify reserve base units; V3 price is Q64.96 and liquidity remains a protocol quantity.
+- [`README` setup](../../README.md#development-setup), [engineering notes](../ENGINEERING.md#registrysnapshot-integration),
+  and `.env.example` document offline checks and the explicit read-only `bun run check:live` harness.
+  The harness writes ignored per-attempt reports, never an application database or public market CLI.
+  Monotonic times are process-local; serialized reports are past evidence rather than reloadable live state.
+
+### Commands and offline evidence
+
+| Actual check | Result |
+| --- | --- |
+| `bun install` after adding exact dependencies | Passed; viem 2.57.20, Vitest 5.1.0, workspace dependencies, and generated `bun.lock` installed |
+| `bun install --frozen-lockfile` in an isolated source copy without `.env`, `.git`, `node_modules`, or live data | Passed; 110 packages installed; lockfile unchanged |
+| `bun run check` in the workspace | Passed: runtime pins, root/protocol/backend TypeScript, Biome lint/format, and **50 tests across two files** |
+| `bun run check` in the isolated clean installation | Passed with the same 50 tests; no endpoint/configuration required |
+| `bun run check:live` against the configured Alchemy endpoint | Passed: live usable registry/snapshot, historical exact-state replay, and real elapsed validation expiry/revalidation |
+
+The initial sandboxed live run reported `network` and failed rather than switching to fixtures.
+The authorized network-enabled run succeeded. Bun installation also required approved access to its
+cache/temporary directories. Early type/lint failures were fixed: Node-compatible erasable syntax,
+ABI typing, environment typing, test narrowing, and iterable callbacks. `ox`'s WebAuthn declarations
+require DOM type names in the shared compiler library; `skipLibCheck` remains false and Node remains
+the runtime. No failed implementation check is being counted as a pass.
+
+[`snapshot.test.ts`](../../apps/backend/test/snapshot.test.ts) and
+[`rpc.test.ts`](../../packages/protocols/test/rpc.test.ts) exercise the existing V01–V18 plan:
+
+| Plan coverage | Executed evidence |
+| --- | --- |
+| V01–V03 | Configuration rejection, actual viem hash/canonical wire calls, ignored-hash provider rejection, wrong chain before/after collection, missing/malformed/contradictory headers |
+| V04–V07 | Empty versus unreadable code, zero discovery, token order/decimals/factory mismatches, disabled/mismatched fee spacing, duplicate identities, zero reserves/price/liquidity and locked V3 screens |
+| V08–V12 | Head advances while reads stay hash-bound, distinct immutable attempts, replacement/noncanonical invalidation, unavailable/recovered validation histories, fresh request counts, age/lag/validation/future boundaries and clock rollback |
+| V13–V15 | Actual viem retries for network/429/503, valid Retry-After, terminal failures, timeout despite ignored abort, four-request concurrency, queued/active cancellation, deadline and late responses, complete rejected/unavailable payloads |
+| V16–V18 | Exact large integers in JSON, source/token/code/policy provenance, live/historical/fixture separation, credential sanitization, and finite-size suitability unavailable/workload admission false |
+
+These are constructed offline responses, not market/fork evidence.
+
+Final handoff checks passed: local links/anchors, whitespace, and CR references across 29 Markdown
+files; `git diff --check`; credential scan of the preserved report and changed source/documents; and
+review of package boundaries, ignored local files, and unchanged Git HEAD. Both workspace and clean
+installation retain lockfile SHA-256 `b1085c7ac8fe6113d01f26ac2737ee7e96c33969bcb04aa3e71b56096e674144`.
+
+The unchanged logo hash is
+`b45aa4306ed34de83f59a0b3bb13035a33cfb9b77eb370aea6220c1cea91442f`.
+
+### Recorded live integration
+
+The [sanitized report](../evidence/M1-03-live-2026-11-17.json) preserves the actual observation,
+historical replay, revalidated record, and as-of eligibility outcomes. It is past evidence, not a
+claim that this block remains fresh. Source/configuration labels are `ethereum-weth-usdc-v1`,
+`alchemy-ethereum-v1`, and `adr-0005-v1`; viem is 2.57.20 and implementation is `m1-03-v1`.
+
+- Attempt: `e4cc160c-be23-463c-898d-a1381fa38f26`; origin `live`, chain ID **1**.
+- Block: **26436521**, hash `0xdb4de7b46f3ebfccdca32d9f232d01b958b39fe23b49240cabcc8c2e714c67d7`;
+  timestamp **1794939647** seconds; parent hash is retained in the report.
+- Collected 2026-11-17 **18:20:59.106–18:21:03.023 UTC**; monotonic elapsed **3916.312333 ms**.
+- Both `eth_getCode` and `eth_call` accepted the selected canonical hash and rejected the recorded
+  constructed unknown-hash probe. The initial attempt made **41** sends with no transient retries;
+  the two expected negative probes are recorded as `state_unavailable`.
+- **31** registry checks passed, **7** observed runtime code hashes were retained, and the payload
+  was complete with identity/structural status passed and no attempt failures.
+
+| Factory-discovered pool | Observed address |
+| --- | --- |
+| V2 USDC/WETH, standard fee 3000 millionths | `0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc` |
+| V3 USDC/WETH, fee 500 millionths | `0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640` |
+| V3 USDC/WETH, fee 3000 millionths | `0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8` |
+
+The initial eligibility check was canonical/valid and fresh: block age **16025 ms**, head lag **1**,
+validation unexpired. The explicit historical re-read made 41 sends and returned identical pool
+state and code hashes at that same block. After waiting beyond the actual five-second validation
+window, the original validation was expired. `prepareForUse` made three new chain/header sends and
+returned two retained validation events with valid canonicality, age **24229 ms**, lag **1**, and
+unexpired validation. Both as-of live qualification checks passed; **finite-size suitability remains
+unavailable and workload admission remains false** throughout.
+
+### Remaining limits and next proposed action
+
+This supplies identity/structural evidence, consistent collection, and lifecycle checks. It does not
+establish all of CR-02, quote/finite-size admission, profitable cycles, transaction costs, security
+of external contracts, independent provider truth, finality, or execution/capture. No controlled
+mainnet reorganization was observed; reorganization/cancellation failures were exercised offline.
+The single endpoint's behavior was verified for these runs, not guaranteed for future requests.
+
+The next proposed task is M1-04's quotation/cycle/profitability and finite-size admission design.
+It requires separate approval and has not started. Only the user creates commits.

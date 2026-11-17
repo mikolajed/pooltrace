@@ -12,9 +12,11 @@
     "packages/*"
   ],
   "scripts": {
-    "check": "bun run check:toolchain && bun run typecheck && bun run lint && bun run format:check",
+    "check": "bun run check:toolchain && bun run typecheck && bun run lint && bun run format:check && bun run test",
     "check:toolchain": "node scripts/check-toolchain.ts",
-    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit && node node_modules/typescript/bin/tsc -p packages/protocols && node node_modules/typescript/bin/tsc -p apps/backend",
+    "test": "node node_modules/vitest/vitest.mjs run",
+    "check:live": "node scripts/check-live.ts",
     "lint": "node node_modules/@biomejs/biome/bin/biome lint .",
     "format:check": "node node_modules/@biomejs/biome/bin/biome format .",
     "format": "node node_modules/@biomejs/biome/bin/biome format --write ."
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.6.8",
     "@types/node": "26.6.6",
-    "typescript": "7.0.2"
+    "typescript": "7.0.2",
+    "vitest": "5.1.0"
   }
 }

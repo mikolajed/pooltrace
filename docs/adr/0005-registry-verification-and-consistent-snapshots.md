@@ -4,7 +4,7 @@
 - Proposed on: 2026-11-17
 - Decision accepted by user: 2026-11-17; registry/snapshot design, including staged liquidity admission
 - Related task: [M1-02](../tasks/M1-02-registry-and-consistent-snapshots.md)
-- Future implementation: [M1-03](../tasks/M1-03-registry-and-consistent-snapshots.md); quotation design/implementation M1-04/05; storage design M1-09
+- Implementation: completed [M1-03](../tasks/M1-03-registry-and-consistent-snapshots.md); future quotation design/implementation M1-04/05; storage design M1-09
 - Requirement IDs: CR-02, CR-03, CR-09, CR-10; amount representation under CR-01
 - Supersedes / superseded by: None
 
@@ -214,11 +214,15 @@ Use **viem 2.57.20** as the integration baseline, based on its
 by M1-02. Current official docs expose the required capabilities:
 
 - [`createPublicClient`](https://viem.sh/docs/clients/public) with mainnet chain metadata and an
-  explicitly supplied [`http`](https://viem.sh/docs/clients/transports/http) transport. Disable
+  explicitly supplied backend HTTP transport. M1-03 uses viem's
+  [`custom`](https://viem.sh/docs/clients/transports/custom) transport over bounded `fetch` so one
+  reader controls actual sends, cancellation, and all time budgets. The standard
+  [`http`](https://viem.sh/docs/clients/transports/http) transport was the initial integration sketch. Disable
   automatic multicall, HTTP batching, and implicit retries initially; use the bounded reader above.
   Disable caching for head/canonicality validation and prove those checks make fresh requests.
-- [`getBlock`](https://viem.sh/docs/actions/public/getBlock) selects/resolves headers and performs
-  number/hash revalidation. A configured mainnet client does not replace checking RPC chain ID.
+- [`getBlock`](https://viem.sh/docs/actions/public/getBlock) describes header retrieval. M1-03 sends
+  chain/header requests directly through the same bounded reader for fresh number/hash validation,
+  avoiding cache/deduplication. A configured mainnet client does not replace checking RPC chain ID.
 - [`getCode`](https://viem.sh/docs/contract/getCode) reads code with `blockHash` and
   `requireCanonical: true`; an absent result and a failed request have different meanings.
 - [`encodeFunctionData`](https://viem.sh/docs/contract/encodeFunctionData),
@@ -232,8 +236,8 @@ toolchain before claiming compatibility. Documentation research is not a success
 If a baseline API/behavior differs, report it and amend the integration choice; never bypass the
 hash requirement with an unsafe cast or silent consistency downgrade.
 
-`packages/protocols` would own sourced candidates, ABI interactions, verification, and pinned RPC
-reads. `apps/backend` would own configuration and one-attempt orchestration, clocks, bounded work,
+`packages/protocols` owns sourced candidates, ABI interactions, verification, and pinned RPC
+reads. `apps/backend` owns configuration and one-attempt orchestration, clocks, bounded work,
 and result delivery. Introduce only the packages needed by the approved M1-03 scope. Domain
 calculations remain free of RPC/persistence/time access. A diagnostic entry point and background
 lifecycle remain M1-06/12; this proposal does not add an independent collector or browser RPC.
@@ -281,16 +285,16 @@ or proof of capture. No live observation has been made in this task.
 The following do **not** block review of this design but do constrain later work:
 
 - Before M1-03 implementation: approve the concrete M1-03 scope. The user has accepted this ADR,
-  including the staged admission boundary; that design acceptance does not grant implementation approval.
+  including the staged admission boundary; separate implementation approval was subsequently recorded in M1-03.
 - During M1-03: obtain the user's backend RPC configuration through an ignored environment file,
   verify provider capabilities, resolve actual pool addresses, and record identity/structural evidence.
   RPC absence leaves live integration unavailable; offline fixtures must stay explicitly labeled.
 - Before admitting the three-pool workload/full CR-02 evidence: settle the M1-04 size/admission
   policy and implement/verify its qualification checks in M1-05. Neither positive structural
   screens nor a configuration file can substitute for that evidence.
-- The exact provider, pool addresses, observed liquidity, tested input amounts, quote admission
-  budget, and runtime compatibility results remain unverified/unselected where stated. These are
-  explicit dependencies, not fabricated defaults or permission to broaden M1-03.
+- M1-03 records actual Alchemy capability, pool identity/structural state, and runtime compatibility
+  evidence. Tested input amounts and the quote admission budget remain unselected until M1-04/05.
+  These are explicit dependencies, not permission to broaden M1-03.
 
 Revisit this ADR if provider coverage forces a different consistency policy, measured load justifies
 aggregation/failover, a candidate tier repeatedly fails admission, or live/historical workloads
@@ -312,18 +316,21 @@ that M1-03 alone satisfies all of CR-02.
 The user approved M1-02's documentation/research task on 2026-11-17. After reviewing the next-step
 explanation, the user said “i accept adr5” on 2026-11-17. This accepts ADR-0005's design, including
 the selected candidate tiers, strict hash/canonicality policy, operating limits, and staged
-liquidity admission. It does not approve M1-03 implementation. Its proposed task record maintains
-implementation authorization separately; M1-02 records research and documentation evidence.
+liquidity admission. That design acceptance did not itself approve M1-03 implementation. The user
+subsequently said “i accept m1-03”; its task record maintains that separate implementation approval.
+M1-02 records research and documentation evidence.
 
 Subsequent configuration clarification on 2026-11-17: the user selected Alchemy for the initial
 Ethereum endpoint and requested multiple-provider fallback and additional chains in future work.
 This supplies the initial provider choice without changing this ADR's single-provider Ethereum
-policy. Endpoint capabilities remain unverified; future fallback/chain designs and M1-03
-implementation remain separately gated. The endpoint value is not recorded here.
+policy. Endpoint capabilities were unverified at that clarification and subsequently checked in
+approved M1-03. Future fallback/chain designs remain separately gated. The endpoint value is not recorded here.
 
 ## Implementation and evidence
 
-Design documentation only; see M1-02 for research and validation evidence. No registry, snapshot
-module, ABI code, dependency installation, application tests, live RPC reads, or fork runs exist
-for this ADR. Sources linked above were consulted on **2026-11-17**. Current source/docs
-describe intended APIs; the published viem baseline has not been installed or executed here.
+See [M1-02](../tasks/M1-02-registry-and-consistent-snapshots.md) for the original design research and
+[M1-03](../tasks/M1-03-registry-and-consistent-snapshots.md#evidence-and-handoff) for the completed
+implementation, dependency compatibility, offline checks, and live block/replay/expiry evidence.
+Sources linked above were consulted on **2026-11-17**. M1-03's custom transport/direct header
+integration refines the library plumbing while preserving this decision's hash selectors, fresh
+validation, limits, and single-provider boundary. No fork execution or finite-size qualification is claimed.

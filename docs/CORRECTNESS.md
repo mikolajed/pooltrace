@@ -1,8 +1,9 @@
 # Correctness requirements
 
 These requirements come from the user's project brief. They define what must hold; ADRs select
-the mechanisms, and approved tasks provide verification evidence. None is implemented or verified
-yet. Stable IDs let tasks and checks refer to requirements without copying them.
+the mechanisms, and approved tasks provide verification evidence. Task records identify the
+implemented portions and remaining gaps; M1-03 supplies registry/snapshot evidence without full
+CR-02 finite-size qualification. Stable IDs let tasks and checks refer to requirements without copying them.
 
 ## CR-01 — Amounts, units, and rounding
 

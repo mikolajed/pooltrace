@@ -31,18 +31,18 @@ estimates belong to individual milestones, not to a fixed project lifespan or fe
 - [x] [SET-13: Product framing and milestone scope](tasks/SET-13-product-framing-and-milestone-scope.md).
   Documentation-only work completed; validation evidence is in the linked record.
 
-## M1 — local read-only research application; M1-01 approved only
+## M1 — local read-only research application; M1-01 through M1-03 complete
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) brings minimal SQLite and browser
-access into this milestone. Each task remains separately scoped; only M1-01 is approved for implementation.
+access into this milestone. Each task remains separately scoped; later work requires its own approval.
 
 - [x] [M1-01: Tooling and workspace foundation](tasks/M1-01-tooling-and-workspaces.md).
   State: Done. Scope, approvals, criteria, and evidence are maintained in the linked record.
 - [x] [M1-02: Registry and consistent-snapshot design](tasks/M1-02-registry-and-consistent-snapshots.md).
   State: Done. Scope, approvals, criteria, and evidence are maintained in the linked record;
   ADR-0005 is Accepted; implementation authorization remains separately scoped.
-- [ ] [M1-03: Registry verification and consistent snapshots](tasks/M1-03-registry-and-consistent-snapshots.md).
-  State: Proposed. Scope, approvals, criteria, and evidence are maintained in the linked record.
+- [x] [M1-03: Registry verification and consistent snapshots](tasks/M1-03-registry-and-consistent-snapshots.md).
+  State: Done. Scope, approvals, criteria, and offline/live evidence are maintained in the linked record.
 - [ ] M1-04: Propose quotation, cycle evaluation, and profitability semantics ADR.
   Acceptance: a reviewable design addressing CR-01 and CR-04 through CR-06.
 - [ ] M1-05: Implement the approved V2/V3 adapters and cycle analysis.

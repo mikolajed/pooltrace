@@ -39,9 +39,9 @@ not include an application or installed dependencies.
 Follow the [development workflow](docs/WORKFLOW.md). Detailed task records separate scope and
 approval from architectural rationale; the backlog remains the inventory of work.
 
-**Bun is the selected package manager and command runner.** Workspace structure and runtime details
-remain proposed in [ADR-0001](docs/adr/0001-project-boundaries-and-tooling.md). No package versions
-have been selected or installed.
+**Bun is the selected package manager and command runner; Node.js is the backend runtime.**
+Workspace boundaries are accepted in [ADR-0001](docs/adr/0001-project-boundaries-and-tooling.md).
+No package versions have been selected or installed.
 
 The accepted language direction is **TypeScript first**, followed by planned backend evolution,
 potentially using Rust with a TypeScript frontend and Python research tools. Compare later upgrades

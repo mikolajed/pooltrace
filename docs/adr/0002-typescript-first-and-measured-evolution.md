@@ -8,6 +8,10 @@
 - Requirement IDs: CR-01 through CR-11 in [CORRECTNESS.md](../CORRECTNESS.md)
 - Supersedes / superseded by: None
 
+> Subsequent decision, 2026-11-17: the user accepted ADR-0001's workspace boundaries and Node.js
+> runtime with Bun tooling. Pending-design references below describe the state at this ADR's
+> acceptance. M1-01 implementation remains unapproved.
+
 ## Context
 
 The user wants to begin with a purely TypeScript application and plans to evolve it toward a more

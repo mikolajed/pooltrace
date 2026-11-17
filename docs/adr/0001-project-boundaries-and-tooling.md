@@ -1,8 +1,8 @@
 # 0001: Project boundaries and tooling
 
-- Status: Proposed
+- Status: Accepted
 - Proposed on: 2026-11-17
-- Decision accepted by user: Not yet
+- Decision accepted by user: 2026-11-17; workspace boundaries and Node.js runtime with Bun tooling
 - Related task: [M1-01](../tasks/M1-01-tooling-and-workspaces.md)
 - Related conventions: [ENGINEERING.md](../ENGINEERING.md)
 - Supersedes / superseded by: None
@@ -19,14 +19,14 @@ Next.js. Package management and worker runtime are separate choices.
 
 The user has since selected a TypeScript-first application with planned, benchmarked backend
 evolution, potentially using Rust and Python; that direction is accepted in
-[ADR-0002](0002-typescript-first-and-measured-evolution.md). This record still proposes the initial
+[ADR-0002](0002-typescript-first-and-measured-evolution.md). This record selects the initial
 workspace layout and worker runtime, not a future multi-language process design.
 
 [ADR-0004](0004-local-processes-and-gated-deployment.md) now selects two local application processes,
 early SQLite, and later on-demand Anvil. The directory sketch below is updated to support that
-decision, but exact package boundaries and the Node/Bun backend runtime remain proposed here.
+decision. This record selects the workspace boundaries and Node.js backend runtime with Bun tooling.
 
-## Proposed decision
+## Decision
 
 Use a small private Bun workspace repository with a committed Bun lockfile. Separate pure domain
 logic, protocol interactions, worker orchestration, frontend, and Solidity contracts:
@@ -42,12 +42,12 @@ contracts/         Solidity executor and Foundry tests
 docs/              requirements, ADRs, mathematics, evidence, and guides
 ```
 
-These directories are a proposal, not an implemented scaffold. Add each application/package only
-when its implementation is approved. Avoid a monorepo orchestration framework initially.
+These directories are the accepted target layout, not an implemented scaffold. Add each
+application/package only when its implementation is approved. Avoid a monorepo orchestration
+framework initially.
 
-Propose keeping the worker on Node.js as requested in the original brief while using Bun to install
-packages and run project commands. If a Bun worker runtime is preferred, settle that explicitly
-before implementation. Keep domain logic independent of runtime-specific APIs either way.
+Keep the worker on Node.js as requested in the original brief while using Bun to install packages
+and run project commands. Keep domain logic independent of runtime-specific APIs.
 
 Use Vitest for TypeScript tests and Foundry for Solidity tests. Choose supported dependency
 versions from current official documentation when implementation is authorized. Do not install
@@ -79,9 +79,11 @@ execution features follow in their milestones. None is created as an unapproved 
 
 ## Approval record
 
-Bun preference is established by the user's instruction, “use bun.” The workspace design, worker
-runtime proposal, and design acceptance remain pending review. Implementation authorization is
-maintained in the linked M1-01 task, not granted by this ADR.
+Bun preference is established by the user's instruction, “use bun.” On 2026-11-17, after the
+workspace and Node.js runtime with Bun tooling were presented for review, the user said:
+“i accept adr 1, now reading m1”. This accepts this ADR's design. The user is still reviewing
+M1-01; implementation approval has not been granted. Implementation authorization is maintained
+in the linked M1-01 task.
 
 ## Implementation and evidence
 

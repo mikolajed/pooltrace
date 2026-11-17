@@ -9,6 +9,10 @@
 - Supersedes: Persistence timing and write ownership in [ADR-0003](0003-sqlite-first-and-storage-evolution.md)
 - Superseded by: None
 
+> Subsequent decision, 2026-11-17: the user accepted ADR-0001's workspace boundaries and Node.js
+> runtime with Bun tooling. Pending-design references below describe the state at this ADR's
+> acceptance. M1-01 implementation remains unapproved.
+
 ## Context
 
 The user clarified that the initial system should run on localhost and asked about separating UI,

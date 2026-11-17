@@ -35,8 +35,9 @@ flowchart LR
 
 Keep a simple development command that starts both application processes when implemented, with
 individual commands available for debugging. Show readiness and startup failures clearly. Stop only
-processes owned by the launcher; do not terminate unrelated user processes. Ports/configuration and
-the exact Node/Bun runtime are decided in the approved foundation task.
+processes owned by the launcher; do not terminate unrelated user processes. ADR-0001 selects Node.js
+for the backend runtime and Bun for tooling. Ports/configuration and supported runtime versions are
+selected in the approved foundation task.
 
 Collection must remain independent of browser refresh/navigation. Keep RPC credentials and database
 access in the backend. Persist a complete observation/result record before notifying the UI that it
@@ -138,8 +139,8 @@ capabilities when selecting the CI platform; no such protection is configured he
 
 ## Decisions still open
 
-Exact runtime, SQLite driver/schema/journal settings, endpoint/process supervision, API contracts,
-and fork lifecycle details require their relevant implementation ADRs. Hosting, artifact packaging,
-CI provider, staging layout, checks/budgets, migrations/cutover, and rollback procedures require a
-future deployment ADR. No workflow YAML, Dockerfile, provisioning script, server, or application
+Runtime versions/configuration, SQLite driver/schema/journal settings, endpoint/process supervision,
+API contracts, and fork lifecycle details require their relevant implementation ADRs. Hosting,
+artifact packaging, CI provider, staging layout, checks/budgets, migrations/cutover, and rollback
+procedures require a future deployment ADR. No workflow YAML, Dockerfile, provisioning script, server, or application
 process is created by this document. Official references were checked on 2026-11-17.

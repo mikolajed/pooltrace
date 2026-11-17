@@ -23,7 +23,7 @@ Small refactors within an accepted design need no separate ADR.
 
 | ID | Decision | Status | Related task |
 | --- | --- | --- | --- |
-| [0001](0001-project-boundaries-and-tooling.md) | Project boundaries and tooling | Proposed | [M1-01](../tasks/M1-01-tooling-and-workspaces.md) |
+| [0001](0001-project-boundaries-and-tooling.md) | Project boundaries and tooling | Accepted: design only | [M1-01](../tasks/M1-01-tooling-and-workspaces.md) |
 | [0002](0002-typescript-first-and-measured-evolution.md) | TypeScript first and measured backend evolution | Accepted: direction only | [SET-10 documentation](../tasks/SET-10-language-evolution-and-benchmarks.md); future EVO/BENCH work in backlog |
 | [0003](0003-sqlite-first-and-storage-evolution.md) | SQLite first and storage evolution | Accepted; timing/ownership refined by 0004 | [SET-11 documentation](../tasks/SET-11-storage-evolution.md); M1/M3 and future STORE/BENCH work |
 | [0004](0004-local-processes-and-gated-deployment.md) | Local processes, early SQLite, and gated deployment | Accepted: architecture/release direction only | [SET-12 documentation](../tasks/SET-12-local-architecture-and-deployment.md); M1/M2 and future DEP work |

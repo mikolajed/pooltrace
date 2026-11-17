@@ -29,9 +29,9 @@ Extend and revise the sequence as the product develops.
 ## M1 — first proposed implementation milestone
 
 Begin with the separately reviewable [M1-01 foundation task](tasks/M1-01-tooling-and-workspaces.md).
-Resolve ADR-0001 before that task, then prepare decisions for registry/snapshot policy and
-quotation/profit semantics before their implementations. Detailed work and acceptance criteria
-live in the [backlog](BACKLOG.md) and its linked task records.
+ADR-0001 is accepted; M1-01 implementation approval remains pending. Then prepare decisions for
+registry/snapshot policy and quotation/profit semantics before their implementations. Detailed work
+and acceptance criteria live in the [backlog](BACKLOG.md) and its linked task records.
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) selects a local UI application and one
 backend process with collection/analysis/RPC/API modules. Review a minimal SQLite schema/driver and

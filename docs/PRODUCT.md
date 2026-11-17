@@ -47,7 +47,7 @@ reviewed scope, design, and implementation approval.
 ## Engineering and correctness
 
 The tooling baseline and technical conventions live in [ENGINEERING.md](ENGINEERING.md).
-The proposed workspace/runtime choice lives in [ADR-0001](adr/0001-project-boundaries-and-tooling.md).
+The accepted workspace/runtime choice lives in [ADR-0001](adr/0001-project-boundaries-and-tooling.md).
 
 Start with a TypeScript backend and frontend, retaining Solidity for the execution contract. Plan
 for a later, potentially Rust/TypeScript/Python system through subsequent milestones.

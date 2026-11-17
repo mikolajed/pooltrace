@@ -8,15 +8,15 @@ authorize code or dependency installation.
 | Area | User-specified direction | Decision still needed |
 | --- | --- | --- |
 | Package management and commands | Bun | Supported version and reproducible lockfile policy at integration |
-| Initial application | TypeScript backend and frontend; Node.js in the original worker brief | Worker runtime and workspace boundaries in [ADR-0001](adr/0001-project-boundaries-and-tooling.md) |
+| Initial application | TypeScript backend and frontend; Node.js backend runtime and workspace boundaries under [ADR-0001](adr/0001-project-boundaries-and-tooling.md) | Supported versions and concrete tooling configuration |
 | EVM interaction | viem | Supported version and exact APIs from current official documentation |
 | Contracts and local forks | Solidity, Foundry, Anvil | Compiler/dependency versions, router APIs, and local execution design |
 | TypeScript tests | Vitest | Version and configuration for the approved runtime |
 | Evidence persistence | SQLite initially, under [ADR-0003](adr/0003-sqlite-first-and-storage-evolution.md) | Driver, schema, migrations, and writer ownership |
 | Terminal | Next.js, React, Tailwind, shadcn/ui, SSE | Versions, read path, and reconnect semantics |
-| Local runtime topology | UI application + one backend; early embedded SQLite; on-demand Anvil in M2 | Exact runtime/configuration/lifecycle under [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) |
+| Local runtime topology | UI application + one backend; early embedded SQLite; on-demand Anvil in M2 | Runtime versions/configuration/lifecycle under [ADR-0001](adr/0001-project-boundaries-and-tooling.md) and [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) |
 
-Bun's selection as package manager does not by itself replace the original worker runtime.
+Bun manages dependencies and project commands; the backend runs on Node.js under ADR-0001.
 No dependency versions or deployment addresses are selected in this setup.
 
 ## Language evolution
@@ -63,7 +63,8 @@ release artifacts and verify migration/recovery behavior before a hosted rollout
 ## Structure and dependencies
 
 Separate domain calculations, protocol I/O, worker orchestration, persistence, web presentation,
-and Solidity execution. The exact directory design remains proposed in ADR-0001.
+and Solidity execution. ADR-0001 selects the target directory layout; create packages only when
+needed by approved implementation.
 
 Keep arithmetic independent of RPC clients, storage, frontend code, and ambient time. Pass external
 state into domain calculations explicitly. Favor the smallest design that satisfies the approved

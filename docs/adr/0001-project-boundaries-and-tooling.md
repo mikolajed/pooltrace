@@ -81,10 +81,13 @@ execution features follow in their milestones. None is created as an unapproved 
 
 Bun preference is established by the user's instruction, “use bun.” On 2026-11-17, after the
 workspace and Node.js runtime with Bun tooling were presented for review, the user said:
-“i accept adr 1, now reading m1”. This accepts this ADR's design. The user is still reviewing
-M1-01; implementation approval has not been granted. Implementation authorization is maintained
-in the linked M1-01 task.
+“i accept adr 1, now reading m1”. This accepted this ADR's design; M1-01 was still under review
+at that point. The user subsequently approved M1-01 on the same date. Implementation authorization
+and its bounded scope are maintained in the linked M1-01 task.
 
 ## Implementation and evidence
 
-Not implemented. No dependency versions selected, packages installed, or checks executed for this ADR.
+The root tooling/workspace foundation is implemented in M1-01. Its task record contains the selected
+versions, installation/check evidence, and limitations. The manifest declares the target workspace
+locations; applications/packages are introduced only with their approved feature implementation.
+This does not establish working backend, domain, protocol, UI, or contract behavior.

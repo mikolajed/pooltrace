@@ -4,10 +4,10 @@ Updated: 2026-11-17.
 
 ## Phase and authorization
 
-**Documentation/setup only. No implementation is approved.**
+**M1-01 tooling and workspace foundation is complete. No subsequent task is approved.**
 
-The user has requested setup/documentation work for an ongoing product developed through bounded
-milestones. Application, database, pipeline, and infrastructure implementation are not authorized.
+The user approved M1-01 on 2026-11-17; its foundation implementation and checks are complete.
+Subsequent application, database, pipeline, and infrastructure work remains separately gated.
 [WORKFLOW.md](WORKFLOW.md) defines the approval process; individual task records hold implementation
 authorizations when they exist.
 
@@ -15,9 +15,12 @@ authorizations when they exist.
 
 - Project introduction, documentation map, product scope, correctness requirements, engineering
   conventions, and approval workflow.
-- Roadmap, backlog, task template, a documentation setup task, and a proposed first implementation task.
+- Roadmap, backlog, task template, documentation task evidence, and completed M1-01 evidence.
 - ADR workflow/template and accepted ADR-0001 for workspace boundaries, a Node.js backend runtime,
-  and Bun tooling. M1-01 implementation remains under user review.
+  and Bun tooling.
+- A private root Bun workspace foundation, generated lockfile, Node.js/Bun version pins,
+  TypeScript tooling script and strict settings, Biome checks, `.env.example`, and setup guidance.
+  Exact versions and references are recorded in [ENGINEERING.md](ENGINEERING.md#foundation-toolchain).
 - Accepted ADR-0002 for the TypeScript-first language direction and benchmarking intent.
   Concrete future migration designs remain open.
 - A draft benchmark methodology and future EVO/BENCH backlog items; no benchmark runs or results.
@@ -30,22 +33,22 @@ authorizations when they exist.
 
 ## What does not exist yet
 
-No application code, package manifests, installed dependencies, lockfile, executable CLI, executor,
-database, terminal, or test suite. No live RPC or fork verification has been performed.
+No backend/frontend/domain/protocol application packages, market-data CLI, executor, database,
+terminal, or behavioral test suite. No live RPC, fork verification, or benchmark has been performed.
 
 ## Next proposed action
 
-The user is reviewing [M1-01: tooling and workspace foundation](tasks/M1-01-tooling-and-workspaces.md).
-[ADR-0001](adr/0001-project-boundaries-and-tooling.md) is accepted. Await explicit M1-01 implementation
-approval before creating a scaffold or installing tooling.
+Review M1-01, then approve M1-02 to prepare the registry and consistent-snapshot ADR addressing
+CR-02/CR-03. That task has not started. M1's remaining implementation requires separate approval.
 
 The [backlog](BACKLOG.md) owns the work inventory. This summary is a handoff aid, not permission
 to start the next task.
 
 ## Latest handoff
 
-On 2026-11-17 the user accepted ADR-0001 and said they are reading M1. Design acceptance is recorded
-in the ADR and reflected in the task and current documentation. M1-01 remains Proposed with no
-implementation authorization. No code, dependencies, or runtime checks were introduced.
-Local links and approval states were checked; `git diff --check` passed. Evidence is recorded in
-M1-01.
+M1-01 is complete. Frozen-lockfile installation and `bun run check` passed both in the repository
+and in a fresh temporary copy on this host; manifest/lockfile bytes were preserved. Runtime pins,
+static checking, lint, formatting, dependency boundaries, and secret ignore rules were verified.
+[The task](tasks/M1-01-tooling-and-workspaces.md) records commands, resolved initial failures,
+references, and limitations. Foundation changes are ready for the user's commit. Only the user
+creates commits; no agent commit was made and no later task was started.

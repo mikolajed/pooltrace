@@ -17,7 +17,8 @@ estimates belong to individual milestones, not to a fixed project lifespan or fe
 - [x] SET-04: Add ADR workflow, template, index, and a proposed initial architecture decision.
 - [x] SET-05: Add a milestone plan and implementation acceptance criteria.
 - [x] SET-06: Preserve the supplied logo preview and register its production work below.
-- [ ] SET-07: User review of the setup and proposed first development scope.
+- [x] SET-07: User review of the setup and proposed first development scope.
+  Design acceptance and M1-01 approval are recorded in the linked foundation task below.
 - [x] [SET-08: Documentation responsibilities and work records](tasks/SET-08-documentation-system.md).
   Documentation-only reorganization completed; validation evidence is in the linked record.
 - [x] SET-09: Clarify ongoing development and milestone planning.
@@ -30,13 +31,13 @@ estimates belong to individual milestones, not to a fixed project lifespan or fe
 - [x] [SET-13: Product framing and milestone scope](tasks/SET-13-product-framing-and-milestone-scope.md).
   Documentation-only work completed; validation evidence is in the linked record.
 
-## M1 — local read-only research application; implementation approval pending
+## M1 — local read-only research application; M1-01 approved only
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) brings minimal SQLite and browser
-access into this milestone. Each task remains separately scoped and unapproved for implementation.
+access into this milestone. Each task remains separately scoped; only M1-01 is approved for implementation.
 
-- [ ] [M1-01: Tooling and workspace foundation](tasks/M1-01-tooling-and-workspaces.md).
-  State: Proposed. Scope, approvals, criteria, and evidence are maintained in the linked record.
+- [x] [M1-01: Tooling and workspace foundation](tasks/M1-01-tooling-and-workspaces.md).
+  State: Done. Scope, approvals, criteria, and evidence are maintained in the linked record.
 - [ ] M1-02: Propose registry and consistent-snapshot ADR before implementation.
   Acceptance: a reviewable design addressing CR-02 and CR-03, including admission and failure policy.
 - [ ] M1-03: Implement the approved registry and snapshot policy.

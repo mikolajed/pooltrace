@@ -1,7 +1,7 @@
 # Pooltrace — agent entry point
 
-**Setup only. Do not implement anything without explicit user approval for the specific task or
-milestone.** A product brief, ADR, backlog entry, or agent-written status does not grant approval.
+**Do not implement anything without explicit user approval for the specific task or milestone.**
+A product brief, ADR, backlog entry, or agent-written status does not grant approval.
 Do not create code, implementation scaffolding, tests, contracts, UI, package manifests, or install
 dependencies until authorized. Do not advance to another task automatically.
 
@@ -24,7 +24,7 @@ technical conventions belong in engineering; task plans and evidence belong in t
 - Routine choices within an explicitly approved scope do not require repeated approval.
 - Never invent addresses, APIs, market data, approvals, or test results.
 - Record actual evidence and update the relevant task and current state before handing off.
-- Do not create commits or push changes unless requested by the user.
+- Only the user creates commits; agents must not commit. Do not push unless the user requests it.
 
 The approval boundary takes precedence over instructions to continue autonomously. Full approval
 semantics live in [WORKFLOW.md](docs/WORKFLOW.md); project requirements must still be respected.

@@ -7,17 +7,55 @@ authorize code or dependency installation.
 
 | Area | User-specified direction | Decision still needed |
 | --- | --- | --- |
-| Package management and commands | Bun | Supported version and reproducible lockfile policy at integration |
-| Initial application | TypeScript backend and frontend; Node.js backend runtime and workspace boundaries under [ADR-0001](adr/0001-project-boundaries-and-tooling.md) | Supported versions and concrete tooling configuration |
+| Package management and commands | Bun; version and lockfile policy below | Review upgrades when changing the toolchain |
+| Initial application | TypeScript backend and frontend; Node.js backend runtime and workspace boundaries under [ADR-0001](adr/0001-project-boundaries-and-tooling.md); foundation pins below | Package-specific build configuration as approved applications are introduced |
 | EVM interaction | viem | Supported version and exact APIs from current official documentation |
 | Contracts and local forks | Solidity, Foundry, Anvil | Compiler/dependency versions, router APIs, and local execution design |
 | TypeScript tests | Vitest | Version and configuration for the approved runtime |
 | Evidence persistence | SQLite initially, under [ADR-0003](adr/0003-sqlite-first-and-storage-evolution.md) | Driver, schema, migrations, and writer ownership |
 | Terminal | Next.js, React, Tailwind, shadcn/ui, SSE | Versions, read path, and reconnect semantics |
-| Local runtime topology | UI application + one backend; early embedded SQLite; on-demand Anvil in M2 | Runtime versions/configuration/lifecycle under [ADR-0001](adr/0001-project-boundaries-and-tooling.md) and [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) |
+| Local runtime topology | UI application + one backend; early embedded SQLite; on-demand Anvil in M2 | Application configuration/lifecycle and later fork toolchain under [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) |
 
 Bun manages dependencies and project commands; the backend runs on Node.js under ADR-0001.
-No dependency versions or deployment addresses are selected in this setup.
+Foundation versions are selected below. Deployment addresses remain unselected.
+
+## Foundation toolchain
+
+M1-01 selects a small root-only foundation. `package.json` declares private Bun workspaces at
+`apps/*` and `packages/*`; application/domain/protocol packages are added with their approved
+implementation tasks. The current dependency graph contains development tools only:
+
+| Tool | Pinned version | Role and source |
+| --- | --- | --- |
+| Node.js | 26.3.1 | Executes project TypeScript tooling using native type stripping; [release](https://nodejs.org/en/blog/release/v26.3.1), [TypeScript support](https://nodejs.org/api/typescript.html) |
+| Bun | 1.3.11 | Dependency management and command runner; [release](https://bun.com/blog/bun-v1.3.11), [workspaces](https://bun.com/docs/pm/workspaces), [installation/lockfile options](https://bun.com/docs/pm/cli/install) |
+| TypeScript | 7.0.2 | Static checking with the official compiler CLI; [release](https://github.com/microsoft/TypeScript/releases/tag/v7.0.2), [compiler options](https://www.typescriptlang.org/tsconfig/) |
+| Node.js types | 26.6.6 | Node 26 type declarations; [maintained definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node) |
+| Biome | 2.6.8 | Formatting and recommended lint rules; [installation](https://biomejs.dev/installation/quick-start/), [configuration](https://biomejs.dev/reference/configuration/) |
+
+References checked on 2026-11-17. These pins identify the versions validated locally, not a claim
+that they are the latest releases. Installed package metadata declares Node.js `>=16.20.0` for
+TypeScript and `>=14.21.3` for Biome; both include this development runtime. Exact direct dependency
+versions and the generated text `bun.lock` fix the resolved dependency graph. Reproduce installation
+with `bun install --frozen-lockfile`; use `bun install` only when intentionally changing dependencies
+and review the resulting manifest/lockfile together. Keep the lockfile in version control.
+
+`tsconfig.base.json` sets strict checking, exact optional properties, checked indexed access, and
+NodeNext ESM resolution with ES2023 libraries. Root `tsconfig.json` checks only real tooling under
+`scripts/` with Node types and no emitted build artifacts. Erasable syntax and explicit module
+semantics match Node's native TypeScript support; type stripping does not replace static checking.
+Future browser packages will select their own module/library settings when approved.
+
+Biome currently includes TypeScript and JSON files, respects `.gitignore`, uses two-space
+indentation from `.editorconfig`, and leaves Markdown and the generated Bun lockfile outside its
+formatting scope. The root scripts invoke the installed CLI files explicitly through Node;
+Bun remains the package manager and project command entry point. `check:toolchain` rejects a runtime
+that differs from the version files. [The root README](../README.md#development-setup) owns setup
+commands and local environment guidance.
+
+Vitest remains the selected TypeScript test framework. Install/configure it when approved behavior
+needs meaningful tests. viem, SQLite, frontend dependencies, and Foundry are likewise deferred to
+their approved feature work; M1-01 does not establish working market or execution behavior.
 
 ## Language evolution
 

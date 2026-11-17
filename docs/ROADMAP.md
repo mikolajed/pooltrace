@@ -1,7 +1,7 @@
 # Proposed roadmap
 
-All implementation milestones are **awaiting explicit approval**. Approval of one milestone does
-not authorize another.
+M1-01 is approved and complete; the rest of the implementation plan awaits explicit approval.
+Approval of one task or milestone does not authorize another.
 
 ## Milestone planning
 
@@ -16,7 +16,7 @@ is a revisable development plan, not the full extent of Pooltrace's future capab
 
 | Stage | Sequencing | Outcome | Related work |
 | --- | --- | --- | --- |
-| Setup | Current | Requirements, documentation system, ADR workflow, backlog, brand reference | SET tasks in [backlog](BACKLOG.md) |
+| Setup | Complete | Requirements, documentation system, ADR workflow, backlog, brand reference | SET tasks in [backlog](BACKLOG.md) |
 | M1: Local read-only research application | First implementation milestone | One backend, minimal UI/CLI access, verified quotes/cycles, early SQLite | M1 tasks in [backlog](BACKLOG.md) |
 | M2: Executor and fork validation | Builds on verified cycle analysis | Guarded execution, meaningful contract tests, full transaction cost evidence | M2 tasks in [backlog](BACKLOG.md) |
 | M3: Evidence and recovery hardening | Builds on M1 persistence and M2 simulation records | Richer history/replay, schema evolution, backup/restore, recovery | M3 tasks in [backlog](BACKLOG.md) |
@@ -28,9 +28,9 @@ Extend and revise the sequence as the product develops.
 
 ## M1 — first proposed implementation milestone
 
-Begin with the separately reviewable [M1-01 foundation task](tasks/M1-01-tooling-and-workspaces.md).
-ADR-0001 is accepted; M1-01 implementation approval remains pending. Then prepare decisions for
-registry/snapshot policy and quotation/profit semantics before their implementations. Detailed work
+The separately approved [M1-01 foundation](tasks/M1-01-tooling-and-workspaces.md) is complete under
+accepted ADR-0001. Next, propose M1-02 for registry/snapshot policy, then prepare quotation/profit
+semantics before their implementations. Remaining tasks await their own approvals. Detailed work
 and acceptance criteria live in the [backlog](BACKLOG.md) and its linked task records.
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) selects a local UI application and one

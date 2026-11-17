@@ -2,8 +2,9 @@
 
 ## Authorization
 
-The current authorization covers repository setup and documentation only. Implementation requires
-explicit user approval for a named task, milestone, or otherwise clearly bounded change.
+Implementation requires explicit user approval for a named task, milestone, or otherwise clearly
+bounded change. Current authorizations and evidence are maintained in the relevant task records;
+[STATUS.md](STATUS.md) summarizes the active phase.
 
 The product brief is future scope. Backlog entries, roadmap dates, proposed or accepted ADRs, and
 an agent's plan do not authorize implementation. Silence is not approval. Do not create application
@@ -16,7 +17,9 @@ choices independently. Return to the user only when a material design or scope c
 decision. Completing a task does not authorize starting the next one.
 
 Requested documentation changes and read-only inspection can proceed within their stated scope.
-Do not commit or push unless the user asks. Never label agent-written decisions as user approvals.
+Only the user creates commits. Agents may prepare changes and suggest commit messages, but must
+not commit. Do not push unless the user explicitly asks. Never label agent-written decisions as
+user approvals.
 
 Future production changes follow the draft gates in [DEPLOYMENT.md](DEPLOYMENT.md). A successful
 build, test run, staging validation, or accepted architecture does not grant release authorization.

@@ -11,7 +11,7 @@
 
 > Subsequent decision, 2026-11-17: the user accepted ADR-0001's workspace boundaries and Node.js
 > runtime with Bun tooling. Pending-design references below describe the state at this ADR's
-> acceptance. M1-01 implementation remains unapproved.
+> acceptance. M1-01 was subsequently approved and completed; its task record owns scope and evidence.
 
 ## Context
 

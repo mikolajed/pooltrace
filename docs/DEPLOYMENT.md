@@ -67,7 +67,7 @@ verified restore, not an assumed copy of a changing file.
 
 | Environment | Purpose | State |
 | --- | --- | --- |
-| Local development | Run the two applications, early SQLite, and later optional Anvil on localhost | Design agreed; implementation unapproved |
+| Local development | Run the two applications, early SQLite, and later optional Anvil on localhost | M1-01 tooling foundation complete; application/runtime lifecycle implementation unapproved |
 | Automated verification | Reproducible builds and appropriate offline/integration/fork checks | Future CI design; not configured |
 | Preview/staging | Validate a specific release candidate with isolated configuration and data | Future hosting design; not provisioned |
 | Production | Host a reviewed research application and preserve evidence across updates | Future design; no server or deployment exists |

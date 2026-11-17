@@ -11,10 +11,10 @@ permanent feature ceiling.
 
 ## Current status
 
-**Setup only. Implementation has not been authorized.**
+**M1-01 tooling and workspace foundation is complete.**
 
-See [current state](docs/STATUS.md) for what exists and the next proposed action. This setup does
-not include an application or installed dependencies.
+See [current state](docs/STATUS.md) for what exists and the next proposed action. The foundation
+provides development tooling; application behavior belongs to subsequent approved tasks.
 
 ## Start here
 
@@ -41,7 +41,8 @@ approval from architectural rationale; the backlog remains the inventory of work
 
 **Bun is the selected package manager and command runner; Node.js is the backend runtime.**
 Workspace boundaries are accepted in [ADR-0001](docs/adr/0001-project-boundaries-and-tooling.md).
-No package versions have been selected or installed.
+The installed foundation toolchain and its authoritative references are recorded in
+[engineering conventions](docs/ENGINEERING.md#foundation-toolchain).
 
 The accepted language direction is **TypeScript first**, followed by planned backend evolution,
 potentially using Rust with a TypeScript frontend and Python research tools. Compare later upgrades
@@ -58,6 +59,38 @@ backend-owned SQLite from the first working backend milestone. Anvil joins as an
 with fork validation. [ADR-0004](docs/adr/0004-local-processes-and-gated-deployment.md) records the
 decision; [the deployment plan](docs/DEPLOYMENT.md) covers future CI/CD, staging, and production gates.
 
-The first proposed task is [M1-01: tooling and workspace foundation](docs/tasks/M1-01-tooling-and-workspaces.md).
+The first approved task is [M1-01: tooling and workspace foundation](docs/tasks/M1-01-tooling-and-workspaces.md).
 The wider M1 milestone is a local read-only research application with minimal UI/persistence and
 CLI access to the same backend behavior. Each implementation task requires its own authorization.
+
+## Development setup
+
+Use Node.js **26.3.1** and Bun **1.3.11**, as recorded in `.node-version` and `.bun-version`.
+These are the pinned, locally validated development versions. Toolchain upgrades should update the
+pins and manifest together, then rerun the setup checks. Installation options are documented by
+[Node.js](https://nodejs.org/en/download) and [Bun](https://bun.com/docs/installation).
+
+From the repository root:
+
+```sh
+bun install --frozen-lockfile
+bun run check
+```
+
+`bun run check` verifies the runtime pins, type-checks the actual tooling script, and lints/checks
+formatting for TypeScript and JSON files. It runs entirely offline after dependency installation.
+Individual commands are `bun run check:toolchain`, `bun run typecheck`, `bun run lint`, and
+`bun run format:check`. Use `bun run format` to apply formatting.
+
+The private root manifest declares `apps/*` and `packages/*` as workspace locations. The accepted
+target layout is in ADR-0001; each application/package is created when its feature implementation
+is approved. The current root type-check covers `scripts/**/*.ts`; future workspaces will add their
+own checks when introduced. There is no application start/build command or behavioral test suite yet.
+
+`.env.example` reserves an empty `ETHEREUM_RPC_URL` for the later registry/snapshot work. The current
+tooling does not use RPC configuration or connect to Ethereum, so setup needs no RPC credentials.
+[Bun automatically loads `.env` files](https://bun.com/docs/runtime/environment-variables) for
+commands; the foundation checks do not consume those application settings. When a later backend
+task adds configuration, keep credentials in an ignored `.env` file on the backend side; never
+expose them through a `NEXT_PUBLIC_` variable or commit them. The RPC provider, configuration
+validation, ports, and database settings will be selected with the tasks that use them.

@@ -4,12 +4,13 @@ Updated: 2026-11-17.
 
 ## Phase and authorization
 
-**M1-01, M1-02, and M1-03 are complete. No subsequent task is approved.**
+**M1-01 through M1-04 are complete. ADR-0006 is Proposed; no M1-05 implementation is approved.**
 
 The user accepted ADR-0005 and explicitly approved M1-03 with “i accept m1-03”. Its bounded
 registry/snapshot implementation and offline/read-only live checks are complete. Individual
 [task records](BACKLOG.md) maintain approval and evidence; [WORKFLOW.md](WORKFLOW.md) governs
-subsequent work. Only the user creates commits.
+subsequent work. The user approved M1-04 with “i accept m1-04”; no M1-05 implementation is approved.
+Only the user creates commits.
 
 ## What exists
 
@@ -26,6 +27,10 @@ subsequent work. Only the user creates commits.
   read-only verification harness using the ignored root environment file; setup is in the
   [README](../README.md#development-setup). The endpoint and credentials are not recorded in evidence.
 - The supplied perched kingfisher reference remains unchanged.
+- Completed [M1-04 research/evidence and M1-05 validation plan](tasks/M1-04-quotation-cycles-and-profitability-design.md).
+- Proposed [ADR-0006](adr/0006-quotation-cycles-and-profitability.md) defines quotations, full-input/
+  finite-size admission, gross ranking, unavailable initial live net results, and conditional cost
+  accounting. Its grid, impact threshold, and operational additions await user acceptance.
 
 ## Remaining boundaries
 
@@ -40,11 +45,12 @@ work. SQLite, the UI/backend service lifecycle, and Anvil retain their separatel
 
 ## Next proposed action
 
-Review M1-03's implementation/evidence, then separately approve M1-04 to prepare the quotation,
-cycle evaluation, profitability, and finite-size admission design. M1-04 has not started.
+Review [ADR-0006](adr/0006-quotation-cycles-and-profitability.md). If accepted, prepare and separately
+approve the concrete M1-05 implementation scope. No M1-05 code or detailed task has been started.
 
 ## Latest handoff
 
-M1-03 is ready for review with passing offline/live and clean-install checks. Changes remain
-uncommitted; Git HEAD is the user's `dee5c07`. No commit or push was made and no subsequent
-implementation task was started.
+The user's M1-03 commit `b54cc54` is present. M1-04's approved research produced a proposed ADR
+and validation plan, with documentation/arithmetic checks recorded in the task. Exactly five
+documentation files changed cumulatively from preparation; application files and dependencies are
+unchanged. These changes remain uncommitted; no agent commit/push or new live/fork check occurred.

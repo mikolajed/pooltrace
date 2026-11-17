@@ -1,0 +1,29 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Future JavaScript tooling and application output
+node_modules/
+dist/
+coverage/
+.next/
+*.tsbuildinfo
+
+# Future Foundry output
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+
+# Local observation databases and development data
+data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.db
+*.db-shm
+*.db-wal
+
+# Operating system files
+.DS_Store
+Thumbs.db

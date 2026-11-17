@@ -4,10 +4,11 @@ Updated: 2026-11-17.
 
 ## Phase and authorization
 
-**M1-02 design task is complete. ADR-0005 is Proposed; M1-03 implementation is not approved.**
+**ADR-0005 is Accepted. The M1-03 task is Proposed; implementation is not approved.**
 
 The user approved M1-01 and subsequently M1-02 on 2026-11-17. Both bounded tasks are complete.
 M1-02 authorized official-source research, a proposed ADR, and an implementation-validation plan.
+The user accepted ADR-0005 on 2026-11-17; this settles its design without approving implementation.
 Subsequent application, database, pipeline, and infrastructure work remains separately gated.
 [WORKFLOW.md](WORKFLOW.md) defines the approval process; individual task records hold implementation
 authorizations when they exist.
@@ -18,9 +19,11 @@ authorizations when they exist.
   conventions, and approval workflow.
 - Roadmap, backlog, task template, documentation task evidence, and completed M1-01 evidence.
 - Completed [M1-02 evidence and an M1-03 validation plan](tasks/M1-02-registry-and-consistent-snapshots.md).
-- Proposed [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md) for source-backed
+- Accepted [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md) for source-backed
   candidates, hash-bound collection, admission stages, freshness/failures, and provenance. No
   pool address, liquidity, provider capability, or runtime integration was verified through RPC.
+- A proposed [M1-03 task record](tasks/M1-03-registry-and-consistent-snapshots.md) for the bounded
+  registry/snapshot implementation, required offline/live checks, and remaining qualification limits.
 - ADR workflow/template and accepted ADR-0001 for workspace boundaries, a Node.js backend runtime,
   and Bun tooling.
 - A private root Bun workspace foundation, generated lockfile, Node.js/Bun version pins,
@@ -43,17 +46,16 @@ terminal, or behavioral test suite. No live RPC, fork verification, or benchmark
 
 ## Next proposed action
 
-Review [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md), especially strict
-hash/canonical reads and the proposed boundary between structural screening and finite-size
-liquidity admission. Then prepare/review a bounded M1-03 implementation task. ADR acceptance and
-M1-03 implementation approval remain separate; M1-03 has not started.
+Review [M1-03](tasks/M1-03-registry-and-consistent-snapshots.md) and approve or amend its implementation
+scope. ADR-0005 acceptance includes strict hash/canonical reads and staged liquidity admission;
+those design choices need no repeated approval. M1-03 implementation has not started.
 
 The [backlog](BACKLOG.md) owns the work inventory. This summary is a handoff aid, not permission
 to start the next task.
 
 ## Latest handoff
 
-The user's M1-01 commit `5cd1acb` is present. M1-02 research and documentation are complete, with
-primary-source links and a planned offline/live validation matrix. M1-02 records actual checks
-and limitations. Only documentation changed; no implementation, dependency installation, live RPC,
-commit, or push was performed. ADR-0005 remains Proposed for review.
+The user's M1-02 commit `db70dbf` is present. The later instruction “i accept adr5” is recorded in
+ADR-0005 and reflected in current documentation. M1-03's actual task document is prepared for
+review, with design acceptance recorded and implementation approval explicitly ungranted. Only
+documentation changed; no implementation, dependency installation, live RPC, commit, or push was performed.

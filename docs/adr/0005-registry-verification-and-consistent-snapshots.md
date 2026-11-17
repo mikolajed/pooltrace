@@ -1,10 +1,10 @@
 # 0005: Registry verification and consistent snapshots
 
-- Status: Proposed
+- Status: Accepted
 - Proposed on: 2026-11-17
-- Decision accepted by user: Not yet
+- Decision accepted by user: 2026-11-17; registry/snapshot design, including staged liquidity admission
 - Related task: [M1-02](../tasks/M1-02-registry-and-consistent-snapshots.md)
-- Future implementation: M1-03; quotation design/implementation M1-04/05; storage design M1-09
+- Future implementation: [M1-03](../tasks/M1-03-registry-and-consistent-snapshots.md); quotation design/implementation M1-04/05; storage design M1-09
 - Requirement IDs: CR-02, CR-03, CR-09, CR-10; amount representation under CR-01
 - Supersedes / superseded by: None
 
@@ -12,19 +12,19 @@
 
 M1 needs comparable observations from three Ethereum WETH/USDC pools. A sourced address does not
 prove a deployed pool's identity or liquidity. A shared block number alone does not bind separate
-reads to the same state during a reorganization. This proposal defines verification, collection,
+reads to the same state during a reorganization. This decision defines verification, collection,
 and invalidation before implementing those behaviors.
 
 ADR-0001 supplies the Node.js/TypeScript backend and protocol boundaries. ADR-0004 assigns RPC and
 collection to the backend. This design keeps those boundaries and M1's read-only workload. It
 does not choose storage, implement quotation, or authorize M1-03. All operational defaults below
-are proposed engineering policy, not measured provider performance or observed market values.
+are accepted engineering policy, not measured provider performance or observed market values.
 
-## Proposed decision
+## Decision
 
 ### 1. Fixed workload and sourced candidates
 
-Propose exactly one V2 pool and two V3 pools, with V3 fee parameters **500 and 3000**. These provide
+Use exactly one V2 pool and two V3 pools, with V3 fee parameters **500 and 3000**. These provide
 a bounded comparison of two documented fee levels; they are candidate tiers, not a claim about
 which pools currently have the most liquidity. The factory source initializes these fee amounts
 with tick spacings 10 and 60. Verify the deployed factory's mapping at the selected block instead
@@ -43,7 +43,7 @@ through RPC during M1-02:
 | V3 factory | `0x1F98431c8aD98523631AE4a59f267346ea31F984` | [V3 Ethereum deployments](https://developers.uniswap.org/docs/protocols/v3/deployments/v3-ethereum-deployments) |
 
 Discover pool addresses through the selected factories at the pinned block: V2 `getPair` and V3
-`getPool` for each proposed tier. Do not copy example pool addresses, trust a subgraph as the
+`getPool` for each selected tier. Do not copy example pool addresses, trust a subgraph as the
 authoritative registry, or silently substitute another fee tier/venue if a pool is missing or fails
 admission. Report the configured workload as unavailable and return the change for review.
 [V2 discovery](https://developers.uniswap.org/docs/protocols/v2/guides/getting-pair-addresses),
@@ -101,8 +101,8 @@ three-pool workload is unavailable. No pool swap or reduced-workload claim is au
 Exact admission budgets and whether every configured size must qualify are decisions for M1-04
 and must be settled before admitting the workload; this ADR does not waive them.
 
-This staging is a proposed sequencing clarification: accepting it would allow M1-03's preparatory
-registry/snapshot slice while leaving full liquidity admission dependent on M1-04/05. If the user
+This staging is an accepted sequencing clarification: M1-03's preparatory registry/snapshot slice
+leaves full liquidity admission dependent on M1-04/05. If the user
 wants complete trade-size admission inside M1-03, revise its scope/dependencies before approving
 implementation. No quotation implementation is authorized through this proposal.
 
@@ -148,7 +148,7 @@ finality or capture claim. Header lookup behavior is described by the
 
 ### 4. Freshness, validation age, and invalidation
 
-Use the following proposed initial limits. They are conservative operational choices to review
+Use the following accepted initial limits. They are conservative operational choices to review
 and tune with evidence; they are not estimates of Ethereum finality, liquidity, or provider capacity.
 
 | Setting | Initial policy |
@@ -209,7 +209,7 @@ provider errors must be sanitized so URLs, authorization headers, and API keys a
 
 ### 6. viem integration and module ownership
 
-Propose **viem 2.57.20** as the integration baseline, based on its
+Use **viem 2.57.20** as the integration baseline, based on its
 [official release](https://github.com/wevm/viem/releases/tag/viem@2.57.20). No dependency is installed
 by M1-02. Current official docs expose the required capabilities:
 
@@ -260,7 +260,7 @@ writer/migration behavior, and how this evidence is persisted. No database is cr
 
 ## Alternatives considered
 
-| Alternative | Tradeoff and reason for this proposal |
+| Alternative | Tradeoff and reason for this decision |
 | --- | --- |
 | Number-pinned reads with before/after hash checks | Broader provider support, but a temporary fork can evade those checks. Prefer a required hash selector and explicit unavailability over a weaker same-state claim. |
 | Independent latest reads or batch requests as the consistency boundary | Simple, but separate requests can see different states. Request batching alone is not the consistency policy. |
@@ -280,8 +280,8 @@ or proof of capture. No live observation has been made in this task.
 
 The following do **not** block review of this design but do constrain later work:
 
-- Before M1-03 implementation: accept/amend this ADR, explicitly accept the staged admission
-  boundary, and approve a concrete M1-03 scope. M1-02 approval grants none of these automatically.
+- Before M1-03 implementation: approve the concrete M1-03 scope. The user has accepted this ADR,
+  including the staged admission boundary; that design acceptance does not grant implementation approval.
 - During M1-03: obtain the user's backend RPC configuration through an ignored environment file,
   verify provider capabilities, resolve actual pool addresses, and record identity/structural evidence.
   RPC absence leaves live integration unavailable; offline fixtures must stay explicitly labeled.
@@ -298,24 +298,26 @@ need different freshness budgets. Preserve past evidence and obtain the relevant
 
 ## Acceptance and validation criteria
 
-Review this proposal against every scope area in M1-02. The
+The design has been accepted against the scope in M1-02. The
 [M1-03 validation plan](../tasks/M1-02-registry-and-consistent-snapshots.md#m1-03-validation-plan)
 defines the required offline and live evidence; it is not a passing test report.
 
-Accepting the design must settle the selected tiers, strict hash/canonicality requirement,
-operational limits, failure behavior, and staged liquidity admission. Implementation must then
+Acceptance settles the selected tiers, strict hash/canonicality requirement, operational limits,
+failure behavior, and staged liquidity admission. Implementation must then
 demonstrate those behaviors and disclose remaining qualification/integration gaps without claiming
 that M1-03 alone satisfies all of CR-02.
 
 ## Approval record
 
-The user approved M1-02's documentation/research task on 2026-11-17. ADR-0005 remains **Proposed**;
-its technical choices have not been accepted. M1-03 implementation is not approved. The related
-task records actual authorization and executed documentation checks.
+The user approved M1-02's documentation/research task on 2026-11-17. After reviewing the next-step
+explanation, the user said “i accept adr5” on 2026-11-17. This accepts ADR-0005's design, including
+the selected candidate tiers, strict hash/canonicality policy, operating limits, and staged
+liquidity admission. It does not approve M1-03 implementation. Its proposed task record maintains
+implementation authorization separately; M1-02 records research and documentation evidence.
 
 ## Implementation and evidence
 
 Design documentation only; see M1-02 for research and validation evidence. No registry, snapshot
 module, ABI code, dependency installation, application tests, live RPC reads, or fork runs exist
-for this proposal. Sources linked above were consulted on **2026-11-17**. Current source/docs
+for this ADR. Sources linked above were consulted on **2026-11-17**. Current source/docs
 describe intended APIs; the published viem baseline has not been installed or executed here.

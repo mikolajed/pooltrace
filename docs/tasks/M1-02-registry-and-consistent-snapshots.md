@@ -62,13 +62,13 @@ The workload, backend ownership, Node.js runtime, and Bun tooling are already se
 linked requirements and ADRs. The table above identifies decisions this task must resolve before
 implementation; it does not preselect their answers.
 
-ADR-0005 now proposes V3 candidate tiers 500/3000, required hash-bound canonical reads, freshness
-and retry limits, and a viem integration baseline. These remain proposed technical choices pending
-user acceptance. Actual pool addresses, provider capabilities, and live liquidity are unverified.
+ADR-0005 was accepted on 2026-11-17, selecting V3 candidate tiers 500/3000, required hash-bound
+canonical reads, freshness/retry limits, and a viem integration baseline. Actual pool addresses,
+provider capabilities, and live liquidity remain unverified.
 Finite-size admission depends on the later quotation/admission policy; the ADR explains what
 M1-03 may establish and what must remain unavailable until that work exists.
 
-M1-09 owns the storage design. ADR-0005 should identify the observation/provenance information
+M1-09 owns the storage design. ADR-0005 identifies the observation/provenance information
 storage and later quotation work need without choosing a database schema or implementing them.
 
 ## Acceptance criteria
@@ -105,7 +105,7 @@ validation plan is a plan, not a record of tests that ran.
   given only its backlog link. This authorizes preparing this task record for review.
 - Design-task approval: Granted on 2026-11-17. The user said “i apporve # M1-02: Registry and
   consistent-snapshot design”, authorizing the documentation/research scope above.
-- Design acceptance: Not granted; ADR-0005 remains Proposed for user review.
+- Design acceptance: Granted on 2026-11-17 when the user said “i accept adr5”; recorded in ADR-0005.
 - Implementation approval: Not granted; M1-03 and later implementation remain separately gated.
 
 ## Evidence and handoff
@@ -123,7 +123,7 @@ registry/snapshot design or implementation.
 Completed design deliverables on 2026-11-17:
 
 - Prepared proposed ADR-0005, linked it from the ADR index, and updated the backlog, roadmap, and
-  current state. Its technical choices remain unaccepted.
+  current state. At that handoff, its technical choices awaited acceptance.
 - Consulted current primary sources from Ethereum's EIP/JSON-RPC references, Uniswap protocol
   documentation and contract interfaces/source, Circle's token-address directory, and viem's
   release/API documentation. The ADR links the sources at their claims and records the retrieval date.
@@ -136,7 +136,7 @@ Completed design deliverables on 2026-11-17:
   require review before implementing/admitting that workload.
 - Prepared the 18-case offline and read-only live integration plan below. These are expected
   outcomes, not executed application tests. No compiler/runtime compatibility or RPC result is claimed.
-- Documentation verification passed for local links/anchors, whitespace, and CR IDs across 28
+- At the design handoff, documentation verification passed for local links/anchors, whitespace, and CR IDs across 28
   Markdown files; `git diff --check` passed. Checks confirmed exactly six documentation files
   changed, M1-02 is Done, ADR-0005 is Proposed, and design acceptance/M1-03 implementation approval
   remain ungranted. Foundation manifests, lockfile, tooling/configuration files, and Git HEAD
@@ -147,15 +147,22 @@ Completed design deliverables on 2026-11-17:
   docs/source, not validated by installing/executing that release. Runtime/provider verification
   remains an M1-03 prerequisite/evidence requirement.
 
-The next action is user review of ADR-0005, including the staged admission boundary. Accepting it
-does not approve M1-03 implementation; its concrete scope must still be separately reviewed and
-approved. The implementation-validation plan below belongs to M1-02 and does not start M1-03.
+After the user accepted ADR-0005 on 2026-11-17, its acceptance record and current documentation
+were updated. The accepted design includes the staged admission boundary. The concrete
+[M1-03 task](M1-03-registry-and-consistent-snapshots.md) is now prepared for review and remains
+Proposed with no implementation approval. The validation plan below belongs to M1-02 and does not
+start M1-03.
+
+Acceptance-recording checks on 2026-11-17 passed: local links/anchors, whitespace, and CR IDs in
+29 Markdown files; `git diff --check`; and approval-state checks confirming ADR-0005 is Accepted,
+M1-02 remains Done, and M1-03 remains Proposed with no implementation approval. Exactly eight
+documentation files changed; foundation files and the user's Git HEAD `db70dbf` are unchanged.
 
 ## M1-03 validation plan
 
-All cases below are **planned**, not executed tests. Accepting ADR-0005 and separately approving
-M1-03 must confirm its preparatory registry/snapshot scope and required live evidence. In this
-proposal M1-03 does not implement quotation, finite-size qualification, storage, a public CLI/API,
+All cases below are **planned**, not executed tests. Accepted ADR-0005 defines the preparatory
+registry/snapshot boundary; M1-03 still needs separate implementation approval and its required
+live evidence. M1-03 does not implement quotation, finite-size qualification, storage, a public CLI/API,
 UI, or an always-running collection process. Adding test tooling belongs to that approved scope.
 
 ### Offline checks with explicit fixtures and controlled RPC responses

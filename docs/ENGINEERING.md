@@ -9,7 +9,7 @@ authorize code or dependency installation.
 | --- | --- | --- |
 | Package management and commands | Bun; version and lockfile policy below | Review upgrades when changing the toolchain |
 | Initial application | TypeScript backend and frontend; Node.js backend runtime and workspace boundaries under [ADR-0001](adr/0001-project-boundaries-and-tooling.md); foundation pins below | Package-specific build configuration as approved applications are introduced |
-| EVM interaction | viem | Supported version and exact APIs from current official documentation |
+| EVM interaction | viem 2.57.20 integration baseline under accepted [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md) | Installation and runtime/API compatibility evidence in approved M1-03 work |
 | Contracts and local forks | Solidity, Foundry, Anvil | Compiler/dependency versions, router APIs, and local execution design |
 | TypeScript tests | Vitest | Version and configuration for the approved runtime |
 | Evidence persistence | SQLite initially, under [ADR-0003](adr/0003-sqlite-first-and-storage-evolution.md) | Driver, schema, migrations, and writer ownership |

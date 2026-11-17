@@ -191,9 +191,28 @@ environment is configured. Passing checks does not grant deployment authorizatio
   Acceptance: recorded preconditions, required results, backup/restore/replay limits, artifact/schema
   compatibility, failure handling, and auditable outcome; production execution needs separate approval.
 
+### RPC resilience and chain expansion
+
+The user selected Alchemy for the initial Ethereum workload and requested multi-provider fallback
+and additional chains as future development. The current M1-03 scope stays single-provider and
+Ethereum-only under ADR-0005; these items do not authorize implementation now.
+
+- [ ] RPC-01: Propose multi-provider capability, health, and fallback policy.
+  Acceptance: provider selection/switching, bounded retries and rate limits, chain/block consistency,
+  disagreement handling, provenance, and observable failure/recovery behavior are explicit.
+  Evaluate extracting the internal RPC module into a separate blockchain gateway process,
+  including shared consumers, request semantics, deadlines, lifecycle, and operational tradeoffs.
+- [ ] RPC-02: Implement a separately approved provider-resilience increment.
+  Acceptance: meaningful failure/recovery checks demonstrate the approved fallback policy without
+  mixing chain/state or hiding unavailable/inconsistent provider responses.
+- [ ] CHAIN-01: Scope and design an additional-chain increment before its implementation.
+  Acceptance: select the chain and workload, verify deployments/provider capabilities, and define
+  chain-specific consistency, provenance, and validation requirements. Do not assume one chain's
+  RPC or protocol behavior applies to every later chain.
+
 ### Feature expansion
 
-- Additional chains and protocol adapters, including Curve.
+- Additional protocol adapters, including Curve; additional-chain design is tracked in CHAIN-01.
 - Cross-chain inventory analysis, flash loans, and Starknet.
 - Live trading and its separate security/execution design.
 - Formal proofs, if separately scoped and justified.

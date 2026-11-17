@@ -108,6 +108,18 @@ workloads under [BENCHMARKING.md](BENCHMARKING.md), including resource and opera
 This is room for continued growth, not a requirement to deploy every candidate or a fixed sequence
 of database upgrades. STORE/BENCH backlog items remain unapproved future work.
 
+## Planned RPC resilience and chain expansion
+
+Begin with the user's Alchemy Ethereum endpoint under ADR-0005's single-provider policy. Later,
+design and implement multiple-provider fallback and additional-chain increments through their
+own reviewed milestones. Their order and timing remain open. [PRODUCT.md](PRODUCT.md) records
+the direction; RPC-01/02 and CHAIN-01 in
+[the backlog](BACKLOG.md) track the future work. Provider/chain growth must preserve the relevant
+state consistency, provenance, and explicit failure semantics. It does not expand M1-03's scope.
+M1-03 keeps RPC access inside the backend behind a distinct module boundary. RPC-01 will evaluate
+extracting that module into a separate gateway process; the initial application topology remains
+the one selected in ADR-0004.
+
 ## Future deployment and CI/CD
 
 Use the localhost architecture first. Later, introduce reproducible automated checks, release

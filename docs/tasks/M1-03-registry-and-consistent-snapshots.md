@@ -41,7 +41,8 @@ to policy logic so failures and time boundaries can be tested. Root checks must 
 packages; the M1-01 scripts-only type-check cannot stand in for application verification.
 
 The live gate may make read-only RPC calls to the explicitly configured endpoint once this task
-is approved. No provider is selected by this task record. Do not request or record credentials in
+is approved. The user selected Alchemy for the initial Ethereum workload and reports configuring
+an endpoint; its chain/capabilities and availability are still unverified. Do not record credentials in
 chat, reports, fixtures, or logs; configuration instructions should use the ignored backend
 environment file. Check current official APIs again during implementation, especially the pinned
 viem release's behavior with the existing Node.js/TypeScript toolchain.
@@ -63,6 +64,20 @@ viem release's behavior with the existing Node.js/TypeScript toolchain.
 
 ADR-0005 was accepted on 2026-11-17, including its strict consistency policy and staged admission
 boundary. Do not ask for that same design acceptance again within this scope.
+
+On 2026-11-17 the user selected a single Alchemy Ethereum endpoint for now and requested future
+support for multiple providers, fallback, and additional chains. This keeps M1-03 within ADR-0005's
+single-provider Ethereum scope. The endpoint value was not inspected or copied into documentation;
+its configuration is user-reported until the approved live checks run.
+
+Use the selected RPC/module boundary so later work can replace or extend provider
+configuration. Future resilience and chain expansion are tracked in the backlog; do not add a
+provider-fallback system or a generic multi-chain framework to this task.
+
+The user accepted keeping RPC access in a distinct module inside the backend for M1-03. RPC-01
+will evaluate extracting that boundary into a separate blockchain gateway process for shared
+consumers and independent operation. No gateway process, service API, or additional application
+process is part of this task; ADR-0004's initial topology remains in effect.
 
 Actual pool addresses, provider capability/availability, observed liquidity, and runtime compatibility
 remain unverified until the approved work produces evidence. A missing RPC endpoint does not prevent
@@ -119,6 +134,13 @@ that an apparent opportunity could have been captured.
 - Implementation approval: Not granted.
 - Approved implementation scope and user instruction: None recorded.
 
+The user's endpoint/future-direction clarification supplies configuration context, not approval to
+implement this task. M1-03 remains Proposed while the user reviews it.
+
+On 2026-11-17 the user replied “ok” to the recommendation to isolate RPC access inside the backend
+now and evaluate a separate gateway process in RPC-01. This accepts the direction described above;
+it does not approve M1-03 implementation or a future gateway implementation.
+
 ## Evidence and handoff
 
 Implementation has not started. This Proposed task record is ready for user review. No application
@@ -128,6 +150,21 @@ Preparation checks passed on 2026-11-17: local links/anchors, whitespace, and CR
 29 Markdown files; `git diff --check`; accepted-design/proposed-task approval states; and confirmation
 that changes are documentation-only with foundation files and Git HEAD unchanged. These checks
 validate this review artifact, not M1-03 application behavior or integration.
+
+Provider clarification recorded on 2026-11-17: Alchemy is the selected initial provider; future
+multi-provider fallback and additional chains are recorded in product/roadmap/backlog documentation.
+No endpoint value was read, disclosed, changed, or tested, and no implementation approval was added.
+Clarification checks passed: links/anchors, whitespace, and CR IDs in 29 Markdown files;
+`git diff --check`; unique RPC-01/RPC-02/CHAIN-01 backlog entries; and M1-03's unchanged Proposed/
+unapproved state. Exactly six Markdown files changed; foundation files and Git HEAD `172a81c`
+are unchanged. These are documentation checks, not endpoint capability or integration evidence.
+
+Gateway-direction clarification recorded on 2026-11-17: the current boundary is an internal RPC
+module; future process extraction is a design question for RPC-01. Product, roadmap, backlog,
+and current state reflect that direction. No implementation or approval state was advanced.
+Links/anchors, whitespace, and CR checks passed across 29 Markdown files; `git diff --check`
+passed. M1-03 remains Proposed with implementation unapproved; cumulative changes remain six
+documentation files and Git HEAD `172a81c` is unchanged.
 
 The next action is user approval or amendment of this scope. Only then implement M1-03 and record
 its actual verification evidence here. Completion does not authorize another task.

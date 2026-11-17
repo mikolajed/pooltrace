@@ -315,6 +315,12 @@ the selected candidate tiers, strict hash/canonicality policy, operating limits,
 liquidity admission. It does not approve M1-03 implementation. Its proposed task record maintains
 implementation authorization separately; M1-02 records research and documentation evidence.
 
+Subsequent configuration clarification on 2026-11-17: the user selected Alchemy for the initial
+Ethereum endpoint and requested multiple-provider fallback and additional chains in future work.
+This supplies the initial provider choice without changing this ADR's single-provider Ethereum
+policy. Endpoint capabilities remain unverified; future fallback/chain designs and M1-03
+implementation remain separately gated. The endpoint value is not recorded here.
+
 ## Implementation and evidence
 
 Design documentation only; see M1-02 for research and validation evidence. No registry, snapshot

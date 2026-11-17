@@ -19,6 +19,7 @@ milestones; review subsequent work as the product develops.
 ### M1 — local read-only research application
 
 - Ethereum mainnet market observations; WETH/USDC only.
+- One user-configured Alchemy endpoint initially; provider capabilities require verification.
 - One Uniswap V2 pool and two selected Uniswap V3 fee tiers.
 - Verify deployments, token addresses, pool identity, and suitable liquidity before configuring pools.
 - Two-swap cycles through different pools, starting and ending in USDC.
@@ -43,6 +44,18 @@ delivery sequence and detailed work.
 Other chains, Curve, cross-chain inventory analysis, flash loans, Starknet, and live trading are
 possible future milestone topics. They are not excluded from the product; each needs a separately
 reviewed scope, design, and implementation approval.
+
+The user wants more resilient RPC access through multiple providers and fallback, and support
+for more chains. Plan these as future increments while keeping the current Ethereum
+milestone on one explicit provider. Provider switching must preserve the required chain/state
+identity, provenance, and honest failure behavior; each additional chain needs reviewed registry,
+capability, consistency, and validation requirements. Concrete fallback rules, extra providers,
+and target chains remain to be selected in those future designs. These plans do not require
+building a general provider/chain framework into the first implementation slice.
+
+Keep initial RPC access in a distinct backend module. Evaluate a separate blockchain gateway
+process in the future RPC design when shared consumers or independent operation make it useful.
+The process boundary and service design remain future decisions under RPC-01.
 
 ## Engineering and correctness
 

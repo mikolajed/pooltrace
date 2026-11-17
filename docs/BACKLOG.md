@@ -38,10 +38,13 @@ access into this milestone. Each task remains separately scoped; only M1-01 is a
 
 - [x] [M1-01: Tooling and workspace foundation](tasks/M1-01-tooling-and-workspaces.md).
   State: Done. Scope, approvals, criteria, and evidence are maintained in the linked record.
-- [ ] M1-02: Propose registry and consistent-snapshot ADR before implementation.
-  Acceptance: a reviewable design addressing CR-02 and CR-03, including admission and failure policy.
+- [x] [M1-02: Registry and consistent-snapshot design](tasks/M1-02-registry-and-consistent-snapshots.md).
+  State: Done. Scope, approvals, criteria, and evidence are maintained in the linked record;
+  ADR-0005 remains Proposed for design review.
 - [ ] M1-03: Implement the approved registry and snapshot policy.
   Acceptance: evidence that the implementation satisfies CR-02 and CR-03 under the accepted design.
+  ADR-0005 proposes staging finite-size liquidity admission with M1-04/05; resolve that boundary
+  and the linked M1-02 validation plan before finalizing this task's scope/approval.
 - [ ] M1-04: Propose quotation, cycle evaluation, and profitability semantics ADR.
   Acceptance: a reviewable design addressing CR-01 and CR-04 through CR-06.
 - [ ] M1-05: Implement the approved V2/V3 adapters and cycle analysis.

@@ -1,6 +1,7 @@
 # Proposed roadmap
 
-M1-01 is approved and complete; the rest of the implementation plan awaits explicit approval.
+M1-01 and the M1-02 design task are complete. ADR-0005 awaits design acceptance; further
+implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
 ## Milestone planning
@@ -29,8 +30,10 @@ Extend and revise the sequence as the product develops.
 ## M1 — first proposed implementation milestone
 
 The separately approved [M1-01 foundation](tasks/M1-01-tooling-and-workspaces.md) is complete under
-accepted ADR-0001. Next, propose M1-02 for registry/snapshot policy, then prepare quotation/profit
-semantics before their implementations. Remaining tasks await their own approvals. Detailed work
+accepted ADR-0001. [M1-02](tasks/M1-02-registry-and-consistent-snapshots.md) produced proposed
+[ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md); review its staged admission
+boundary before approving M1-03. Quotation/profit semantics also need their own design and
+implementation approvals. Remaining tasks await their own approvals. Detailed work
 and acceptance criteria live in the [backlog](BACKLOG.md) and its linked task records.
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) selects a local UI application and one

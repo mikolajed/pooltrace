@@ -27,6 +27,7 @@ Small refactors within an accepted design need no separate ADR.
 | [0002](0002-typescript-first-and-measured-evolution.md) | TypeScript first and measured backend evolution | Accepted: direction only | [SET-10 documentation](../tasks/SET-10-language-evolution-and-benchmarks.md); future EVO/BENCH work in backlog |
 | [0003](0003-sqlite-first-and-storage-evolution.md) | SQLite first and storage evolution | Accepted; timing/ownership refined by 0004 | [SET-11 documentation](../tasks/SET-11-storage-evolution.md); M1/M3 and future STORE/BENCH work |
 | [0004](0004-local-processes-and-gated-deployment.md) | Local processes, early SQLite, and gated deployment | Accepted: architecture/release direction only | [SET-12 documentation](../tasks/SET-12-local-architecture-and-deployment.md); M1/M2 and future DEP work |
+| [0005](0005-registry-verification-and-consistent-snapshots.md) | Registry verification and consistent snapshots | Proposed | [M1-02](../tasks/M1-02-registry-and-consistent-snapshots.md); future M1-03 implementation |
 
 Link requirements from [CORRECTNESS.md](../CORRECTNESS.md) where applicable. An ADR explains how
 to meet them; it does not change them or establish implementation evidence by itself.
@@ -35,7 +36,8 @@ to meet them; it does not change them or establish implementation evidence by it
 
 These are topics to investigate, not preaccepted designs:
 
-- Pool registry verification, same-block reads, freshness, and reorg invalidation.
+- Pool registry verification, same-block reads, freshness, and reorg invalidation are proposed in
+  ADR-0005 and await design acceptance.
 - Integer quotation, cycle composition, size selection, and unavailable cost semantics.
 - Executor router interfaces, security properties, and fork execution/cost accounting.
 - SQLite driver/schema, provenance, writer ownership, migrations, backup/restore, and replay under

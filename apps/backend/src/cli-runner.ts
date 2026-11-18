@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parseArgs, parseEnv } from "node:util";
+import { setImmediate as yieldToLoop } from "node:timers/promises";
 import { DomainError, parseSizes } from "@pooltrace/domain";
 import {
   jsonEvidence,
@@ -17,6 +18,8 @@ import {
   type Analysis,
 } from "./analysis.ts";
 import { readConfig } from "./config.ts";
+import { EvidenceStore, databasePath, type SaveReceipt, type Witness } from "./storage/store.ts";
+import { StorageError, storageReason } from "./storage/driver.ts";
 
 type Mode = "live" | "fixture";
 type Format = "text" | "json";
@@ -35,7 +38,7 @@ Usage: bun run cli --mode live|fixture [--format text|json] [--sizes JSON]
        bun run cli --help [--format text|json]
 
 --mode    Required for analysis. Fixture mode is constructed, offline data.
---format  Text by default; JSON emits one cli-v1 envelope with decimal-string integers.
+--format  Text by default; JSON emits one cli-v2 envelope with decimal-string integers.
 --sizes   Six positive increasing USDC decimal strings as a JSON array.
 --help    Show help without reading application configuration or making RPC calls.
 
@@ -44,7 +47,9 @@ Live settings: root .env, then .env.local, then process environment.
 Keep ETHEREUM_RPC_URL private in environment configuration; no URL argument is accepted.
 Fixture mode needs no valid live URL and never uses it. All fixture state/time is constructed.
 Results rank gross surplus. Transaction costs and net profit remain unavailable.
-Exit: 0 usable result/help; 1 unusable/runtime result; 2 usage/configuration; 130 interrupted.
+Persistence: defaults to data/pooltrace.sqlite (live) or data/pooltrace-fixture.sqlite (fixture).
+POOLTRACE_DB_PATH overrides the path through the same root-file/process precedence.
+Exit: 0 usable and saved/help; 1 unusable/runtime/storage failure; 2 usage/configuration; 130 interrupted.
 Help accepts only --format; combining it with --mode or --sizes is invalid.`;
 class UsageError extends Error {
   readonly reason: "usage" | "size_configuration" | "configuration" | "environment";
@@ -129,7 +134,7 @@ function configuredSizes(raw: string | undefined) {
   }
 }
 export interface CliEnvelope {
-  readonly formatVersion: "cli-v1";
+  readonly formatVersion: "cli-v2";
   readonly kind: "result" | "error";
   readonly mode: Mode | null;
   readonly origin: Mode | null;
@@ -142,6 +147,11 @@ export interface CliEnvelope {
   readonly observation: Observation | null;
   readonly analysis: Analysis | null;
   readonly eligibility: ReturnType<typeof analysisEligibility> | null;
+  readonly persistence: SaveReceipt & {
+    readonly collectionRevisionId: string | null;
+    readonly lastSavedAnalysisRevisionId: string | null;
+    readonly knownInvalidation: Witness | null;
+  };
 }
 export interface CliDependencies {
   readonly root: string;
@@ -151,6 +161,7 @@ export interface CliDependencies {
   readonly fetch?: Fetch;
   readonly clock?: Clock;
   readonly fixtureFactory?: () => Promise<{ fetch: Fetch }> | { fetch: Fetch };
+  readonly openStore?: (path: string) => EvidenceStore;
 }
 function outcome(
   analysis: Analysis | null,
@@ -188,10 +199,12 @@ export function renderCli(e: CliEnvelope, format: Format): string {
     state = e.eligibility,
     block = observation?.block;
   const lines = [
-    "Pooltrace CLI (cli-v1)",
+    "Pooltrace CLI (cli-v2)",
     `Mode/origin: ${e.mode ?? "unavailable"} / ${e.origin ?? "unavailable"}`,
     `Status: ${e.status}${e.reason ? ` (${e.reason})` : ""}`,
     `As of: ${date(e.asOf)}`,
+    `Persistence: ${e.persistence.status}${e.persistence.reason ? ` (${e.persistence.reason})` : ""}`,
+    `Saved collection: ${e.persistence.collectionRevisionId ?? "unavailable"}; last saved analysis: ${e.persistence.lastSavedAnalysisRevisionId ?? "unavailable"}`,
   ];
   if (e.constructed)
     lines.push(
@@ -273,13 +286,24 @@ export async function runCli(
     analysis: Analysis | null = null,
     sizes: readonly bigint[] | null = null;
   let started = false;
+  let store: EvidenceStore | undefined;
+  let collectionRevisionId: string | null = null,
+    lastSavedAnalysisRevisionId: string | null = null,
+    knownInvalidation: Witness | null = null;
+  let persistence: SaveReceipt = {
+    status: "not_saved",
+    reason: null,
+    observationRevisionId: null,
+    analysisRevisionId: null,
+    acknowledgedAt: null,
+  };
   const clock = deps.clock ?? systemClock;
   const envelope = (
     status: Status,
     reason: string | null,
     state: ReturnType<typeof analysisEligibility> | null,
   ): CliEnvelope => ({
-    formatVersion: "cli-v1",
+    formatVersion: "cli-v2",
     kind: status === "configuration_error" ? "error" : "result",
     mode,
     origin: mode,
@@ -292,6 +316,12 @@ export async function runCli(
     observation,
     analysis,
     eligibility: state,
+    persistence: {
+      ...persistence,
+      collectionRevisionId,
+      lastSavedAnalysisRevisionId,
+      knownInvalidation,
+    },
   });
   try {
     const parsed = parseCli(args);
@@ -302,7 +332,7 @@ export async function runCli(
         exitCode: 0,
         stdout:
           format === "json"
-            ? jsonEvidence({ formatVersion: "cli-v1", kind: "help", help: HELP })
+            ? jsonEvidence({ formatVersion: "cli-v2", kind: "help", help: HELP })
             : HELP,
         envelope: null,
       };
@@ -317,7 +347,14 @@ export async function runCli(
             RPC_CONFIG_REVISION: "diagnostic-fixture-v1",
           })
         : readConfig(env);
+    let path: string;
+    try {
+      path = databasePath(deps.root, parsed.mode, env.POOLTRACE_DB_PATH);
+    } catch {
+      throw new UsageError("configuration");
+    }
     started = true;
+    store = deps.openStore ? deps.openStore(path) : new EvidenceStore(path);
     let fetcher = deps.fetch;
     if (mode === "fixture")
       fetcher = (
@@ -333,42 +370,106 @@ export async function runCli(
       ...(deps.signal ? { signal: deps.signal } : {}),
     };
     observation = await collectSnapshot(config, { ...options, origin: mode ?? "live" });
-    if (observation.registry)
+    persistence = store.saveObservation(observation);
+    await yieldToLoop();
+    collectionRevisionId =
+      persistence.status === "saved" ? persistence.observationRevisionId : null;
+    if (collectionRevisionId && store.available && observation.registry && !deps.signal?.aborted) {
       analysis = await analyzeSnapshot(observation, config, { ...options, sizes: textSizes });
-    if (analysis?.contracts && !deps.signal?.aborted)
+      persistence = store.saveAnalysis(analysis, collectionRevisionId);
+      if (persistence.status === "saved")
+        lastSavedAnalysisRevisionId = persistence.analysisRevisionId;
+    }
+    await yieldToLoop();
+    if (
+      analysis?.contracts &&
+      store.available &&
+      persistence.status === "saved" &&
+      !deps.signal?.aborted
+    ) {
+      const previous = analysis;
       analysis = (await prepareAnalysisForUse(analysis, config, options)).analysis;
-    const state = analysis ? analysisEligibility(analysis, clock) : null;
+      if (analysis !== previous && collectionRevisionId && persistence.analysisRevisionId)
+        persistence = store.saveAnalysis(
+          analysis,
+          collectionRevisionId,
+          persistence.analysisRevisionId,
+        );
+      if (persistence.status === "saved")
+        lastSavedAnalysisRevisionId = persistence.analysisRevisionId;
+    }
+    // Deliver OS signals queued while synchronous SQLite was running before deciding eligibility.
+    await yieldToLoop();
+    knownInvalidation = store.available ? store.knownInvalidation(observation.attemptId) : null;
+    await yieldToLoop();
+    let state = analysis ? analysisEligibility(analysis, clock) : null;
+    if (!store.available && persistence.status === "saved") state = null;
+    if (state && knownInvalidation)
+      state = {
+        ...state,
+        canonical: "invalidated",
+        eligibleForLiveQualification: false,
+        workloadAdmitted: false,
+        best: null,
+      };
     const status = deps.signal?.aborted ? "cancelled" : outcome(analysis, state);
     const reason = deps.signal?.aborted
       ? "cancelled"
-      : (analysis?.failures[0] ?? observation.failures[0] ?? null);
+      : (persistence.reason ?? analysis?.failures[0] ?? observation.failures[0] ?? null);
     const result = envelope(status, reason, state);
     return {
-      exitCode: status === "cancelled" ? 130 : status === "usable" ? 0 : 1,
+      exitCode:
+        status === "cancelled"
+          ? 130
+          : status === "usable" && persistence.status === "saved"
+            ? 0
+            : 1,
       stdout: renderCli(result, format),
       envelope: result,
     };
   } catch (error) {
+    await yieldToLoop();
+    if (error instanceof StorageError)
+      persistence = {
+        ...persistence,
+        reason: storageReason(error),
+      };
     const reason =
-      error instanceof UsageError
-        ? error.reason
-        : error instanceof DomainError
-          ? "size_configuration"
-          : safeReason(error);
+      error instanceof StorageError
+        ? storageReason(error)
+        : error instanceof UsageError
+          ? error.reason
+          : error instanceof DomainError
+            ? "size_configuration"
+            : safeReason(error);
     const status = deps.signal?.aborted
       ? "cancelled"
       : started
         ? "unavailable"
         : "configuration_error";
+    const failedState = analysis ? analysisEligibility(analysis, clock) : null;
     const result = envelope(
       status,
       deps.signal?.aborted ? "cancelled" : reason,
-      analysis ? analysisEligibility(analysis, clock) : null,
+      failedState
+        ? {
+            ...failedState,
+            best: null,
+            workloadAdmitted: false,
+            eligibleForLiveQualification: false,
+          }
+        : null,
     );
     return {
       exitCode: status === "cancelled" ? 130 : started ? 1 : 2,
       stdout: renderCli(result, format),
       envelope: result,
     };
+  } finally {
+    try {
+      store?.close();
+    } catch {
+      /* Commit acknowledgement remains separate from handle cleanup. */
+    }
   }
 }

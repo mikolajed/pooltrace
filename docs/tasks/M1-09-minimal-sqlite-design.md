@@ -292,7 +292,8 @@ the real-file/process/fault scenarios and existing checks with clean frozen-lock
 native install/build script permissions must be reviewed rather than assumed. API/SSE/browser,
 daemon ownership, retention, backup/restore, new migrations, and performance comparisons stay later.
 At design handoff no M1-10 task, implementation, or installation had started. The user later
-requested [M1-10 scope preparation](M1-10-minimal-evidence-store.md); implementation remains unapproved.
+requested [M1-10 scope preparation](M1-10-minimal-evidence-store.md), then approved implementation.
+That task owns subsequent code, checks, and remaining limitations.
 
 ### Documentation verification and limits
 
@@ -310,7 +311,7 @@ live RPC, benchmark, or database restart/fault injection ran for this design. It
 commit was separately requested after delivery; no push is authorized.
 The next proposed action at design handoff was review of **ADR-0007**. That review is now complete;
 the next proposed task was preparation of M1-10's bounded implementation scope for approval.
-That scope is now prepared at the user's separate request; review it before implementation.
+The user subsequently reviewed/approved M1-10; its record owns the resulting implementation.
 
 ### Design acceptance follow-up
 

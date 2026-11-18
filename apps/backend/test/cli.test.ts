@@ -1,4 +1,7 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
+import { mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { spawn, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { runCli, loadCliEnvironment, formatAmount, renderCli } from "../src/cli-runner.ts";
@@ -8,11 +11,20 @@ import { readConfig } from "../src/config.ts";
 import { quoteFixture } from "@pooltrace/protocols/fixtures";
 
 const root = fileURLToPath(new URL("../../../", import.meta.url));
+const directories: string[] = [];
+function temporaryRoot() {
+  const path = mkdtempSync(join(tmpdir(), "pooltrace-cli-test-"));
+  directories.push(path);
+  return path;
+}
+afterEach(() => {
+  for (const dir of directories.splice(0)) rmSync(dir, { recursive: true, force: true });
+});
 const defaultGrid = '["10","50","100","500","1000","5000"]';
 const emptyFile = () => undefined;
 function dependencies(kind?: NonNullable<Parameters<typeof quoteFixture>[0]>["kind"]) {
   return {
-    root,
+    root: temporaryRoot(),
     env: { ETHEREUM_RPC_URL: "invalid-private-key", USDC_INPUT_AMOUNTS: defaultGrid },
     readFile: emptyFile,
     fixtureFactory: () => quoteFixture({ timestamp: 1_700_000_000n, ...(kind ? { kind } : {}) }),
@@ -45,7 +57,7 @@ describe("CLI contract and shared behavior (C01–C07)", () => {
     const b = await runCli(["--format", "json", "--help"], { root, env: {}, readFile, fetch });
     expect(a.exitCode).toBe(0);
     expect(a.stdout).toContain("Usage: bun run cli");
-    expect(JSON.parse(b.stdout)).toMatchObject({ formatVersion: "cli-v1", kind: "help" });
+    expect(JSON.parse(b.stdout)).toMatchObject({ formatVersion: "cli-v2", kind: "help" });
     expect(readFile).not.toHaveBeenCalled();
     expect(fetch).not.toHaveBeenCalled();
   });
@@ -116,7 +128,7 @@ describe("CLI contract and shared behavior (C01–C07)", () => {
     expect(fetch).not.toHaveBeenCalled();
     const decoded = JSON.parse(result.stdout);
     expect(decoded).toMatchObject({
-      formatVersion: "cli-v1",
+      formatVersion: "cli-v2",
       mode: "fixture",
       origin: "fixture",
       constructed: true,
@@ -203,7 +215,7 @@ describe("CLI contract and shared behavior (C01–C07)", () => {
     expect(missing.exitCode).toBe(2);
     expect(missing.envelope?.reason).toBe("configuration");
     const failed = await runCli(["--mode", "live", "--format", "json"], {
-      root,
+      root: temporaryRoot(),
       env: { ETHEREUM_RPC_URL: "https://fixture.invalid/private-key" },
       readFile: emptyFile,
       fetch: async () => {
@@ -218,7 +230,7 @@ describe("CLI contract and shared behavior (C01–C07)", () => {
       return new Promise<Response>(() => {});
     });
     const cancelled = await runCli(["--mode", "live", "--format", "json"], {
-      root,
+      root: temporaryRoot(),
       env: { ETHEREUM_RPC_URL: "https://fixture.invalid" },
       readFile: emptyFile,
       signal: abort.signal,
@@ -238,12 +250,17 @@ describe("CLI contract and shared behavior (C01–C07)", () => {
       const p = spawnSync("bun", ["run", "cli", ...args], {
         cwd: root,
         encoding: "utf8",
-        env: { ...process.env, ETHEREUM_RPC_URL: "", USDC_INPUT_AMOUNTS: defaultGrid },
+        env: {
+          ...process.env,
+          ETHEREUM_RPC_URL: "",
+          USDC_INPUT_AMOUNTS: defaultGrid,
+          POOLTRACE_DB_PATH: join(temporaryRoot(), "process.sqlite"),
+        },
       });
       expect(p.status).toBe(args.includes("live") ? 2 : 0);
       if (args.includes("json")) {
         const result = JSON.parse(p.stdout);
-        expect(result.formatVersion).toBe("cli-v1");
+        expect(result.formatVersion).toBe("cli-v2");
       } else expect(p.stdout).toContain(args.includes("--help") ? "Usage:" : "CONSTRUCTED FIXTURE");
     }
   });
@@ -258,6 +275,7 @@ describe("CLI contract and shared behavior (C01–C07)", () => {
             ...process.env,
             ETHEREUM_RPC_URL: "https://fixture.invalid",
             USDC_INPUT_AMOUNTS: defaultGrid,
+            POOLTRACE_DB_PATH: join(temporaryRoot(), "signal.sqlite"),
             NODE_OPTIONS: `--import=${bootstrap}`,
           },
           stdio: ["ignore", "pipe", "pipe"],
@@ -294,6 +312,6 @@ describe("CLI contract and shared behavior (C01–C07)", () => {
       },
     );
     expect(result.code).toBe(130);
-    expect(JSON.parse(result.out)).toMatchObject({ formatVersion: "cli-v1", status: "cancelled" });
+    expect(JSON.parse(result.out)).toMatchObject({ formatVersion: "cli-v2", status: "cancelled" });
   });
 });

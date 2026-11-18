@@ -4,15 +4,15 @@
 - Proposed on: 2026-11-18
 - Decision accepted by user: 2026-11-18; “i accept adr7”
 - Related task: [M1-09 design](../tasks/M1-09-minimal-sqlite-design.md)
-- Related implementation: [M1-10](../tasks/M1-10-minimal-evidence-store.md), Proposed; implementation unapproved
+- Related implementation: [M1-10](../tasks/M1-10-minimal-evidence-store.md#implementation-evidence)
 - Requirement IDs: CR-01, CR-03, CR-09, CR-10, CR-11; preserve CR-02/04/05/06 in
   [CORRECTNESS.md](../CORRECTNESS.md)
 - Supersedes: None; refines the accepted SQLite/backend ownership direction in ADR-0003/0004
 
 ## Context
 
-The current backend produces immutable observations, analyses, and revalidated copies in memory.
-There is no application database. SQLite and backend ownership are accepted in
+At design time the backend produced immutable observations, analyses, and revalidated copies in
+memory without an application database. M1-10 implements the store described here. Ownership is accepted in
 [ADR-0003](0003-sqlite-first-and-storage-evolution.md) and
 [ADR-0004](0004-local-processes-and-gated-deployment.md); this ADR selects their minimal physical
 design. It does not change snapshot/quotation policies or authorize implementation.
@@ -24,9 +24,9 @@ and shared dependencies ambiguous. SQLite's INTEGER range also cannot hold every
 
 The initial workload is one-shot backend/CLI attempts with small bounded history reads. Browser
 queries, a long-running service, large analytical scans, and recovery automation remain later work.
-The user accepted this design on 2026-11-18; implementation remains separately unapproved.
-No SQLite connection has been opened for this design, and no transaction/round-trip/durability
-result is claimed.
+The user accepted this design on 2026-11-18 and separately approved M1-10. Design-stage research
+did not open a database; the implementation/task evidence below distinguishes actual validation
+from the original plan and unverified hardware guarantees.
 
 ## Decision
 
@@ -296,9 +296,8 @@ SQLite call cannot be promptly interrupted by a JavaScript SIGINT handler; handl
 when control returns and disclose the confirmed/unknown save status with exit 130. There is no
 hard interruption-latency claim beyond the separately stated lock-wait bound.
 
-These CLI/configuration changes are proposed, not present. M1-10's scope must explicitly include
-them and meaningful updates of the existing contract/process tests. Current README/CLI remains
-cli-v1 until separately implemented.
+M1-10 implements these CLI/configuration changes and updates contract/process tests. Current
+output is cli-v2; archived cli-v1 remains historical evidence. The root README owns usage.
 
 ### 7. Historical reads and integrity
 
@@ -374,10 +373,10 @@ larger normalized schema. Application integrity checks, sync I/O, storage growth
 platform compatibility require actual verification. There is no measured capacity, backup, power-loss,
 or cross-platform guarantee. Future query/retention needs may justify another design.
 
-The version-specific Node documentation gap from scope preparation is resolved; required exports
-were inspected without opening a database. SQL execution, compile options/effective PRAGMAs,
-round trips, file ownership, crash/restart behavior, contention, and the proposed CLI integration
-remain unverified. Passing those M1-10 gates is required before calling storage implemented.
+M1-10 verifies the selected native driver/engine, effective settings, SQL/schema/codec behavior,
+owned-file/process interruption, contention, and CLI integration. Its task records native cases
+separately from injected I/O/commit/rollback failures. Actual power loss, physical disk failure,
+other-platform compatibility, backup/restore, and performance remain unverified.
 
 ## Acceptance and validation criteria
 
@@ -398,16 +397,18 @@ eligibility after save. No new live qualification claim can come from database l
 The user approved M1-09's documentation/research scope on 2026-11-18 with “i accept”. After the
 design delivery was committed as `8360629`, the user said “i accept adr7” on 2026-11-18, accepting
 this ADR's driver, evidence/version model, lifecycle, CLI integration, and migration/failure design.
-M1-10 installation, database creation, implementation, and migrations/tests remain unapproved.
+The user separately said “i accept m1-10” on 2026-11-18; its task owns that implementation approval.
 The user separately requested a documentation commit after M1-10 scope preparation; that request
-is recorded in its task. No implementation or push is authorized. Design acceptance and
+is recorded in its task, as is the later completion-commit request. No later task or push is
+authorized. Design acceptance and
 implementation authorization are separate under [WORKFLOW.md](../WORKFLOW.md); acceptance supplies
 no runtime or market evidence.
 
 ## Implementation and evidence
 
-Accepted design documentation only. Research, read-only module inspection, paper model checks, exact
-sources, and limitations belong to [M1-09 evidence](../tasks/M1-09-minimal-sqlite-design.md#evidence-and-handoff).
-No connection/database, package installation, runnable migration, application code, test suite,
-benchmark, transaction/fork, or live RPC was introduced. Official references were checked on
-2026-11-18. Existing observations and archived reports remain unchanged historical evidence.
+Design research/paper checks and their limitations belong to
+[M1-09 evidence](../tasks/M1-09-minimal-sqlite-design.md#evidence-and-handoff). The separately approved
+[M1-10 implementation](../tasks/M1-10-minimal-evidence-store.md#implementation-evidence) owns the
+driver/facade, codec, executable version-1 schema, store, cli-v2, actual native/offline/process/live
+checks, and remaining limitations. Official pinned references were rechecked on 2026-11-18.
+Earlier observations and archived reports remain unchanged historical evidence.

@@ -31,7 +31,7 @@ estimates belong to individual milestones, not to a fixed project lifespan or fe
 - [x] [SET-13: Product framing and milestone scope](tasks/SET-13-product-framing-and-milestone-scope.md).
   Documentation-only work completed; validation evidence is in the linked record.
 
-## M1 — local read-only research application; M1-01 through M1-09 complete
+## M1 — local read-only research application; M1-01 through M1-10 complete
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) brings minimal SQLite and browser
 access into this milestone. Each task remains separately scoped; later work requires its own approval.
@@ -55,10 +55,10 @@ access into this milestone. Each task remains separately scoped; later work requ
   State: Done. Guide ownership, approvals, worked examples, and actual documentation checks are in the linked record.
 - [x] [M1-09: Minimal SQLite driver, schema, and migration design](tasks/M1-09-minimal-sqlite-design.md).
   State: Done — design delivery. Research/paper checks and later validation gates are in the linked
-  record; [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md) is Accepted. No store is implemented.
-- [ ] [M1-10: Minimal SQLite evidence store](tasks/M1-10-minimal-evidence-store.md).
-  State: Proposed — implementation unapproved. Scope, approval boundary, acceptance criteria,
-  real-file/process/fault validation, and CLI integration are in the linked record.
+  record; [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md) is Accepted.
+- [x] [M1-10: Minimal SQLite evidence store](tasks/M1-10-minimal-evidence-store.md).
+  State: Done. Exact evidence/history storage, cli-v2, native/offline/process/live validation,
+  clean installation, approvals, and limitations are in the linked record.
 - [ ] M1-11: Add the approved local API, SSE updates, and minimal read-only browser view.
   Acceptance: UI reads backend-owned results/history, displays provenance/age/unavailable states,
   and can reconnect/refresh without restarting collection. Rich terminal work remains in M4.

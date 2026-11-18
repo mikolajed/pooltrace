@@ -1,12 +1,13 @@
 # Read-only analysis guide
 
 Pooltrace compares exact USDC → WETH → USDC quotations at one Ethereum block. The working slice
-through M1-07 can report a qualified grid and its best tested gross result. Transaction costs
+through M1-10 can report a qualified grid, its best tested gross result, and separate save status. Transaction costs
 and estimated net profit remain unavailable because no full-transaction cost producer exists.
 
 Start with the [setup](../README.md#development-setup) and
 [CLI instructions](../README.md#diagnostic-cli). This guide explains calculations, examples, and
-result interpretation for the implementation at `99fe048`, documented on 2026-11-18.
+result interpretation for the calculation implementation at `99fe048`, documented on 2026-11-18.
+M1-10 adds persistence and cli-v2 without changing those calculations.
 [CORRECTNESS](CORRECTNESS.md) owns requirements; [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md)
 and [ADR-0006](adr/0006-quotation-cycles-and-profitability.md) own the accepted policies and rationale.
 [M1-08](tasks/M1-08-mathematics-and-evidence-documentation.md#evidence-and-handoff) records this
@@ -33,7 +34,8 @@ flowchart LR
   R[Registry checks at block B] --> S[Immutable snapshot]
   S --> Q[Exact leg quotations]
   Q --> C[36 cycle outcomes]
-  C --> E[Use-time eligibility]
+  C --> P[Atomic evidence saves]
+  P --> E[Use-time eligibility after storage]
   E --> O[CLI text or JSON]
 ```
 
@@ -41,8 +43,16 @@ The CLI calls shared backend modules directly in one Node process.
 [Domain functions](../packages/domain/src/index.ts) own pure exact arithmetic and ranking;
 [protocol adapters](../packages/protocols/src/quotes.ts) own Router02/QuoterV2 calls;
 [snapshots](../apps/backend/src/snapshot.ts) and [analysis](../apps/backend/src/analysis.ts) own
-attempts, clocks, validation, and sealed evidence. There is no second collector, background
-service, database writer, or execution transaction behind the command.
+attempts, clocks, validation, and sealed evidence. The backend's
+[store](../apps/backend/src/storage/store.ts) preserves collection, analysis, and renewal versions
+in SQLite. There is no second collector, background service, or execution transaction.
+
+Save status is independent of calculation quality. A confirmed save does not extend freshness;
+eligibility is checked after storage and can already be stale. Unknown commits are never labeled
+saved. Original evidence and quote amounts remain immutable; later invalidation is a retained
+witness that also applies to older branches. Loaded history preserves original origin/as-of state
+but never restores current live admission or a current best. The [README](../README.md#diagnostic-cli)
+owns paths, cli-v2 fields, exits, and operational limits.
 
 Registry checks cover code presence, factory discovery, distinct pools, decimals, token ordering,
 factory/fee/spacing identities, positive reserves/liquidity, and initialized/unlocked V3 state.
@@ -364,6 +374,7 @@ was collected at block 26442216; it is not a same-state formatting comparison wi
 | [M1-06 task](tasks/M1-06-cli-and-configuration.md#evidence-and-handoff), [JSON](evidence/M1-06-cli-live-2026-11-18.json), [text](evidence/M1-06-cli-live-2026-11-18.txt) | Actual CLI live runs on 2026-11-18 and separate offline/process/configuration/interrupt checks; live results were gross-negative with costs unavailable |
 | [M1-07 task](tasks/M1-07-validation-and-regression-coverage.md#evidence-and-handoff) | 158 offline tests, including 42 added cases and a 205-tuple V2 corpus, plus clean frozen-lockfile verification; no new live run or production correction |
 | [M1-08 task](tasks/M1-08-mathematics-and-evidence-documentation.md#evidence-and-handoff) | Documentation/example checks and new offline help/fixture command verification, distinguished from the earlier suite/integration results |
+| [M1-10 task](tasks/M1-10-minimal-evidence-store.md#implementation-evidence), [JSON](evidence/M1-10-cli-live-2026-11-18.json), [text](evidence/M1-10-cli-live-2026-11-18.txt) | SQLite/cli-v2, exact immutable history, native/controlled-fault/process checks, clean install, and actual live saved reports; loaded records are historical |
 
 Reports describe past events. Re-running an integration harness selects new state and need not
 produce the same amounts or admission. Local helper replies and CLI fixtures are constructed;
@@ -373,8 +384,8 @@ deployed binary or a security audit. The single configured provider and supporte
 behavior remain external trust assumptions, including possible token upgrades.
 
 There is no wallet, executor, transaction submission, fork simulation, full-transaction cost
-producer, database, HTTP API/SSE, browser UI, or service lifecycle in this working slice. JSON
-redirection and checked-in reports are not an application evidence store. M1-09 through M1-12
-cover the remaining local application work; M2 covers reviewed execution/cost/fork capabilities.
+producer, HTTP API/SSE, browser UI, or service lifecycle in this working slice. M1-10 supplies the
+local SQLite evidence store; JSON redirection and checked-in reports are separate report artifacts.
+M1-11/M1-12 cover remaining local application work; M2 covers reviewed execution/cost/fork capabilities.
 Provider fallback/gateway and additional chains remain separately scoped future work in the
 [backlog](BACKLOG.md). These boundaries describe this increment, not the lifetime of Pooltrace.

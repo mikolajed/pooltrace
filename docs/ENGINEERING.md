@@ -12,7 +12,7 @@ authorize code or dependency installation.
 | EVM interaction | viem 2.57.20 installed and verified under accepted [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md) and [ADR-0006](adr/0006-quotation-cycles-and-profitability.md) | Reviewed executor integration remains M2 work |
 | Contracts and local forks | Solidity, Foundry, Anvil | Compiler/dependency versions, router APIs, and local execution design |
 | TypeScript tests | Vitest 5.1.0; offline package tests executed through Node | Additional meaningful checks with approved behavior |
-| Evidence persistence | SQLite initially, under [ADR-0003](adr/0003-sqlite-first-and-storage-evolution.md); minimal design accepted in [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md) | M1-10 implementation remains unapproved |
+| Evidence persistence | better-sqlite3 13.2.0 / SQLite 3.54.1 under accepted [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md); backend implementation in M1-10 | Other-platform verification and M3 hardening |
 | Terminal | Next.js, React, Tailwind, shadcn/ui, SSE | Versions, read path, and reconnect semantics |
 | Local runtime topology | UI application + one backend; early embedded SQLite; on-demand Anvil in M2 | Application configuration/lifecycle and later fork toolchain under [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) |
 
@@ -76,7 +76,7 @@ eligibility live in immutable observations; no database or long-running collecti
 
 `bun run check` covers tooling, all three packages, lint/formatting, and offline tests. Explicit
 live commands use the configured endpoint; `bun run check:live` writes ignored integration reports.
-SQLite, frontend dependencies, and Foundry remain deferred to their approved tasks.
+SQLite was deferred from M1-03 and is now implemented in M1-10. Frontend and Foundry remain later work.
 
 ## Quotation integration
 
@@ -162,12 +162,15 @@ design into M1; M3 covers richer evidence/replay/recovery. Both require implemen
 Language and storage migrations can proceed independently. Use the storage comparison methodology
 in [BENCHMARKING.md](BENCHMARKING.md) before claiming an improvement.
 
-Completed M1-09 design delivery records accepted [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md):
-better-sqlite3 13.2.0 on the unchanged Node pin, immutable exact evidence versions, atomic saves,
-bounded historical reads, and initial migration/failure handling. These are accepted design choices;
-no dependency, database, codec, migration, or CLI persistence exists. The task records research
-and paper checks; native loading, effective settings, real-file/process behavior, and
-cli-v2 integration remain separately approved M1-10 gates.
+[M1-10](tasks/M1-10-minimal-evidence-store.md#implementation-evidence) implements accepted
+[ADR-0007](adr/0007-minimal-sqlite-evidence-store.md): better-sqlite3 13.2.0 on the unchanged Node
+pin, the owned narrow vendor facade, exact typed canonical documents, immutable versions/terminal
+witnesses, atomic saves, bounded historical reads, version-1 initialization, and cli-v2 persistence.
+SQLite is 3.54.1 on the verified macOS arm64 host; no added install-script trust was needed.
+DELETE/EXTRA, foreign keys, trusted schema OFF, and 500 ms lock waiting are verified per connection.
+Unit/process tests use temporary files/roots; ordinary test runs must not write default evidence
+files. The task separates native-file faults, injected errors, actual live evidence, and unverified
+power-loss/other-platform behavior. There is no retention, backup/recovery automation, or benchmark.
 
 ## Local execution and future releases
 

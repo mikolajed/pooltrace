@@ -3,7 +3,7 @@
 M1-01 through M1-08 are complete, including verified snapshots, qualified read-only cycle analysis,
 diagnostic live/fixture CLI access, focused arithmetic/failure validation, and the analysis guide.
 M1-09 design delivery is complete with [accepted ADR-0007](adr/0007-minimal-sqlite-evidence-store.md);
-the store is not implemented. Further implementation awaits explicit approval.
+M1-10 implements the minimal store and cli-v2 persistence. Further implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
 ## Milestone planning
@@ -51,10 +51,10 @@ and acceptance criteria live in the [backlog](BACKLOG.md) and its linked task re
 [M1-08](tasks/M1-08-mathematics-and-evidence-documentation.md) connects the implemented math,
 assumptions, commands, result states, and actual evidence through the [analysis guide](ANALYSIS.md).
 [M1-09](tasks/M1-09-minimal-sqlite-design.md) delivers accepted ADR-0007 and its paper/research
-evidence. Storage implementation, API/browser access, and process lifecycle remain separately
-gated M1-10 through M1-12.
-[M1-10's implementation scope](tasks/M1-10-minimal-evidence-store.md) is prepared for review;
-its database, driver installation, and CLI integration have not started.
+evidence. [M1-10](tasks/M1-10-minimal-evidence-store.md#implementation-evidence) implements the
+store, exact immutable history, atomic saves and cli-v2; its evidence separates native/injected
+faults, offline/process checks, and actual live runs. API/browser access and process lifecycle
+remain separately gated M1-11/M1-12.
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) selects a local UI application and one
 backend process with collection/analysis/RPC/API modules. Review a minimal SQLite schema/driver and

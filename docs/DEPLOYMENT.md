@@ -47,8 +47,9 @@ stale, calculated, quoted, and simulated results from [CORRECTNESS.md](CORRECTNE
 ## Persistence and fork lifecycle
 
 Keep the SQLite file on local durable storage outside build/release output. A process restart or UI
-rebuild must not replace the evidence file. Review a minimal schema, exact amount encoding,
-migrations, and persistence failure behavior before M1 storage code. M3 extends this with richer
+rebuild must not replace the evidence file. M1-10 implements the reviewed schema, exact encoding,
+version-1 initialization and explicit persistence failures under [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md).
+The CLI owns one connection per invocation; it does not add a service. M3 extends this with richer
 history/replay and recovery; its scope no longer introduces the first database.
 
 Anvil is controlled by the backend's simulation module once M2 is approved. Verify the selected
@@ -67,7 +68,7 @@ verified restore, not an assumed copy of a changing file.
 
 | Environment | Purpose | State |
 | --- | --- | --- |
-| Local development | Run the two applications, early SQLite, and later optional Anvil on localhost | Modules/check harnesses and one-shot live/fixture CLI complete through M1-06; service/UI/storage lifecycle remains unapproved |
+| Local development | Run the two applications, early SQLite, and later optional Anvil on localhost | One-shot backend/CLI and embedded persistence implemented through M1-10; service/UI lifecycle remains unapproved |
 | Automated verification | Reproducible builds and appropriate offline/integration/fork checks | Future CI design; not configured |
 | Preview/staging | Validate a specific release candidate with isolated configuration and data | Future hosting design; not provisioned |
 | Production | Host a reviewed research application and preserve evidence across updates | Future design; no server or deployment exists |
@@ -139,8 +140,9 @@ capabilities when selecting the CI platform; no such protection is configured he
 
 ## Decisions still open
 
-Runtime versions/configuration, SQLite driver/schema/journal settings, endpoint/process supervision,
-API contracts, and fork lifecycle details require their relevant implementation ADRs. Hosting,
+Runtime pins and the minimal SQLite driver/schema/journal settings are selected and validated in
+their task records. Endpoint/process supervision, API contracts, and fork lifecycle details still
+require their relevant scopes/ADRs. Hosting,
 artifact packaging, CI provider, staging layout, checks/budgets, migrations/cutover, and rollback
 procedures require a future deployment ADR. No workflow YAML, Dockerfile, provisioning script, server, or application
 process is created by this document. Official references were checked on 2026-11-17.

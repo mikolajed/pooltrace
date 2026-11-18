@@ -4,29 +4,24 @@ Updated: 2026-11-18.
 
 ## Phase and authorization
 
-**M1-01 through M1-09 are complete. ADR-0007 is Accepted; M1-10's scope is prepared for review.**
+**M1-01 through M1-10 are complete. Later work remains unapproved.**
 
-The user accepted M1-08's bounded documentation scope on 2026-11-18 with “i accept”. The
-[task record](tasks/M1-08-mathematics-and-evidence-documentation.md) owns approval and actual
-documentation checks; earlier task records retain their own approvals/evidence.
-[WORKFLOW.md](WORKFLOW.md) governs later work. The user separately requested the completed M1-08
-documentation commit, followed by preparation of M1-09's scope. No push is authorized.
-The user approved M1-09 design delivery with “i accept” on 2026-11-18. Its
-[task record](tasks/M1-09-minimal-sqlite-design.md#evidence-and-handoff) owns actual research/paper
-checks. After the design commit, the user accepted ADR-0007 on 2026-11-18 with “i accept adr7”.
-This accepts the storage design; M1-10 implementation remains unapproved.
-The user requested “prep m1-10”; its [Proposed scope](tasks/M1-10-minimal-evidence-store.md)
-is prepared. No dependency installation, database, migration, or implementation is authorized yet.
+The user accepted ADR-0007 with “i accept adr7”, then approved M1-10 with “i accept m1-10” on
+2026-11-18 after its scope was committed. The [M1-10 task](tasks/M1-10-minimal-evidence-store.md)
+owns approval, actual implementation/native/offline/process/live evidence, and limitations.
+Earlier records retain their own evidence. [WORKFLOW.md](WORKFLOW.md) governs later work;
+no M1-11 or push is authorized. The user separately requested the completed M1-10 commit.
 
 ## What exists
 
 - Product/correctness/engineering/deployment plans, roadmap/backlog, and accepted ADRs 0001–0007.
 - [Accepted ADR-0007](adr/0007-minimal-sqlite-evidence-store.md) specifies a minimal SQLite
   evidence store: native driver, exact immutable versions, atomic saves, historical reads,
-  migration/failure rules, and CLI persistence design. No driver/store is installed.
-- Pinned Bun/Node workspace, strict TypeScript/Biome, viem/Vitest, and **158 passing offline tests**
-  across eight files, recorded in M1-07 with a clean frozen-lockfile install without private config.
-  The behavioral suite/install was not repeated for M1-08/M1-09's Markdown-only changes.
+  migration/failure rules, and CLI persistence. M1-10 implements the backend-owned embedded store
+  with better-sqlite3 13.2.0 / SQLite 3.54.1 on the unchanged Node pin; verified on macOS arm64.
+- Pinned Bun/Node workspace, strict TypeScript/Biome, viem/Vitest, and **205 passing offline tests**
+  across nine files, including 47 new storage/CLI cases. Full checks and clean frozen-lockfile
+  installation/checks passed without private configuration; tests use isolated files/processes.
 - The [analysis guide](ANALYSIS.md) explains implemented mathematics, exact constructed examples,
   result/lifecycle interpretation, and actual archived evidence. Root README remains the command
   reference; source/requirements/ADRs/task records retain their separate authority.
@@ -39,10 +34,14 @@ is prepared. No dependency installation, database, migration, or implementation 
 - `packages/protocols`: sourced Ethereum registry, identity/structural verification, bounded
   hash-bound RPC, Router02 comparison, QuoterV2 calls, and separate constructed fixture transports.
 - `apps/backend`: immutable snapshots/analysis, all 36 route/size outcomes, shared quote/control
-  budgets, use-time eligibility, revalidation, and invalidation.
+  budgets, use-time eligibility, revalidation, terminal invalidation, and exact versioned storage.
 - `bun run cli --mode live|fixture`, with exact plain-text or `--format json` output. Modes are
   explicit; fixture data is constructed and cannot confer live admission. Configuration, exits,
-  and setup are in the [README](../README.md#diagnostic-cli).
+  and setup are in the [README](../README.md#diagnostic-cli). cli-v2 reports independent save
+  status and confirmed revision IDs. Default live/fixture files are separate; history is backend-only.
+- Real cli-v2 live text/JSON runs both saved 36 qualified outcomes and matched stored analysis
+  after reopen. Best tested gross was negative; cost/net remained unavailable. Loaded evidence is
+  historical with no restored current admission. Details are in M1-10, separate from older reports.
 - Successful real live CLI text/JSON runs with 36/36 qualified comparisons at their recorded
   as-of events. Best tested gross was negative; costs/net profit were unavailable. Actual reports
   are linked from [M1-06 evidence](tasks/M1-06-cli-and-configuration.md#evidence-and-handoff).
@@ -56,28 +55,27 @@ Qualification belongs to each observation/input/policy. M1-03 source snapshots r
 suitability; M1-05 analysis records supply finite-size evidence. Output and archived reports are
 as-of events, not continuing live eligibility or a positive profitability/capture claim.
 
-No full-transaction cost producer, executor, fork execution, HTTP API/SSE, UI, database, background
+No full-transaction cost producer, executor, fork execution, HTTP API/SSE, UI, background
 service lifecycle, benchmark, or deployment pipeline exists yet. Gross quotation is not net profit,
 execution success, finality, or capture evidence.
 
 RPC remains an internal backend/protocol boundary using one Alchemy Ethereum endpoint. Provider
-fallback/gateway and additional chains remain RPC-01/RPC-02/CHAIN-01. SQLite and UI/backend services
-retain separately gated M1 tasks; executor/Anvil/cost generation remain M2.
+fallback/gateway and additional chains remain RPC-01/RPC-02/CHAIN-01. Further storage changes
+retain their own scopes; UI/backend service lifecycle remains M1-11/M1-12 and
+executor/Anvil/cost generation remains M2. Broader history/recovery/backup is M3; physical disk
+failure, power loss, other-platform compatibility, and performance remain unverified.
 
 ## Next proposed action
 
-Review [M1-10: Minimal SQLite evidence store](tasks/M1-10-minimal-evidence-store.md) under
-[accepted ADR-0007](adr/0007-minimal-sqlite-evidence-store.md). Implementation has not started;
-do not install the driver, open a database, or implement the store before approval.
+Prepare M1-11's bounded local API/SSE/minimal browser scope for review when requested.
+It has not been prepared or started. Completion of M1-10 does not authorize it.
 
 ## Latest handoff
 
 Requested M1-07 completion commit: `99fe048` (`test: complete M1-07 validation and regression coverage`).
 Requested M1-08 documentation commit: `c9414e2` (`docs: complete M1-08 analysis guide and evidence documentation`).
 Requested M1-09 design commit: `8360629` (`docs: complete M1-09 SQLite evidence-store design`).
-ADR-0007 acceptance, M1-10 scope preparation, and navigation/current-state updates are Markdown
-only; the user separately requested their commit. The new task covers driver verification, exact immutable evidence, atomic saves,
-historical reads, cli-v2 persistence, isolated tests, and real-file/process/fault validation.
-Official version-specific research and paper checks are recorded in M1-09. Database/
-native-driver behavior remains unverified; there was no database/connection, installation,
-code/test change, new live check, push, or M1-10 implementation.
+Requested acceptance/scope commit: `07660ec` (`docs: accept ADR-0007 and prepare M1-10 implementation scope`).
+The user requested a completion commit for M1-10's implementation, tests, two new actual live
+report archives, and documentation updates. No later task, push, API/UI, service, fork, or execution
+was introduced.

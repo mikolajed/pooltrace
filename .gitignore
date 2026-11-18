@@ -21,9 +21,11 @@ data/
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
+*.sqlite-journal
 *.db
 *.db-shm
 *.db-wal
+*.db-journal
 
 # Operating system files
 .DS_Store

@@ -94,9 +94,13 @@ Individual commands are `bun run check:toolchain`, `bun run typecheck`, `bun run
 
 `packages/domain` owns pure exact arithmetic, qualification, composition, and ranking.
 `packages/protocols` owns the sourced Ethereum registry, ABI reads, verification, and bounded RPC
-transport. `apps/backend` owns configuration, one-attempt collection, eligibility, and revalidation.
+transport. `apps/backend` owns configuration, one-attempt collection, eligibility, revalidation,
+and the embedded SQLite evidence store.
 All three expose TypeScript source to the pinned Node runtime. The diagnostic CLI below invokes
-these shared modules. Application services, an HTTP API, UI, and database remain later tasks.
+these shared modules. Application services, an HTTP API, and UI remain later tasks. The pinned
+better-sqlite3 13.2.0 native dependency is verified on macOS arm64 / Node 26.3.1; other platforms
+need their own compatibility checks. The package supplies the tested native binary without an
+additional trusted install script.
 
 ## Diagnostic CLI
 
@@ -122,9 +126,9 @@ are formatted exactly. A complete negative or zero gross result is a normal outc
 gross quotation alone would still leave transaction costs and estimated net profit unavailable.
 Eligibility is computed immediately before output; the document does not remain fresh after exit.
 
-`--format json` emits one `cli-v1` envelope on stdout, without progress or ANSI escapes. Its
+`--format json` emits one `cli-v2` envelope on stdout, without progress or ANSI escapes. Its
 `kind` is `result` or `error`; `mode`, `origin`, `constructed`, `status`, `reason`, `asOf` (Unix
-milliseconds), `units`, `sizes`, `observation`, `analysis`, and `eligibility` retain evidence and
+milliseconds), `units`, `sizes`, `observation`, `analysis`, `eligibility`, and `persistence` retain evidence and
 unavailable values. Bigint quantities, including block numbers and base-unit amounts, are exact
 decimal strings. Sizes and cycle-row input/output/gross use 10^-6 USDC. Each leg quote's input/output
 units follow its tokenIn/tokenOut; the intermediate leg-1 output uses 10^-18 WETH.
@@ -135,16 +139,44 @@ redirect stdout alone for a JSON document.
 
 | Exit | Meaning |
 | --- | --- |
-| 0 | Help or a usable result, including a qualified fixture or nonpositive gross result. Fixture success never means live admission. |
-| 1 | Runtime failure, or rejected/incomplete/stale/invalidated/unavailable analysis. Returned diagnostics remain evidence. |
-| 2 | Invalid arguments or configuration; RPC has not started. Errors do not echo supplied values. |
-| 130 | SIGINT interruption; the CLI cancels its owned work and exits. |
+| 0 | Help or a usable result with confirmed saved evidence, including qualified fixture or nonpositive gross results. Fixture success never means live admission. |
+| 1 | Runtime, storage, or integrity failure; uncertain save; or rejected/incomplete/stale/invalidated/unavailable analysis. Calculation diagnostics and save status remain separate. |
+| 2 | Invalid arguments or configuration, before database/network access. Errors do not echo supplied values. |
+| 130 | SIGINT interruption; owned work is cancelled and confirmed prior saves/current save status are reported. Synchronous SQLite waits for control to return before handling the signal. |
 
 Live and fixture sizes use `--sizes` first, then `USDC_INPUT_AMOUNTS`, then the six defaults.
 Every override must be a JSON array of exactly six increasing, distinct, positive decimal strings
 with at most six places. Both modes load root `.env`, then `.env.local`, then defined process
 values (including empty values); fixture mode ignores the live URL/provider settings. Help loads
 neither file. No endpoint URL argument is accepted.
+
+Both modes persist by default: live uses `data/pooltrace.sqlite`, fixture uses
+`data/pooltrace-fixture.sqlite`. Optional `POOLTRACE_DB_PATH` uses the same environment precedence;
+relative paths resolve from the repository root. Omit it to retain separate defaults. An explicit
+shared file keeps origins distinct. Empty, URI, and `:memory:` paths are invalid. New parent
+directories use mode 0700 and new files 0600; existing permissions are preserved. Use local storage.
+Database files and rollback journals are ignored by Git; keep them outside build output.
+
+`persistence.status` is `saved`, `not_saved`, or `unknown`, with a fixed reason or null.
+`collectionRevisionId` and `lastSavedAnalysisRevisionId` identify confirmed prior saves;
+`observationRevisionId` / `analysisRevisionId` identify the confirmed current write, and
+`acknowledgedAt` is its wall time. An uncertain write has no confirmed current IDs/time.
+`knownInvalidation` carries a stored witness revision/index when present. Paths and credentials
+are excluded. A usable calculation can have a failed save and exit 1; a saved result can expire
+before output and also exit 1. The CLI never loops on renewal/writes to manufacture success.
+
+Collection, analysis, and renewal are separate atomic saves retaining immutable history and all
+failure outcomes. The store uses DELETE/EXTRA, a 500 ms lock wait, and at most one read-only
+reconciliation of an uncertain commit. Filesystem latency is not bounded by that timeout. Do not
+delete a database/journal or change its mode to bypass a storage error; preserve it for inspection.
+No backup/restore or power-loss guarantee has been validated. See
+[ADR-0007](docs/adr/0007-minimal-sqlite-evidence-store.md) and
+[M1-10 evidence](docs/tasks/M1-10-minimal-evidence-store.md#implementation-evidence).
+
+Backend exact-version/history reads use bounded metadata pages and mark loaded evidence
+historical, preserving original origin/as-of fields and known invalidation. They do not restore
+live clocks/admission or a current best. There is no public history command, API, or replay loader.
+Archived cli-v1 reports remain unchanged historical evidence.
 
 ## Private live configuration and integration checks
 

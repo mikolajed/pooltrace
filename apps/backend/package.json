@@ -5,6 +5,7 @@
   "exports": "./src/index.ts",
   "dependencies": {
     "@pooltrace/domain": "workspace:*",
-    "@pooltrace/protocols": "workspace:*"
+    "@pooltrace/protocols": "workspace:*",
+    "better-sqlite3": "13.2.0"
   }
 }

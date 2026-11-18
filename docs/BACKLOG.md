@@ -31,7 +31,7 @@ estimates belong to individual milestones, not to a fixed project lifespan or fe
 - [x] [SET-13: Product framing and milestone scope](tasks/SET-13-product-framing-and-milestone-scope.md).
   Documentation-only work completed; validation evidence is in the linked record.
 
-## M1 — local read-only research application; M1-01 through M1-04 complete
+## M1 — local read-only research application; M1-01 through M1-05 complete
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) brings minimal SQLite and browser
 access into this milestone. Each task remains separately scoped; later work requires its own approval.
@@ -45,8 +45,8 @@ access into this milestone. Each task remains separately scoped; later work requ
   State: Done. Scope, approvals, criteria, and offline/live evidence are maintained in the linked record.
 - [x] [M1-04: Quotation, cycle evaluation, and profitability design](tasks/M1-04-quotation-cycles-and-profitability-design.md).
   State: Done. Research/design evidence is maintained in the linked record; ADR-0006 is Accepted.
-- [ ] [M1-05: V2/V3 quotation and cycle analysis](tasks/M1-05-quotation-and-cycle-analysis.md).
-  State: Proposed. Scope, approval boundary, criteria, and preparation evidence are maintained in the linked record.
+- [x] [M1-05: V2/V3 quotation and cycle analysis](tasks/M1-05-quotation-and-cycle-analysis.md).
+  State: Done. Scope, approvals, criteria, and offline/live evidence are maintained in the linked record.
 - [ ] M1-06: Add the runnable CLI and configuration documentation.
   Acceptance: documented real-data and explicit fixture modes, `.env.example`, and states satisfying
   CR-06, CR-09, and CR-11. Use shared backend behavior/API without starting a duplicate collector.

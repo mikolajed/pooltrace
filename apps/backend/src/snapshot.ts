@@ -71,7 +71,7 @@ export interface Options {
   readonly blockNumber?: bigint;
 }
 
-function freeze<T>(value: T): T {
+export function freeze<T>(value: T): T {
   if (value && typeof value === "object") {
     for (const child of Object.values(value)) freeze(child);
     Object.freeze(value);
@@ -135,7 +135,7 @@ export function eligibility(observation: Observation, clock: Clock = systemClock
   };
 }
 
-async function validate(rpc: RpcSession, block: Header): Promise<Validation> {
+export async function validate(rpc: RpcSession, block: Header): Promise<Validation> {
   try {
     if ((await rpc.chain()) !== 1n) throw new RpcFailure("configuration");
     const canonical = await rpc.block(block.number);

@@ -4,7 +4,7 @@
 - Proposed on: 2026-11-17
 - Decision accepted by user: 2026-11-18; “i accept adr6”
 - Related task: [M1-04](../tasks/M1-04-quotation-cycles-and-profitability-design.md)
-- Future implementation: [M1-05](../tasks/M1-05-quotation-and-cycle-analysis.md), Proposed and awaiting separate approval
+- Implementation: completed [M1-05](../tasks/M1-05-quotation-and-cycle-analysis.md); cost producer/executor remain future work
 - Requirement IDs: CR-01 through CR-06, CR-09, CR-10 in [CORRECTNESS.md](../CORRECTNESS.md)
 - Supersedes / superseded by: None; extends accepted [ADR-0005](0005-registry-verification-and-consistent-snapshots.md)
 
@@ -350,12 +350,14 @@ It does not establish that any test or new live quote passed, or authorize M1-05
 The user approved M1-04's design/research scope on 2026-11-17 with “i accept m1-04”.
 On 2026-11-18 the user said “i accept adr6”, accepting this ADR's design, including the initial
 six-size grid, full-input and 100 bps impact gates, all-36 workload admission, gross ranking,
-cost/valuation semantics, and operational limits. M1-05 implementation remains separately scoped
-and unapproved; acceptance does not establish runtime or market evidence.
+cost/valuation semantics, and operational limits. The user subsequently said “i accept m1-05”
+on 2026-11-18; its task record holds that separate implementation approval and actual evidence.
+Design acceptance itself does not establish runtime or market evidence.
 
 ## Implementation and evidence
 
-Documentation/research only. Sources linked in this ADR were consulted on **2026-11-17**;
-M1-04's task record owns actual research/documentation checks and access limitations.
-No new live RPC, quotation, protocol execution, dependency, test suite, or fork evidence was
-produced. Existing M1-03 evidence remains limited to its recorded identity/structural snapshots.
+Sources linked in this ADR were consulted on **2026-11-17** for M1-04's design research.
+The [M1-05 record](../tasks/M1-05-quotation-and-cycle-analysis.md#evidence-and-handoff) owns the
+subsequent approved implementation, rechecked/pinned sources, offline checks, and actual live
+qualification/replay/expiry evidence. M1-03 source snapshots retain their original structural-only
+meaning. No executor, full-transaction cost producer, fork execution, or capture evidence is claimed.

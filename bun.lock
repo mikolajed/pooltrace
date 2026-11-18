@@ -14,12 +14,17 @@
     "apps/backend": {
       "name": "@pooltrace/backend",
       "dependencies": {
+        "@pooltrace/domain": "workspace:*",
         "@pooltrace/protocols": "workspace:*",
       },
+    },
+    "packages/domain": {
+      "name": "@pooltrace/domain",
     },
     "packages/protocols": {
       "name": "@pooltrace/protocols",
       "dependencies": {
+        "@pooltrace/domain": "workspace:*",
         "viem": "2.57.20",
       },
     },
@@ -72,6 +77,8 @@
     "@oxc-project/types": ["@oxc-project/types@0.156.0", "", {}, "sha512-1Duyg48TdJNdyhEB8Xn1L36bT9Pv6GUtlKjHxOys8xkaF/rQq3XJE+bAurSK/AgIz5mGFsb77cn9Pb20+WCScw=="],
 
     "@pooltrace/backend": ["@pooltrace/backend@workspace:apps/backend"],
+
+    "@pooltrace/domain": ["@pooltrace/domain@workspace:packages/domain"],
 
     "@pooltrace/protocols": ["@pooltrace/protocols@workspace:packages/protocols"],
 

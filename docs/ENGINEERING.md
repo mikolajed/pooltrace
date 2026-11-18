@@ -9,7 +9,7 @@ authorize code or dependency installation.
 | --- | --- | --- |
 | Package management and commands | Bun; version and lockfile policy below | Review upgrades when changing the toolchain |
 | Initial application | TypeScript backend and frontend; Node.js backend runtime and workspace boundaries under [ADR-0001](adr/0001-project-boundaries-and-tooling.md); foundation pins below | Package-specific build configuration as approved applications are introduced |
-| EVM interaction | viem 2.57.20 installed and verified under accepted [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md) | Later quotation integration under M1-04/05 |
+| EVM interaction | viem 2.57.20 installed and verified under accepted [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md) and [ADR-0006](adr/0006-quotation-cycles-and-profitability.md) | Reviewed executor integration remains M2 work |
 | Contracts and local forks | Solidity, Foundry, Anvil | Compiler/dependency versions, router APIs, and local execution design |
 | TypeScript tests | Vitest 5.1.0; offline package tests executed through Node | Additional meaningful checks with approved behavior |
 | Evidence persistence | SQLite initially, under [ADR-0003](adr/0003-sqlite-first-and-storage-evolution.md) | Driver, schema, migrations, and writer ownership |
@@ -77,6 +77,36 @@ eligibility live in immutable observations; no database or long-running collecti
 `bun run check` covers tooling, both packages, lint/formatting, and offline tests. Only the explicit
 `bun run check:live` harness uses the configured endpoint and writes ignored integration reports.
 SQLite, frontend dependencies, and Foundry remain deferred to their approved tasks.
+
+## Quotation integration
+
+M1-05 adds the private `@pooltrace/domain` workspace and workspace dependencies only; no external
+dependency version changes. Its pure functions receive explicit amounts, state, evidence, and
+time inputs. Protocols owns Router02 comparison and QuoterV2 ABI calls; backend owns analysis
+attempts, clocks, eligibility, and validation. Root TypeScript checks include all three packages;
+Vitest discovers their actual offline tests.
+
+The existing bounded reader now accepts quote-only logical/send limits, reserved final reads, and
+a state-dispatch gate. M1-03's defaults are preserved. Three quote workers leave a semaphore slot
+for renewal; quotes and control requests share the same four-request reader, deadline, and send
+budget. The gate runs on actual state sends, including retries. No extra provider session bypasses
+those limits. Evidence counts logical reads separately from actual sends.
+
+`QUOTE_SOURCE` retains sourced deployments, retrieval date, and exact reviewed public repository
+revisions for V2 periphery, V3 periphery, and V3 core. Source links are pinned to those commits.
+Runtime-code hashes and factory/wrapped-token checks are observation evidence, not a claim that
+deployed bytecode was independently reproduced or audited from those source revisions. Runtime and
+wire compatibility are checked through actual viem calls and the live integration gate.
+
+The domain's conditional cost function validates supplied model/context evidence, exact valuation,
+units, freshness, and rounding. It generates no gas estimate or cost evidence. The analysis backend
+accepts no live cost override and always reports unavailable transaction costs/net profit for this
+slice. This preserves ADR-0006's staged cost boundary.
+
+The explicit `bun run check:quotes:live` harness verifies a fresh admitted grid and elapsed expiry
+before independent historical replay. Each eligibility record is as-of its own event. Setup is in
+the [README](../README.md#development-setup); actual source revisions, commands, results, and
+limitations are in [M1-05 evidence](tasks/M1-05-quotation-and-cycle-analysis.md#evidence-and-handoff).
 
 ## Language evolution
 

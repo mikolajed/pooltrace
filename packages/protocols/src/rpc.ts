@@ -94,11 +94,28 @@ export class RpcSession {
   private readonly client;
   private active = 0;
   private sequence = 0;
+  private reads = 0;
+  get logicalReads(): number {
+    return this.reads;
+  }
+  private reservedReads: number;
+  private readonly maxReads: number;
+  private readonly maxSends: number;
+  private readonly beforeStateSend: (() => Promise<void>) | undefined;
   private lastWall: number;
   private lastMono: number;
   private readonly waiting: Array<() => void> = [];
 
-  constructor(options: { url: string; clock?: Clock; fetch?: Fetch; signal?: AbortSignal }) {
+  constructor(options: {
+    url: string;
+    clock?: Clock;
+    fetch?: Fetch;
+    signal?: AbortSignal;
+    maxReads?: number;
+    maxSends?: number;
+    reserveReads?: number;
+    beforeStateSend?: () => Promise<void>;
+  }) {
     let parsed: URL;
     try {
       parsed = new URL(options.url);
@@ -108,6 +125,19 @@ export class RpcSession {
     if (!["https:", "http:"].includes(parsed.protocol) || parsed.username || parsed.password)
       throw new RpcFailure("configuration");
     this.url = options.url;
+    this.maxReads = options.maxReads ?? Infinity;
+    this.maxSends = options.maxSends ?? Infinity;
+    this.reservedReads = options.reserveReads ?? 0;
+    this.beforeStateSend = options.beforeStateSend;
+    if (
+      [this.maxReads, this.maxSends].some(
+        (n) => n !== Infinity && (!Number.isSafeInteger(n) || n < 1),
+      ) ||
+      !Number.isSafeInteger(this.reservedReads) ||
+      this.reservedReads < 0 ||
+      this.reservedReads >= this.maxReads
+    )
+      throw new RpcFailure("configuration");
     this.clock = options.clock ?? systemClock;
     this.fetcher = options.fetch ?? fetch;
     this.startedWall = this.clock.wall();
@@ -196,13 +226,20 @@ export class RpcSession {
       this.signal.addEventListener("abort", aborted, { once: true });
     });
   }
-  private async send(method: string, params: readonly unknown[]): Promise<unknown> {
+  private async send(
+    method: string,
+    params: readonly unknown[],
+    sent: () => void,
+  ): Promise<unknown> {
+    if (method === "eth_call" || method === "eth_getCode") await this.beforeStateSend?.();
     this.guard();
+    if (this.sequence >= this.maxSends) throw new RpcFailure("budget");
     const id = ++this.sequence;
     const timeout = new AbortController();
     const timer = setTimeout(() => timeout.abort(), POLICY.requestTimeoutMs);
     const signal = AbortSignal.any([this.signal, timeout.signal]);
     try {
+      sent();
       const response = await abortable(
         this.fetcher(this.url, {
           method: "POST",
@@ -265,16 +302,21 @@ export class RpcSession {
       )
         throw new RpcFailure("configuration");
     }
+    if (this.reads >= this.maxReads - this.reservedReads) throw new RpcFailure("budget");
+    this.reads++;
     await this.acquire();
     try {
       for (let send = 1; send <= POLICY.maxSends; send++) {
+        let sent = false;
         try {
-          const result = await this.send(method, params);
+          const result = await this.send(method, params, () => {
+            sent = true;
+          });
           this.requests.push({ method, send, outcome: "success" });
           return result;
         } catch (error) {
           const safe = failure(error);
-          this.requests.push({ method, send, outcome: safe.reason });
+          if (sent) this.requests.push({ method, send, outcome: safe.reason });
           if (
             send === POLICY.maxSends ||
             !["network", "timeout", "rate_limited", "server"].includes(safe.reason)
@@ -317,6 +359,7 @@ export class RpcSession {
     signature: string,
     args: readonly unknown[],
     hash: Hash,
+    gas?: bigint,
   ): Promise<unknown> {
     try {
       const abi: Abi = parseAbi([signature]);
@@ -329,6 +372,7 @@ export class RpcSession {
         blockHash: hash,
         requireCanonical: true,
         batch: false,
+        ...(gas === undefined ? {} : { gas }),
       });
       if (!result.data || result.data === "0x" || !dataPattern.test(result.data))
         throw new RpcFailure("malformed");
@@ -340,5 +384,8 @@ export class RpcSession {
   close(): void {
     clearTimeout(this.timer);
     this.controller.abort("closed");
+  }
+  releaseReserve(): void {
+    this.reservedReads = 0;
   }
 }

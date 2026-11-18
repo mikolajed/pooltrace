@@ -101,7 +101,8 @@ No application tests or new live/fork checks are part of this design task.
 - Design/research-task approval: Granted on 2026-11-17 when the user said “i accept m1-04”.
   This authorizes the documentation/research scope above, not application implementation or live RPC.
 - Design acceptance: Granted on 2026-11-18 when the user said “i accept adr6”; recorded in ADR-0006.
-- Implementation approval: Not granted; M1-05 and later tasks remain separately gated.
+- Implementation approval: Not granted by this design task. M1-05 was subsequently approved;
+  its own task record maintains that implementation authorization and evidence.
 
 ## Preparation history
 
@@ -117,8 +118,8 @@ quotation behavior or integration. Approval would authorize only the documentati
 
 The bounded implementation scope is maintained in [M1-05](M1-05-quotation-and-cycle-analysis.md).
 
-The following checks are **planned**, not executed application tests. ADR-0006 is accepted;
-these checks require separately approved M1-05 implementation work. Preserve
+This is the validation plan prepared by M1-04, not an executed test report. ADR-0006 is accepted;
+the separately approved/completed M1-05 record owns actual checks and live evidence. Preserve
 M1-03's passing behavior and explicit unavailable suitability; append linked qualification/analysis
 records rather than rewriting that evidence. Root checks must cover any actually introduced domain
 package as well as protocol/backend code.

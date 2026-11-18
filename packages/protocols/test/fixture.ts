@@ -31,7 +31,7 @@ export function error(request: WireRequest, message: string, code = -32000): Res
 export function fixture(
   options: {
     override?: (target: string, name: string, args: readonly unknown[]) => unknown;
-    intercept?: (request: WireRequest) => Response | Promise<Response> | undefined;
+    intercept?: (request: WireRequest) => Response | Promise<Response | undefined> | undefined;
     ignoreHash?: boolean;
   } = {},
 ) {

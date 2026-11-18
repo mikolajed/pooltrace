@@ -16,7 +16,10 @@ export type FailureReason =
   | "state_unavailable"
   | "noncanonical"
   | "malformed"
-  | "rpc";
+  | "rpc"
+  | "budget"
+  | "stale"
+  | "validation_expired";
 
 // Errors deliberately retain no provider message, URL, response body, headers, or cause.
 export class RpcFailure extends Error {

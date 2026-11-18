@@ -14,9 +14,10 @@
   "scripts": {
     "check": "bun run check:toolchain && bun run typecheck && bun run lint && bun run format:check && bun run test",
     "check:toolchain": "node scripts/check-toolchain.ts",
-    "typecheck": "node node_modules/typescript/bin/tsc --noEmit && node node_modules/typescript/bin/tsc -p packages/protocols && node node_modules/typescript/bin/tsc -p apps/backend",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit && node node_modules/typescript/bin/tsc -p packages/domain && node node_modules/typescript/bin/tsc -p packages/protocols && node node_modules/typescript/bin/tsc -p apps/backend",
     "test": "node node_modules/vitest/vitest.mjs run",
     "check:live": "node scripts/check-live.ts",
+    "check:quotes:live": "node scripts/check-quotes-live.ts",
     "lint": "node node_modules/@biomejs/biome/bin/biome lint .",
     "format:check": "node node_modules/@biomejs/biome/bin/biome format .",
     "format": "node node_modules/@biomejs/biome/bin/biome format --write ."

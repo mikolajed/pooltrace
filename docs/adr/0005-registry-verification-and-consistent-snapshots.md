@@ -289,12 +289,12 @@ The following do **not** block review of this design but do constrain later work
 - During M1-03: obtain the user's backend RPC configuration through an ignored environment file,
   verify provider capabilities, resolve actual pool addresses, and record identity/structural evidence.
   RPC absence leaves live integration unavailable; offline fixtures must stay explicitly labeled.
-- Before admitting the three-pool workload/full CR-02 evidence: settle the M1-04 size/admission
-  policy and implement/verify its qualification checks in M1-05. Neither positive structural
-  screens nor a configuration file can substitute for that evidence.
-- M1-03 records actual Alchemy capability, pool identity/structural state, and runtime compatibility
-  evidence. Tested input amounts and the quote admission budget remain unselected until M1-04/05.
-  These are explicit dependencies, not permission to broaden M1-03.
+- Before admitting the three-pool workload/full CR-02 evidence: use the accepted size/admission
+  policy in ADR-0006 and actual M1-05 qualification evidence for that state/input/policy. Neither
+  positive structural screens nor a configuration file can substitute for that evidence.
+- M1-03 records actual Alchemy capability, pool identity/structural state, and runtime compatibility.
+  ADR-0006 selects the input grid/admission budget; completed M1-05 records actual qualification
+  and quotation evidence. This does not retroactively broaden M1-03's structural-only claim.
 
 Revisit this ADR if provider coverage forces a different consistency policy, measured load justifies
 aggregation/failover, a candidate tier repeatedly fails admission, or live/historical workloads

@@ -18,6 +18,38 @@ afterEach(() => {
 });
 
 describe("bounded read-only RPC transport (V01/V02/V08/V13/V14/V17)", () => {
+  it("enforces logical/read-send caps and preserves reserved final control reads", async () => {
+    const f = fixture();
+    const rpc = new RpcSession({
+      url: "https://fixture.invalid",
+      fetch: f.fetch,
+      maxReads: 5,
+      maxSends: 5,
+      reserveReads: 3,
+    });
+    sessions.push(rpc);
+    await rpc.chain();
+    await rpc.chain();
+    await expect(rpc.chain()).rejects.toMatchObject({ reason: "budget" });
+    expect(f.calls).toHaveLength(2);
+    rpc.releaseReserve();
+    await rpc.chain();
+    await rpc.chain();
+    await rpc.chain();
+    await expect(rpc.chain()).rejects.toMatchObject({ reason: "budget" });
+    expect(f.calls).toHaveLength(5);
+    expect(rpc.logicalReads).toBe(5);
+    const limited = new RpcSession({
+      url: "https://fixture.invalid",
+      fetch: f.fetch,
+      maxReads: 10,
+      maxSends: 1,
+    });
+    sessions.push(limited);
+    await limited.chain();
+    await expect(limited.chain()).rejects.toMatchObject({ reason: "budget" });
+    expect(limited.requests).toHaveLength(1);
+  });
   it("puts the hash and canonical flag on actual viem code and contract calls", async () => {
     const f = fixture();
     const rpc = session(f.fetch);

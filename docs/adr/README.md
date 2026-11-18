@@ -28,7 +28,7 @@ Small refactors within an accepted design need no separate ADR.
 | [0003](0003-sqlite-first-and-storage-evolution.md) | SQLite first and storage evolution | Accepted; timing/ownership refined by 0004 | [SET-11 documentation](../tasks/SET-11-storage-evolution.md); M1/M3 and future STORE/BENCH work |
 | [0004](0004-local-processes-and-gated-deployment.md) | Local processes, early SQLite, and gated deployment | Accepted: architecture/release direction only | [SET-12 documentation](../tasks/SET-12-local-architecture-and-deployment.md); M1/M2 and future DEP work |
 | [0005](0005-registry-verification-and-consistent-snapshots.md) | Registry verification and consistent snapshots | Accepted | [M1-02](../tasks/M1-02-registry-and-consistent-snapshots.md); completed [M1-03 implementation](../tasks/M1-03-registry-and-consistent-snapshots.md) |
-| [0006](0006-quotation-cycles-and-profitability.md) | Quotations, finite-size admission, and cycle profitability | Accepted: design only | [M1-04 design](../tasks/M1-04-quotation-cycles-and-profitability-design.md); proposed [M1-05 implementation](../tasks/M1-05-quotation-and-cycle-analysis.md) |
+| [0006](0006-quotation-cycles-and-profitability.md) | Quotations, finite-size admission, and cycle profitability | Accepted | [M1-04 design](../tasks/M1-04-quotation-cycles-and-profitability-design.md); completed [M1-05 implementation](../tasks/M1-05-quotation-and-cycle-analysis.md) |
 
 Link requirements from [CORRECTNESS.md](../CORRECTNESS.md) where applicable. An ADR explains how
 to meet them; it does not change them or establish implementation evidence by itself.

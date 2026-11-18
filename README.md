@@ -11,12 +11,12 @@ permanent feature ceiling.
 
 ## Current status
 
-**M1-03 registry verification and consistent snapshots is complete.**
+**M1-05 V2/V3 quotation and cycle analysis is complete.**
 
 See [current state](docs/STATUS.md) for what exists and the next proposed action. The foundation
-now includes a tested, read-only backend/protocol slice. See the
-[M1-03 record](docs/tasks/M1-03-registry-and-consistent-snapshots.md) for actual offline/live evidence
-and the remaining finite-size qualification boundary.
+now includes tested domain/protocol/backend modules for verified, qualified read-only cycle
+comparisons. See the [M1-05 record](docs/tasks/M1-05-quotation-and-cycle-analysis.md) for actual
+offline/live evidence and the remaining transaction-cost/execution boundary.
 
 ## Start here
 
@@ -84,9 +84,10 @@ lint/format checks, and runs the offline Vitest suite. It needs no RPC credentia
 Individual commands are `bun run check:toolchain`, `bun run typecheck`, `bun run lint`,
 `bun run format:check`, and `bun run test`. Use `bun run format` to apply formatting.
 
+`packages/domain` owns pure exact arithmetic, qualification, composition, and ranking.
 `packages/protocols` owns the sourced Ethereum registry, ABI reads, verification, and bounded RPC
 transport. `apps/backend` owns configuration, one-attempt collection, eligibility, and revalidation.
-Both expose TypeScript source to the pinned Node runtime. There is no application service/start
+All three expose TypeScript source to the pinned Node runtime. There is no application service/start
 command, public market CLI/API, UI, or database yet.
 
 For the explicit read-only integration check, copy `.env.example` to root `.env` and supply the
@@ -112,5 +113,34 @@ from `apps/backend/src/index.ts`. Collection returns immutable evidence; revalid
 to a new observation. Recompute eligibility before use; `prepareForUse` renews an expired validation.
 Monotonic times belong to the collecting process: serialized reports are historical evidence, not
 reloadable live eligibility. The fixed thresholds and units are documented in ADR-0005.
-Identity and positive structural screens leave finite-size suitability unavailable and workload
-admission false until M1-04/05. This slice produces no quotation or profitability result.
+The source snapshot retains its structural-only suitability fields. Quotation analysis produces
+separate qualification records without rewriting that source evidence.
+
+To run the explicit quotation integration gate with the same private configuration:
+
+```sh
+bun run check:quotes:live
+```
+
+The default USDC sizes are 10, 50, 100, 500, 1000, and 5000. Optional `USDC_INPUT_AMOUNTS` is a
+JSON array of exactly six increasing, distinct, positive decimal strings with at most six decimal
+places; see `.env.example`. Invalid configuration fails before RPC. Inputs and outputs stay exact
+base-unit integers; these are USDC amounts, not assumed USD values.
+
+The harness collects one snapshot, analyzes all 36 route/size combinations, checks real elapsed
+validation expiry/revalidation, and replays the same block in historical mode. It compares amounts,
+qualification, and ranking; quoter gas is diagnostic. It writes a sanitized
+`data/m1-05-live-<observationId>.json` report and exits nonzero unless the required live grid,
+expiry/use check, and replay pass. Eligibility fields are as-of their recorded validation events.
+No positive gross return is needed for a passing gate.
+
+Consumers call `analyzeSnapshot` with a collected observation and private backend configuration,
+then recompute `analysisEligibility` before using a result. `prepareAnalysisForUse` renews expired
+validation and returns new evidence. Qualification is specific to the recorded block, directions,
+inputs, and policy. All 36 entries must qualify; failed grids retain diagnostics with no
+authoritative best result. Historical/fixture results retain their origin and never become live.
+
+The result ranks signed USDC gross surplus, with deterministic size/route tie breaks. The best
+tested gross result may be negative or zero; it does not claim an optimum or net profit. Live
+transaction costs and net profit remain explicitly unavailable until a reviewed full-transaction
+cost producer exists. There is no wallet, transaction submission, executor, or fork execution here.

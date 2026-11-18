@@ -4,6 +4,7 @@
   "type": "module",
   "exports": "./src/index.ts",
   "dependencies": {
+    "@pooltrace/domain": "workspace:*",
     "viem": "2.57.20"
   }
 }

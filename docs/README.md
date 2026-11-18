@@ -11,6 +11,7 @@ across agent instructions, task plans, and ADRs.
 | [../AGENTS.md](../AGENTS.md) | Short agent entry point and approval guardrail | Agent navigation changes |
 | [PRODUCT.md](PRODUCT.md) | Product purpose, ongoing vision, milestone workloads, interface priorities | The user changes product direction or milestone scope |
 | [CORRECTNESS.md](CORRECTNESS.md) | Stable financial, state, execution, and evidence requirements | A requirement is clarified or explicitly changed |
+| [ANALYSIS.md](ANALYSIS.md) | Explanation of implemented read-only calculations, assumptions, worked examples, result interpretation, and evidence reading paths | Implemented behavior or the reader's interpretation path changes |
 | [ENGINEERING.md](ENGINEERING.md) | Selected tools and engineering conventions | An approved tooling/convention choice changes |
 | [BENCHMARKING.md](BENCHMARKING.md) | Backend/storage benchmark methodology and reporting requirements; actual runs belong in task evidence | A comparison is scoped or its methodology changes |
 | [DEPLOYMENT.md](DEPLOYMENT.md) | Local process lifecycle, future environments, and draft release gates | Runtime or release/deployment requirements change |
@@ -25,6 +26,8 @@ across agent instructions, task plans, and ADRs.
 ## Reading paths
 
 - **Understand the project:** product → correctness → roadmap.
+- **Use and understand the working slice:** root README setup/commands → analysis guide → linked
+  source/ADRs for details and task records for actual evidence.
 - **Start or resume work:** agent entry point → current state → workflow → relevant task and ADRs.
 - **Review a design:** task scope → linked requirements → proposed ADR and alternatives.
 - **Verify a result:** task evidence → actual artifacts and check output. A checked box alone is
@@ -42,6 +45,8 @@ across agent instructions, task plans, and ADRs.
 - The user's explicit instructions and approvals govern. No document written by an agent can
   manufacture approval or silently override a user requirement.
 - Requirements describe what must hold. ADRs explain how to satisfy them; they cannot waive them.
+- The analysis guide explains implemented behavior and examples; it does not replace requirements,
+  accepted decisions, README command ownership, or task evidence.
 - A proposed ADR describes a possible design. It is not a description of implemented architecture.
 - Backlog checkboxes summarize progress. Once a detailed task exists, its scope, approval, and
   evidence are maintained there; the backlog links to it instead of duplicating those fields.

@@ -1,7 +1,7 @@
 # Proposed roadmap
 
-M1-01 through M1-07 are complete, including verified snapshots, qualified read-only cycle analysis,
-diagnostic live/fixture CLI access, and focused arithmetic/failure validation. Further
+M1-01 through M1-08 are complete, including verified snapshots, qualified read-only cycle analysis,
+diagnostic live/fixture CLI access, focused arithmetic/failure validation, and the analysis guide. Further
 implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
@@ -47,6 +47,9 @@ and net-profit evidence remain unavailable pending a reviewed producer.
 asymmetric direction/unit checks, and running-analysis failure regressions without changing
 production behavior. Detailed work
 and acceptance criteria live in the [backlog](BACKLOG.md) and its linked task records.
+[M1-08](tasks/M1-08-mathematics-and-evidence-documentation.md) connects the implemented math,
+assumptions, commands, result states, and actual evidence through the [analysis guide](ANALYSIS.md).
+Storage, API/browser access, and process lifecycle remain separately gated M1-09 through M1-12.
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) selects a local UI application and one
 backend process with collection/analysis/RPC/API modules. Review a minimal SQLite schema/driver and

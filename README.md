@@ -11,7 +11,7 @@ permanent feature ceiling.
 
 ## Current status
 
-**M1-07 arithmetic, direction, composition, and snapshot-failure validation is complete.**
+**M1-08 analysis documentation and evidence guide is complete.**
 
 See [current state](docs/STATUS.md) for what exists and the next proposed action. The foundation
 includes tested domain/protocol/backend modules and an explicit live/fixture CLI for read-only
@@ -21,6 +21,9 @@ quotation evidence. Transaction costs, net profit, and execution remain unavaila
 The [M1-07 record](docs/tasks/M1-07-validation-and-regression-coverage.md#evidence-and-handoff)
 maps independent vectors and controlled failure checks to actual results: 158 offline tests pass,
 with production behavior unchanged.
+Read the [analysis guide](docs/ANALYSIS.md) for implemented math, constructed examples, result
+states, and an archived CLI walkthrough. Storage, browser/API access, and application lifecycle
+remain later M1 tasks.
 
 ## Start here
 
@@ -31,6 +34,7 @@ with production behavior unchanged.
 | [Current state](docs/STATUS.md)                 | Session handoff and next proposed action                      |
 | [Product brief](docs/PRODUCT.md)                | Product vision, milestone workloads, and interface priorities |
 | [Correctness requirements](docs/CORRECTNESS.md) | Stable requirements for calculations, execution, and evidence |
+| [Read-only analysis guide](docs/ANALYSIS.md)     | Implemented math, units, examples, result states, and evidence |
 | [Engineering conventions](docs/ENGINEERING.md)  | Selected tools and implementation conventions                 |
 | [Benchmark plan](docs/BENCHMARKING.md)          | Draft methodology for comparing the TS baseline and upgrades   |
 | [Deployment plan](docs/DEPLOYMENT.md)          | Local processes and future gated releases                      |
@@ -122,7 +126,8 @@ Eligibility is computed immediately before output; the document does not remain 
 `kind` is `result` or `error`; `mode`, `origin`, `constructed`, `status`, `reason`, `asOf` (Unix
 milliseconds), `units`, `sizes`, `observation`, `analysis`, and `eligibility` retain evidence and
 unavailable values. Bigint quantities, including block numbers and base-unit amounts, are exact
-decimal strings. Sizes/input/output/gross use 10^-6 USDC; leg-1 output uses 10^-18 WETH.
+decimal strings. Sizes and cycle-row input/output/gross use 10^-6 USDC. Each leg quote's input/output
+units follow its tokenIn/tokenOut; the intermediate leg-1 output uses 10^-18 WETH.
 `--help --format json` instead returns `{formatVersion, kind: "help", help}` without reading
 configuration. Help accepts only the optional format flag; duplicate/unknown flags, positionals,
 or combining help with mode/sizes are usage errors. Bun may print its command banner to stderr;

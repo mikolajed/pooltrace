@@ -31,7 +31,7 @@ estimates belong to individual milestones, not to a fixed project lifespan or fe
 - [x] [SET-13: Product framing and milestone scope](tasks/SET-13-product-framing-and-milestone-scope.md).
   Documentation-only work completed; validation evidence is in the linked record.
 
-## M1 — local read-only research application; M1-01 through M1-07 complete
+## M1 — local read-only research application; M1-01 through M1-08 complete
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) brings minimal SQLite and browser
 access into this milestone. Each task remains separately scoped; later work requires its own approval.
@@ -51,8 +51,8 @@ access into this milestone. Each task remains separately scoped; later work requ
   State: Done. Scope, approvals, criteria, and offline/process/live evidence are maintained in the linked record.
 - [x] [M1-07: Validate arithmetic, token ordering, rounding, composition, and snapshot failures](tasks/M1-07-validation-and-regression-coverage.md).
   State: Done. Scope, approvals, independent expectations, reused coverage, and actual results are in the linked record.
-- [ ] M1-08: Document mathematics, assumptions, commands, and actual milestone evidence.
-  Acceptance: a reviewer can reproduce the approved slice and understand what remains unverified.
+- [x] [M1-08: Document mathematics, assumptions, commands, and actual milestone evidence](tasks/M1-08-mathematics-and-evidence-documentation.md).
+  State: Done. Guide ownership, approvals, worked examples, and actual documentation checks are in the linked record.
 - [ ] M1-09: Propose the minimal SQLite driver/schema/migration design for the first backend slice.
   Acceptance: backend ownership, exact amount encoding, observation/result provenance, write/read
   boundaries, persistence failures, and minimal versioned migrations under ADR-0004 are explicit.

@@ -207,3 +207,7 @@ Testing is not formal verification. Security assumptions and remaining limitatio
 
 Write setup and mathematics documentation alongside approved work. Optional enhancements belong in
 the backlog, not in an unapproved expansion of the current task.
+
+The [analysis guide](ANALYSIS.md) explains implemented calculations, exact worked examples, result
+states, and how to inspect evidence. The [root README](../README.md) owns setup/commands; ADRs own
+decisions, and individual task records own actual validation outcomes.

@@ -1,0 +1,660 @@
+{
+  "formatVersion": "dep02-hosted-validation-v1",
+  "recordedDate": "2026-11-19",
+  "timezone": "Europe/Warsaw",
+  "repository": "mikolajed/pooltrace",
+  "pullRequest": {
+    "number": 1,
+    "url": "https://github.com/mikolajed/pooltrace/pull/1",
+    "author": "mikolajed",
+    "draft": true,
+    "merged": false
+  },
+  "baseline": {
+    "runId": 44422845638,
+    "url": "https://github.com/mikolajed/pooltrace/actions/runs/44422845638",
+    "event": "pull_request",
+    "attempt": 1,
+    "headSha": "5237c41ddbeeaecd3eaabb552d6ade29a9d2abf7",
+    "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+    "testedMergeSha": "309931b9d1bd662592c95bce0bdbf16bdf21a22e",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 135219996805,
+        "name": "web-build",
+        "conclusion": "success"
+      },
+      {
+        "id": 135219997186,
+        "name": "fixture-smoke",
+        "conclusion": "success"
+      },
+      {
+        "id": 135219997203,
+        "name": "checks-linux",
+        "conclusion": "success"
+      },
+      {
+        "id": 135219997209,
+        "name": "workflow-check",
+        "conclusion": "success"
+      },
+      {
+        "id": 135219997268,
+        "name": "checks-macos",
+        "conclusion": "success"
+      },
+      {
+        "id": 135220534649,
+        "name": "pr-gate",
+        "conclusion": "success"
+      }
+    ],
+    "candidateMetadata": [
+      {
+        "formatVersion": "ci-candidate-v1",
+        "recordedAt": "2026-11-18T23:41:40.024Z",
+        "event": "pull_request",
+        "headSha": "5237c41ddbeeaecd3eaabb552d6ade29a9d2abf7",
+        "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+        "testedSha": "309931b9d1bd662592c95bce0bdbf16bdf21a22e",
+        "workspaceDirty": false,
+        "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+        "job": "checks-linux",
+        "runner": {
+          "os": "linux",
+          "arch": "x64",
+          "image": "ubuntu24",
+          "imageVersion": "20261111.127.1"
+        },
+        "runtime": {
+          "node": "26.3.1",
+          "bun": "1.3.11",
+          "driver": "13.2.0",
+          "sqlite": "3.54.1"
+        },
+        "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+      },
+      {
+        "formatVersion": "ci-candidate-v1",
+        "recordedAt": "2026-11-18T23:41:51.350Z",
+        "event": "pull_request",
+        "headSha": "5237c41ddbeeaecd3eaabb552d6ade29a9d2abf7",
+        "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+        "testedSha": "309931b9d1bd662592c95bce0bdbf16bdf21a22e",
+        "workspaceDirty": false,
+        "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+        "job": "checks-macos",
+        "runner": {
+          "os": "darwin",
+          "arch": "arm64",
+          "image": "macos15",
+          "imageVersion": "20261104.0514.1"
+        },
+        "runtime": {
+          "node": "26.3.1",
+          "bun": "1.3.11",
+          "driver": "13.2.0",
+          "sqlite": "3.54.1"
+        },
+        "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+      },
+      {
+        "formatVersion": "ci-candidate-v1",
+        "recordedAt": "2026-11-18T23:41:29.492Z",
+        "event": "pull_request",
+        "headSha": "5237c41ddbeeaecd3eaabb552d6ade29a9d2abf7",
+        "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+        "testedSha": "309931b9d1bd662592c95bce0bdbf16bdf21a22e",
+        "workspaceDirty": false,
+        "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+        "job": "fixture-smoke",
+        "runner": {
+          "os": "linux",
+          "arch": "x64",
+          "image": "ubuntu24",
+          "imageVersion": "20261111.370.1"
+        },
+        "runtime": {
+          "node": "26.3.1",
+          "bun": "1.3.11",
+          "driver": "13.2.0",
+          "sqlite": "3.54.1"
+        },
+        "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+      },
+      {
+        "formatVersion": "ci-candidate-v1",
+        "recordedAt": "2026-11-18T23:41:29.786Z",
+        "event": "pull_request",
+        "headSha": "5237c41ddbeeaecd3eaabb552d6ade29a9d2abf7",
+        "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+        "testedSha": "309931b9d1bd662592c95bce0bdbf16bdf21a22e",
+        "workspaceDirty": false,
+        "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+        "job": "workflow-check",
+        "runner": {
+          "os": "linux",
+          "arch": "x64",
+          "image": "ubuntu24",
+          "imageVersion": "20261116.376.1"
+        },
+        "runtime": {
+          "node": "26.3.1",
+          "bun": "1.3.11",
+          "driver": "13.2.0",
+          "sqlite": "3.54.1"
+        },
+        "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+      },
+      {
+        "formatVersion": "ci-candidate-v1",
+        "recordedAt": "2026-11-18T23:41:32.656Z",
+        "event": "pull_request",
+        "headSha": "5237c41ddbeeaecd3eaabb552d6ade29a9d2abf7",
+        "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+        "testedSha": "309931b9d1bd662592c95bce0bdbf16bdf21a22e",
+        "workspaceDirty": false,
+        "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+        "job": "web-build",
+        "runner": {
+          "os": "linux",
+          "arch": "x64",
+          "image": "ubuntu24",
+          "imageVersion": "20261111.127.1"
+        },
+        "runtime": {
+          "node": "26.3.1",
+          "bun": "1.3.11",
+          "driver": "13.2.0",
+          "sqlite": "3.54.1"
+        },
+        "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+      }
+    ],
+    "results": {
+      "checksLinux": {
+        "testFiles": 13,
+        "tests": 281,
+        "failed": 0
+      },
+      "checksMacos": {
+        "testFiles": 13,
+        "tests": 281,
+        "failed": 0
+      },
+      "webBuild": "passed",
+      "workflowPolicy": "passed",
+      "checksumVerifiedActionlintLinuxX64": "passed",
+      "fixtureSmoke": {
+        "passed": 1,
+        "failed": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "retries": 0,
+        "reportedDurationSeconds": 17.1
+      }
+    },
+    "checkSource": {
+      "name": "pr-gate",
+      "appId": 15368,
+      "appSlug": "github-actions",
+      "appName": "GitHub Actions"
+    },
+    "artifacts": [
+      {
+        "id": 14482098475,
+        "name": "workflow-check-44422845638-1",
+        "bytes": 599,
+        "digest": "sha256:cc38531cd36857edb6e2e51c5b3a01c4580d3d36c4bb9c3d884c923918818c34",
+        "createdAt": "2026-11-18T23:41:30Z",
+        "expiresAt": "2026-11-25T23:41:30Z"
+      },
+      {
+        "id": 14482048778,
+        "name": "web-build-44422845638-1",
+        "bytes": 584,
+        "digest": "sha256:b1eea27910593bf8586f23fd7151e0c69cc29b05317798850401ae4d8553c7dc",
+        "createdAt": "2026-11-18T23:41:37Z",
+        "expiresAt": "2026-11-25T23:41:36Z"
+      },
+      {
+        "id": 14481714145,
+        "name": "checks-linux-44422845638-1",
+        "bytes": 591,
+        "digest": "sha256:df587f72d5c942040fc56ceeac2a82b0f94f4681e9da9ddda71dcc666751b8c2",
+        "createdAt": "2026-11-18T23:41:56Z",
+        "expiresAt": "2026-11-25T23:41:55Z"
+      },
+      {
+        "id": 14481614235,
+        "name": "fixture-smoke-44422845638-1",
+        "bytes": 232142,
+        "digest": "sha256:7efc691f5e98499c812a4b5ede21b66285fce8e5b978f677c55c65c784066f50",
+        "createdAt": "2026-11-18T23:42:08Z",
+        "expiresAt": "2026-11-25T23:42:08Z"
+      },
+      {
+        "id": 14481449474,
+        "name": "checks-macos-44422845638-1",
+        "bytes": 593,
+        "digest": "sha256:85cc29bbdfcfb0a79e636060b8215731e01cc478ef2bb6ed1a1a30e893a37863",
+        "createdAt": "2026-11-18T23:42:13Z",
+        "expiresAt": "2026-11-25T23:42:12Z"
+      }
+    ],
+    "inspectedArtifact": {
+      "id": 14481614235,
+      "sha256": "7efc691f5e98499c812a4b5ede21b66285fce8e5b978f677c55c65c784066f50",
+      "paths": ["ci-results/fixture-smoke.json", "playwright-report/index.html"],
+      "lifecycle": {
+        "constructed": true,
+        "events": [
+          "ready:cca38e4f-a2c5-4fe9-acc6-5a12b891c379",
+          "SIGINT:130",
+          "ready:d352bf03-853d-46ea-9d44-ebce0b4d7d7e",
+          "SIGTERM:143"
+        ],
+        "historicalRevision": "039b70fdb8764884c3874a71d2aa7e827994292033800c15b8eb1be24c8e3533"
+      }
+    }
+  },
+  "remaining": [
+    "Stale-base combined integration and review invalidation not demonstrated.",
+    "Direct/force-push and deletion restrictions were read back; no write attempt on main was made.",
+    "CONTRIB-01 bot/human approval integration remains unapproved.",
+    "No merge, auto-merge or deployment authorized."
+  ],
+  "controlledFailure": {
+    "runId": 44423461946,
+    "url": "https://github.com/mikolajed/pooltrace/actions/runs/44423461946",
+    "headSha": "80e06f81b59373db93b90dae5c9419471dc0c3d9",
+    "probePath": "scripts/ci/test/hosted-failure-probe.test.ts",
+    "fault": "Temporary isolated Vitest assertion expect(false).toBe(true), without workflow or application changes.",
+    "localProbeExit": 1,
+    "event": "pull_request",
+    "attempt": 1,
+    "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+    "testedMergeSha": "02d9b59090973b638690f2e4f491b340eeac9313",
+    "conclusion": "failure",
+    "jobs": [
+      {
+        "id": 135222122226,
+        "name": "checks-macos",
+        "conclusion": "failure"
+      },
+      {
+        "id": 135222122660,
+        "name": "checks-linux",
+        "conclusion": "failure"
+      },
+      {
+        "id": 135222122689,
+        "name": "workflow-check",
+        "conclusion": "success"
+      },
+      {
+        "id": 135222122866,
+        "name": "web-build",
+        "conclusion": "success"
+      },
+      {
+        "id": 135222122992,
+        "name": "fixture-smoke",
+        "conclusion": "success"
+      },
+      {
+        "id": 135225992593,
+        "name": "pr-gate",
+        "conclusion": "failure"
+      }
+    ],
+    "results": {
+      "linux": {
+        "passed": 281,
+        "failed": 1,
+        "failure": "CI04 deliberate hosted failure probe"
+      },
+      "macos": {
+        "passed": 281,
+        "failed": 1,
+        "failure": "CI04 deliberate hosted failure probe"
+      },
+      "gateExit": 1,
+      "gateMessage": "Required checks failed, were skipped/cancelled, or are missing.",
+      "browserPassed": 1,
+      "browserDurationSeconds": 15.1,
+      "osDependencyDownloadSeconds": 413
+    },
+    "protectionEnforcementDemonstrated": false
+  },
+  "repair": {
+    "headSha": "af8a61bdea1c9efcd1dc36348b923bf7909b3b65",
+    "change": "Delete only the isolated temporary probe; git diff against baseline for apps/packages/scripts/.github/package.json/bun.lock is empty.",
+    "localVerification": {
+      "gateWorkflowRegressionTests": 19,
+      "workflowPolicy": "passed"
+    },
+    "runId": 44424968096,
+    "url": "https://github.com/mikolajed/pooltrace/actions/runs/44424968096",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 135227316123,
+        "name": "checks-macos",
+        "conclusion": "success"
+      },
+      {
+        "id": 135227316467,
+        "name": "fixture-smoke",
+        "conclusion": "success"
+      },
+      {
+        "id": 135227316533,
+        "name": "workflow-check",
+        "conclusion": "success"
+      },
+      {
+        "id": 135227316574,
+        "name": "checks-linux",
+        "conclusion": "success"
+      },
+      {
+        "id": 135227316619,
+        "name": "web-build",
+        "conclusion": "success"
+      },
+      {
+        "id": 135227804735,
+        "name": "pr-gate",
+        "conclusion": "success"
+      }
+    ],
+    "candidateMetadata": [
+      {
+        "formatVersion": "ci-candidate-v1",
+        "recordedAt": "2026-11-18T23:57:16.815Z",
+        "event": "pull_request",
+        "headSha": "af8a61bdea1c9efcd1dc36348b923bf7909b3b65",
+        "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+        "testedSha": "f3ac620293f13b2059fb6d69924dbce80c05b214",
+        "workspaceDirty": false,
+        "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+        "job": "checks-macos",
+        "runner": {
+          "os": "darwin",
+          "arch": "arm64",
+          "image": "macos15",
+          "imageVersion": "20261112.0539.3"
+        },
+        "runtime": {
+          "node": "26.3.1",
+          "bun": "1.3.11",
+          "driver": "13.2.0",
+          "sqlite": "3.54.1"
+        },
+        "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+      },
+      {
+        "formatVersion": "ci-candidate-v1",
+        "recordedAt": "2026-11-18T23:57:06.619Z",
+        "event": "pull_request",
+        "headSha": "af8a61bdea1c9efcd1dc36348b923bf7909b3b65",
+        "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+        "testedSha": "f3ac620293f13b2059fb6d69924dbce80c05b214",
+        "workspaceDirty": false,
+        "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+        "job": "fixture-smoke",
+        "runner": {
+          "os": "linux",
+          "arch": "x64",
+          "image": "ubuntu24",
+          "imageVersion": "20261111.370.1"
+        },
+        "runtime": {
+          "node": "26.3.1",
+          "bun": "1.3.11",
+          "driver": "13.2.0",
+          "sqlite": "3.54.1"
+        },
+        "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+      },
+      {
+        "formatVersion": "ci-candidate-v1",
+        "recordedAt": "2026-11-18T23:57:06.976Z",
+        "event": "pull_request",
+        "headSha": "af8a61bdea1c9efcd1dc36348b923bf7909b3b65",
+        "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+        "testedSha": "f3ac620293f13b2059fb6d69924dbce80c05b214",
+        "workspaceDirty": false,
+        "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+        "job": "workflow-check",
+        "runner": {
+          "os": "linux",
+          "arch": "x64",
+          "image": "ubuntu24",
+          "imageVersion": "20261116.133.1"
+        },
+        "runtime": {
+          "node": "26.3.1",
+          "bun": "1.3.11",
+          "driver": "13.2.0",
+          "sqlite": "3.54.1"
+        },
+        "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+      },
+      {
+        "formatVersion": "ci-candidate-v1",
+        "recordedAt": "2026-11-18T23:57:05.683Z",
+        "event": "pull_request",
+        "headSha": "af8a61bdea1c9efcd1dc36348b923bf7909b3b65",
+        "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+        "testedSha": "f3ac620293f13b2059fb6d69924dbce80c05b214",
+        "workspaceDirty": false,
+        "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+        "job": "checks-linux",
+        "runner": {
+          "os": "linux",
+          "arch": "x64",
+          "image": "ubuntu24",
+          "imageVersion": "20261116.133.1"
+        },
+        "runtime": {
+          "node": "26.3.1",
+          "bun": "1.3.11",
+          "driver": "13.2.0",
+          "sqlite": "3.54.1"
+        },
+        "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+      },
+      {
+        "formatVersion": "ci-candidate-v1",
+        "recordedAt": "2026-11-18T23:57:02.060Z",
+        "event": "pull_request",
+        "headSha": "af8a61bdea1c9efcd1dc36348b923bf7909b3b65",
+        "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+        "testedSha": "f3ac620293f13b2059fb6d69924dbce80c05b214",
+        "workspaceDirty": false,
+        "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+        "job": "web-build",
+        "runner": {
+          "os": "linux",
+          "arch": "x64",
+          "image": "ubuntu24",
+          "imageVersion": "20261111.370.1"
+        },
+        "runtime": {
+          "node": "26.3.1",
+          "bun": "1.3.11",
+          "driver": "13.2.0",
+          "sqlite": "3.54.1"
+        },
+        "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+      }
+    ]
+  },
+  "postRebaseFormattingFix": {
+    "headSha": "691975cc837f13253ea2c5c552802dc83e5498c0",
+    "runId": 44425608076,
+    "url": "https://github.com/mikolajed/pooltrace/actions/runs/44425608076",
+    "observedFailures": [
+      {
+        "job": "checks-linux",
+        "id": 135229520109,
+        "step": "bun run format:check",
+        "exitCode": 1
+      },
+      {
+        "job": "checks-macos",
+        "id": 135229520107,
+        "step": "bun run format:check",
+        "exitCode": 1
+      }
+    ],
+    "reason": "New hosted evidence JSON array needed repository formatter layout; tests were not reached in those jobs.",
+    "fix": "Format the evidence archive with the pinned repository formatter; amend the single commit without changing code, tests or CI policy."
+  },
+  "postRebaseMacosUnitClockFix": {
+    "headSha": "1a8c98fda210ed02b6dc10b3a62a7f8360d7060c",
+    "runId": 44426058624,
+    "url": "https://github.com/mikolajed/pooltrace/actions/runs/44426058624",
+    "observedFailure": {
+      "job": "checks-macos",
+      "id": 135231381361,
+      "passed": 280,
+      "failed": 1,
+      "test": "retains historical origin and never mixes attempts/reuse across runs",
+      "expected": "historical",
+      "received": "unavailable"
+    },
+    "diagnosis": "The unit test assumed a healthy clock but used host wall/monotonic samples. Clock divergence can conservatively produce unavailable. Exact runner clock samples were not captured; host timing is inferred.",
+    "fix": "Supply a coherent constructed clock and block timestamp for the provenance case; retain attempt/reuse checks, assert historical origin and assert diverged clocks remain unavailable. No production policy changes.",
+    "localVerification": {
+      "analysisAndSnapshotTests": 49,
+      "fullCheckTests": 281,
+      "fullCheckTestFiles": 13,
+      "fullCheckTypesLintFormat": "passed",
+      "formatCheckFiles": 89,
+      "results": "passed"
+    }
+  },
+  "readyForReviewRepair": {
+    "ruleset": {
+      "id": 27598219,
+      "url": "https://github.com/mikolajed/pooltrace/rules/27598219",
+      "name": "Protect main",
+      "enforcement": "active",
+      "conditions": {
+        "ref_name": {
+          "exclude": [],
+          "include": ["~DEFAULT_BRANCH"]
+        }
+      },
+      "rules": [
+        {
+          "type": "deletion"
+        },
+        {
+          "type": "non_fast_forward"
+        },
+        {
+          "type": "pull_request",
+          "parameters": {
+            "required_approving_review_count": 0,
+            "dismiss_stale_reviews_on_push": false,
+            "required_reviewers": [],
+            "require_code_owner_review": false,
+            "require_last_push_approval": false,
+            "required_review_thread_resolution": true,
+            "require_extra_approval_for_unattributed_changes": false,
+            "allowed_merge_methods": ["merge", "squash", "rebase"]
+          }
+        },
+        {
+          "type": "required_status_checks",
+          "parameters": {
+            "strict_required_status_checks_policy": true,
+            "do_not_enforce_on_create": false,
+            "required_status_checks": [
+              {
+                "context": "pr-gate",
+                "integration_id": 15368
+              }
+            ]
+          }
+        }
+      ],
+      "bypassActors": [],
+      "currentUserCanBypass": "never",
+      "createdAt": "2026-11-19T01:32:48.015+01:00"
+    },
+    "pullRequestAtFailure": {
+      "headSha": "641f29daa1f7b7b00b4cf8f37a77140baf593a17",
+      "baseSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+      "draft": false,
+      "mergeable": true,
+      "mergeableState": "blocked",
+      "merged": false
+    },
+    "run": {
+      "id": 44429913415,
+      "url": "https://github.com/mikolajed/pooltrace/actions/runs/44429913415",
+      "headSha": "641f29daa1f7b7b00b4cf8f37a77140baf593a17",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 135244836867,
+          "name": "pr-gate",
+          "conclusion": "failure"
+        },
+        {
+          "id": 135244345371,
+          "name": "fixture-smoke",
+          "conclusion": "success"
+        },
+        {
+          "id": 135244345311,
+          "name": "checks-macos",
+          "conclusion": "failure"
+        },
+        {
+          "id": 135244345290,
+          "name": "workflow-check",
+          "conclusion": "success"
+        },
+        {
+          "id": 135244345275,
+          "name": "web-build",
+          "conclusion": "success"
+        },
+        {
+          "id": 135244344882,
+          "name": "checks-linux",
+          "conclusion": "success"
+        }
+      ],
+      "macos": {
+        "passed": 280,
+        "failed": 1,
+        "test": "shares periodic validation with state sends without exceeding four requests or deadlocking",
+        "expectedQualified": true,
+        "receivedQualified": false
+      }
+    },
+    "diagnosis": "Source collection still used the default host clock before analysis switched to a controlled clock. Exact runner clock samples were not recorded; clock divergence is inferred from the mixed setup.",
+    "fix": "Inject a coherent constructed clock and timestamp throughout the analysis unit suite; preserve controlled time advancement and unsafe-clock rejection. Add regression forbidding default host-clock reads. No production policy changes.",
+    "localVerification": {
+      "analysisTests": 17,
+      "fullCheckTests": 282,
+      "fullCheckFiles": 13,
+      "typesLintFormat": "passed"
+    },
+    "remaining": [
+      "Stale-base combined integration and review invalidation not demonstrated.",
+      "Direct/force-push and deletion restrictions were read back; no write attempt on main was made.",
+      "CONTRIB-01 bot/human approval integration remains unapproved.",
+      "No merge, auto-merge or deployment authorized."
+    ]
+  }
+}

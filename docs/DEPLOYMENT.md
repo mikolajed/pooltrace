@@ -6,6 +6,14 @@ CI/CD pipeline below are future plans. M1-11/M1-12 implement the local workflow 
 [ADR-0008](adr/0008-local-api-sse-and-process-interface.md); no hosted infrastructure or production
 environment exists.
 
+The next requested priority is PR verification before M2. [Accepted ADR-0009](adr/0009-pr-verification-and-repository-trust.md)
+and approved [DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md) define that setup.
+The candidate passes local macOS/Ubuntu validation and its initial hosted baseline on PR #1.
+Publication and hosted-check fixes are approved. The user enabled the main-branch ruleset;
+agent administration and merging remain unapproved.
+The shared contribution/authorization policy belongs in
+[WORKFLOW.md](WORKFLOW.md#proposed-shared-pr-contributions).
+
 ## Local development architecture
 
 Everything owned by Pooltrace initially runs on the developer's machine. Ethereum mainnet RPC is
@@ -40,7 +48,7 @@ commands, ports and configuration. `bun run dev --mode live|fixture` starts the 
 with a fresh invocation ID and checks owned application readiness before reporting success. Failures
 and signals stop only owned process groups. There is no automatic restart, port adoption or
 port-owner termination. Native Bun-to-Node signals and actual Next descendants were verified on
-macOS; other platforms are unsupported by this launcher. ADR-0001 selects Node.js for runtime and
+macOS arm64 and Ubuntu 24.04 arm64; Windows remains unsupported. ADR-0001 selects Node.js for runtime and
 Bun for tooling.
 
 Collection must remain independent of browser refresh/navigation. Keep RPC credentials and database
@@ -76,11 +84,12 @@ verified restore, not an assumed copy of a changing file.
 | Environment | Purpose | State |
 | --- | --- | --- |
 | Local development | Run the two applications, early SQLite, and later optional Anvil on localhost | Implemented through M1-12; application, browser, clean build and native shutdown verified on macOS arm64; Anvil remains M2 |
-| Automated verification | Reproducible builds and appropriate offline/integration/fork checks | Future CI design; not configured |
+| Automated verification | Reproducible builds and appropriate offline/integration/fork checks | DEP-02 initial hosted baseline passed; main ruleset active; stale-base integration pending; fork checks remain future M2 |
 | Preview/staging | Validate a specific release candidate with isolated configuration and data | Future hosting design; not provisioned |
 | Production | Host a reviewed research application and preserve evidence across updates | Future design; no server or deployment exists |
 
-Do not select a host, container platform, process supervisor, or CI provider in this setup. A future
+Hosting, containers and production process supervision remain open. ADR-0009 selects GitHub Actions
+for PR verification independently of those choices. A future
 host must support the chosen frontend features, a persistent collector/API process, durable data,
 and any authorized native fork workload. Consider those requirements before selecting packaging
 or a platform. Next.js offers server and static deployment options with different feature support.
@@ -90,7 +99,34 @@ Under the currently defined milestones, an eventual hosted production environmen
 read-only and executes transactions only on local forks. Hosting does not authorize live trading or
 mainnet contract deployment; any such capability needs a separately reviewed milestone and design.
 
-## Future CI/CD gates
+## PR verification implementation
+
+[DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md#implementation-evidence) is approved
+and implemented before M2:
+credential-free checks/build, Linux/macOS compatibility, automated fixture browser/API smoke,
+candidate metadata and a fail-closed aggregate gate. The user enabled main-branch protection;
+strict settings and a failing PR's blocked state are read back in the task.
+ADR-0009 owns the accepted check contract and trust boundaries. Local macOS/Ubuntu validation and
+the initial six-job hosted baseline passed with the same source digest. Hosted runners were Ubuntu
+24.04 x64 and macOS 15 arm64; the task retains exact images, runtime/native versions and candidates.
+
+[CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md) then connects actual selected contributor
+tools/identities to that same CI. Verify real PR creation/update events, approval identity and
+revocation before enabling routine delivery. No provider integration or bot identity was configured
+by this work; existing account connections remain unverified. Current human commit/push restrictions remain until the proposed
+delivery policy is explicitly accepted/enabled.
+
+Read-only GitHub inspection confirmed a public, personally owned repository. The user created
+`Protect main` on 2026-11-19; ruleset readback confirms active default-branch targeting, required
+PRs, resolved conversations, strict `pr-gate` bound to GitHub Actions app `15368`, deletion/force
+push restrictions and no bypass actors. Required approvals remain zero until a distinct bot author
+is verified. The connector can read this public ruleset but lacks protection administration.
+Remaining stale-base and contributor-integration proof belongs in DEP-02/CONTRIB-01. Protection
+settings, provider accounts and secrets are external changes requiring the task's explicit scope.
+Workflow files alone do not establish enforcement. Missing permissions or unavailable plan features
+must remain explicit setup gaps. Hosted staging and release promotion retain the separate gates below.
+
+## Future release gates
 
 This is a draft pipeline to implement only in a separately approved task. Local documented checks
 come first. Passing checks never authorizes an agent to deploy or bypass the user's approval rule.
@@ -154,8 +190,11 @@ API/SSE/browser interface and foreground launcher. Completed
 readiness, ownership, shutdown, browser/live and clean-build evidence. Hosted release gates remain separate.
 
 Runtime pins and the minimal SQLite driver/schema/journal settings are selected and validated in
-their task records. Fork lifecycle details still require M2 scope/design. Hosting,
-artifact packaging, CI provider, staging layout, checks/budgets, migrations/cutover, and rollback
-procedures require a future deployment ADR. No workflow YAML, Dockerfile or provisioning script
-has been added. Official references for future deployment were checked on 2026-11-17; local runtime
+their task records. ADR-0009 is accepted. DEP-02 records selected action/browser pins and local
+Linux/macOS results, hosted baselines and actual protection readback. Stale-base integration and
+contributor identities still require verification in DEP-02/CONTRIB-01.
+Fork lifecycle details still require M2 scope/design. Hosting,
+release artifact packaging, staging layout, release checks/budgets, migrations/cutover, and rollback
+procedures require a future deployment ADR. CI workflow YAML is prepared; no Dockerfile or hosted
+provisioning script has been added. Official references for future deployment were checked on 2026-11-17; local runtime
 research and actual results are in ADR-0008 and the completed task records.

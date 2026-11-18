@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { QUOTE_POLICY } from "@pooltrace/domain";
-import { QUOTE_SOURCE, POLICY, jsonEvidence } from "@pooltrace/protocols";
+import { QUOTE_SOURCE, POLICY, jsonEvidence, systemClock } from "@pooltrace/protocols";
 import {
   analyzeSnapshot,
   analysisEligibility,
@@ -9,7 +9,7 @@ import {
   prepareAnalysisForUse,
   revalidateAnalysis,
 } from "../src/index.ts";
-import { quoteFixture } from "../../../packages/protocols/test/quote-fixture.ts";
+import { quoteFixture as createQuoteFixture } from "../../../packages/protocols/test/quote-fixture.ts";
 import {
   BLOCK_HASH,
   OTHER_HASH,
@@ -17,13 +17,41 @@ import {
   error,
 } from "../../../packages/protocols/test/fixture.ts";
 const config = readConfig({ ETHEREUM_RPC_URL: "https://fixture.invalid/private-key" });
+// These unit cases control time explicitly; host clock health is not their input.
+const fixtureClock = { wall: () => 1_700_000_000_000, mono: () => 1000 };
+const quoteFixture = (options: Parameters<typeof createQuoteFixture>[0] = {}) =>
+  createQuoteFixture({ timestamp: BigInt(fixtureClock.wall() / 1000), ...options });
 async function collected(f = quoteFixture()) {
-  return { f, o: await collectSnapshot(config, { fetch: f.fetch, origin: "fixture" }) };
+  return {
+    f,
+    o: await collectSnapshot(config, { fetch: f.fetch, origin: "fixture", clock: fixtureClock }),
+  };
 }
 describe("quotation orchestration and lifecycle (Q03–Q18)", () => {
+  it("keeps constructed collection and analysis independent of host clock sampling", async () => {
+    const wall = vi.spyOn(systemClock, "wall").mockImplementation(() => {
+      throw Error("unexpected_host_wall_clock");
+    });
+    const mono = vi.spyOn(systemClock, "mono").mockImplementation(() => {
+      throw Error("unexpected_host_monotonic_clock");
+    });
+    try {
+      const { f, o } = await collected();
+      const a = await analyzeSnapshot(o, config, { fetch: f.fetch, clock: fixtureClock });
+      expect(o.clockInvalid).toBe(false);
+      expect(analysisEligibility(a, fixtureClock).qualified).toBe(true);
+      expect(analysisEligibility(a, fixtureClock).freshness).toBe("fixture");
+      expect(wall).not.toHaveBeenCalled();
+      expect(mono).not.toHaveBeenCalled();
+    } finally {
+      wall.mockRestore();
+      mono.mockRestore();
+    }
+  });
   it("shares periodic validation with state sends without exceeding four requests or deadlocking", async () => {
     const base = quoteFixture();
-    const o = await collectSnapshot(config, { fetch: base.fetch, origin: "fixture" });
+    const { o } = await collected(base);
+    expect(o.clockInvalid).toBe(false);
     let offset = 0,
       advanced = false,
       active = 0,
@@ -38,7 +66,7 @@ describe("quotation orchestration and lifecycle (Q03–Q18)", () => {
           String((r.params[0] as { data: string }).data).startsWith("0xc6a5026a")
         ) {
           advanced = true;
-          offset = 5001;
+          offset = POLICY.maxValidationAgeMs + 1;
         }
         return undefined;
       },
@@ -73,7 +101,7 @@ describe("quotation orchestration and lifecycle (Q03–Q18)", () => {
             QUOTE_SOURCE.quoter.toLowerCase() &&
           String((r.params[0] as { data: string }).data).startsWith("0xc6a5026a")
         )
-          offset = 20_001;
+          offset = POLICY.attemptTimeoutMs + 1;
         return undefined;
       },
     });
@@ -91,8 +119,8 @@ describe("quotation orchestration and lifecycle (Q03–Q18)", () => {
     const { f, o } = await collected();
     const before = jsonEvidence(o);
     const count = f.calls.length;
-    const a = await analyzeSnapshot(o, config, { fetch: f.fetch });
-    const state = analysisEligibility(a);
+    const a = await analyzeSnapshot(o, config, { fetch: f.fetch, clock: fixtureClock });
+    const state = analysisEligibility(a, fixtureClock);
     expect(state.qualified).toBe(true);
     expect(state.quotesComplete).toBe(true);
     expect(state.best?.gross).toBeLessThan(0n);
@@ -125,10 +153,10 @@ describe("quotation orchestration and lifecycle (Q03–Q18)", () => {
     "keeps %s failures explicit without reducing the workload",
     async (kind) => {
       const { f, o } = await collected(quoteFixture({ kind }));
-      const a = await analyzeSnapshot(o, config, { fetch: f.fetch });
+      const a = await analyzeSnapshot(o, config, { fetch: f.fetch, clock: fixtureClock });
       expect(a.rows).toHaveLength(36);
-      expect(analysisEligibility(a).qualified).toBe(false);
-      expect(analysisEligibility(a).best).toBeNull();
+      expect(analysisEligibility(a, fixtureClock).qualified).toBe(false);
+      expect(analysisEligibility(a, fixtureClock).best).toBeNull();
       if (kind === "partial")
         expect(a.quotes.some((q) => q.reason === "full_input_not_proven")).toBe(true);
       if (kind === "opposite")
@@ -154,25 +182,29 @@ describe("quotation orchestration and lifecycle (Q03–Q18)", () => {
     });
     const { o } = await collected(f);
     fail = true;
-    const a = await analyzeSnapshot(o, config, { fetch: f.fetch });
+    const a = await analyzeSnapshot(o, config, { fetch: f.fetch, clock: fixtureClock });
     expect(a.quotes.some((q) => q.status === "unavailable" && q.output === null)).toBe(true);
-    expect(analysisEligibility(a).qualified).toBe(false);
+    expect(analysisEligibility(a, fixtureClock).qualified).toBe(false);
     expect(jsonEvidence(a)).not.toContain("private-key");
   });
   it("rejects bad grids and changed configuration before any new provider access", async () => {
     const { f, o } = await collected();
     const count = f.calls.length;
-    await expect(analyzeSnapshot(o, config, { sizes: ["1"], fetch: f.fetch })).rejects.toThrow(
-      "size_configuration",
-    );
     await expect(
-      analyzeSnapshot(o, { ...config, configurationRevision: "changed" }, { fetch: f.fetch }),
+      analyzeSnapshot(o, config, { sizes: ["1"], fetch: f.fetch, clock: fixtureClock }),
+    ).rejects.toThrow("size_configuration");
+    await expect(
+      analyzeSnapshot(
+        o,
+        { ...config, configurationRevision: "changed" },
+        { fetch: f.fetch, clock: fixtureClock },
+      ),
     ).rejects.toThrow("configuration");
     expect(f.calls).toHaveLength(count);
   });
   it("never resurrects a confirmed replaced block", async () => {
     const { f, o } = await collected();
-    const a = await analyzeSnapshot(o, config, { fetch: f.fetch });
+    const a = await analyzeSnapshot(o, config, { fetch: f.fetch, clock: fixtureClock });
     const replaced = quoteFixture({
       intercept: (r) =>
         r.method === "eth_getBlockByNumber" && r.params[0] === "0x64"
@@ -184,17 +216,23 @@ describe("quotation orchestration and lifecycle (Q03–Q18)", () => {
             })
           : undefined,
     });
-    const invalid = await revalidateAnalysis(a, config, { fetch: replaced.fetch });
-    expect(analysisEligibility(invalid).canonical).toBe("invalidated");
-    expect(analysisEligibility(invalid).best).toBeNull();
+    const invalid = await revalidateAnalysis(a, config, {
+      fetch: replaced.fetch,
+      clock: fixtureClock,
+    });
+    expect(analysisEligibility(invalid, fixtureClock).canonical).toBe("invalidated");
+    expect(analysisEligibility(invalid, fixtureClock).best).toBeNull();
     const count = f.calls.length;
-    const again = await revalidateAnalysis(invalid, config, { fetch: f.fetch });
+    const again = await revalidateAnalysis(invalid, config, {
+      fetch: f.fetch,
+      clock: fixtureClock,
+    });
     expect(again).toBe(invalid);
     expect(f.calls).toHaveLength(count);
   });
   it("renews expired validation with new requests and preserves unavailable/recovery events", async () => {
     const { f, o } = await collected();
-    const a = await analyzeSnapshot(o, config, { fetch: f.fetch });
+    const a = await analyzeSnapshot(o, config, { fetch: f.fetch, clock: fixtureClock });
     const offset = POLICY.maxValidationAgeMs + 1;
     const clock = {
       wall: () => a.finishedAt + offset,
@@ -214,12 +252,17 @@ describe("quotation orchestration and lifecycle (Q03–Q18)", () => {
     expect(analysisEligibility(recovered, clock).canonical).toBe("valid");
   });
   it("retains historical origin and never mixes attempts/reuse across runs", async () => {
-    const f = quoteFixture();
-    const o = await collectSnapshot(config, { fetch: f.fetch, blockNumber: 100n });
-    const a = await analyzeSnapshot(o, config, { fetch: f.fetch }),
-      b = await analyzeSnapshot(o, config, { fetch: f.fetch });
-    expect(analysisEligibility(a).freshness).toBe("historical");
-    expect(analysisEligibility(a).workloadAdmitted).toBe(false);
+    // This provenance case assumes a healthy clock, independent of host scheduling.
+    const clock = fixtureClock;
+    const f = quoteFixture({ timestamp: BigInt(clock.wall() / 1000) });
+    const o = await collectSnapshot(config, { fetch: f.fetch, blockNumber: 100n, clock });
+    const a = await analyzeSnapshot(o, config, { fetch: f.fetch, clock }),
+      b = await analyzeSnapshot(o, config, { fetch: f.fetch, clock });
+    expect(a.observation.origin).toBe("historical");
+    expect(analysisEligibility(a, clock).freshness).toBe("historical");
+    expect(analysisEligibility(a, clock).workloadAdmitted).toBe(false);
+    const divergedClock = { wall: clock.wall, mono: () => clock.mono() + 1000 };
+    expect(analysisEligibility(a, divergedClock).freshness).toBe("unavailable");
     expect(a.attemptId).not.toBe(b.attemptId);
     expect(a.quotes[0]?.quoteId).not.toBe(b.quotes[0]?.quoteId);
     expect(
@@ -230,8 +273,12 @@ describe("quotation orchestration and lifecycle (Q03–Q18)", () => {
     const { f, o } = await collected();
     const abort = new AbortController();
     abort.abort();
-    const a = await analyzeSnapshot(o, config, { fetch: f.fetch, signal: abort.signal });
-    expect(analysisEligibility(a).qualified).toBe(false);
+    const a = await analyzeSnapshot(o, config, {
+      fetch: f.fetch,
+      signal: abort.signal,
+      clock: fixtureClock,
+    });
+    expect(analysisEligibility(a, fixtureClock).qualified).toBe(false);
     expect(a.rows).toHaveLength(36);
     expect(a.quotes).toHaveLength(0);
   });
@@ -240,9 +287,9 @@ describe("quotation orchestration and lifecycle (Q03–Q18)", () => {
     const old = {
       ...o,
       origin: "live" as const,
-      block: o.block ? { ...o.block, timestamp: BigInt(Math.floor(Date.now() / 1000) - 60) } : null,
+      block: o.block ? { ...o.block, timestamp: BigInt(fixtureClock.wall() / 1000 - 60) } : null,
     };
-    const a = await analyzeSnapshot(old, config, { fetch: f.fetch });
+    const a = await analyzeSnapshot(old, config, { fetch: f.fetch, clock: fixtureClock });
     expect(a.quotes).toHaveLength(0);
     expect(a.failures).toContain("stale");
   });

@@ -19,7 +19,12 @@ if (mode === "read") {
     "INSERT INTO schema_migrations SELECT 2,checksum,applied_at_ms,node_version,driver_version,sqlite_version,sqlite_source_id FROM schema_migrations WHERE version=1",
   );
   process.stdout.write("READY\n");
-  setInterval(() => {}, 1000);
+  // Retain the native connection until this owned process is killed. An empty timer permits
+  // garbage collection to close SQLite and release the writer lock while the process stays alive.
+  setInterval(() => {
+    if (!db.inTransaction) process.exit(1);
+  }, 1000);
+  setImmediate(() => global.gc?.());
 } else {
   store.close();
   process.stdout.write("READY\n");

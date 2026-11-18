@@ -14,8 +14,9 @@ across agent instructions, task plans, and ADRs.
 | [ANALYSIS.md](ANALYSIS.md) | Explanation of implemented read-only calculations, assumptions, worked examples, result interpretation, and evidence reading paths | Implemented behavior or the reader's interpretation path changes |
 | [ENGINEERING.md](ENGINEERING.md) | Selected tools and engineering conventions | An approved tooling/convention choice changes |
 | [BENCHMARKING.md](BENCHMARKING.md) | Backend/storage benchmark methodology and reporting requirements; actual runs belong in task evidence | A comparison is scoped or its methodology changes |
-| [DEPLOYMENT.md](DEPLOYMENT.md) | Local process lifecycle, future environments, and draft release gates | Runtime or release/deployment requirements change |
-| [WORKFLOW.md](WORKFLOW.md) | Authorization, work lifecycle, and handoff rules | The user changes the development process |
+| [DEPLOYMENT.md](DEPLOYMENT.md) | Local process lifecycle, proposed PR verification, future environments and release gates | Runtime, CI or release/deployment requirements change |
+| [WORKFLOW.md](WORKFLOW.md) | Authorization, contribution policy, commit/PR naming, work lifecycle and handoff rules | The user changes the development process |
+| [pull_request_template.md](pull_request_template.md) | PR description template for contributors and GitHub | The review handoff changes |
 | [STATUS.md](STATUS.md) | Concise current state and next proposed action | A work session changes the project state |
 | [ROADMAP.md](ROADMAP.md) | Milestone sequence, dependencies, and continued development | Milestone scope or sequencing changes |
 | [BACKLOG.md](BACKLOG.md) | Work inventory, stable task IDs, and links to detailed tasks | Tasks are added, refined, or change state |
@@ -40,7 +41,12 @@ across agent instructions, task plans, and ADRs.
   [M1-10 implementation/evidence](tasks/M1-10-minimal-evidence-store.md#implementation-evidence),
   M3/STORE tasks → storage benchmark methodology. Future stores/formats remain open.
 - **Plan runtime or deployment:** ADR-0004 → deployment plan → relevant M1/M2 or future DEP tasks.
-  Local architecture is selected; pipeline/hosting implementation is not authorized.
+  Local architecture is selected; DEP-02 implementation/publication are approved and hosted CI
+  validation has begun. Repository administration and hosting remain separately gated.
+- **Set up PR verification and contributor tools:** proposed shared policy in WORKFLOW →
+  [accepted ADR-0009](adr/0009-pr-verification-and-repository-trust.md) → DEP-02 for CI/Linux/browser
+  checks and CONTRIB-01 for actual identities/tool connections. DEP-02 is in progress before M2;
+  CONTRIB-01 remains proposed. The ADR owns technical gates; WORKFLOW owns contributor rules, not assignments.
 - **Review local API/browser and startup work:** M1-11/M1-12's approved task scopes →
   [accepted ADR-0008](adr/0008-local-api-sse-and-process-interface.md) for API/SSE, producer ownership,
   process interface, application responsibilities, and integration gate → completed task records

@@ -11,10 +11,10 @@ authorize code or dependency installation.
 | Initial application | TypeScript backend and frontend; Node.js backend runtime and workspace boundaries under [ADR-0001](adr/0001-project-boundaries-and-tooling.md); foundation pins below | Package-specific build configuration as approved applications are introduced |
 | EVM interaction | viem 2.57.20 installed and verified under accepted [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md) and [ADR-0006](adr/0006-quotation-cycles-and-profitability.md) | Reviewed executor integration remains M2 work |
 | Contracts and local forks | Solidity, Foundry, Anvil | Compiler/dependency versions, router APIs, and local execution design |
-| TypeScript tests | Vitest 5.1.0; offline package tests executed through Node | Additional meaningful checks with approved behavior |
+| TypeScript tests | Vitest 5.1.0; Playwright Test 1.65.1 / Chromium for fixture browser integration in DEP-02 | Initial hosted baseline passed; source-bound main ruleset active; further integration proof pending |
 | Evidence persistence | better-sqlite3 13.2.0 / SQLite 3.54.1 under accepted [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md); backend implementation in M1-10 | Other-platform verification and M3 hardening |
 | Terminal | Next.js 16.4.6 / React 19.3.1 and SSE in M1-11; plain CSS for the minimal browser | Tailwind/shadcn and terminal refinement remain M4 work |
-| Local runtime topology | UI application + one backend and embedded SQLite; macOS foreground launcher in M1-12 | Later fork toolchain under [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) |
+| Local runtime topology | UI application + one backend and embedded SQLite; macOS/Linux foreground launcher | Later fork toolchain under [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) |
 
 Bun manages dependencies and project commands; the backend runs on Node.js under ADR-0001.
 Foundation versions are selected below. Deployment addresses remain unselected.
@@ -181,8 +181,8 @@ power-loss/other-platform behavior. There is no retention, backup/recovery autom
 [M1-11](tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) and
 [M1-12](tasks/M1-12-local-startup-readiness-and-shutdown.md#implementation-evidence): local
 API/SSE/browser, per-database CLI/service producer exclusion, identity-bearing readiness and
-foreground startup/shutdown. The launcher supports the verified macOS host; other platforms fail
-explicitly. The README owns commands, configuration and manual stale-owner precautions.
+foreground startup/shutdown. DEP-02 additionally verifies Ubuntu 24.04 arm64 native processes;
+Windows remains unsupported. The README owns commands, configuration and manual stale-owner precautions.
 
 The private web workspace pins Next.js **16.4.6**, React/react-dom **19.3.1** and their type packages
 at **19.3.0**. No component framework or install-script trust was added. Official
@@ -197,7 +197,7 @@ backend response with conservative request-start expiry; SSE loss/silence or pag
 withdraws current presentation. Historical records retain their original evidence and cannot
 restore admission. Backend collection is serial and independent of all HTTP/browser requests.
 
-The offline suite has 262 tests across 12 files and uses at most two workers. Service time-fault
+The offline suite has 281 tests across 13 files and uses at most two workers. Service time-fault
 checks inject an explicit clock instead of widening financial freshness limits. Process tests use
 isolated ports/files and owned child groups. The tasks distinguish controlled faults from actual
 browser/native signals/live RPC evidence and record a clean credential-free frozen install/check
@@ -210,9 +210,35 @@ introduced with M2, initially one fork job at a time. CLI access must not create
 collection or calculation authority.
 
 [DEPLOYMENT.md](DEPLOYMENT.md) owns process lifecycle and the draft future CI/CD/environment plan.
-Keep checks reproducible locally before automating them. Hosting and pipeline implementation remain
-future tasks; passing CI does not authorize a production change. Preserve data separately from
+Keep checks reproducible locally before automating them. Hosting remains future work; DEP-02's
+initial hosted baseline passed and the user enabled the main-branch ruleset. Passing CI does not
+authorize a production change. Preserve data separately from
 release artifacts and verify migration/recovery behavior before a hosted rollout.
+
+## PR verification implementation
+
+[Accepted ADR-0009](adr/0009-pr-verification-and-repository-trust.md) defines one check contract for
+all contributors. [DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md#implementation-evidence)
+implements the workflow candidate, an explicit all-required-success gate, syntax/policy validation,
+candidate/native metadata and a real fixture browser/API/native-signal smoke. The initial hosted
+baseline passed all six jobs on GitHub's Ubuntu 24.04 x64 and macOS 15 arm64 runners. The task
+records actual run/candidate IDs separately from local VM results. The user enabled an active
+main-branch ruleset with required PRs, strict `pr-gate` from GitHub Actions and no bypass actors.
+Failed current checks are reported as merge-blocking; stale-base integration remains unverified.
+
+Exact added development pins are `@playwright/test` **1.65.1** and `yaml` **2.9.1**, with matching
+Chromium build **1255** (Chrome for Testing 159.0.8154.6). No existing runtime/dependency pin or
+install-script trust changed. Official registry metadata and [Playwright CI guidance](https://playwright.dev/docs/ci)
+were consulted on 2026-11-18. Browser tests use one worker, no retries, frozen dependencies in a
+temporary source snapshot, explicit fixture mode and an independent string-based decimal oracle.
+Private configuration and runtime databases are excluded from the snapshot and uploaded artifacts.
+
+Actions use exact verified release commit SHAs; the task records their release/source mapping.
+Actionlint **1.7.12** is downloaded from its official release and verified by the selected asset's
+SHA-256 before execution. The local policy checker additionally verifies required jobs, events,
+gate dependencies, pinned actions, timeouts, credential handling and read-only permissions.
+Nineteen regression cases cover gate failures/missing/skipped/cancelled states and weakened workflow
+mutations, including YAML `if: false`. These checks help review; CI code itself still needs human scrutiny.
 
 ## Structure and dependencies
 

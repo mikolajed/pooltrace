@@ -314,7 +314,7 @@ export async function runLocal(
         error instanceof LocalConfigError && error.reason === "usage" ? "usage" : "configuration",
     };
   }
-  if ((options.platform ?? process.platform) !== "darwin")
+  if (!["darwin", "linux"].includes(options.platform ?? process.platform))
     return { exitCode: 1, reason: "platform_unsupported" };
   if (options.signal?.aborted) return cancelled(options.signal);
   const timing = { ...TIMING, ...options.timing };

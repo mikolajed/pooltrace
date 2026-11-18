@@ -1,0 +1,158 @@
+{
+  "reportVersion": "dep-02-local-validation-v1",
+  "context": "Local validation; not a GitHub-hosted run or merge-enforcement proof",
+  "observedAt": "2026-11-18T23:01:04.786612+00:00",
+  "baseline": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388 plus uncommitted approved DEP-02 candidate",
+  "sourceDigestInputs": "apps, packages, scripts, .github, root JSON/TS files, bun.lock, runtime pins and .gitignore; excludes dependencies, generated output and docs",
+  "macos": {
+    "metadata": {
+      "formatVersion": "ci-candidate-v1",
+      "recordedAt": "2026-11-18T22:51:14.329Z",
+      "event": null,
+      "headSha": null,
+      "baseSha": null,
+      "testedSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+      "workspaceDirty": true,
+      "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+      "job": null,
+      "runner": {
+        "os": "darwin",
+        "arch": "arm64",
+        "image": null,
+        "imageVersion": null
+      },
+      "runtime": {
+        "node": "26.3.1",
+        "bun": "1.3.11",
+        "driver": "13.2.0",
+        "sqlite": "3.54.1"
+      },
+      "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+    },
+    "checks": {
+      "status": "passed",
+      "testFiles": 13,
+      "tests": 281
+    },
+    "webBuild": "passed",
+    "chromiumSmoke": {
+      "status": "passed",
+      "durationSeconds": 13.7,
+      "constructed": true,
+      "rows": 36,
+      "nativeSignals": {
+        "SIGINT": 130,
+        "SIGTERM": 143
+      },
+      "cleanup": [
+        "ownership marker released",
+        "both listeners closed",
+        "saved evidence reopened as historical"
+      ]
+    },
+    "actionlint": "1.7.12 checksum-verified; passed"
+  },
+  "linux": {
+    "execution": "Isolated Lima VM, Ubuntu 24.04 arm64; two CPUs, 4 GiB memory; no host source mounts",
+    "metadata": {
+      "formatVersion": "ci-candidate-v1",
+      "recordedAt": "2026-11-18T22:54:32.818Z",
+      "event": null,
+      "headSha": null,
+      "baseSha": null,
+      "testedSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+      "workspaceDirty": true,
+      "sourceDigestSha256": "385cb710f9292bcff9b4c2ea1c5e91912a65e0a7747a9492f4fa4195a216b43d",
+      "job": null,
+      "runner": {
+        "os": "linux",
+        "arch": "arm64",
+        "image": null,
+        "imageVersion": null
+      },
+      "runtime": {
+        "node": "26.3.1",
+        "bun": "1.3.11",
+        "driver": "13.2.0",
+        "sqlite": "3.54.1"
+      },
+      "lockfileSha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+    },
+    "frozenInstall": {
+      "status": "passed",
+      "packages": 174,
+      "privateConfiguration": false
+    },
+    "checks": {
+      "status": "passed",
+      "testFiles": 13,
+      "tests": 281
+    },
+    "webBuild": "passed",
+    "chromiumSmoke": {
+      "status": "passed",
+      "durationSeconds": 10.5,
+      "constructed": true,
+      "rows": 36,
+      "nativeSignals": {
+        "SIGINT": 130,
+        "SIGTERM": 143
+      },
+      "cleanup": [
+        "ownership marker released",
+        "both listeners closed",
+        "saved evidence reopened as historical"
+      ]
+    },
+    "actionlint": "1.7.12 checksum-verified; passed"
+  },
+  "gateCli": [
+    {
+      "case": "success",
+      "exitCode": 0
+    },
+    {
+      "case": "malformed",
+      "exitCode": 1
+    },
+    {
+      "case": "missing",
+      "exitCode": 1
+    },
+    {
+      "case": "failure",
+      "exitCode": 1
+    },
+    {
+      "case": "cancelled",
+      "exitCode": 1
+    },
+    {
+      "case": "skipped",
+      "exitCode": 1
+    }
+  ],
+  "repositoryInspection": {
+    "repository": "mikolajed/pooltrace",
+    "visibility": "public",
+    "ownerType": "User",
+    "defaultBranch": "main",
+    "observedMainSha": "2e5a3fe91797fb12d8801dc2d03014a0b6dc9388",
+    "branchProtected": false,
+    "rulesets": [],
+    "protectionEndpoint": "403 Resource not accessible by integration; connector has no administration access"
+  },
+  "pending": [
+    "Commit/branch publication and draft PR need explicit user authorization",
+    "GitHub-hosted ubuntu-24.04 x64 / macos-15 execution",
+    "Actual deliberate failing PR and repair, stale-base check and merge blocking",
+    "Main protection settings and source-bound required check",
+    "Distinct bot author and user approval under unapproved CONTRIB-01"
+  ],
+  "limits": [
+    "All browser/API market data is constructed fixture evidence",
+    "Local Linux VM is not a GitHub runner result",
+    "No private RPC, model or deployment credential was supplied to verification",
+    "No production policy, cost producer, transaction or deployment was added"
+  ]
+}

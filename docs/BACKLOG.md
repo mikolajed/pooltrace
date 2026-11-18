@@ -31,7 +31,7 @@ estimates belong to individual milestones, not to a fixed project lifespan or fe
 - [x] [SET-13: Product framing and milestone scope](tasks/SET-13-product-framing-and-milestone-scope.md).
   Documentation-only work completed; validation evidence is in the linked record.
 
-## M1 — local read-only research application; M1-01 through M1-10 complete
+## M1 — local read-only research application; complete through M1-12
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) brings minimal SQLite and browser
 access into this milestone. Each task remains separately scoped; later work requires its own approval.
@@ -67,6 +67,9 @@ access into this milestone. Each task remains separately scoped; later work requ
   record, including native signals, owned cleanup and historical reopen.
 
 ## M2 — executor and local forks; approval pending
+
+PR verification and shared contribution setup below are the next requested priority before M2.
+DEP-02 is now approved and in progress; CONTRIB-01 and M2 work remain unapproved.
 
 - [ ] M2-01: Propose executor trust-boundary and fork/cost-accounting ADRs.
 - [ ] M2-02: Build the approved single-owner, prefunded executor.
@@ -167,18 +170,24 @@ approved scope. Data-store roles may complement each other; there is no mandator
   Acceptance: equivalent data/queries and stated durability/concurrency guarantees, isolated storage
   effects where possible, resource/space/network measurements, and recovery/migration evidence.
 
-### Future deployment and CI/CD
+### PR verification and future deployment
 
 The local architecture is accepted in [ADR-0004](adr/0004-local-processes-and-gated-deployment.md).
-[DEPLOYMENT.md](DEPLOYMENT.md) records the draft future pipeline; no workflow, host, or production
-environment is configured. Passing checks does not grant deployment authorization.
+[DEPLOYMENT.md](DEPLOYMENT.md) records proposed PR verification and future release gates. The
+repository has no CI workflow; remote bot/hosting setup remains unverified. The user requested documentation
+of CI and shared PR contributions as the next priority. ADR-0009 is accepted and DEP-02 implementation is approved;
+CONTRIB-01 remains proposed. CI can precede hosting decisions in DEP-01.
+
+- [ ] [DEP-02: PR verification and cloud compatibility](tasks/DEP-02-pr-verification-and-cloud-compatibility.md).
+  State: In progress; approved by “i accept adr9 and dep2”. CI checks/build, Linux/macOS
+  validation, fixture browser smoke, candidate evidence and actual merge enforcement under ADR-0009.
+- [ ] [CONTRIB-01: Shared PR contributor setup](tasks/CONTRIB-01-shared-pr-contributor-setup.md).
+  State: Proposed; follows the CI foundation. Actual selected tool connections/identities, scoped
+  delivery, equivalent checks, human approval and independent revocation; no vendor capability assumed.
 
 - [ ] DEP-01: Propose hosting, packaging, environment boundaries, and process/data lifecycle ADR.
   Acceptance: UI/backend artifacts, collector ownership, persistent data, optional native fork
   workload, configuration, staging isolation, and production recovery requirements are explicit.
-- [ ] DEP-02: Implement separately approved CI checks/build artifact generation.
-  Acceptance: required checks are defined by change type, unrun required checks block promotion,
-  dependency/toolchain inputs and artifact identity are recorded, and no production update occurs.
 - [ ] DEP-03: Implement separately approved staging validation and migration rehearsal.
   Acceptance: the exact candidate passes applicable API/UI/SSE/collector/fork checks, schema-upgrade
   and recovery checks use isolated data, and evidence identifies candidate/configuration versions.

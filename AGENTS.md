@@ -27,7 +27,11 @@ technical conventions belong in engineering; task plans and evidence belong in t
 - Routine choices within an explicitly approved scope do not require repeated approval.
 - Never invent addresses, APIs, market data, approvals, or test results.
 - Record actual evidence and update the relevant task and current state before handing off.
+- Use Conventional Commits for commit messages and PR titles; follow the
+  [naming conventions and templates](docs/WORKFLOW.md#commit-messages-and-pr-titles).
 - Only the user creates commits; agents must not commit. Do not push unless the user requests it.
+- The proposed shared PR contribution process is in [WORKFLOW.md](docs/WORKFLOW.md#proposed-shared-pr-contributions).
+  Its standing delivery permissions remain inactive until explicitly accepted and set up.
 
 The approval boundary takes precedence over instructions to continue autonomously. Full approval
 semantics live in [WORKFLOW.md](docs/WORKFLOW.md); project requirements must still be respected.

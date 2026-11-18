@@ -20,7 +20,7 @@ evidence and the [M1-05 record](docs/tasks/M1-05-quotation-and-cycle-analysis.md
 quotation evidence. Transaction costs, net profit, and execution remain unavailable.
 The [M1-07 record](docs/tasks/M1-07-validation-and-regression-coverage.md#evidence-and-handoff)
 maps independent vectors and controlled failure checks to actual results. The current suite has
-262 passing offline tests; [M1-11](docs/tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) and
+281 passing offline tests; [M1-11](docs/tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) and
 [M1-12](docs/tasks/M1-12-local-startup-readiness-and-shutdown.md#implementation-evidence) record
 clean installation/build, real browser/process checks, and actual live observation evidence.
 Read the [analysis guide](docs/ANALYSIS.md) for implemented math, constructed examples, result
@@ -101,8 +101,8 @@ transport. `apps/backend` owns configuration, one-attempt collection, eligibilit
 and the embedded SQLite evidence store.
 All three expose TypeScript source to the pinned Node runtime. The diagnostic CLI and local backend
 invoke these shared modules. The pinned
-better-sqlite3 13.2.0 native dependency is verified on macOS arm64 / Node 26.3.1; other platforms
-need their own compatibility checks. The package supplies the tested native binary without an
+better-sqlite3 13.2.0 native dependency is verified on macOS arm64 and Ubuntu 24.04 arm64 / Node
+26.3.1; other hosts need their own compatibility checks. The package supplies the tested native binary without an
 additional trusted install script.
 
 ## Local application
@@ -130,7 +130,7 @@ period, and escalates only its remaining owned process groups. It never adopts o
 port owner, restarts a failed child automatically, or deletes an evidence file. Invalid configuration
 exits 2, startup/runtime failure exits 1, SIGINT exits 130, and SIGTERM exits 143. Cleanup after an
 uncatchable signal or blocked filesystem operation is not a hard time guarantee. Process-group
-behavior must be verified on each supported host; current implementation validation targets macOS.
+behavior is validated on macOS arm64 and Ubuntu 24.04 arm64; Windows remains unsupported.
 
 The individual applications also remain usable in separate terminals:
 
@@ -169,6 +169,39 @@ marker fails closed. Before manually removing a leftover marker, verify that its
 descendants have actually stopped and that the file belongs to the expected database. Never remove
 an active marker or a database/journal file to bypass ownership. Keep custom database paths and
 their sidecars in an ignored directory such as `data/`, or add suitable local ignore rules.
+
+## PR verification and browser smoke
+
+Accepted [ADR-0009](docs/adr/0009-pr-verification-and-repository-trust.md) defines the CI contract.
+The [DEP-02 record](docs/tasks/DEP-02-pr-verification-and-cloud-compatibility.md#implementation-evidence)
+distinguishes local macOS/Ubuntu validation, actual GitHub-hosted runs on
+[PR #1](https://github.com/mikolajed/pooltrace/pull/1), and repository settings.
+The workflow is in `.github/workflows/ci.yml`. The user enabled the `Protect main` ruleset;
+readback confirms required PRs, current-base `pr-gate` from GitHub Actions, and no bypass actors.
+
+To run the automated fixture browser/API/native shutdown smoke locally:
+
+```sh
+bun run browser:install
+bun run test:browser
+bun run check:workflow
+```
+
+Browser installation downloads the pinned Chromium build; on Linux it also installs required OS
+libraries. The smoke uses an isolated source snapshot and frozen dependency installation with no
+private `.env`, temporary ports/database, and real application entrypoints. It verifies all 36
+rows with exact decimal units, history, stream/suspension withdrawal and native Ctrl+C/SIGTERM
+stop/restart. It uses one browser worker and no retries. `bun run check` type-checks these tests;
+`bun run test:browser` runs them separately. Routine reports/traces in `ci-results/`, `test-results/`
+and `playwright-report/` are ignored; inspect a failure before considering a diagnostic rerun.
+
+CI uses frozen installs, the full checks on Linux/macOS, production build, fixture smoke, pinned
+workflow validation and a gate that requires all dependencies to succeed. It receives no private
+RPC/model/deployment secrets and performs no merge or deployment. The initial hosted baseline
+passed all six checks; protection readback and a blocked failing PR are recorded in the task.
+Stale-base integration remains in DEP-02. Contributor identity/tool setup remains
+[CONTRIB-01](docs/tasks/CONTRIB-01-shared-pr-contributor-setup.md); the proposed standing
+delivery permissions are not enabled by DEP-02.
 
 ## Diagnostic CLI
 

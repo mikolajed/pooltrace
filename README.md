@@ -11,13 +11,16 @@ permanent feature ceiling.
 
 ## Current status
 
-**M1-06 diagnostic CLI and configuration documentation is complete.**
+**M1-07 arithmetic, direction, composition, and snapshot-failure validation is complete.**
 
 See [current state](docs/STATUS.md) for what exists and the next proposed action. The foundation
 includes tested domain/protocol/backend modules and an explicit live/fixture CLI for read-only
 cycle comparisons. See the [M1-06 record](docs/tasks/M1-06-cli-and-configuration.md) for command
 evidence and the [M1-05 record](docs/tasks/M1-05-quotation-and-cycle-analysis.md) for underlying
 quotation evidence. Transaction costs, net profit, and execution remain unavailable.
+The [M1-07 record](docs/tasks/M1-07-validation-and-regression-coverage.md#evidence-and-handoff)
+maps independent vectors and controlled failure checks to actual results: 158 offline tests pass,
+with production behavior unchanged.
 
 ## Start here
 

@@ -149,7 +149,7 @@ describe("registry and snapshots (V01–V18)", () => {
         .every((c) => c.status === "unavailable"),
     ).toBe(true);
   });
-  it.each(["decimals", "token0", "factory", "fee", "tickSpacing"])(
+  it.each(["decimals", "token0", "token1", "factory", "fee", "tickSpacing"])(
     "rejects a %s mismatch without substituting a pool",
     async (name) => {
       const o = await collect(
@@ -161,7 +161,7 @@ describe("registry and snapshots (V01–V18)", () => {
                 ? 9
                 : name === "token0"
                   ? REGISTRY.weth
-                  : name === "factory"
+                  : name === "factory" || name === "token1"
                     ? REGISTRY.usdc
                     : 100,
         }),

@@ -4,19 +4,27 @@ Updated: 2026-11-18.
 
 ## Phase and authorization
 
-**M1-01 through M1-06 are complete. M1-07 is prepared for review; implementation is unapproved.**
+**M1-01 through M1-07 are complete. Later implementation is unapproved.**
 
 The user accepted M1-06 and authorized its implementation and initial scope-document commit with
 “Lgtm, commit now, then mark this as accepted and move on with more work”.
 The [M1-06 record](tasks/M1-06-cli-and-configuration.md) owns that bounded approval and evidence;
 [WORKFLOW.md](WORKFLOW.md) governs later tasks. The user separately requested the completed M1-06
 implementation commit. The default user-only commit rule otherwise remains.
+The user accepted [M1-07](tasks/M1-07-validation-and-regression-coverage.md) and requested its scope
+commit before starting implementation on 2026-11-18; that requested commit is `7a9b68b`.
+Its bounded validation work is complete; the task record owns actual checks and limits. The user
+separately requested the completed M1-07 test/documentation commit.
 
 ## What exists
 
 - Product/correctness/engineering/deployment plans, roadmap/backlog, and accepted ADRs 0001–0006.
-- Pinned Bun/Node workspace, strict TypeScript/Biome, viem/Vitest, and **116 passing offline tests**
-  across five files, also passing after a clean frozen-lockfile install without private config.
+- Pinned Bun/Node workspace, strict TypeScript/Biome, viem/Vitest, and **158 passing offline tests**
+  across eight files, also passing after a clean frozen-lockfile install without private config.
+- M1-07 adds 42 regression cases, including a 205-input V2 property corpus, independent vectors,
+  asymmetric token direction/units, isolated quote failures, and running-analysis lifecycle faults.
+  No production correction or dependency change was required. Coverage/reuse and historical live
+  evidence are mapped in [M1-07 evidence](tasks/M1-07-validation-and-regression-coverage.md#evidence-and-handoff).
 - `packages/domain`: exact sizes/V2 arithmetic, rational impact/full-input predicates, composition,
   deterministic signed gross ranking, and conditional cost arithmetic with explicit evidence.
 - `packages/protocols`: sourced Ethereum registry, identity/structural verification, bounded
@@ -49,14 +57,14 @@ retain separately gated M1 tasks; executor/Anvil/cost generation remain M2.
 
 ## Next proposed action
 
-Review [M1-07's validation scope](tasks/M1-07-validation-and-regression-coverage.md), prepared from
-existing arithmetic, ordering, rounding, composition, and snapshot-failure evidence. It proposes
-independent vectors, asymmetric direction/unit cases, and isolated/running-analysis failures.
-Implementation requires explicit approval of that bounded scope; M1-06 completion does not grant it.
+Prepare M1-08's documentation scope for review, building on the existing mathematics, assumptions,
+commands, and actual evidence. M1-08 has not started; no later task is authorized by M1-07 completion.
 
 ## Latest handoff
 
 Requested scope-document commit: `843c8ba` (`docs: prepare M1-06 CLI and configuration scope`).
 Requested implementation commit: `b0ee436` (`feat: implement M1-06 CLI and configuration`).
-M1-07's scope and navigation updates are uncommitted documentation only. No M1-07 code/tests,
-dependency installation, new live checks, agent commit, or push occurred during preparation.
+Requested M1-07 scope commit: `7a9b68b` (`docs: prepare M1-07 validation scope`).
+M1-07 tests and completion/evidence updates are included in the subsequent commit explicitly
+requested by the user. No new live run, push, or later task was started. Production code,
+dependencies, and prior evidence are unchanged.

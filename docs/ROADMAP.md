@@ -1,7 +1,7 @@
 # Proposed roadmap
 
-M1-01 through M1-06 are complete, including verified snapshots, qualified read-only cycle analysis,
-and diagnostic live/fixture CLI access. Further
+M1-01 through M1-07 are complete, including verified snapshots, qualified read-only cycle analysis,
+diagnostic live/fixture CLI access, and focused arithmetic/failure validation. Further
 implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
@@ -42,7 +42,10 @@ profitability semantics. The separately approved [M1-05 implementation](tasks/M1
 has offline/live admission, quotation, composition, and ranking evidence.
 [M1-06](tasks/M1-06-cli-and-configuration.md) adds a one-shot CLI over the shared backend with
 explicit live/fixture modes and exact text/JSON output. Full transaction costs
-and net-profit evidence remain unavailable pending a reviewed producer. Detailed work
+and net-profit evidence remain unavailable pending a reviewed producer.
+[M1-07](tasks/M1-07-validation-and-regression-coverage.md) adds independent arithmetic vectors,
+asymmetric direction/unit checks, and running-analysis failure regressions without changing
+production behavior. Detailed work
 and acceptance criteria live in the [backlog](BACKLOG.md) and its linked task records.
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) selects a local UI application and one

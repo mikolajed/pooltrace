@@ -11,12 +11,13 @@ permanent feature ceiling.
 
 ## Current status
 
-**M1-05 V2/V3 quotation and cycle analysis is complete.**
+**M1-06 diagnostic CLI and configuration documentation is complete.**
 
 See [current state](docs/STATUS.md) for what exists and the next proposed action. The foundation
-now includes tested domain/protocol/backend modules for verified, qualified read-only cycle
-comparisons. See the [M1-05 record](docs/tasks/M1-05-quotation-and-cycle-analysis.md) for actual
-offline/live evidence and the remaining transaction-cost/execution boundary.
+includes tested domain/protocol/backend modules and an explicit live/fixture CLI for read-only
+cycle comparisons. See the [M1-06 record](docs/tasks/M1-06-cli-and-configuration.md) for command
+evidence and the [M1-05 record](docs/tasks/M1-05-quotation-and-cycle-analysis.md) for underlying
+quotation evidence. Transaction costs, net profit, and execution remain unavailable.
 
 ## Start here
 
@@ -79,7 +80,7 @@ bun install --frozen-lockfile
 bun run check
 ```
 
-`bun run check` verifies the runtime pins, type-checks tooling and both working packages, runs Biome
+`bun run check` verifies the runtime pins, type-checks tooling and all three working packages, runs Biome
 lint/format checks, and runs the offline Vitest suite. It needs no RPC credentials after installation.
 Individual commands are `bun run check:toolchain`, `bun run typecheck`, `bun run lint`,
 `bun run format:check`, and `bun run test`. Use `bun run format` to apply formatting.
@@ -87,10 +88,59 @@ Individual commands are `bun run check:toolchain`, `bun run typecheck`, `bun run
 `packages/domain` owns pure exact arithmetic, qualification, composition, and ranking.
 `packages/protocols` owns the sourced Ethereum registry, ABI reads, verification, and bounded RPC
 transport. `apps/backend` owns configuration, one-attempt collection, eligibility, and revalidation.
-All three expose TypeScript source to the pinned Node runtime. There is no application service/start
-command, public market CLI/API, UI, or database yet.
+All three expose TypeScript source to the pinned Node runtime. The diagnostic CLI below invokes
+these shared modules. Application services, an HTTP API, UI, and database remain later tasks.
 
-For the explicit read-only integration check, copy `.env.example` to root `.env` and supply the
+## Diagnostic CLI
+
+Run from the repository root after installation:
+
+```sh
+bun run cli --help
+bun run cli --mode fixture
+bun run cli --mode fixture --format json
+bun run cli --mode live
+bun run cli --mode live --format json
+bun run cli --mode live --sizes '["10","50","100","500","1000","5000"]'
+```
+
+Select `--mode live|fixture` explicitly; there is no default mode or fallback. Each command
+performs one attempt and exits. Fixture mode is offline and requires no valid RPC URL. Its pool
+addresses, balances, quotation responses, and fixed block time are constructed diagnostics, never
+market evidence. Live mode requires the private configuration described below.
+
+Output defaults to plain text with all 36 route/size outcomes, block/hash and as-of times,
+qualification, current admission, and the eligible best tested gross result. USDC/WETH decimals
+are formatted exactly. A complete negative or zero gross result is a normal outcome. Positive
+gross quotation alone would still leave transaction costs and estimated net profit unavailable.
+Eligibility is computed immediately before output; the document does not remain fresh after exit.
+
+`--format json` emits one `cli-v1` envelope on stdout, without progress or ANSI escapes. Its
+`kind` is `result` or `error`; `mode`, `origin`, `constructed`, `status`, `reason`, `asOf` (Unix
+milliseconds), `units`, `sizes`, `observation`, `analysis`, and `eligibility` retain evidence and
+unavailable values. Bigint quantities, including block numbers and base-unit amounts, are exact
+decimal strings. Sizes/input/output/gross use 10^-6 USDC; leg-1 output uses 10^-18 WETH.
+`--help --format json` instead returns `{formatVersion, kind: "help", help}` without reading
+configuration. Help accepts only the optional format flag; duplicate/unknown flags, positionals,
+or combining help with mode/sizes are usage errors. Bun may print its command banner to stderr;
+redirect stdout alone for a JSON document.
+
+| Exit | Meaning |
+| --- | --- |
+| 0 | Help or a usable result, including a qualified fixture or nonpositive gross result. Fixture success never means live admission. |
+| 1 | Runtime failure, or rejected/incomplete/stale/invalidated/unavailable analysis. Returned diagnostics remain evidence. |
+| 2 | Invalid arguments or configuration; RPC has not started. Errors do not echo supplied values. |
+| 130 | SIGINT interruption; the CLI cancels its owned work and exits. |
+
+Live and fixture sizes use `--sizes` first, then `USDC_INPUT_AMOUNTS`, then the six defaults.
+Every override must be a JSON array of exactly six increasing, distinct, positive decimal strings
+with at most six places. Both modes load root `.env`, then `.env.local`, then defined process
+values (including empty values); fixture mode ignores the live URL/provider settings. Help loads
+neither file. No endpoint URL argument is accepted.
+
+## Private live configuration and integration checks
+
+For live CLI runs and the explicit read-only integration checks, copy `.env.example` to root `.env` and supply the
 selected Alchemy Ethereum mainnet URL as `ETHEREUM_RPC_URL`. Keep it private. Optional
 `RPC_PROVIDER_LABEL` and `RPC_CONFIG_REVISION` are nonsecret provenance labels; defaults are
 `alchemy-ethereum` and `alchemy-ethereum-v1`. Change the revision when changing the endpoint.
@@ -106,7 +156,8 @@ It collects at the current head, re-reads the same block in historical mode for 
 waits for the five-second validation expiry, and revalidates before checking eligibility again.
 It writes a sanitized `data/m1-03-live-<attemptId>.json` report and exits nonzero if a required gate
 fails. Reports contain public chain data and nonsecret labels; `data/` is ignored. There is no
-fallback endpoint or automatic fixture substitution. Offline fixtures are injected explicitly in tests.
+fallback endpoint or automatic fixture substitution. CLI fixture mode is explicitly selected;
+tests inject constructed transports through the same protocol boundary.
 
 Backend consumers use `collectSnapshot`, `eligibility`, `revalidateSnapshot`, and `prepareForUse`
 from `apps/backend/src/index.ts`. Collection returns immutable evidence; revalidation appends events

@@ -1,6 +1,7 @@
 # Proposed roadmap
 
-M1-01 through M1-05 are complete, including verified snapshots and qualified read-only cycle analysis. Further
+M1-01 through M1-06 are complete, including verified snapshots, qualified read-only cycle analysis,
+and diagnostic live/fixture CLI access. Further
 implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
@@ -33,11 +34,14 @@ The separately approved [M1-01 foundation](tasks/M1-01-tooling-and-workspaces.md
 accepted ADR-0001. [M1-02](tasks/M1-02-registry-and-consistent-snapshots.md) produced accepted
 [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md). The separately approved
 [M1-03 implementation](tasks/M1-03-registry-and-consistent-snapshots.md) has offline and live evidence
-for identity, structural screening, and consistent snapshots; finite-size qualification remains open.
+for identity, structural screening, and consistent snapshots; finite-size qualification is recorded
+separately by M1-05.
 [M1-04](tasks/M1-04-quotation-cycles-and-profitability-design.md) produced accepted
 [ADR-0006](adr/0006-quotation-cycles-and-profitability.md) for quotation, qualification, cycles, and
 profitability semantics. The separately approved [M1-05 implementation](tasks/M1-05-quotation-and-cycle-analysis.md)
-has offline/live admission, quotation, composition, and ranking evidence. Full transaction costs
+has offline/live admission, quotation, composition, and ranking evidence.
+[M1-06](tasks/M1-06-cli-and-configuration.md) adds a one-shot CLI over the shared backend with
+explicit live/fixture modes and exact text/JSON output. Full transaction costs
 and net-profit evidence remain unavailable pending a reviewed producer. Detailed work
 and acceptance criteria live in the [backlog](BACKLOG.md) and its linked task records.
 

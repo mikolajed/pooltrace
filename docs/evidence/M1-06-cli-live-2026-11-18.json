@@ -1,0 +1,4128 @@
+{
+  "formatVersion": "cli-v1",
+  "kind": "result",
+  "mode": "live",
+  "origin": "live",
+  "constructed": false,
+  "status": "usable",
+  "reason": null,
+  "asOf": 1795008147790,
+  "units": {
+    "usdc": "10^-6 USDC",
+    "weth": "10^-18 WETH"
+  },
+  "sizes": ["10000000", "50000000", "100000000", "500000000", "1000000000", "5000000000"],
+  "observation": {
+    "attemptId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+    "origin": "live",
+    "chainId": "1",
+    "providerLabel": "alchemy-ethereum",
+    "configurationRevision": "alchemy-ethereum-v1",
+    "implementationRevision": "m1-03-v1",
+    "policy": {
+      "revision": "adr-0005-v1",
+      "maxBlockAgeMs": 30000,
+      "maxHeadLag": "2",
+      "maxValidationAgeMs": 5000,
+      "futureToleranceMs": 2000,
+      "requestTimeoutMs": 5000,
+      "attemptTimeoutMs": 20000,
+      "concurrency": 4,
+      "retryWaitMs": 250,
+      "maxSends": 2
+    },
+    "dependencyVersions": {
+      "viem": "2.57.20"
+    },
+    "block": {
+      "number": "26442213",
+      "timestamp": "1795008131",
+      "hash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+      "parentHash": "0xe5db89ce08b8dc49df3f5973b8ed052f63323769dc75fedbed2174bb5dae8515"
+    },
+    "startedAt": 1795008139180,
+    "startedMono": 520.148166,
+    "finishedAt": 1795008142995,
+    "elapsedMs": 3814.235417,
+    "clockInvalid": false,
+    "capabilities": [
+      {
+        "method": "eth_getCode",
+        "positive": true,
+        "unknownHashRejected": true,
+        "unknownHashTestInput": "0x85a3d69ab5b5ed4b1e48b9934424fccf074c98df58175450782ea10c64dff46e"
+      },
+      {
+        "method": "eth_call",
+        "positive": true,
+        "unknownHashRejected": true,
+        "unknownHashTestInput": "0x85a3d69ab5b5ed4b1e48b9934424fccf074c98df58175450782ea10c64dff46e"
+      }
+    ],
+    "registry": {
+      "source": {
+        "revision": "ethereum-weth-usdc-v1",
+        "retrievedAt": "2026-11-17",
+        "usdc": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "weth": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "v2Factory": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+        "v3Factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+        "fees": [500, 3000],
+        "sources": [
+          "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+          "https://developers.uniswap.org/docs/sdks/v3/guides/pool-data",
+          "https://developers.uniswap.org/docs/protocols/v2/deployments",
+          "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-ethereum-deployments",
+          "https://github.com/Uniswap/v2-core/blob/master/contracts/interfaces/IUniswapV2Pair.sol",
+          "https://github.com/Uniswap/v3-core/blob/main/contracts/interfaces/pool/IUniswapV3PoolState.sol"
+        ]
+      },
+      "checks": [
+        {
+          "name": "code:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          "status": "passed"
+        },
+        {
+          "name": "code:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+          "status": "passed"
+        },
+        {
+          "name": "code:0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+          "status": "passed"
+        },
+        {
+          "name": "code:0x1F98431c8aD98523631AE4a59f267346ea31F984",
+          "status": "passed"
+        },
+        {
+          "name": "decimals:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          "status": "passed",
+          "observed": 6
+        },
+        {
+          "name": "decimals:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+          "status": "passed",
+          "observed": 18
+        },
+        {
+          "name": "discover:v2",
+          "status": "passed",
+          "observed": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc"
+        },
+        {
+          "name": "discover:v3:500",
+          "status": "passed",
+          "observed": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640"
+        },
+        {
+          "name": "discover:v3:3000",
+          "status": "passed",
+          "observed": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8"
+        },
+        {
+          "name": "distinct_pools",
+          "status": "passed"
+        },
+        {
+          "name": "code:0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+          "status": "passed"
+        },
+        {
+          "name": "code:0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+          "status": "passed"
+        },
+        {
+          "name": "code:0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+          "status": "passed"
+        },
+        {
+          "name": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc:factory",
+          "status": "passed",
+          "observed": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+        },
+        {
+          "name": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc:token0",
+          "status": "passed",
+          "observed": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        },
+        {
+          "name": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc:token1",
+          "status": "passed",
+          "observed": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+        },
+        {
+          "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:factory",
+          "status": "passed",
+          "observed": "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+        },
+        {
+          "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:token0",
+          "status": "passed",
+          "observed": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        },
+        {
+          "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:token1",
+          "status": "passed",
+          "observed": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+        },
+        {
+          "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:factory",
+          "status": "passed",
+          "observed": "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+        },
+        {
+          "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:token0",
+          "status": "passed",
+          "observed": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        },
+        {
+          "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:token1",
+          "status": "passed",
+          "observed": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+        },
+        {
+          "name": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc:reserves",
+          "status": "passed",
+          "observed": true
+        },
+        {
+          "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:enabled_fee",
+          "status": "passed",
+          "observed": 10
+        },
+        {
+          "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:enabled_fee",
+          "status": "passed",
+          "observed": 60
+        },
+        {
+          "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:fee",
+          "status": "passed",
+          "observed": 500
+        },
+        {
+          "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:spacing",
+          "status": "passed",
+          "observed": 10
+        },
+        {
+          "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:state",
+          "status": "passed",
+          "observed": true
+        },
+        {
+          "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:fee",
+          "status": "passed",
+          "observed": 3000
+        },
+        {
+          "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:spacing",
+          "status": "passed",
+          "observed": 60
+        },
+        {
+          "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:state",
+          "status": "passed",
+          "observed": true
+        }
+      ],
+      "codeHashes": {
+        "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48": "0xd80d4b7c890cb9d6a4893e6b52bc34b56b25335cb13716e0d1d31383e6b41505",
+        "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2": "0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23",
+        "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f": "0xbab145d02e7005f0d84c6c1639d39b799b0ea16df99ebbdaf5a14d9da820b4e0",
+        "0x1F98431c8aD98523631AE4a59f267346ea31F984": "0x4d7b8525cd5d14343fa67a732fba5b24cddba11620ca88392f4ec6c52f91fd69",
+        "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc": "0x5b83bdbcc56b2e630f2807bbadd2b0c21619108066b92a58de081261089e9ce5",
+        "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640": "0xa981b66c747a3d9fa29d7e200d5faaa2826960523d0e5a0df8148e8868c480b4",
+        "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8": "0xf2b8b58f95b1471751302e520a0e7c410ce9846ed46020be253dbd25fbb6da11"
+      },
+      "tokens": [
+        {
+          "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          "expectedDecimals": 6,
+          "observedDecimals": 6
+        },
+        {
+          "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+          "expectedDecimals": 18,
+          "observedDecimals": 18
+        }
+      ],
+      "pools": [
+        {
+          "protocol": "v2",
+          "fee": 3000,
+          "address": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+          "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+          "values": {
+            "factory": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+            "token0": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "token1": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "reserve0": "8614939924412",
+            "reserve1": "4802333020605085296918",
+            "blockTimestampLast": 1795008047
+          },
+          "finiteSizeSuitability": "unavailable"
+        },
+        {
+          "protocol": "v3",
+          "fee": 500,
+          "address": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+          "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+          "values": {
+            "factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+            "token0": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "token1": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "fee": 500,
+            "tickSpacing": 10,
+            "sqrtPriceX96": "1869830004542190508979398717180472",
+            "tick": 201390,
+            "observationIndex": 553,
+            "observationCardinality": 723,
+            "observationCardinalityNext": 723,
+            "feeProtocol": 68,
+            "unlocked": true,
+            "liquidity": "4261607720320161713"
+          },
+          "finiteSizeSuitability": "unavailable"
+        },
+        {
+          "protocol": "v3",
+          "fee": 3000,
+          "address": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+          "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+          "values": {
+            "factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+            "token0": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "token1": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "fee": 3000,
+            "tickSpacing": 60,
+            "sqrtPriceX96": "1870849294470748699737472739204528",
+            "tick": 201401,
+            "observationIndex": 645,
+            "observationCardinality": 1440,
+            "observationCardinalityNext": 1440,
+            "feeProtocol": 102,
+            "unlocked": true,
+            "liquidity": "974787854508240165"
+          },
+          "finiteSizeSuitability": "unavailable"
+        }
+      ],
+      "identity": "passed",
+      "structural": "passed",
+      "finiteSizeSuitability": "unavailable",
+      "workloadAdmitted": false
+    },
+    "complete": true,
+    "failures": [],
+    "validations": [
+      {
+        "at": 1795008142993,
+        "monotonicAt": 4332.637666,
+        "canonical": "valid",
+        "head": {
+          "number": "26442213",
+          "timestamp": "1795008131",
+          "hash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+          "parentHash": "0xe5db89ce08b8dc49df3f5973b8ed052f63323769dc75fedbed2174bb5dae8515"
+        }
+      }
+    ],
+    "requests": [
+      {
+        "method": "eth_chainId",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getBlockByNumber",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getCode",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getCode",
+        "send": 1,
+        "outcome": "state_unavailable"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "state_unavailable"
+      },
+      {
+        "method": "eth_getCode",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getCode",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getCode",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getCode",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getCode",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getCode",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getCode",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_chainId",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getBlockByNumber",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getBlockByNumber",
+        "send": 1,
+        "outcome": "success"
+      }
+    ]
+  },
+  "analysis": {
+    "attemptId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+    "observation": {
+      "attemptId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+      "origin": "live",
+      "chainId": "1",
+      "providerLabel": "alchemy-ethereum",
+      "configurationRevision": "alchemy-ethereum-v1",
+      "implementationRevision": "m1-03-v1",
+      "policy": {
+        "revision": "adr-0005-v1",
+        "maxBlockAgeMs": 30000,
+        "maxHeadLag": "2",
+        "maxValidationAgeMs": 5000,
+        "futureToleranceMs": 2000,
+        "requestTimeoutMs": 5000,
+        "attemptTimeoutMs": 20000,
+        "concurrency": 4,
+        "retryWaitMs": 250,
+        "maxSends": 2
+      },
+      "dependencyVersions": {
+        "viem": "2.57.20"
+      },
+      "block": {
+        "number": "26442213",
+        "timestamp": "1795008131",
+        "hash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "parentHash": "0xe5db89ce08b8dc49df3f5973b8ed052f63323769dc75fedbed2174bb5dae8515"
+      },
+      "startedAt": 1795008139180,
+      "startedMono": 520.148166,
+      "finishedAt": 1795008142995,
+      "elapsedMs": 3814.235417,
+      "clockInvalid": false,
+      "capabilities": [
+        {
+          "method": "eth_getCode",
+          "positive": true,
+          "unknownHashRejected": true,
+          "unknownHashTestInput": "0x85a3d69ab5b5ed4b1e48b9934424fccf074c98df58175450782ea10c64dff46e"
+        },
+        {
+          "method": "eth_call",
+          "positive": true,
+          "unknownHashRejected": true,
+          "unknownHashTestInput": "0x85a3d69ab5b5ed4b1e48b9934424fccf074c98df58175450782ea10c64dff46e"
+        }
+      ],
+      "registry": {
+        "source": {
+          "revision": "ethereum-weth-usdc-v1",
+          "retrievedAt": "2026-11-17",
+          "usdc": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          "weth": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+          "v2Factory": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+          "v3Factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+          "fees": [500, 3000],
+          "sources": [
+            "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+            "https://developers.uniswap.org/docs/sdks/v3/guides/pool-data",
+            "https://developers.uniswap.org/docs/protocols/v2/deployments",
+            "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-ethereum-deployments",
+            "https://github.com/Uniswap/v2-core/blob/master/contracts/interfaces/IUniswapV2Pair.sol",
+            "https://github.com/Uniswap/v3-core/blob/main/contracts/interfaces/pool/IUniswapV3PoolState.sol"
+          ]
+        },
+        "checks": [
+          {
+            "name": "code:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "status": "passed"
+          },
+          {
+            "name": "code:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "status": "passed"
+          },
+          {
+            "name": "code:0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+            "status": "passed"
+          },
+          {
+            "name": "code:0x1F98431c8aD98523631AE4a59f267346ea31F984",
+            "status": "passed"
+          },
+          {
+            "name": "decimals:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "status": "passed",
+            "observed": 6
+          },
+          {
+            "name": "decimals:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "status": "passed",
+            "observed": 18
+          },
+          {
+            "name": "discover:v2",
+            "status": "passed",
+            "observed": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc"
+          },
+          {
+            "name": "discover:v3:500",
+            "status": "passed",
+            "observed": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640"
+          },
+          {
+            "name": "discover:v3:3000",
+            "status": "passed",
+            "observed": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8"
+          },
+          {
+            "name": "distinct_pools",
+            "status": "passed"
+          },
+          {
+            "name": "code:0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+            "status": "passed"
+          },
+          {
+            "name": "code:0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+            "status": "passed"
+          },
+          {
+            "name": "code:0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+            "status": "passed"
+          },
+          {
+            "name": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc:factory",
+            "status": "passed",
+            "observed": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+          },
+          {
+            "name": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc:token0",
+            "status": "passed",
+            "observed": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+          },
+          {
+            "name": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc:token1",
+            "status": "passed",
+            "observed": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+          },
+          {
+            "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:factory",
+            "status": "passed",
+            "observed": "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+          },
+          {
+            "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:token0",
+            "status": "passed",
+            "observed": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+          },
+          {
+            "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:token1",
+            "status": "passed",
+            "observed": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+          },
+          {
+            "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:factory",
+            "status": "passed",
+            "observed": "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+          },
+          {
+            "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:token0",
+            "status": "passed",
+            "observed": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+          },
+          {
+            "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:token1",
+            "status": "passed",
+            "observed": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+          },
+          {
+            "name": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc:reserves",
+            "status": "passed",
+            "observed": true
+          },
+          {
+            "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:enabled_fee",
+            "status": "passed",
+            "observed": 10
+          },
+          {
+            "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:enabled_fee",
+            "status": "passed",
+            "observed": 60
+          },
+          {
+            "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:fee",
+            "status": "passed",
+            "observed": 500
+          },
+          {
+            "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:spacing",
+            "status": "passed",
+            "observed": 10
+          },
+          {
+            "name": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640:state",
+            "status": "passed",
+            "observed": true
+          },
+          {
+            "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:fee",
+            "status": "passed",
+            "observed": 3000
+          },
+          {
+            "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:spacing",
+            "status": "passed",
+            "observed": 60
+          },
+          {
+            "name": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8:state",
+            "status": "passed",
+            "observed": true
+          }
+        ],
+        "codeHashes": {
+          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48": "0xd80d4b7c890cb9d6a4893e6b52bc34b56b25335cb13716e0d1d31383e6b41505",
+          "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2": "0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23",
+          "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f": "0xbab145d02e7005f0d84c6c1639d39b799b0ea16df99ebbdaf5a14d9da820b4e0",
+          "0x1F98431c8aD98523631AE4a59f267346ea31F984": "0x4d7b8525cd5d14343fa67a732fba5b24cddba11620ca88392f4ec6c52f91fd69",
+          "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc": "0x5b83bdbcc56b2e630f2807bbadd2b0c21619108066b92a58de081261089e9ce5",
+          "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640": "0xa981b66c747a3d9fa29d7e200d5faaa2826960523d0e5a0df8148e8868c480b4",
+          "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8": "0xf2b8b58f95b1471751302e520a0e7c410ce9846ed46020be253dbd25fbb6da11"
+        },
+        "tokens": [
+          {
+            "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "expectedDecimals": 6,
+            "observedDecimals": 6
+          },
+          {
+            "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "expectedDecimals": 18,
+            "observedDecimals": 18
+          }
+        ],
+        "pools": [
+          {
+            "protocol": "v2",
+            "fee": 3000,
+            "address": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+            "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+            "values": {
+              "factory": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+              "token0": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+              "token1": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+              "reserve0": "8614939924412",
+              "reserve1": "4802333020605085296918",
+              "blockTimestampLast": 1795008047
+            },
+            "finiteSizeSuitability": "unavailable"
+          },
+          {
+            "protocol": "v3",
+            "fee": 500,
+            "address": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+            "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+            "values": {
+              "factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+              "token0": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+              "token1": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+              "fee": 500,
+              "tickSpacing": 10,
+              "sqrtPriceX96": "1869830004542190508979398717180472",
+              "tick": 201390,
+              "observationIndex": 553,
+              "observationCardinality": 723,
+              "observationCardinalityNext": 723,
+              "feeProtocol": 68,
+              "unlocked": true,
+              "liquidity": "4261607720320161713"
+            },
+            "finiteSizeSuitability": "unavailable"
+          },
+          {
+            "protocol": "v3",
+            "fee": 3000,
+            "address": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+            "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+            "values": {
+              "factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+              "token0": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+              "token1": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+              "fee": 3000,
+              "tickSpacing": 60,
+              "sqrtPriceX96": "1870849294470748699737472739204528",
+              "tick": 201401,
+              "observationIndex": 645,
+              "observationCardinality": 1440,
+              "observationCardinalityNext": 1440,
+              "feeProtocol": 102,
+              "unlocked": true,
+              "liquidity": "974787854508240165"
+            },
+            "finiteSizeSuitability": "unavailable"
+          }
+        ],
+        "identity": "passed",
+        "structural": "passed",
+        "finiteSizeSuitability": "unavailable",
+        "workloadAdmitted": false
+      },
+      "complete": true,
+      "failures": [],
+      "validations": [
+        {
+          "at": 1795008142993,
+          "monotonicAt": 4332.637666,
+          "canonical": "valid",
+          "head": {
+            "number": "26442213",
+            "timestamp": "1795008131",
+            "hash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+            "parentHash": "0xe5db89ce08b8dc49df3f5973b8ed052f63323769dc75fedbed2174bb5dae8515"
+          }
+        },
+        {
+          "at": 1795008147788,
+          "monotonicAt": 9127.388916,
+          "canonical": "valid",
+          "head": {
+            "number": "26442214",
+            "timestamp": "1795008143",
+            "hash": "0x37b0f13d6fe66d86583dd72b6f1ec2a5f1f1140064c72fbc8628095ce09c7816",
+            "parentHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a"
+          }
+        }
+      ],
+      "requests": [
+        {
+          "method": "eth_chainId",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getBlockByNumber",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getCode",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getCode",
+          "send": 1,
+          "outcome": "state_unavailable"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "state_unavailable"
+        },
+        {
+          "method": "eth_getCode",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getCode",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getCode",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getCode",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getCode",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getCode",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getCode",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_chainId",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getBlockByNumber",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getBlockByNumber",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getCode",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getCode",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_call",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_chainId",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getBlockByNumber",
+          "send": 1,
+          "outcome": "success"
+        },
+        {
+          "method": "eth_getBlockByNumber",
+          "send": 1,
+          "outcome": "success"
+        }
+      ]
+    },
+    "implementationRevision": "m1-05-v1",
+    "policy": {
+      "revision": "quotation-v1",
+      "impactBps": "100",
+      "callGas": "5000000",
+      "maxReads": 100,
+      "maxSends": 200,
+      "finalReads": 3
+    },
+    "sizes": ["10000000", "50000000", "100000000", "500000000", "1000000000", "5000000000"],
+    "contracts": {
+      "source": {
+        "revision": "ethereum-quotes-v1",
+        "retrievedAt": "2026-11-18",
+        "sourceRevisions": {
+          "v2Periphery": "ed24991304291297c3b4a52818d02f46a17aa9a2",
+          "v3Periphery": "24ccf014fe7f81d74a14c1689d6fdf123f280e45",
+          "v3Core": "5ea68a77cb541c6b3812df783be71ba8c081e25f"
+        },
+        "router": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "quoter": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "sources": [
+          "https://developers.uniswap.org/docs/protocols/v2/deployments",
+          "https://developers.uniswap.org/docs/protocols/v3/deployments/v3-ethereum-deployments",
+          "https://raw.githubusercontent.com/Uniswap/v2-periphery/ed24991304291297c3b4a52818d02f46a17aa9a2/contracts/libraries/UniswapV2Library.sol",
+          "https://raw.githubusercontent.com/Uniswap/v3-periphery/24ccf014fe7f81d74a14c1689d6fdf123f280e45/contracts/interfaces/IQuoterV2.sol",
+          "https://raw.githubusercontent.com/Uniswap/v3-periphery/24ccf014fe7f81d74a14c1689d6fdf123f280e45/contracts/lens/QuoterV2.sol",
+          "https://raw.githubusercontent.com/Uniswap/v3-core/5ea68a77cb541c6b3812df783be71ba8c081e25f/contracts/UniswapV3Pool.sol",
+          "https://raw.githubusercontent.com/Uniswap/v3-core/5ea68a77cb541c6b3812df783be71ba8c081e25f/contracts/libraries/TickMath.sol"
+        ]
+      },
+      "checks": [
+        {
+          "name": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D:code",
+          "status": "passed",
+          "observed": true
+        },
+        {
+          "name": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D:factory",
+          "status": "passed",
+          "observed": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+        },
+        {
+          "name": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D:weth",
+          "status": "passed",
+          "observed": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+        },
+        {
+          "name": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e:code",
+          "status": "passed",
+          "observed": true
+        },
+        {
+          "name": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e:factory",
+          "status": "passed",
+          "observed": "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+        },
+        {
+          "name": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e:weth",
+          "status": "passed",
+          "observed": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+        }
+      ],
+      "codeHashes": {
+        "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D": "0xa324bc7db3d091b6f1a2d526e48a9c7039e03b3cc35f7d44b15ac7a1544c11d2",
+        "0x61fFE014bA17989E743c5F6cB21bF9697530B21e": "0x06148f47d0f41a68d3bc970030a7150e5d608cfbc28d372440a2e41ce543d92b"
+      },
+      "identity": "passed"
+    },
+    "rows": [
+      {
+        "route": [0, 1],
+        "input": "10000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:0",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:3",
+        "status": "passed",
+        "reason": null,
+        "output": "9973150",
+        "gross": "-26850"
+      },
+      {
+        "route": [0, 1],
+        "input": "50000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:1",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:4",
+        "status": "passed",
+        "reason": null,
+        "output": "49865510",
+        "gross": "-134490"
+      },
+      {
+        "route": [0, 1],
+        "input": "100000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:2",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:5",
+        "status": "passed",
+        "reason": null,
+        "output": "99730415",
+        "gross": "-269585"
+      },
+      {
+        "route": [0, 1],
+        "input": "500000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:6",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:9",
+        "status": "passed",
+        "reason": null,
+        "output": "498627894",
+        "gross": "-1372106"
+      },
+      {
+        "route": [0, 1],
+        "input": "1000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:7",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:10",
+        "status": "passed",
+        "reason": null,
+        "output": "997195337",
+        "gross": "-2804663"
+      },
+      {
+        "route": [0, 1],
+        "input": "5000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:8",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:11",
+        "status": "passed",
+        "reason": null,
+        "output": "4983559907",
+        "gross": "-16440093"
+      },
+      {
+        "route": [0, 2],
+        "input": "10000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:0",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:12",
+        "status": "passed",
+        "reason": null,
+        "output": "9937366",
+        "gross": "-62634"
+      },
+      {
+        "route": [0, 2],
+        "input": "50000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:1",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:13",
+        "status": "passed",
+        "reason": null,
+        "output": "49686552",
+        "gross": "-313448"
+      },
+      {
+        "route": [0, 2],
+        "input": "100000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:2",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:14",
+        "status": "passed",
+        "reason": null,
+        "output": "99372410",
+        "gross": "-627590"
+      },
+      {
+        "route": [0, 2],
+        "input": "500000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:6",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:15",
+        "status": "passed",
+        "reason": null,
+        "output": "496834268",
+        "gross": "-3165732"
+      },
+      {
+        "route": [0, 2],
+        "input": "1000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:7",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:16",
+        "status": "passed",
+        "reason": null,
+        "output": "993599087",
+        "gross": "-6400913"
+      },
+      {
+        "route": [0, 2],
+        "input": "5000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:8",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:17",
+        "status": "passed",
+        "reason": null,
+        "output": "4965219243",
+        "gross": "-34780757"
+      },
+      {
+        "route": [1, 0],
+        "input": "10000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:18",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:21",
+        "status": "passed",
+        "reason": null,
+        "output": "9956862",
+        "gross": "-43138"
+      },
+      {
+        "route": [1, 0],
+        "input": "50000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:19",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:22",
+        "status": "passed",
+        "reason": null,
+        "output": "49784069",
+        "gross": "-215931"
+      },
+      {
+        "route": [1, 0],
+        "input": "100000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:20",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:23",
+        "status": "passed",
+        "reason": null,
+        "output": "99567535",
+        "gross": "-432465"
+      },
+      {
+        "route": [1, 0],
+        "input": "500000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:24",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:27",
+        "status": "passed",
+        "reason": null,
+        "output": "497813562",
+        "gross": "-2186438"
+      },
+      {
+        "route": [1, 0],
+        "input": "1000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:25",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:28",
+        "status": "passed",
+        "reason": null,
+        "output": "995566840",
+        "gross": "-4433160"
+      },
+      {
+        "route": [1, 0],
+        "input": "5000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:26",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:29",
+        "status": "passed",
+        "reason": null,
+        "output": "4975424162",
+        "gross": "-24575838"
+      },
+      {
+        "route": [1, 2],
+        "input": "10000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:18",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:30",
+        "status": "passed",
+        "reason": null,
+        "output": "9954156",
+        "gross": "-45844"
+      },
+      {
+        "route": [1, 2],
+        "input": "50000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:19",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:31",
+        "status": "passed",
+        "reason": null,
+        "output": "49770723",
+        "gross": "-229277"
+      },
+      {
+        "route": [1, 2],
+        "input": "100000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:20",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:32",
+        "status": "passed",
+        "reason": null,
+        "output": "99541300",
+        "gross": "-458700"
+      },
+      {
+        "route": [1, 2],
+        "input": "500000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:24",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:33",
+        "status": "passed",
+        "reason": null,
+        "output": "497700598",
+        "gross": "-2299402"
+      },
+      {
+        "route": [1, 2],
+        "input": "1000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:25",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:34",
+        "status": "passed",
+        "reason": null,
+        "output": "995386441",
+        "gross": "-4613559"
+      },
+      {
+        "route": [1, 2],
+        "input": "5000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:26",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:35",
+        "status": "passed",
+        "reason": null,
+        "output": "4976342065",
+        "gross": "-23657935"
+      },
+      {
+        "route": [2, 0],
+        "input": "10000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:36",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:39",
+        "status": "passed",
+        "reason": null,
+        "output": "9942786",
+        "gross": "-57214"
+      },
+      {
+        "route": [2, 0],
+        "input": "50000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:37",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:40",
+        "status": "passed",
+        "reason": null,
+        "output": "49713657",
+        "gross": "-286343"
+      },
+      {
+        "route": [2, 0],
+        "input": "100000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:38",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:41",
+        "status": "passed",
+        "reason": null,
+        "output": "99426620",
+        "gross": "-573380"
+      },
+      {
+        "route": [2, 0],
+        "input": "500000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:42",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:45",
+        "status": "passed",
+        "reason": null,
+        "output": "497105350",
+        "gross": "-2894650"
+      },
+      {
+        "route": [2, 0],
+        "input": "1000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:43",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:46",
+        "status": "passed",
+        "reason": null,
+        "output": "994141331",
+        "gross": "-5858669"
+      },
+      {
+        "route": [2, 0],
+        "input": "5000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:44",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:47",
+        "status": "passed",
+        "reason": null,
+        "output": "4967933648",
+        "gross": "-32066352"
+      },
+      {
+        "route": [2, 1],
+        "input": "10000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:36",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:48",
+        "status": "passed",
+        "reason": null,
+        "output": "9975879",
+        "gross": "-24121"
+      },
+      {
+        "route": [2, 1],
+        "input": "50000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:37",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:49",
+        "status": "passed",
+        "reason": null,
+        "output": "49879337",
+        "gross": "-120663"
+      },
+      {
+        "route": [2, 1],
+        "input": "100000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:38",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:50",
+        "status": "passed",
+        "reason": null,
+        "output": "99758527",
+        "gross": "-241473"
+      },
+      {
+        "route": [2, 1],
+        "input": "500000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:42",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:51",
+        "status": "passed",
+        "reason": null,
+        "output": "498786714",
+        "gross": "-1213286"
+      },
+      {
+        "route": [2, 1],
+        "input": "1000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:43",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:52",
+        "status": "passed",
+        "reason": null,
+        "output": "997558627",
+        "gross": "-2441373"
+      },
+      {
+        "route": [2, 1],
+        "input": "5000000000",
+        "leg1": "97744c0d-9b8c-4240-87c8-d13206989c26:44",
+        "leg2": "97744c0d-9b8c-4240-87c8-d13206989c26:53",
+        "status": "passed",
+        "reason": null,
+        "output": "4987201149",
+        "gross": "-12798851"
+      }
+    ],
+    "quotes": [
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:0",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "10000000",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "5557694566104104",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "4802333020605085296918",
+            "d": "8614939924412"
+          },
+          "idealNumerator": "47879260215432700410272460000000000",
+          "idealDenominator": "8614939924412000000",
+          "shortfall": "55410214827559189473152000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "10000000",
+          "comparedOutput": "5557694566104104"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:1",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "50000000",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "27788344193769289",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "4802333020605085296918",
+            "d": "8614939924412"
+          },
+          "idealNumerator": "239396301077163502051362300000000000",
+          "idealDenominator": "8614939924412000000",
+          "shortfall": "1385248958064392335316932000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "50000000",
+          "comparedOutput": "27788344193769289"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:2",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "100000000",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "55576366799010040",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "4802333020605085296918",
+            "d": "8614939924412"
+          },
+          "idealNumerator": "478792602154327004102724600000000000",
+          "idealDenominator": "8614939924412000000",
+          "shortfall": "5540963769863708695503520000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "100000000",
+          "comparedOutput": "55576366799010040"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:3",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "5557694566104104",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "9973150",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "34868771098538376390513087412315923010950153474751158906446065452080491921408000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "3334677940359717160544172357617346979814906833231952571101374242321408000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869830107814428173015710733687202",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90073"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:4",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "27788344193769289",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "49865510",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "174343048430450482531029850208253000073020728591821866845115787140389591318528000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "48714567315076613281801813545981748363073735422706131405327212611478528000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869830520900988520556015667694137",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90073"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:5",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "55576366799010040",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "99730415",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "348684079226312354016312870158051431804339297444685410938915427741090269102080000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "195034414780287628295387832588581918813002624132916185286672712693742080000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869831037253810822860701073104979",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90073"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:6",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "500000000",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "277868971123779110",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "4802333020605085296918",
+            "d": "8614939924412"
+          },
+          "idealNumerator": "2393963010771635020513623000000000000",
+          "idealDenominator": "8614939924412000000",
+          "shortfall": "138517682105203914438366680000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "500000000",
+          "comparedOutput": "277868971123779110"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:7",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "1000000000",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "555705788418364616",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "4802333020605085296918",
+            "d": "8614939924412"
+          },
+          "idealNumerator": "4787926021543270041027246000000000000",
+          "idealDenominator": "8614939924412000000",
+          "shortfall": "554038671053111031550594208000000",
+          "bps": "2",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "1000000000",
+          "comparedOutput": "555705788418364616"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:8",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "5000000000",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "2777243458341299806",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "4802333020605085296918",
+            "d": "8614939924412"
+          },
+          "idealNumerator": "23939630107716350205136230000000000000",
+          "idealDenominator": "8614939924412000000",
+          "shortfall": "13844558639831383536759735928000000",
+          "bps": "6",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "5000000000",
+          "comparedOutput": "2777243458341299806"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:9",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "277868971123779110",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "498627894",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "1743339694950759744469594588965711431312024793375412388355097213847034627358720000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "4817157001651193398787434556109085483374292730539699173999537257410462720000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869835167861276154939683327117827",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90073"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:10",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "555705788418364616",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "997195337",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "3486477657960917505601946677515777268257182953266059321522339580363058846892032000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "19255043329388638250486091224618687522976027374882953352610011653848684032000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869840330582884222599296415441009",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90073"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:11",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "2777243458341299806",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "4983559907",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "17424323212079507116299013078229396589726418861575842920886968761902910943526912000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "480892003211006583146131579206026504823826992121900662013659602167182438912000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869881610858994954340679630931718",
+          "initializedTicksCrossed": 0,
+          "gasEstimate": "98728"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:12",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "5557694566104104",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "9937366",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "34781555563024273398040568434296123303569087558105958408931192852150325608448000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "8564800219028608705247165501070813060569806266060364572978638498664448000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1870849744830227916417500536056339",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90037"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:13",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "27788344193769289",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "49686552",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "173906972771544903535204362839047764955279306059075939214187533545741293191168000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "210801853600520139457238886576129166990354134000328062429186147532423168000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1870851546257720896110002836674504",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90037"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:14",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "55576366799010040",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "99372410",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "347811932955110972440484173634394474746299429266984847129663513214474235412480000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "838069223705868892206940659845663648418541166533611209522248984445972480000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1870853798018633646337719980566865",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90037"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:15",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "277868971123779110",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "496834268",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "1738979165448631781126749179788708651343760599294933617999031437924455751352320000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "20930160704844287663115890670708754560775989630964094033128101661549240320000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1870871811167849868898390262673984",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90037"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:16",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "555705788418364616",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "993599087",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "3477757103538804155162722198582521197050936872842682484800172647945942641672192000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "83709816261275801545406720180975285099737597595003880512522214696883464192000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1870894325259413508384669948587309",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90077"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:17",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "2777243458341299806",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "4965219243",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "17380740612749643416658445261625521160537508359170700742495555633433919170281472000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "2090530133086717369990144436089326725223481414062987573089814682033697769472000",
+          "bps": "2",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1871074344246816780760497860180164",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "98748"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:18",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "10000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "5567085046010070",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3496264245886248179441392826553653097928254729934306179541418142784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "34945161137633050553516721301403762713792906025693390264516474337126080000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "1934278000631115296528567571256661368224630829523619505756365217280000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "4295128740",
+          "sqrtAfter": "1869829901043711131604806538790862",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "87202"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:19",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "50000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "27835419067086789",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3496264245886248179441392826553653097928254729934306179541418142784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "174725805688165252767583606507018813568964530128466951322582371685630400000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "48356939267033554274902454659181362699405434398119901406806258669056000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "4295128740",
+          "sqrtAfter": "1869829487049908198649072266037502",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "87202"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:20",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "100000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "55670822726772349",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3496264245886248179441392826553653097928254729934306179541418142784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "349451611376330505535167213014037627137929060256933902645164743371260800000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "193427703526421886540759110031677726060488325461069809413904764087296000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "4295128740",
+          "sqrtAfter": "1869828969557912329532636554243163",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "87202"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:21",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "5567085046010070",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "9956862",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "47816222915792760484026856353480000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "55751584769684385305037480000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "5567085046010070",
+          "comparedOutput": "9956862"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:22",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "27835419067086789",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "49784069",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "239081061644683650567949681688796000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "1383185901662395298482346796000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "27835419067086789",
+          "comparedOutput": "49784069"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:23",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "55670822726772349",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "99567535",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "478161990953732829926723308736636000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "5529842980278447854951606636000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "55670822726772349",
+          "comparedOutput": "99567535"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:24",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "500000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "278353497339347651",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3496264245886248179441392826553653097928254729934306179541418142784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "1747258056881652527675836065070188135689645301284669513225823716856304000000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "4835681881560848019251470160341061931069885193320186599453610117192704000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "4295128740",
+          "sqrtAfter": "1869824829632257231762222348195157",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "87202"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:25",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "1000000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "556705453950085452",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3496264245886248179441392826553653097928254729934306179541418142784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "3494516113763305055351672130140376271379290602569339026451647433712608000000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "19342673993771039243973392312378205067283684145900023972283896212011008000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "4295128740",
+          "sqrtAfter": "1869819654750967861892406798553567",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "87202"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:26",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "5000000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "2783465642141068998",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3496264245886248179441392826553653097928254729934306179541418142784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "17472580568816525276758360650701881356896453012846695132258237168563040000000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "483556143619334044064463356155006207367630671605612919629253559383201792000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "4295128740",
+          "sqrtAfter": "1869778256731805029367833166088277",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "87202"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:27",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "278353497339347651",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "497813562",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "2390804661356470129132471766943364000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "138154458833222159894565027364000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "278353497339347651",
+          "comparedOutput": "497813562"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:28",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "556705453950085452",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "995566840",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "4781596089248379818741799391661328000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "552579296920161758684392541328000",
+          "bps": "2",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "556705453950085452",
+          "comparedOutput": "995566840"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:29",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "2783465642141068998",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "4975424162",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "23907451120844049455484583589438472000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "13807376155064209127822256722472000",
+          "bps": "6",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "2783465642141068998",
+          "comparedOutput": "4975424162"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:30",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "5567085046010070",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "9954156",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "34840323725744984772634220498517682882760143187659373058674277675018580131840000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "10433303712090737790646245420184382947200136591630513283039857009827840000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1870849745591171431708600357402931",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90037"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:31",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "27835419067086789",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "49770723",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "174201580059232307776827243609750461924439025230863455543072921984733615751168000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "213101419653804141430280486413084520907510816893016772825483220822919168000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1870851550072362953045080495606313",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90037"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:32",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "55670822726772349",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "99541300",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "348403063694781098175940830238162812673822390769302616250629263478097222565888000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "840790409852998503678072375077084991556798767952842199456342564243365888000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1870853805672728690603774475784831",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90037"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:33",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "278353497339347651",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "497700598",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "1742011461536171653927333363159227711243831088705277764460106590456448246874112000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "21004469257061302813824632711067964840476889138972239146714983861182042112000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1870871850430708148503577065923172",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90037"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:34",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "556705453950085452",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "995386441",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "3484013280776043350459490872277819701494700648928537547048392124366946801025024000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "84010279568248367117350980841501599628320387596274659445273934467249281024000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1870894406265816955318528069019529",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90077"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:35",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "2783465642141068998",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "4976342065",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3500077082621698181332142057274595927407325742887973769766215702784"
+          },
+          "idealNumerator": "17419680721634887224886153298783689171637018126028564250780592091258645827813376000",
+          "idealDenominator": "3500077082621698181332142057274595927407325742887973769766215702784000000",
+          "shortfall": "2099904642050083389017042612478202202256642537765797676347673631089018853376000",
+          "bps": "2",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1871074848452188688927248337500268",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "98748"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:36",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "10000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "5559215312564322",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3500077082621698181332142057274595927407325742887973769766215702784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "34895768513738330867881456311027721396251037656593098484569170556756480000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "8427852616319192797433914673741183263183194358758050433008817983488000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "4295128740",
+          "sqrtAfter": "1870848842632523388827290958672339",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "87409"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:37",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "50000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "27796049710166384",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3500077082621698181332142057274595927407325742887973769766215702784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "174478842568691654339407281555138606981255188282965492422845852783782400000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "210696111800460786330978356029638785587531577270486961296805228711936000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "4295128740",
+          "sqrtAfter": "1870847035281804657537793775774445",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "87409"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:38",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "100000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "55592032288840620",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3500077082621698181332142057274595927407325742887973769766215702784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "348957685137383308678814563110277213962510376565930984845691705567564800000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "842783429462229706103181652084724478161041729825316305564489286164480000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "4295128740",
+          "sqrtAfter": "1870844776098316884356250831923731",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "87409"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:39",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "5559215312564322",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "9942786",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "47748629026779074385194324578008000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "59502169120766192191030008000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "5559215312564322",
+          "comparedOutput": "9942786"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:40",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "27796049710166384",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "49713657",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "238742914493885823736848656109376000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "1377907750680830124046983376000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "27796049710166384",
+          "comparedOutput": "49713657"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:41",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "55592032288840620",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "99426620",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "477485252389001071991273469793680000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "5512035847086107020312633680000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "55592032288840620",
+          "comparedOutput": "99426620"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:42",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "500000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "277957476213700671",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3500077082621698181332142057274595927407325742887973769766215702784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "1744788425686916543394072815551386069812551882829654924228458527837824000000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "21069382194021473126585314586555388594120366335155084529506568790646784000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "4295128740",
+          "sqrtAfter": "1870826702826838011597108618462813",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "87409"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:43",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "1000000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "555908239497059571",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3500077082621698181332142057274595927407325742887973769766215702784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "3489576851373833086788145631102772139625103765659309848456917055675648000000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "84276511085903594357988086402765804261994076301834242871585622368272384000000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "4295128740",
+          "sqrtAfter": "1870804111728536435844735054985383",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "87409"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:44",
+        "pool": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+        "protocol": "v3",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "tokenOut": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "input": "5000000000",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "2779272709451034831",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "3500077082621698181332142057274595927407325742887973769766215702784",
+            "d": "6277101735386680763835789423207666416102355444464034512896"
+          },
+          "idealNumerator": "17447884256869165433940728155513860698125518828296549242284585278378240000000000000",
+          "idealDenominator": "6277101735386680763835789423207666416102355444464034512896000000",
+          "shortfall": "2106709261232504526706176154315994028346890988991421962858231012025319424000000",
+          "bps": "2",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1870849294470748699737472739204528",
+          "limit": "4295128740",
+          "sqrtAfter": "1870623402581680251181866019261608",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "96094"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:45",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "277957476213700671",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "497105350",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "2387403198244842120343783079410644000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "137761220393982039506768110644000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "277957476213700671",
+          "comparedOutput": "497105350"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:46",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "555908239497059571",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "994141331",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "4774748738492547954366540143810244000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "550997482958031919949425952244000",
+          "bps": "2",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "555908239497059571",
+          "comparedOutput": "994141331"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:47",
+        "pool": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+        "protocol": "v2",
+        "fee": 3000,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "2779272709451034831",
+        "target": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "method": "getAmountsOut",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "4967933648",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "8614939924412",
+            "d": "4802333020605085296918"
+          },
+          "idealNumerator": "23871437623201997147655348236788884000",
+          "idealDenominator": "4802333020605085296918000000",
+          "shortfall": "13765821236516581186345339924884000",
+          "bps": "6",
+          "passed": true
+        },
+        "evidence": {
+          "comparedInput": "2779272709451034831",
+          "comparedOutput": "4967933648"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:48",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "5559215312564322",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "9975879",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "34878312205842771691414314547674491131240240586162040356655478179164527263744000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "3136855312089336692118507260818332820719159723960598015298346620127744000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869830107842686453134993691730760",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90073"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:49",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "27796049710166384",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "49879337",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "174391392556643563951681640101494186053798365951012527824916613700564411219968000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "49995032527343687935556441974601140946454775282034387712698727157011968000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869830521044171257789937120312562",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90073"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:50",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "55592032288840620",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "99758527",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "348782363932776869525883905698660816673413199416439058949621448007739496202240000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "192760398941588378874493301897155103755877409867711572038592531977034240000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869831037544904579393151711574664",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90073"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:51",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "277957476213700671",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "498786714",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "1743894972626570160659985757121681114666745783582088109259357056758398836539392000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "4818145280413447931073581812541255191399083198094095999074419184664763392000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869835169505864315037778790285161",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90073"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:52",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "555908239497059571",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "997558627",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "3487747828575315809602190749194861189133931350697216510206938447318253087752192000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "19267819839677537385294170349862930325017797694237545985875169756090184192000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869840334344799467427512044534768",
+          "initializedTicksCrossed": 1,
+          "gasEstimate": "90073"
+        }
+      },
+      {
+        "analysisId": "97744c0d-9b8c-4240-87c8-d13206989c26",
+        "observationId": "684b4041-adbf-4c99-ac51-87cdc062d7fc",
+        "quoteId": "97744c0d-9b8c-4240-87c8-d13206989c26:53",
+        "pool": "0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640",
+        "protocol": "v3",
+        "fee": 500,
+        "blockHash": "0x870eb62544c3caff40148b1fa2f5f62d7a530ed6d2eed111af22f3e542468c5a",
+        "tokenIn": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "tokenOut": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "input": "2779272709451034831",
+        "target": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+        "method": "quoteExactInputSingle",
+        "gas": "5000000",
+        "status": "passed",
+        "reason": null,
+        "output": "4987201149",
+        "fullInput": true,
+        "impact": {
+          "reference": {
+            "n": "6277101735386680763835789423207666416102355444464034512896",
+            "d": "3496264245886248179441392826553653097928254729934306179541418142784"
+          },
+          "idealNumerator": "17437054658834128962949314968369864931745123351338904041411566183842531573235712000",
+          "idealDenominator": "3496264245886248179441392826553653097928254729934306179541418142784000000",
+          "shortfall": "481594542613519140042485621128491609921842645847568284805329060720714419712000",
+          "bps": "1",
+          "passed": true
+        },
+        "evidence": {
+          "sqrtBefore": "1869830004542190508979398717180472",
+          "limit": "1461446703485210103287273052203988822378723970341",
+          "sqrtAfter": "1869881648566231361804573234140067",
+          "initializedTicksCrossed": 0,
+          "gasEstimate": "98728"
+        }
+      }
+    ],
+    "startedAt": 1795008142997,
+    "finishedAt": 1795008147789,
+    "elapsedMs": 4791.532375000001,
+    "clockInvalid": false,
+    "logicalReads": 63,
+    "requests": [
+      {
+        "method": "eth_getCode",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getCode",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_call",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_chainId",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getBlockByNumber",
+        "send": 1,
+        "outcome": "success"
+      },
+      {
+        "method": "eth_getBlockByNumber",
+        "send": 1,
+        "outcome": "success"
+      }
+    ],
+    "failures": [],
+    "transactionCost": {
+      "status": "unavailable",
+      "reason": "full_transaction_evidence_missing"
+    },
+    "netProfit": {
+      "status": "unavailable",
+      "reason": "full_transaction_evidence_missing"
+    }
+  },
+  "eligibility": {
+    "canonical": "valid",
+    "freshness": "fresh",
+    "blockAgeMs": 16790,
+    "signedClockOffsetMs": 16790,
+    "headLag": "1",
+    "validationExpired": false,
+    "eligibleForLiveQualification": true,
+    "finiteSizeSuitability": "passed",
+    "workloadAdmitted": true,
+    "coverageComplete": true,
+    "quotesComplete": true,
+    "qualified": true,
+    "best": {
+      "route": [2, 1],
+      "input": "10000000",
+      "gross": "-24121"
+    },
+    "rankingMetric": "absolute_usdc_gross_surplus",
+    "transactionCost": {
+      "status": "unavailable",
+      "reason": "full_transaction_evidence_missing"
+    },
+    "netProfit": {
+      "status": "unavailable",
+      "reason": "full_transaction_evidence_missing"
+    }
+  }
+}

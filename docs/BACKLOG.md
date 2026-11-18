@@ -31,7 +31,7 @@ estimates belong to individual milestones, not to a fixed project lifespan or fe
 - [x] [SET-13: Product framing and milestone scope](tasks/SET-13-product-framing-and-milestone-scope.md).
   Documentation-only work completed; validation evidence is in the linked record.
 
-## M1 — local read-only research application; M1-01 through M1-05 complete
+## M1 — local read-only research application; M1-01 through M1-06 complete
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) brings minimal SQLite and browser
 access into this milestone. Each task remains separately scoped; later work requires its own approval.
@@ -47,8 +47,8 @@ access into this milestone. Each task remains separately scoped; later work requ
   State: Done. Research/design evidence is maintained in the linked record; ADR-0006 is Accepted.
 - [x] [M1-05: V2/V3 quotation and cycle analysis](tasks/M1-05-quotation-and-cycle-analysis.md).
   State: Done. Scope, approvals, criteria, and offline/live evidence are maintained in the linked record.
-- [ ] [M1-06: Runnable CLI and configuration documentation](tasks/M1-06-cli-and-configuration.md).
-  State: Proposed. Scope, approval boundary, criteria, and preparation evidence are maintained in the linked record.
+- [x] [M1-06: Runnable CLI and configuration documentation](tasks/M1-06-cli-and-configuration.md).
+  State: Done. Scope, approvals, criteria, and offline/process/live evidence are maintained in the linked record.
 - [ ] M1-07: Validate arithmetic, token ordering, rounding, composition, and snapshot failures.
   Acceptance: meaningful checks for CR-01 through CR-05 and evidence reporting under CR-10.
 - [ ] M1-08: Document mathematics, assumptions, commands, and actual milestone evidence.

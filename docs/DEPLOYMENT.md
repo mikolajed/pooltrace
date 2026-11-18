@@ -31,7 +31,7 @@ flowchart LR
 | Backend | One application process owns RPC adapters, collection, domain analysis, persistence, HTTP API, and SSE. Module boundaries do not require more services. |
 | SQLite | Embedded local file introduced with the first working backend in M1; no separate database-server process. The backend owns reads/writes and migrations. |
 | Anvil | Separate loopback process introduced in M2, started for fork validation. Quoting and viewing data do not depend on it. Initially only one simulation job runs at a time. |
-| CLI | Diagnostic access to shared backend behavior, not another always-running collector. Its exact API/standalone mode must preserve one collection/write owner. |
+| CLI | M1-06 provides one-shot diagnostic access directly to shared backend modules in explicit live/fixture modes. Future service/API integration must preserve collection/write ownership. |
 
 Keep a simple development command that starts both application processes when implemented, with
 individual commands available for debugging. Show readiness and startup failures clearly. Stop only
@@ -67,7 +67,7 @@ verified restore, not an assumed copy of a changing file.
 
 | Environment | Purpose | State |
 | --- | --- | --- |
-| Local development | Run the two applications, early SQLite, and later optional Anvil on localhost | Tooling and read-only snapshot/analysis modules/check harnesses complete through M1-05; service/UI/storage lifecycle remains unapproved |
+| Local development | Run the two applications, early SQLite, and later optional Anvil on localhost | Modules/check harnesses and one-shot live/fixture CLI complete through M1-06; service/UI/storage lifecycle remains unapproved |
 | Automated verification | Reproducible builds and appropriate offline/integration/fork checks | Future CI design; not configured |
 | Preview/staging | Validate a specific release candidate with isolated configuration and data | Future hosting design; not provisioned |
 | Production | Host a reviewed research application and preserve evidence across updates | Future design; no server or deployment exists |

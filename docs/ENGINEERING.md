@@ -74,8 +74,8 @@ deadline, concurrency, retry, cancellation, and sanitized errors in one place; e
 No wallet client or transaction method is exposed. Policy, exact quantities, provenance, and
 eligibility live in immutable observations; no database or long-running collection loop is added.
 
-`bun run check` covers tooling, both packages, lint/formatting, and offline tests. Only the explicit
-`bun run check:live` harness uses the configured endpoint and writes ignored integration reports.
+`bun run check` covers tooling, all three packages, lint/formatting, and offline tests. Explicit
+live commands use the configured endpoint; `bun run check:live` writes ignored integration reports.
 SQLite, frontend dependencies, and Foundry remain deferred to their approved tasks.
 
 ## Quotation integration
@@ -107,6 +107,32 @@ The explicit `bun run check:quotes:live` harness verifies a fresh admitted grid 
 before independent historical replay. Each eligibility record is as-of its own event. Setup is in
 the [README](../README.md#development-setup); actual source revisions, commands, results, and
 limitations are in [M1-05 evidence](tasks/M1-05-quotation-and-cycle-analysis.md#evidence-and-handoff).
+
+## Diagnostic CLI
+
+M1-06 adds the root `bun run cli` command, executing `apps/backend/src/cli.ts` on pinned Node.
+Node's built-in `util.parseArgs`, `util.parseEnv`, filesystem/path APIs, and `AbortController`
+provide the entry point without new dependencies or a CLI framework. Strict parsing rejects
+unknown/duplicate options and positionals. Private environment values never enter output.
+[Node argument parsing](https://nodejs.org/api/util.html#utilparseargsconfig),
+[Node signal handling](https://nodejs.org/api/process.html#signal-events); consulted 2026-11-18
+and verified on the pinned runtime, without changing dependency versions.
+
+The runner delegates collection, analysis, use-time renewal, and eligibility to existing backend
+functions. JSON serialization uses the shared exact bigint serializer; text formatting uses integer
+division/remainders. The owned SIGINT listener forwards cancellation and is removed on completion.
+No application service, storage writer, retry at another block, or independent collector is added.
+
+Constructed wire transports now live in `@pooltrace/protocols/fixtures`; test modules re-export
+them. Only explicit fixture mode dynamically imports this subpath. Its fixed block timestamp and
+synthetic pools/state are diagnostics. Constructed V2 replies reuse domain arithmetic; V3 replies
+use a fee-adjusted marginal reference rather than simulating swaps. Neither is an independent
+protocol oracle. Existing domain vectors and M1-05 live/replay evidence retain that separate role.
+
+The [README](../README.md#diagnostic-cli) owns commands, configuration precedence, JSON units,
+output states, and exit codes. Root checks cover the real entry point and shared fixture source.
+[M1-06 evidence](tasks/M1-06-cli-and-configuration.md#evidence-and-handoff) records offline/process
+cases, real SIGINT, clean installation, and actual read-only live text/JSON runs.
 
 ## Language evolution
 

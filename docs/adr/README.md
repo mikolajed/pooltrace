@@ -29,7 +29,7 @@ Small refactors within an accepted design need no separate ADR.
 | [0004](0004-local-processes-and-gated-deployment.md) | Local processes, early SQLite, and gated deployment | Accepted: architecture/release direction only | [SET-12 documentation](../tasks/SET-12-local-architecture-and-deployment.md); M1/M2 and future DEP work |
 | [0005](0005-registry-verification-and-consistent-snapshots.md) | Registry verification and consistent snapshots | Accepted | [M1-02](../tasks/M1-02-registry-and-consistent-snapshots.md); completed [M1-03 implementation](../tasks/M1-03-registry-and-consistent-snapshots.md) |
 | [0006](0006-quotation-cycles-and-profitability.md) | Quotations, finite-size admission, and cycle profitability | Accepted | [M1-04 design](../tasks/M1-04-quotation-cycles-and-profitability-design.md); completed [M1-05 implementation](../tasks/M1-05-quotation-and-cycle-analysis.md) |
-| [0007](0007-minimal-sqlite-evidence-store.md) | Minimal SQLite evidence store | Proposed | Completed [M1-09 design delivery](../tasks/M1-09-minimal-sqlite-design.md); M1-10 implementation unapproved |
+| [0007](0007-minimal-sqlite-evidence-store.md) | Minimal SQLite evidence store | Accepted: design only | Completed [M1-09 design delivery](../tasks/M1-09-minimal-sqlite-design.md); [M1-10 scope](../tasks/M1-10-minimal-evidence-store.md) Proposed, implementation unapproved |
 
 Link requirements from [CORRECTNESS.md](../CORRECTNESS.md) where applicable. An ADR explains how
 to meet them; it does not change them or establish implementation evidence by itself.
@@ -39,8 +39,8 @@ to meet them; it does not change them or establish implementation evidence by it
 These are topics to investigate, not preaccepted designs:
 
 - Executor router interfaces, security properties, and fork execution/cost accounting.
-- Review the proposed minimal driver/schema/lifecycle in ADR-0007 under ADR-0003/0004. Broader
-  backup/restore, schema evolution, and replay remain M3/future work; no database is implemented.
+- Broader backup/restore, schema evolution, and replay beyond the accepted minimal ADR-0007
+  design remain M3/future work under ADR-0003/0004; no database is implemented.
 - Terminal read path, SSE updates/reconnect, and frontend state semantics.
 - Brand asset production and terminal visual conventions.
 - Concrete Rust migration boundaries and Python research integration under ADR-0002; the selected

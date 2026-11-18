@@ -1,13 +1,13 @@
 # M1-09: Minimal SQLite driver, schema, and migration design
 
-- State: Done — design delivered; ADR-0007 remains Proposed
+- State: Done — design delivered; ADR-0007 Accepted
 - Milestone: M1 — local read-only research application
 - Related ADRs: [ADR-0001](../adr/0001-project-boundaries-and-tooling.md),
   [ADR-0003](../adr/0003-sqlite-first-and-storage-evolution.md),
   [ADR-0004](../adr/0004-local-processes-and-gated-deployment.md),
   [ADR-0005](../adr/0005-registry-verification-and-consistent-snapshots.md),
   [ADR-0006](../adr/0006-quotation-cycles-and-profitability.md),
-  [ADR-0007](../adr/0007-minimal-sqlite-evidence-store.md) (Proposed)
+  [ADR-0007](../adr/0007-minimal-sqlite-evidence-store.md) (Accepted)
 - Requirement IDs: CR-01, CR-03, CR-09, CR-10, CR-11; preserve CR-02, CR-04, CR-05, and CR-06 in
   [CORRECTNESS.md](../CORRECTNESS.md)
 - Depends on: Completed M1-01 through M1-08, the accepted SQLite/backend ownership direction,
@@ -20,9 +20,9 @@ quotation/cycle outcomes, and later validation/invalidation evidence in a minima
 store. It selects a justified driver and representation, defines atomic write/read boundaries and
 migration/failure behavior, and supplies an implementable validation plan for M1-10.
 
-SQLite and backend ownership are already accepted. Driver/schema/migration details are not.
+SQLite/backend ownership and ADR-0007's driver/schema/migration design are accepted.
 This task delivers a design for review; it creates no database, package, application code, or
-executable migrations. Accepting the design later will still require separate M1-10 approval.
+executable migrations. M1-10 still requires separate implementation approval.
 
 ## Existing constraints and the design problem
 
@@ -57,8 +57,9 @@ The [analysis guide](../ANALYSIS.md) and actual models expose several concrete c
 ## Scope and planned deliverables
 
 The approved deliverable is [ADR-0007: Minimal SQLite evidence store](../adr/0007-minimal-sqlite-evidence-store.md),
-kept **Proposed** using the ADR template. The decision and alternatives live in that ADR, actual
-research/check evidence in this task, and navigation/current state in their canonical documents.
+delivered as **Proposed** using the ADR template and subsequently accepted by the user. The
+decision and alternatives live in that ADR, actual research/check evidence in this task, and
+navigation/current state in their canonical documents.
 No separate competing schema specification or implementation scaffold is part of this task.
 
 | Design area | Required decision/detail |
@@ -183,6 +184,8 @@ design work. Present the actual ADR for acceptance; do not start M1-10 or write 
 - Commit-only authorization: On 2026-11-18 the user said “commit first” after design delivery.
   This authorizes committing the eight M1-09 documentation changes; it does not accept ADR-0007,
   authorize M1-10, or authorize a push.
+- Design acceptance: On 2026-11-18, after commit `8360629`, the user said “i accept adr7”.
+  ADR-0007 is now Accepted. This does not authorize M1-10 or another commit/push.
 
 ## Preparation history
 
@@ -206,8 +209,9 @@ reference and post-M1-08 Git HEAD `c9414e2`; no staged files. No application or 
 ## Evidence and handoff
 
 Delivered on 2026-11-18 as documentation only. The actual review document is
-[ADR-0007](../adr/0007-minimal-sqlite-evidence-store.md), not this scope record. It remains
-**Proposed**; the user approved delivery of the design, not its specific choices or M1-10.
+[ADR-0007](../adr/0007-minimal-sqlite-evidence-store.md), not this scope record. At delivery it was
+**Proposed**; the user subsequently accepted the design after commit `8360629`. M1-10 remains
+unapproved.
 
 ### Recommendation and research
 
@@ -287,7 +291,8 @@ operations; integrate the existing one-shot CLI's proposed persistence/status be
 the real-file/process/fault scenarios and existing checks with clean frozen-lockfile setup. Any
 native install/build script permissions must be reviewed rather than assumed. API/SSE/browser,
 daemon ownership, retention, backup/restore, new migrations, and performance comparisons stay later.
-No M1-10 task, implementation, or installation has been started.
+At design handoff no M1-10 task, implementation, or installation had started. The user later
+requested [M1-10 scope preparation](M1-10-minimal-evidence-store.md); implementation remains unapproved.
 
 ### Documentation verification and limits
 
@@ -303,5 +308,18 @@ The existing 158-test/eight-file M1-07 result is historical evidence, not a new 
 No application tests, clean install, native load, SQLite connection (including in-memory), SQL,
 live RPC, benchmark, or database restart/fault injection ran for this design. Its documentation
 commit was separately requested after delivery; no push is authorized.
-The next proposed action is review of **ADR-0007**, followed by separately scoped M1-10 work only
-after the required decisions/authorization.
+The next proposed action at design handoff was review of **ADR-0007**. That review is now complete;
+the next proposed task was preparation of M1-10's bounded implementation scope for approval.
+That scope is now prepared at the user's separate request; review it before implementation.
+
+### Design acceptance follow-up
+
+Recorded the user's explicit “i accept adr7” on 2026-11-18 in the ADR and this task, and updated
+the documentation map, ADR index, engineering, roadmap, backlog, and current state. The accepted
+technical design is unchanged. At acceptance handoff M1-10 had not been prepared or started; no
+code, tests, configuration, dependencies, database connection, commit, or push was introduced by
+recording acceptance.
+Acceptance-follow-up checks passed across 38 Markdown files: 384 local links/anchors, 140
+requirement references, whitespace/final newlines, explicit acceptance metadata, and
+`git diff --check`. Exactly eight expected Markdown files changed; no staged files, configured
+endpoint, or detected environment credentials were found. HEAD remains `8360629`.

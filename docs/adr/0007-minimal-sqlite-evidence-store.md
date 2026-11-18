@@ -1,10 +1,10 @@
 # 0007: Minimal SQLite evidence store
 
-- Status: Proposed
+- Status: Accepted
 - Proposed on: 2026-11-18
-- Decision accepted by user: Not yet
+- Decision accepted by user: 2026-11-18; “i accept adr7”
 - Related task: [M1-09 design](../tasks/M1-09-minimal-sqlite-design.md)
-- Related implementation: M1-10 in [BACKLOG.md](../BACKLOG.md), separately unapproved
+- Related implementation: [M1-10](../tasks/M1-10-minimal-evidence-store.md), Proposed; implementation unapproved
 - Requirement IDs: CR-01, CR-03, CR-09, CR-10, CR-11; preserve CR-02/04/05/06 in
   [CORRECTNESS.md](../CORRECTNESS.md)
 - Supersedes: None; refines the accepted SQLite/backend ownership direction in ADR-0003/0004
@@ -14,7 +14,7 @@
 The current backend produces immutable observations, analyses, and revalidated copies in memory.
 There is no application database. SQLite and backend ownership are accepted in
 [ADR-0003](0003-sqlite-first-and-storage-evolution.md) and
-[ADR-0004](0004-local-processes-and-gated-deployment.md); this ADR proposes their minimal physical
+[ADR-0004](0004-local-processes-and-gated-deployment.md); this ADR selects their minimal physical
 design. It does not change snapshot/quotation policies or authorize implementation.
 
 An observation ID survives revalidation; two analyses can share that observation and append
@@ -24,10 +24,11 @@ and shared dependencies ambiguous. SQLite's INTEGER range also cannot hold every
 
 The initial workload is one-shot backend/CLI attempts with small bounded history reads. Browser
 queries, a long-running service, large analytical scans, and recovery automation remain later work.
-All recommendations below are proposed until accepted. No SQLite connection has been opened for
-this design, and no transaction/round-trip/durability result is claimed.
+The user accepted this design on 2026-11-18; implementation remains separately unapproved.
+No SQLite connection has been opened for this design, and no transaction/round-trip/durability
+result is claimed.
 
-## Proposed decision
+## Decision
 
 ### 1. Driver and runtime
 
@@ -394,14 +395,18 @@ eligibility after save. No new live qualification claim can come from database l
 
 ## Approval record
 
-The user approved M1-09's documentation/research scope on 2026-11-18 with “i accept”. This ADR's
-specific recommendation has **not** been accepted. M1-10 installation, database creation,
-implementation, migrations/tests, commits, and pushes remain unapproved. Design acceptance and
-implementation authorization are separate under [WORKFLOW.md](../WORKFLOW.md).
+The user approved M1-09's documentation/research scope on 2026-11-18 with “i accept”. After the
+design delivery was committed as `8360629`, the user said “i accept adr7” on 2026-11-18, accepting
+this ADR's driver, evidence/version model, lifecycle, CLI integration, and migration/failure design.
+M1-10 installation, database creation, implementation, and migrations/tests remain unapproved.
+The user separately requested a documentation commit after M1-10 scope preparation; that request
+is recorded in its task. No implementation or push is authorized. Design acceptance and
+implementation authorization are separate under [WORKFLOW.md](../WORKFLOW.md); acceptance supplies
+no runtime or market evidence.
 
 ## Implementation and evidence
 
-Proposed documentation only. Research, read-only module inspection, paper model checks, exact
+Accepted design documentation only. Research, read-only module inspection, paper model checks, exact
 sources, and limitations belong to [M1-09 evidence](../tasks/M1-09-minimal-sqlite-design.md#evidence-and-handoff).
 No connection/database, package installation, runnable migration, application code, test suite,
 benchmark, transaction/fork, or live RPC was introduced. Official references were checked on

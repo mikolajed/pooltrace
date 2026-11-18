@@ -4,7 +4,7 @@ Updated: 2026-11-18.
 
 ## Phase and authorization
 
-**M1-01 through M1-06 are complete. Later implementation is unapproved.**
+**M1-01 through M1-06 are complete. M1-07 is prepared for review; implementation is unapproved.**
 
 The user accepted M1-06 and authorized its implementation and initial scope-document commit with
 “Lgtm, commit now, then mark this as accepted and move on with more work”.
@@ -49,12 +49,14 @@ retain separately gated M1 tasks; executor/Anvil/cost generation remain M2.
 
 ## Next proposed action
 
-Prepare the bounded M1-07 validation scope for review: assess existing arithmetic, ordering,
-rounding, composition, and snapshot-failure evidence, then identify remaining meaningful gaps.
-M1-07 has not started and is not authorized by M1-06 completion.
+Review [M1-07's validation scope](tasks/M1-07-validation-and-regression-coverage.md), prepared from
+existing arithmetic, ordering, rounding, composition, and snapshot-failure evidence. It proposes
+independent vectors, asymmetric direction/unit cases, and isolated/running-analysis failures.
+Implementation requires explicit approval of that bounded scope; M1-06 completion does not grant it.
 
 ## Latest handoff
 
 Requested scope-document commit: `843c8ba` (`docs: prepare M1-06 CLI and configuration scope`).
-M1-06 acceptance, implementation, tests, documentation, and evidence are included in the subsequent
-implementation commit explicitly requested by the user. No push or later task was started.
+Requested implementation commit: `b0ee436` (`feat: implement M1-06 CLI and configuration`).
+M1-07's scope and navigation updates are uncommitted documentation only. No M1-07 code/tests,
+dependency installation, new live checks, agent commit, or push occurred during preparation.

@@ -49,8 +49,8 @@ access into this milestone. Each task remains separately scoped; later work requ
   State: Done. Scope, approvals, criteria, and offline/live evidence are maintained in the linked record.
 - [x] [M1-06: Runnable CLI and configuration documentation](tasks/M1-06-cli-and-configuration.md).
   State: Done. Scope, approvals, criteria, and offline/process/live evidence are maintained in the linked record.
-- [ ] M1-07: Validate arithmetic, token ordering, rounding, composition, and snapshot failures.
-  Acceptance: meaningful checks for CR-01 through CR-05 and evidence reporting under CR-10.
+- [ ] [M1-07: Validate arithmetic, token ordering, rounding, composition, and snapshot failures](tasks/M1-07-validation-and-regression-coverage.md).
+  State: Proposed. Scope, approval boundary, targeted gaps, and validation plan are in the linked record.
 - [ ] M1-08: Document mathematics, assumptions, commands, and actual milestone evidence.
   Acceptance: a reviewer can reproduce the approved slice and understand what remains unverified.
 - [ ] M1-09: Propose the minimal SQLite driver/schema/migration design for the first backend slice.

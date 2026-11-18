@@ -11,19 +11,21 @@ permanent feature ceiling.
 
 ## Current status
 
-**M1-08 analysis documentation and evidence guide is complete.**
+**M1-01 through M1-12 are complete.**
 
 See [current state](docs/STATUS.md) for what exists and the next proposed action. The foundation
-includes tested domain/protocol/backend modules and an explicit live/fixture CLI for read-only
-cycle comparisons. See the [M1-06 record](docs/tasks/M1-06-cli-and-configuration.md) for command
+includes a local read-only browser, API/SSE service, combined startup/shutdown, exact SQLite evidence
+history, and an explicit live/fixture CLI over the shared analysis modules. See the [M1-06 record](docs/tasks/M1-06-cli-and-configuration.md) for command
 evidence and the [M1-05 record](docs/tasks/M1-05-quotation-and-cycle-analysis.md) for underlying
 quotation evidence. Transaction costs, net profit, and execution remain unavailable.
 The [M1-07 record](docs/tasks/M1-07-validation-and-regression-coverage.md#evidence-and-handoff)
-maps independent vectors and controlled failure checks to actual results: 158 offline tests pass,
-with production behavior unchanged.
+maps independent vectors and controlled failure checks to actual results. The current suite has
+262 passing offline tests; [M1-11](docs/tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) and
+[M1-12](docs/tasks/M1-12-local-startup-readiness-and-shutdown.md#implementation-evidence) record
+clean installation/build, real browser/process checks, and actual live observation evidence.
 Read the [analysis guide](docs/ANALYSIS.md) for implemented math, constructed examples, result
-states, and an archived CLI walkthrough. Storage, browser/API access, and application lifecycle
-remain later M1 tasks.
+states, and an archived CLI walkthrough. [ADR-0008](docs/adr/0008-local-api-sse-and-process-interface.md)
+defines the accepted local API/browser and startup behavior.
 
 ## Start here
 
@@ -87,8 +89,9 @@ bun install --frozen-lockfile
 bun run check
 ```
 
-`bun run check` verifies the runtime pins, type-checks tooling and all three working packages, runs Biome
+`bun run check` verifies the runtime pins, type-checks tooling, backend/domain/protocol packages and the web app, runs Biome
 lint/format checks, and runs the offline Vitest suite. It needs no RPC credentials after installation.
+The web application build is checked separately with `bun run build:web`.
 Individual commands are `bun run check:toolchain`, `bun run typecheck`, `bun run lint`,
 `bun run format:check`, and `bun run test`. Use `bun run format` to apply formatting.
 
@@ -96,11 +99,76 @@ Individual commands are `bun run check:toolchain`, `bun run typecheck`, `bun run
 `packages/protocols` owns the sourced Ethereum registry, ABI reads, verification, and bounded RPC
 transport. `apps/backend` owns configuration, one-attempt collection, eligibility, revalidation,
 and the embedded SQLite evidence store.
-All three expose TypeScript source to the pinned Node runtime. The diagnostic CLI below invokes
-these shared modules. Application services, an HTTP API, and UI remain later tasks. The pinned
+All three expose TypeScript source to the pinned Node runtime. The diagnostic CLI and local backend
+invoke these shared modules. The pinned
 better-sqlite3 13.2.0 native dependency is verified on macOS arm64 / Node 26.3.1; other platforms
 need their own compatibility checks. The package supplies the tested native binary without an
 additional trusted install script.
+
+## Local application
+
+The local application has a backend process and a separate Next.js browser application. The backend
+owns collection, analysis, SQLite, the read API, and SSE. Browser navigation, refresh, and reconnection
+do not start another collector. No wallet, transaction executor, or Anvil is required.
+
+From the repository root, select a mode explicitly:
+
+```sh
+bun run dev --mode fixture
+bun run dev --mode live
+```
+
+Fixture mode is constructed offline data and needs no live credentials. Live mode uses the private
+RPC configuration below. There is no automatic fallback between them. By default the browser is at
+[http://127.0.0.1:4318](http://127.0.0.1:4318), with the backend at
+[http://127.0.0.1:4317](http://127.0.0.1:4317). Both bind only to loopback. Wait for both applications
+to report readiness; readiness establishes process/storage availability, not qualified market data
+or a profitable result. RPC failures and unavailable observations remain visible while the service runs.
+
+Stop with Ctrl+C. The foreground launcher cancels its applications, allows a 10-second graceful
+period, and escalates only its remaining owned process groups. It never adopts or kills an existing
+port owner, restarts a failed child automatically, or deletes an evidence file. Invalid configuration
+exits 2, startup/runtime failure exits 1, SIGINT exits 130, and SIGTERM exits 143. Cleanup after an
+uncatchable signal or blocked filesystem operation is not a hard time guarantee. Process-group
+behavior must be verified on each supported host; current implementation validation targets macOS.
+
+The individual applications also remain usable in separate terminals:
+
+```sh
+bun run dev:backend --mode fixture
+bun run dev:web --mode fixture
+bun run build:web
+```
+
+Use the same mode and public connection settings for the two individual commands. The root
+`.env.example` documents configurable `POOLTRACE_BACKEND_PORT` (4317), `POOLTRACE_WEB_PORT` (4318),
+and `POOLTRACE_COLLECTION_DELAY_MS` (10000). Ports must differ and fall within 1024–65535; the delay
+is an integer from 1000–300000 ms after an attempt finishes. Attempts do not overlap or queue up.
+No setting increases the accepted market-data or canonicality age limits. `POOLTRACE_API_ORIGIN`,
+if supplied, must equal the configured loopback backend origin. The browser obtains only public
+connection settings at runtime; RPC credentials and database paths remain backend-only.
+
+The browser shows route/size outcomes, exact gross amounts, provenance, independent save status,
+and bounded historical records. Costs and net profit remain unavailable. Constructed fixture data
+is labeled. Current admission requires a confirmed save and unexpired backend evidence; stream
+errors/silence, suspension, or elapsed validity remove that presentation. A reconnect fetches current
+state and cannot restore expired admission. Historical records preserve original origin and as-of
+evidence; they never become current live results after restart.
+
+The backend exposes uncached read-only `/api/v1/current`, `/api/v1/history/observations`,
+`/api/v1/history/analyses`, exact revision detail beneath those history paths, and `/api/v1/events`.
+Lists default to 20 records and allow at most 100 with stable high-water cursors. `/healthz`
+identifies the application/process instance. SSE sends bounded status projections, not a durable
+event replay log. These endpoints do not proxy RPC or trigger collection. Financial JSON quantities
+remain exact decimal strings with explicit units; no missing value is silently converted to zero.
+
+Only one Pooltrace producer may own a database at a time. The standalone CLI uses the same guard:
+stop the service before running the CLI on its file, or choose an isolated diagnostic database.
+Ownership uses a `<database>.owner` sidecar held until handles close. A competing or crash-left
+marker fails closed. Before manually removing a leftover marker, verify that its producer and
+descendants have actually stopped and that the file belongs to the expected database. Never remove
+an active marker or a database/journal file to bypass ownership. Keep custom database paths and
+their sidecars in an ignored directory such as `data/`, or add suitable local ignore rules.
 
 ## Diagnostic CLI
 
@@ -175,7 +243,8 @@ No backup/restore or power-loss guarantee has been validated. See
 
 Backend exact-version/history reads use bounded metadata pages and mark loaded evidence
 historical, preserving original origin/as-of fields and known invalidation. They do not restore
-live clocks/admission or a current best. There is no public history command, API, or replay loader.
+live clocks/admission or a current best. The local API/browser exposes these historical reads;
+there is no diagnostic CLI history command or replay loader.
 Archived cli-v1 reports remain unchanged historical evidence.
 
 ## Private live configuration and integration checks

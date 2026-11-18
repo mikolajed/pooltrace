@@ -1,8 +1,8 @@
 # 0008: Local API, SSE, and application process interface
 
-- Status: Proposed
+- Status: Accepted
 - Proposed on: 2026-11-18
-- Decision accepted by user: Not yet
+- Decision accepted by user: 2026-11-18; “ok i think we can do it now i accept ad8 and m1-11 and m1-12”
 - Related task records: [M1-11](../tasks/M1-11-local-api-sse-and-browser.md),
   [M1-12](../tasks/M1-12-local-startup-readiness-and-shutdown.md)
 - Requirement IDs: CR-01, CR-03, CR-05, CR-06, CR-09, CR-10, CR-11; preserve CR-02/04
@@ -25,10 +25,10 @@ directly; SQLite transaction locking alone does not establish one collector owne
 objects deliberately carry historical context and no current best; loading them cannot restore
 live admission. Neither issue can be solved by the launcher or browser alone.
 
-## Proposed decision
+## Decision
 
-All names, endpoints, defaults, and behavior below are **proposals**, not implemented commands or
-existing APIs. Accepting the ADR selects the design; implementation approval belongs to each task.
+The names, endpoints, defaults, and behavior below are the accepted design. Implementation and
+its actual validation evidence belong to the related task records.
 The shared process interface is versioned `local-process-v1`; the read API is `local-api-v1`.
 
 ### 1. Application responsibilities
@@ -45,7 +45,7 @@ launcher checks use isolated ports, temporary evidence files, and owned processe
 
 ### 2. Commands, configuration, and readiness
 
-| Proposed root command | Meaning |
+| Root command | Meaning |
 | --- | --- |
 | `bun run dev:backend --mode live` or `--mode fixture` | Start the backend alone on pinned Node; mode is required and fixture is never a live fallback |
 | `bun run dev:web --mode live` or `--mode fixture` | Start the minimal Next.js UI alone on Node, using public local connection configuration |
@@ -71,7 +71,7 @@ its own descendants. Changing these entry paths/argv is a process interface chan
 invoke the same Node entries; the
 launcher does not parse shell strings from `package.json` to discover them.
 
-| Setting | Proposed rule |
+| Setting | Rule |
 | --- | --- |
 | Binding | Both applications bind explicitly to `127.0.0.1`; no public/network-interface mode in this task |
 | Ports | `POOLTRACE_BACKEND_PORT=4317`, `POOLTRACE_WEB_PORT=4318`; configurable distinct integers 1024–65535, no automatic port substitution |
@@ -115,7 +115,7 @@ unchanged. Market unavailability alone does not terminate an otherwise operation
 ### 3. One producer, bounded collection, and current eligibility
 
 M1-11 introduces a small exclusive producer guard shared by the service and the existing CLI before
-opening their store or starting RPC. Key it to the canonical local database path. Propose an
+opening their store or starting RPC. Key it to the canonical local database path. Use an
 exclusive sidecar file (`<database>.owner`, mode 0600) created with exclusive-create semantics,
 containing a random ownership token and nonsecret process metadata. Canonicalize symlink paths;
 reject hard-linked database aliases rather than pretending path-based ownership covers them.
@@ -163,7 +163,7 @@ invalidation. Never cast retrieved `History.value` into a live producer or resto
 
 ### 4. Narrow read API and exact presentation
 
-| Proposed GET endpoint | Behavior |
+| GET endpoint | Behavior |
 | --- | --- |
 | `/api/v1/current` | Current service/collector state and current in-memory analysis projection, independent persistence receipt, as-of eligibility, expiry information, and source revision references; honest null/empty initial state |
 | `/api/v1/history/observations` | Existing bounded observation metadata list |
@@ -207,7 +207,7 @@ explicitly historical. Coalesce fetches so status ticks do not accumulate overla
 
 SSE IDs combine the instance and sequence, distinct from storage revision IDs. There is no durable
 event log or replay guarantee; a reconnect always resynchronizes from the current projection/API.
-Use `text/event-stream`, UTF-8, no-store, and a proposed 1000 ms retry hint. Bound to 16 clients,
+Use `text/event-stream`, UTF-8, no-store, and a 1000 ms retry hint. Bound to 16 clients,
 64 KiB per status frame, and 128 KiB queued output per client. Respect Node backpressure, coalesce
 pending status, and disconnect clients exceeding bounds or failing to drain within 5000 ms.
 Connection rejection and slow-client cleanup must not block collection or grow an unbounded queue.
@@ -312,11 +312,14 @@ has been tested by this documentation work.
 
 ## Approval record
 
-Design acceptance: Pending. Documentation preparation does not accept this proposed decision or
-authorize implementation. The related task records own implementation approval.
+On 2026-11-18 the user said “ok i think we can do it now i accept ad8 and m1-11 and m1-12”.
+This accepts ADR-0008 and separately authorizes the two named implementation scopes. The related
+task records own implementation approval and evidence; later work and pushes remain unapproved.
 
 ## Implementation and evidence
 
-Implementation pending. Documentation preparation and actual documentation checks are recorded in
-the linked M1-11/M1-12 task records. Source inspection and design review are not executed application
-tests or implementation evidence.
+Implemented by [M1-11](../tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) and
+[M1-12](../tasks/M1-12-local-startup-readiness-and-shutdown.md#implementation-evidence) on 2026-11-18.
+The task records distinguish offline checks, clean installation/build, actual browser/process
+validation, live observation and remaining platform/recovery limits. They also retain the earlier
+documentation preparation evidence separately.

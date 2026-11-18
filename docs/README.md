@@ -41,10 +41,10 @@ across agent instructions, task plans, and ADRs.
   M3/STORE tasks → storage benchmark methodology. Future stores/formats remain open.
 - **Plan runtime or deployment:** ADR-0004 → deployment plan → relevant M1/M2 or future DEP tasks.
   Local architecture is selected; pipeline/hosting implementation is not authorized.
-- **Review local API/browser and startup work:** M1-11/M1-12's proposed task scopes →
-  [proposed ADR-0008](adr/0008-local-api-sse-and-process-interface.md) for API/SSE, producer ownership,
-  process interface, application responsibilities, and integration gate. Preparation is complete;
-  design acceptance and implementation remain separately pending.
+- **Review local API/browser and startup work:** M1-11/M1-12's approved task scopes →
+  [accepted ADR-0008](adr/0008-local-api-sse-and-process-interface.md) for API/SSE, producer ownership,
+  process interface, application responsibilities, and integration gate → completed task records
+  for actual application/browser/process/live evidence and limitations.
 
 ## Consistency rules
 

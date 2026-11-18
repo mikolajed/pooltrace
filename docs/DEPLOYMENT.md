@@ -2,7 +2,9 @@
 
 Status: Local architecture accepted in
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md). Hosted deployment and the detailed
-CI/CD pipeline below are future plans. No workflow, infrastructure, or production environment exists.
+CI/CD pipeline below are future plans. M1-11/M1-12 implement the local workflow under
+[ADR-0008](adr/0008-local-api-sse-and-process-interface.md); no hosted infrastructure or production
+environment exists.
 
 ## Local development architecture
 
@@ -31,13 +33,15 @@ flowchart LR
 | Backend | One application process owns RPC adapters, collection, domain analysis, persistence, HTTP API, and SSE. Module boundaries do not require more services. |
 | SQLite | Embedded local file introduced with the first working backend in M1; no separate database-server process. The backend owns reads/writes and migrations. |
 | Anvil | Separate loopback process introduced in M2, started for fork validation. Quoting and viewing data do not depend on it. Initially only one simulation job runs at a time. |
-| CLI | M1-06 provides one-shot diagnostic access directly to shared backend modules in explicit live/fixture modes. Future service/API integration must preserve collection/write ownership. |
+| CLI | One-shot diagnostic access to shared backend modules in explicit live/fixture modes. CLI and service share exclusive per-database producer ownership; use an isolated file or stop the service before CLI access to its file. |
 
-Keep a simple development command that starts both application processes when implemented, with
-individual commands available for debugging. Show readiness and startup failures clearly. Stop only
-processes owned by the launcher; do not terminate unrelated user processes. ADR-0001 selects Node.js
-for the backend runtime and Bun for tooling. Ports/configuration and supported runtime versions are
-selected in the approved foundation task.
+The [README local application section](../README.md#local-application) owns the combined/individual
+commands, ports and configuration. `bun run dev --mode live|fixture` starts the fixed Node entrypoints
+with a fresh invocation ID and checks owned application readiness before reporting success. Failures
+and signals stop only owned process groups. There is no automatic restart, port adoption or
+port-owner termination. Native Bun-to-Node signals and actual Next descendants were verified on
+macOS; other platforms are unsupported by this launcher. ADR-0001 selects Node.js for runtime and
+Bun for tooling.
 
 Collection must remain independent of browser refresh/navigation. Keep RPC credentials and database
 access in the backend. Persist a complete observation/result record before notifying the UI that it
@@ -49,7 +53,10 @@ stale, calculated, quoted, and simulated results from [CORRECTNESS.md](CORRECTNE
 Keep the SQLite file on local durable storage outside build/release output. A process restart or UI
 rebuild must not replace the evidence file. M1-10 implements the reviewed schema, exact encoding,
 version-1 initialization and explicit persistence failures under [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md).
-The CLI owns one connection per invocation; it does not add a service. M3 extends this with richer
+The CLI owns one connection per invocation; the service retains its connection across serial
+attempts and closes it before releasing producer ownership. Restarted history is never current
+admission. A crash-left owner marker fails closed; the README documents manual verification before
+removing one. M3 extends this with richer
 history/replay and recovery; its scope no longer introduces the first database.
 
 Anvil is controlled by the backend's simulation module once M2 is approved. Verify the selected
@@ -68,7 +75,7 @@ verified restore, not an assumed copy of a changing file.
 
 | Environment | Purpose | State |
 | --- | --- | --- |
-| Local development | Run the two applications, early SQLite, and later optional Anvil on localhost | One-shot backend/CLI and embedded persistence implemented through M1-10; service/UI lifecycle remains unapproved |
+| Local development | Run the two applications, early SQLite, and later optional Anvil on localhost | Implemented through M1-12; application, browser, clean build and native shutdown verified on macOS arm64; Anvil remains M2 |
 | Automated verification | Reproducible builds and appropriate offline/integration/fork checks | Future CI design; not configured |
 | Preview/staging | Validate a specific release candidate with isolated configuration and data | Future hosting design; not provisioned |
 | Production | Host a reviewed research application and preserve evidence across updates | Future design; no server or deployment exists |
@@ -140,14 +147,15 @@ capabilities when selecting the CI platform; no such protection is configured he
 
 ## Decisions still open
 
-[Proposed ADR-0008](adr/0008-local-api-sse-and-process-interface.md) now scopes the minimal local
-API/SSE/browser process interface and foreground launcher for separate M1-11/M1-12 review. It
-specifies proposed readiness identity, ownership, deadlines, shutdown, and the real-app integration
-gate; neither the design nor implementation is accepted yet. Hosted release gates remain separate.
+[Accepted ADR-0008](adr/0008-local-api-sse-and-process-interface.md) specifies the implemented local
+API/SSE/browser interface and foreground launcher. Completed
+[M1-11](tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) and
+[M1-12](tasks/M1-12-local-startup-readiness-and-shutdown.md#implementation-evidence) record actual
+readiness, ownership, shutdown, browser/live and clean-build evidence. Hosted release gates remain separate.
 
 Runtime pins and the minimal SQLite driver/schema/journal settings are selected and validated in
-their task records. Endpoint/process supervision, API contracts, and fork lifecycle details still
-require their relevant scopes/ADRs. Hosting,
+their task records. Fork lifecycle details still require M2 scope/design. Hosting,
 artifact packaging, CI provider, staging layout, checks/budgets, migrations/cutover, and rollback
-procedures require a future deployment ADR. No workflow YAML, Dockerfile, provisioning script, server, or application
-process is created by this document. Official references were checked on 2026-11-17.
+procedures require a future deployment ADR. No workflow YAML, Dockerfile or provisioning script
+has been added. Official references for future deployment were checked on 2026-11-17; local runtime
+research and actual results are in ADR-0008 and the completed task records.

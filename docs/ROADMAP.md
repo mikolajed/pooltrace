@@ -1,9 +1,8 @@
 # Proposed roadmap
 
-M1-01 through M1-08 are complete, including verified snapshots, qualified read-only cycle analysis,
-diagnostic live/fixture CLI access, focused arithmetic/failure validation, and the analysis guide.
-M1-09 design delivery is complete with [accepted ADR-0007](adr/0007-minimal-sqlite-evidence-store.md);
-M1-10 implements the minimal store and cli-v2 persistence. Further implementation awaits explicit approval.
+M1-01 through M1-12 are complete, including verified snapshots, qualified read-only cycle analysis,
+diagnostic CLI access, exact SQLite history, the analysis guide, a minimal local API/SSE/browser and
+combined startup/shutdown. Further implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
 ## Milestone planning
@@ -20,7 +19,7 @@ is a revisable development plan, not the full extent of Pooltrace's future capab
 | Stage | Sequencing | Outcome | Related work |
 | --- | --- | --- | --- |
 | Setup | Complete | Requirements, documentation system, ADR workflow, backlog, brand reference | SET tasks in [backlog](BACKLOG.md) |
-| M1: Local read-only research application | First implementation milestone | One backend, minimal UI/CLI access, verified quotes/cycles, early SQLite | M1 tasks in [backlog](BACKLOG.md) |
+| M1: Local read-only research application | Complete | One backend, minimal UI/CLI access, verified quotes/cycles, early SQLite | M1 tasks in [backlog](BACKLOG.md) |
 | M2: Executor and fork validation | Builds on verified cycle analysis | Guarded execution, meaningful contract tests, full transaction cost evidence | M2 tasks in [backlog](BACKLOG.md) |
 | M3: Evidence and recovery hardening | Builds on M1 persistence and M2 simulation records | Richer history/replay, schema evolution, backup/restore, recovery | M3 tasks in [backlog](BACKLOG.md) |
 | M4: Research terminal refinement | Builds on the minimal M1 UI and usable evidence | Full route/cost/size inspection, polished states, brand integration | M4 and BR tasks in [backlog](BACKLOG.md) |
@@ -29,7 +28,7 @@ is a revisable development plan, not the full extent of Pooltrace's future capab
 Documentation and validation accompany every milestone; M5 consolidates that evidence and guidance.
 Extend and revise the sequence as the product develops.
 
-## M1 — first proposed implementation milestone
+## M1 — completed local read-only application
 
 The separately approved [M1-01 foundation](tasks/M1-01-tooling-and-workspaces.md) is complete under
 accepted ADR-0001. [M1-02](tasks/M1-02-registry-and-consistent-snapshots.md) produced accepted
@@ -53,21 +52,20 @@ assumptions, commands, result states, and actual evidence through the [analysis 
 [M1-09](tasks/M1-09-minimal-sqlite-design.md) delivers accepted ADR-0007 and its paper/research
 evidence. [M1-10](tasks/M1-10-minimal-evidence-store.md#implementation-evidence) implements the
 store, exact immutable history, atomic saves and cli-v2; its evidence separates native/injected
-faults, offline/process checks, and actual live runs. API/browser access and process lifecycle
-remain separately gated M1-11/M1-12.
+faults, offline/process checks, and actual live runs.
 
-Proposed [M1-11](tasks/M1-11-local-api-sse-and-browser.md) and
-[M1-12](tasks/M1-12-local-startup-readiness-and-shutdown.md) now have reviewable scopes under
-[proposed ADR-0008](adr/0008-local-api-sse-and-process-interface.md). M1-11 supplies the individual
+Completed [M1-11](tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) and
+[M1-12](tasks/M1-12-local-startup-readiness-and-shutdown.md#implementation-evidence) implement
+[accepted ADR-0008](adr/0008-local-api-sse-and-process-interface.md). M1-11 supplies the individual
 applications/API/browser; M1-12 adds their combined startup workflow using the same process interface.
-M1-12's final validation depends on the actual M1-11 apps, not process fixtures alone.
+Their evidence includes clean setup/build, actual browser/API/live checks and native shutdown of
+the real applications, separately from controlled process fixtures.
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) selects a local UI application and one
-backend process with collection/analysis/RPC/API modules. Review a minimal SQLite schema/driver and
-persist observations/results from the first working backend. Add a narrow API/SSE/browser view and
-keep CLI access tied to the same backend behavior; no independent duplicate collector is needed.
+backend process with collection/analysis/RPC/API modules. The implemented SQLite/API/browser and
+CLI share backend behavior and exclusive per-database producer ownership.
 
-M1 should end with reproducible read-only cycle analysis, stored provenance, a minimal local browser
+M1 provides reproducible read-only cycle analysis, stored provenance, a minimal local browser
 view, diagnostic CLI access, and documented limitations. It works without Anvil. Net profit cannot
 be claimed without the evidence required by [CR-06](CORRECTNESS.md).
 

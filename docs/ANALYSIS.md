@@ -1,13 +1,15 @@
 # Read-only analysis guide
 
 Pooltrace compares exact USDC → WETH → USDC quotations at one Ethereum block. The working slice
-through M1-10 can report a qualified grid, its best tested gross result, and separate save status. Transaction costs
+can report a qualified grid, its best tested gross result, and separate save status. Transaction costs
 and estimated net profit remain unavailable because no full-transaction cost producer exists.
 
 Start with the [setup](../README.md#development-setup) and
 [CLI instructions](../README.md#diagnostic-cli). This guide explains calculations, examples, and
 result interpretation for the calculation implementation at `99fe048`, documented on 2026-11-18.
 M1-10 adds persistence and cli-v2 without changing those calculations.
+M1-11/M1-12 expose the same backend calculations through the local read API/browser and application
+startup workflow; their task records own implementation and validation evidence.
 [CORRECTNESS](CORRECTNESS.md) owns requirements; [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md)
 and [ADR-0006](adr/0006-quotation-cycles-and-profitability.md) own the accepted policies and rationale.
 [M1-08](tasks/M1-08-mathematics-and-evidence-documentation.md#evidence-and-handoff) records this
@@ -37,6 +39,10 @@ flowchart LR
   C --> P[Atomic evidence saves]
   P --> E[Use-time eligibility after storage]
   E --> O[CLI text or JSON]
+  E --> A[Local read API and status stream]
+  P --> H[Historical evidence]
+  H --> A
+  A --> B[Browser view]
 ```
 
 The CLI calls shared backend modules directly in one Node process.
@@ -45,7 +51,9 @@ The CLI calls shared backend modules directly in one Node process.
 [snapshots](../apps/backend/src/snapshot.ts) and [analysis](../apps/backend/src/analysis.ts) own
 attempts, clocks, validation, and sealed evidence. The backend's
 [store](../apps/backend/src/storage/store.ts) preserves collection, analysis, and renewal versions
-in SQLite. There is no second collector, background service, or execution transaction.
+in SQLite. The service schedules serial attempts independently of browsers. Its producer guard is
+shared with the one-shot CLI, so two producers cannot collect into one evidence file at once.
+Browser requests consume backend evidence and create no execution transaction or collection job.
 
 Save status is independent of calculation quality. A confirmed save does not extend freshness;
 eligibility is checked after storage and can already be stale. Unknown commits are never labeled
@@ -300,6 +308,33 @@ The CLI recomputes eligibility immediately before output and exits. Wall-clock/a
 events describe that moment. Monotonic timestamps belong to the collecting process; reading a
 saved JSON file cannot restore live eligibility. There is no archive-loading or watch command.
 
+## Reading browser and service evidence
+
+Application readiness and market-data eligibility answer different questions. A ready backend has
+validated configuration, exclusive producer ownership, an initialized evidence store, and a bound
+server. It can still report no analysis, failed RPC, rejected quotes, negative gross, unavailable
+costs, or expired validation. Browser connection state and persistence acknowledgement are separate
+facts again. Read them alongside the observation's origin, block/hash, and as-of time.
+
+The service runs one collection/analysis attempt at a time and waits after completion before the
+next. Its status stream does not produce quotes or renew old validation. After a confirmed save,
+the current view checks the existing age/canonicality gates; expired evidence loses current best
+and admission until a newly qualified attempt is available. Gaps are honest evidence of those
+limits, not a reason to widen the policy or treat the last positive result as current.
+
+SSE status events identify the backend instance and view sequence. They ask the browser to refresh
+or withdraw a view; only a current-view response confirms its as-of eligibility. The browser counts
+the entire request duration against the server's remaining validity, so delayed delivery never
+starts a fresh five-second interval. Stream loss, silence, or page suspension removes current
+presentation until a fresh response confirms it. Reconnecting resynchronizes state, not a durable
+stream history, and never starts another collector.
+
+Historical API records keep exact amounts, source references, original origin/as-of information,
+and known invalidation. Their retrieval context is historical even if the original observation was
+live. A stored as-of ranking can be inspected but cannot become a current live best. Restart begins
+without restored admission. See the [application commands](../README.md#local-application),
+[ADR-0008](adr/0008-local-api-sse-and-process-interface.md), and the M1-11/M1-12 evidence records.
+
 ## Costs and conditional accounting
 
 Current analysis always returns `full_transaction_evidence_missing` for costs/net profit, even
@@ -375,6 +410,8 @@ was collected at block 26442216; it is not a same-state formatting comparison wi
 | [M1-07 task](tasks/M1-07-validation-and-regression-coverage.md#evidence-and-handoff) | 158 offline tests, including 42 added cases and a 205-tuple V2 corpus, plus clean frozen-lockfile verification; no new live run or production correction |
 | [M1-08 task](tasks/M1-08-mathematics-and-evidence-documentation.md#evidence-and-handoff) | Documentation/example checks and new offline help/fixture command verification, distinguished from the earlier suite/integration results |
 | [M1-10 task](tasks/M1-10-minimal-evidence-store.md#implementation-evidence), [JSON](evidence/M1-10-cli-live-2026-11-18.json), [text](evidence/M1-10-cli-live-2026-11-18.txt) | SQLite/cli-v2, exact immutable history, native/controlled-fault/process checks, clean install, and actual live saved reports; loaded records are historical |
+| [M1-11 task](tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence), [fixture API](evidence/M1-11-local-fixture-2026-11-18.json), [live API](evidence/M1-11-local-live-2026-11-18.json), [browser capture](evidence/M1-11-browser-live-2026-11-18.jpg) | Actual local API/SSE/browser/history, 36 qualified saved live outcomes at block 26444090, separate UI as-of capture, conservative expiry and producer exclusion; 262 offline tests and clean install/build |
+| [M1-12 task](tasks/M1-12-local-startup-readiness-and-shutdown.md#implementation-evidence), [native process report](evidence/M1-12-local-process-2026-11-18.json) | Controlled launcher faults plus actual Bun/Node application startup, signals, CLI refusal, owned cleanup, closed listeners and historical reopen; macOS host only |
 
 Reports describe past events. Re-running an integration harness selects new state and need not
 produce the same amounts or admission. Local helper replies and CLI fixtures are constructed;
@@ -383,9 +420,9 @@ Pinned reviewed source and runtime-code hashes identify provenance, not an indep
 deployed binary or a security audit. The single configured provider and supported token/deployment
 behavior remain external trust assumptions, including possible token upgrades.
 
-There is no wallet, executor, transaction submission, fork simulation, full-transaction cost
-producer, HTTP API/SSE, browser UI, or service lifecycle in this working slice. M1-10 supplies the
-local SQLite evidence store; JSON redirection and checked-in reports are separate report artifacts.
-M1-11/M1-12 cover remaining local application work; M2 covers reviewed execution/cost/fork capabilities.
+There is no wallet, executor, transaction submission, fork simulation, or full-transaction cost
+producer in this slice. M1-10 supplies local SQLite history; M1-11/M1-12 add the read-only local
+application workflow with their own validation records. JSON redirection and checked-in reports
+are separate report artifacts. M2 covers reviewed execution/cost/fork capabilities.
 Provider fallback/gateway and additional chains remain separately scoped future work in the
 [backlog](BACKLOG.md). These boundaries describe this increment, not the lifetime of Pooltrace.

@@ -1,8 +1,8 @@
 # M1-11: Local API, SSE updates, and minimal read-only browser
 
-- State: Proposed
+- State: Done
 - Milestone: M1 — local read-only research application
-- Related ADRs: proposed [ADR-0008](../adr/0008-local-api-sse-and-process-interface.md);
+- Related ADRs: accepted [ADR-0008](../adr/0008-local-api-sse-and-process-interface.md);
   accepted ADRs [0001](../adr/0001-project-boundaries-and-tooling.md),
   [0004](../adr/0004-local-processes-and-gated-deployment.md),
   [0005](../adr/0005-registry-verification-and-consistent-snapshots.md),
@@ -18,8 +18,8 @@
 One local backend continuously produces bounded read-only analysis attempts and owns SQLite, API,
 and SSE. A separate minimal browser application shows current as-of results and exact historical
 evidence with honest expiry, origin, failure, and save states. Refreshing or reconnecting the browser
-does not create or restart collection. This document prepares a reviewable implementation scope;
-application code, executable contracts, scaffolding, tests, and dependencies are not created here.
+does not create or restart collection. This task implements the accepted design within the scope
+approved below.
 
 ## Scope
 
@@ -96,9 +96,9 @@ permanent product limitation.
 
 ## Decisions and open questions
 
-ADR-0008 owns the proposed commands/configuration, producer guard, read/SSE semantics, state expiry,
-process interface, application responsibilities, and integration gate. Both task scopes and design remain
-proposed. Internal file names and ordinary implementation details can be resolved within approval;
+ADR-0008 owns the accepted commands/configuration, producer guard, read/SSE semantics, state expiry,
+process interface, application responsibilities, and integration gate. The design and this task's
+implementation scope are approved. Internal file names and ordinary details can be resolved within approval;
 the two Node entry paths/argv are fixed shared interfaces. A material process-interface, policy,
 dependency/runtime compatibility, or scope change must be reviewed and reflected in dependent task
 scope before dependent work proceeds.
@@ -110,27 +110,27 @@ the approved minimal scope with manifests and lockfile reviewed together.
 
 ## Acceptance criteria
 
-- [ ] ADR-0008 is accepted and this specific implementation scope is explicitly approved.
-- [ ] Individual backend/web commands run on the selected pins with documented configuration,
+- [x] ADR-0008 is accepted and this specific implementation scope is explicitly approved.
+- [x] Individual backend/web commands run on the selected pins with documented configuration,
   identity/readiness, lifecycle and cleanup; RPC failure does not masquerade as process failure.
-- [ ] Only one service/CLI producer owns a given canonical evidence file; concurrent and leftover
+- [x] Only one service/CLI producer owns a given canonical evidence file; concurrent and leftover
   ownership fails explicitly without competing collection, destructive cleanup, or credential leaks.
-- [ ] One scheduler preserves accepted RPC/state/financial/save policies; browser count and request
+- [x] One scheduler preserves accepted RPC/state/financial/save policies; browser count and request
   traffic do not create more collectors, revalidation work, or ownership authority.
-- [ ] API current/history semantics preserve exact amounts, all outcomes, provenance, unavailable
+- [x] API current/history semantics preserve exact amounts, all outcomes, provenance, unavailable
   versus zero, origin, save acknowledgement and invalidation; restart/history never restores live admission.
-- [ ] Bounded SSE/reconnect and delayed/out-of-order responses resynchronize correctly; slow clients
+- [x] Bounded SSE/reconnect and delayed/out-of-order responses resynchronize correctly; slow clients
   remain bounded and eligibility visibly expires despite absent results, network loss, or page suspension.
-- [ ] The minimal real browser view is readable/keyboard-usable and displays truthful current,
+- [x] The minimal real browser view is readable/keyboard-usable and displays truthful current,
   diagnostic, historical, fixture, empty, negative, stale, incomplete and unavailable states.
-- [ ] Full offline checks and the web build pass; actual process/browser/live results or explicit
+- [x] Full offline checks and the web build pass; actual process/browser/live results or explicit
   external-validation limits are recorded separately, with no fabricated market evidence.
-- [ ] User documentation, task evidence, backlog/status and process interface match the result;
+- [x] User documentation, task evidence, backlog/status and process interface match the result;
   M1-12 completion is assessed against its own real-application integration gate.
 
 ## Planned validation
 
-These checks have **not run**. They become required evidence only after implementation approval.
+This matrix was prepared before implementation. Actual checks, results and limits are recorded in the implementation evidence below.
 
 | Case | Required evidence |
 | --- | --- |
@@ -147,12 +147,13 @@ These checks have **not run**. They become required evidence only after implemen
 
 - Documentation preparation: Approved on 2026-11-18 by “ok do it”, following the recommendation to
   prepare both task scopes and their shared process interface for review.
-- Design acceptance: Pending; see [ADR-0008 approval](../adr/0008-local-api-sse-and-process-interface.md#approval-record).
-- Implementation approval: **Not granted.**
-- Implementation scope approved by user: None recorded. Documentation preparation does not approve
-  either task's implementation or the proposed ADR.
+- Design acceptance: 2026-11-18; see [ADR-0008 approval](../adr/0008-local-api-sse-and-process-interface.md#approval-record).
+- Implementation approval: **Granted on 2026-11-18.**
+- Approved scope and user instruction: “ok i think we can do it now i accept ad8 and m1-11 and m1-12”.
+  This approves the bounded M1-11 implementation above, including required dependencies and checks.
+  It does not authorize later tasks, commits, pushes, or deployment.
 
-## Evidence and handoff
+## Preparation evidence
 
 Documentation prepared on 2026-11-18 from requirements, accepted ADRs, and read-only source/design
 review covering entry points, storage/history, and application lifecycle. Findings include the
@@ -164,9 +165,96 @@ transport-delay expiry details; the documents now specify them and the targeted 
 remaining material contradiction in those sections.
 
 Documentation verification: `git diff --check` passed; an inline local Markdown target/anchor check
-passed for **172 links across 11 changed/new documents**. Wording checks confirm the ADR and task
-scopes describe technical responsibilities without implementation assignments. These are documentation checks, not
+passed for **172 links across 11 changed/new documents**. The ADR and task scopes were checked for
+consistent technical responsibilities and interface definitions. These are documentation checks, not
 application tests. Full offline tests, build, installation, HTTP/SSE/process/browser and live checks
 were not run for this documentation-only preparation. Official API research and its limitations
-are recorded in ADR-0008. Next proposed action: review ADR-0008 and both scopes, then separately
-authorize the desired implementation.
+are recorded in ADR-0008. The user subsequently accepted the design and approved implementation
+as recorded above. Implementation results follow below.
+
+## Implementation evidence
+
+Completed on 2026-11-18 on macOS arm64, Node 26.3.1 and Bun 1.3.11, from baseline
+`08f5a47bb989ee7a1c6038e711ea0f63ad9b74a6` plus the approved implementation diff. Actual API reports
+record source digest `aea38dd53355a649171614e2d94574ee800af3c92b1bb01d56d354cec75f7f36`, its input
+set, runtime, process identities, as-of events, exact payloads and historical reads.
+
+### Delivered behavior
+
+- Backend service, strict shared local configuration, canonical per-file producer guard shared with
+  the diagnostic CLI, persistent store ownership, serial scheduling, independent save state, current
+  eligibility/expiry, bounded read API and SSE, readiness and graceful cancellation/shutdown.
+- Minimal Next.js/React browser with 36 exact route/size rows, gross ranking, unavailable costs/net,
+  public runtime configuration, service/connection/save state, provenance and age, and bounded
+  analysis/observation history. Historical selection uses its own provenance and never restores
+  live admission. Runtime backend/native modules are excluded from browser imports.
+- Exact frontend pins: Next.js 16.4.6, React/react-dom 19.3.1, @types/react and @types/react-dom
+  19.3.0. Official Next installation/CLI documentation, React version documentation and actual
+  registry metadata were consulted; installed metadata, TypeScript and the real build verified
+  compatibility with the unchanged toolchain. No component framework or additional install-script
+  trust was introduced.
+- Root scripts/configuration, environment example, ignored ownership/generated files, README and
+  analysis/engineering/runtime guidance updated for actual behavior. Web type checking generates
+  production route/ambient types first, excludes duplicate development output and disables stale
+  incremental-cache reuse. Generated `next-env.d.ts` stays ignored.
+
+### Actual validation
+
+| Cases | Executed evidence |
+| --- | --- |
+| A01/A02 | New local-service/guard tests verify missing parents, alias/hard-link handling, exclusive ownership, foreign/malformed owner protection, CLI refusal before collection, real API lifecycle/restart, five simultaneous reads and 16 SSE clients without another collector. Native combined-process evidence below also verifies guard release and CLI exclusion. |
+| A03 | Real fixture API list → exact analysis revision → historical detail round trip; observation metadata/detail; explicit absent revision 404; all 36 rows and independent save state. Original codec/atomic-save/uncertainty/invalidation cases remain in the prior storage/CLI suite. |
+| A04 | Explicit injected clock advances remove expired best/admission while preserving saved numbers. Existing snapshot/analysis/CLI cases retain rejected/partial/clock/invalidation coverage. Browser helper checks conservative request-start deadlines and malformed/expired inputs. Production limits were not widened. |
+| A05 | Actual local HTTP method/Host/Origin/query/page-bound checks and redaction; real 16-client cap/reconnect status frames, including JSON parsing using SSE data-line semantics. Controlled stream doubles separately verify 128 KiB queue refusal, five-second drain timeout and timeout cancellation; they are not kernel/network stress evidence. |
+| A06 | Actual browser displayed 36 rows, connected status, constructed labels, exact negative gross and unavailable costs/net. Analysis and observation history opened with historical/save/age labels. Refresh reconnected; after process stop 36 diagnostic rows remained, current best became unavailable and connection reported waiting. Native keyboard Tab/Enter activated history. Actual live browser also displayed chain/block provenance and 36 live rows. |
+| A07 | `bun run check` passed: 262 tests in 12 files, including 22 new service/guard cases, two web presentation cases and 33 launcher/config cases. Type/lint/format gates passed. A separate source snapshot without `.env`/`.env.local` or private project environment passed `bun install --frozen-lockfile` (156 packages), the same full check and `bun run build:web`. Generated ambient-file removal in that disposable snapshot was followed by successful automatic regeneration/type checking. |
+| A08 | Actual Alchemy-backed live application/API/history run: 36 qualified outcomes, confirmed saved analysis, exact historical retrieval and unavailable costs/net. The archived event is described below. |
+
+Earlier verification exposed an unsupported constructor parameter property on native Node, incorrect
+SSE framing for multiline JSON, an observation-source ID used as an analysis revision, mixed
+current/historical labels, fresh-checkout generated-type gaps, and a storage-unavailability HTTP
+mapping. These were corrected and the affected checks passed. A raw Host-header test uses Node HTTP
+because fetch normalizes that header. Timing-sensitive fixture failures with concurrent Vitest
+workers were addressed with an explicit service test clock and a two-worker limit; financial/time
+policies are unchanged. A clean-snapshot formatting failure was limited to newly written JSON
+reports; formatting preserved their exact values, then all checks passed.
+
+### Actual archived application evidence
+
+- [Constructed fixture API/history report](../evidence/M1-11-local-fixture-2026-11-18.json): explicit
+  fixture origin at synthetic block 100; all 36 qualified diagnostics saved, best tested gross
+  `-34985` USDC base units. This is constructed data, never market or live-admission evidence.
+- [Actual live API/history report](../evidence/M1-11-local-live-2026-11-18.json): captured at
+  2026-11-18 20:37:51 Europe/Warsaw (19:37:51 UTC), chain 1, block **26444090**, hash
+  `0x3f6f813ec3de0c6f0c4c4779dbea888711ffd7fd4a9beec6a5fea2cdd2e2cb17`.
+  At the recorded event the 36-entry comparison was qualified, saved and usable. Best tested gross
+  was **-0.018538 USDC**, route `[1,2]`, input 10 USDC; cost/net remained unavailable. The confirmed
+  analysis revision is `5a35768f5fcc2efe34a0a1aa6014754fcc042c07628a3b4f552c165171163d4b`.
+  Retrieval was historical with `currentBest: null` and no live qualification.
+- [Fixture browser capture](../evidence/M1-11-browser-fixture-2026-11-18.jpg) and
+  [live browser capture](../evidence/M1-11-browser-live-2026-11-18.jpg) are actual UI observations.
+  Collection continued between captures and API reports; these are distinct as-of events.
+- [Native process report](../evidence/M1-12-local-process-2026-11-18.json) records real combined
+  startup, competing CLI refusal, SIGTERM/143, released ownership, closed ports and historical reopen.
+
+All verification used isolated files/ports/processes. Mainnet access was read-only; no transaction,
+wallet, fork, or cost producer was introduced. Sandbox attempts that could not bind loopback or
+write Bun cache/temp data were rerun with the necessary execution permission, not counted as passes.
+
+Final documentation checks passed: `git diff --check`, Biome formatting (78 files), and 261 local
+Markdown targets/anchors across 12 changed documents. Both API archives match the current
+implementation source digest above. Candidate files were checked against configured private
+secret values without printing those values; none were present.
+
+### Limits and handoff
+
+macOS arm64 is the verified application/launcher host. Other operating systems, hardware/power-loss
+failure, network-filesystem behavior, browser-specific OS suspension, and exhaustive network
+throttling/stress remain unverified. Controlled clock/stream faults are distinguished above from
+actual browser and native-process evidence. No sustained freshness, throughput, recovery, positive
+net-profit, execution or capture claim is made. The accepted manual stale-owner recovery boundary,
+retained-data growth and gaps after validation expiry remain intentional limitations.
+
+Use the [README local application commands](../../README.md#local-application). Code and evidence
+are ready for review. The user subsequently requested the completion commit with “commit” on
+2026-11-18, including the selected evidence archives. No push or later milestone was authorized.

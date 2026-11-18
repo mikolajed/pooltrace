@@ -59,12 +59,12 @@ access into this milestone. Each task remains separately scoped; later work requ
 - [x] [M1-10: Minimal SQLite evidence store](tasks/M1-10-minimal-evidence-store.md).
   State: Done. Exact evidence/history storage, cli-v2, native/offline/process/live validation,
   clean installation, approvals, and limitations are in the linked record.
-- [ ] [M1-11: Local API, SSE updates, and minimal read-only browser](tasks/M1-11-local-api-sse-and-browser.md).
-  State: Proposed. Scope, approval boundary, and planned validation are in the linked record;
-  [proposed ADR-0008](adr/0008-local-api-sse-and-process-interface.md) owns the shared design.
-- [ ] [M1-12: Local startup, readiness, and shutdown](tasks/M1-12-local-startup-readiness-and-shutdown.md).
-  State: Proposed. Scope, approval boundary, and planned validation are in the linked record.
-  Combined-workflow validation depends on the actual M1-11 applications.
+- [x] [M1-11: Local API, SSE updates, and minimal read-only browser](tasks/M1-11-local-api-sse-and-browser.md).
+  State: Done. Scope and actual application/browser/live evidence are in the linked record;
+  [accepted ADR-0008](adr/0008-local-api-sse-and-process-interface.md) owns the shared design.
+- [x] [M1-12: Local startup, readiness, and shutdown](tasks/M1-12-local-startup-readiness-and-shutdown.md).
+  State: Done. Actual controlled-process and integrated application validation are in the linked
+  record, including native signals, owned cleanup and historical reopen.
 
 ## M2 — executor and local forks; approval pending
 

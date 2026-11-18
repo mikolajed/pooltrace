@@ -9,6 +9,7 @@ dist/
 coverage/
 .vitest/
 .next/
+apps/web/next-env.d.ts
 *.tsbuildinfo
 
 # Future Foundry output
@@ -22,10 +23,12 @@ data/
 *.sqlite-shm
 *.sqlite-wal
 *.sqlite-journal
+*.sqlite.owner
 *.db
 *.db-shm
 *.db-wal
 *.db-journal
+*.db.owner
 
 # Operating system files
 .DS_Store

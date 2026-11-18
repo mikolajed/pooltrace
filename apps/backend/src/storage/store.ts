@@ -1,27 +1,27 @@
 import { randomUUID } from "node:crypto";
-import { mkdirSync, openSync, closeSync } from "node:fs";
+import { closeSync, mkdirSync, openSync } from "node:fs";
 import { dirname, resolve } from "node:path";
-import type { Observation } from "../snapshot.ts";
 import type { Analysis } from "../analysis.ts";
-import { CODEC, encode, decode, digest, revision } from "./codec.ts";
+import type { Observation } from "../snapshot.ts";
+import { CODEC, decode, digest, encode, revision } from "./codec.ts";
 import {
-  assertObservation,
-  assertAnalysis,
-  observationCore,
-  analysisCore,
-  assertExtension,
-} from "./evidence.ts";
-import {
-  connect,
-  record,
-  text,
-  integer,
-  StorageError,
-  storageReason,
   type Connect,
+  connect,
   type Database,
+  integer,
+  record,
+  StorageError,
   type StorageReason,
+  storageReason,
+  text,
 } from "./driver.ts";
+import {
+  analysisCore,
+  assertAnalysis,
+  assertExtension,
+  assertObservation,
+  observationCore,
+} from "./evidence.ts";
 import { initialize, verifyReadOnly } from "./schema.ts";
 
 const context = randomUUID();
@@ -474,6 +474,21 @@ export class EvidenceStore {
       return receipt("not_saved", storageReason(error));
     }
   }
+  findVersion(kind: "observations" | "analyses", id: string): History | null {
+    return this.read(() => {
+      if (kind !== "observations" && kind !== "analyses")
+        throw new StorageError("storage_configuration");
+      if (
+        !this.row(
+          kind === "observations" ? "observation_versions" : "analysis_versions",
+          "revision_id",
+          id,
+        )
+      )
+        return null;
+      return kind === "observations" ? this.getObservation(id) : this.getAnalysis(id);
+    });
+  }
   list(kind: "observations" | "analyses", options: ListOptions = {}) {
     return this.read(() => this.listRows(kind, options));
   }
@@ -516,7 +531,7 @@ export class EvidenceStore {
     args.push(limit);
     const rows = this.db
       .prepare(
-        `SELECT t.seq,t.observation_id,${kind === "analyses" ? "t.analysis_id,t.source_revision_id" : "t.collection_revision_id"},t.recorded_at_ms,o.origin FROM ${kind} t JOIN observations o ON t.observation_id=o.observation_id WHERE ${where.join(" AND ")} ORDER BY t.seq DESC LIMIT ?`,
+        `SELECT t.seq,t.observation_id,${kind === "analyses" ? "t.analysis_id,t.source_revision_id,(SELECT v.revision_id FROM analysis_versions v WHERE v.analysis_id=t.analysis_id AND v.parent_revision_id IS NULL) revision_id" : "t.collection_revision_id"},t.recorded_at_ms,o.origin FROM ${kind} t JOIN observations o ON t.observation_id=o.observation_id WHERE ${where.join(" AND ")} ORDER BY t.seq DESC LIMIT ?`,
       )
       .all(...args)
       .map((v) => {

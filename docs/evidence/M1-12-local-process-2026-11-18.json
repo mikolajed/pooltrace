@@ -1,0 +1,44 @@
+{
+  "reportVersion": "local-process-verification-v1",
+  "observedAt": "2026-11-18T19:46:13.365Z",
+  "context": "historical process verification",
+  "runtime": {
+    "node": "v26.3.1",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "mode": "fixture",
+  "constructed": true,
+  "readiness": {
+    "contractVersion": "local-process-v1",
+    "application": "backend",
+    "runId": "0631e9fa-3799-4e14-8635-ae4e884e0cd0",
+    "instanceId": "9c295039-f156-494d-b92f-fe2e1087a2c0",
+    "phase": "ready"
+  },
+  "competingCli": {
+    "exitCode": 1,
+    "reason": "producer_unavailable"
+  },
+  "signal": "SIGTERM",
+  "exit": {
+    "code": 143,
+    "signal": null
+  },
+  "normalizedExitCode": 143,
+  "ownerReleased": true,
+  "portsClosed": [4357, 4358],
+  "historicalReopen": {
+    "context": "historical",
+    "currentBest": null,
+    "records": 1
+  },
+  "lifecycle": [
+    "Pooltrace backend: starting",
+    "Pooltrace backend: ready (http://127.0.0.1:4357)",
+    "Pooltrace web: starting",
+    "Pooltrace web: ready (http://127.0.0.1:4358)",
+    "Pooltrace: stopping",
+    "Pooltrace: stopped"
+  ]
+}

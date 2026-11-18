@@ -1,8 +1,8 @@
 # M1-12: Local startup, readiness, and shutdown
 
-- State: Proposed
+- State: Done
 - Milestone: M1 — local read-only research application
-- Related ADRs: proposed [ADR-0008](../adr/0008-local-api-sse-and-process-interface.md);
+- Related ADRs: accepted [ADR-0008](../adr/0008-local-api-sse-and-process-interface.md);
   accepted [ADR-0001](../adr/0001-project-boundaries-and-tooling.md) and
   [ADR-0004](../adr/0004-local-processes-and-gated-deployment.md)
 - Requirement IDs: CR-03, CR-09, CR-10; preserve financial/evidence requirements in
@@ -90,25 +90,25 @@ gap and review the design rather than adding broad process searches or claiming 
 
 ## Acceptance criteria
 
-- [ ] ADR-0008 is accepted and this specific implementation scope is explicitly approved.
-- [ ] One Bun command starts the actual M1-11 applications with correct configuration, isolated
+- [x] ADR-0008 is accepted and this specific implementation scope is explicitly approved.
+- [x] One Bun command starts the actual M1-11 applications with correct configuration, isolated
   ownership and identity-bearing readiness; individual commands remain usable without Anvil.
-- [ ] Invalid configuration fails before spawning; failed/mismatched/timed-out startup and child
+- [x] Invalid configuration fails before spawning; failed/mismatched/timed-out startup and child
   failure after readiness are clear, nonzero outcomes with sibling cleanup.
-- [ ] Actual SIGINT/SIGTERM and repeated/cancel-during-start signals stop only owned applications
+- [x] Actual SIGINT/SIGTERM and repeated/cancel-during-start signals stop only owned applications
   and descendants; escalation and incomplete cleanup reporting match the agreed policy.
-- [ ] Unrelated sentinel processes/listeners survive all relevant failure and signal checks;
+- [x] Unrelated sentinel processes/listeners survive all relevant failure and signal checks;
   an occupied port never causes adoption, port substitution, or termination of its original owner.
-- [ ] Fixture process tests, real Bun-to-Node process checks, and actual M1-11 integrated fixture
+- [x] Fixture process tests, real Bun-to-Node process checks, and actual M1-11 integrated fixture
   workflow are recorded separately. Passing controlled processes alone cannot mark this task done.
-- [ ] Full integrated repository checks/web build and frozen-lockfile setup pass; live smoke and
+- [x] Full integrated repository checks/web build and frozen-lockfile setup pass; live smoke and
   platform/forced-stop limits are reported honestly. Tests isolate ports/evidence/owned processes.
-- [ ] README/configuration/help, task evidence, backlog and status describe implemented behavior;
+- [x] README/configuration/help, task evidence, backlog and status describe implemented behavior;
   no next milestone or deployment begins automatically.
 
 ## Planned validation
 
-These are future checks, not executed results. Fixture child programs are created only after approval.
+This matrix was prepared before implementation; actual controlled-process and application evidence is recorded below.
 
 | Case | Required evidence |
 | --- | --- |
@@ -125,12 +125,13 @@ These are future checks, not executed results. Fixture child programs are create
 
 - Documentation preparation: Approved on 2026-11-18 by “ok do it”, after the recommendation to
   prepare M1-11/M1-12 scopes and their shared interface for review.
-- Design acceptance: Pending; see [ADR-0008 approval](../adr/0008-local-api-sse-and-process-interface.md#approval-record).
-- Implementation approval: **Not granted.**
-- Implementation scope approved by user: None recorded. This preparation does not authorize a
-  launcher, process fixture, package change, or application implementation.
+- Design acceptance: 2026-11-18; see [ADR-0008 approval](../adr/0008-local-api-sse-and-process-interface.md#approval-record).
+- Implementation approval: **Granted on 2026-11-18.**
+- Approved scope and user instruction: “ok i think we can do it now i accept ad8 and m1-11 and m1-12”.
+  This approves the bounded M1-12 implementation and required checks, including real-app integration.
+  It does not authorize later tasks, commits, pushes, or deployment.
 
-## Evidence and handoff
+## Preparation evidence
 
 Documentation prepared on 2026-11-18 alongside M1-11 and proposed ADR-0008, informed by read-only
 source and design review. Actual baseline has Bun scripts invoking pinned Node, a one-shot CLI,
@@ -142,8 +143,55 @@ both were resolved in ADR-0008 and targeted rechecks found no remaining
 material contradiction in those sections.
 
 Documentation verification: `git diff --check` passed; the shared inline Markdown target/anchor
-check passed for **172 links across 11 changed/new documents**. Wording checks confirm technical
-responsibilities are independent of implementation assignments. No process fixtures, app startup,
-browser, build, dependency installation, offline application suite, or live check ran. Planned
-L01–L08 evidence remains entirely pending. Next proposed action: review the shared ADR and both
-scopes, then separately authorize implementation.
+check passed for **172 links across 11 changed/new documents**. The scopes were checked against
+the shared technical interface. No process fixtures, app startup,
+browser, build, dependency installation, offline application suite, or live check ran during preparation.
+The user subsequently accepted the shared ADR and approved this scope as recorded above.
+Implementation results follow below.
+
+## Implementation evidence
+
+Completed on 2026-11-18 on macOS arm64 with Node 26.3.1 and Bun 1.3.11, against baseline `08f5a47`
+plus the approved M1-11/M1-12 implementation diff. The launcher uses built-in Node APIs only.
+`bun run dev --mode live|fixture` and the separate application commands are documented in the
+[root README](../../README.md#local-application).
+
+### Delivered behavior
+
+The foreground launcher validates configuration before spawning, creates a fresh invocation ID,
+starts fixed Node application entrypoints, checks identity-bearing readiness and the web root,
+isolates the web environment, drains raw child streams without relaying secrets/paths, reports fixed
+lifecycle outcomes, and monitors both children during startup and after readiness. Failures/signals
+stop the owned sibling/process groups, wait for graceful exit and escalate only owned groups when
+needed. Existing listeners are never adopted or killed. Application cleanup remains in each app.
+
+### Actual validation
+
+| Cases | Executed evidence |
+| --- | --- |
+| L01 | Strict mode/duplicate/unknown arguments, invalid ports/delay/grid/database/RPC settings, fixture configuration without live credentials, environment precedence and web allowlist checks. Help ran through the actual root Bun/Node command without starting apps. |
+| L02/L03 | Controlled real child processes exercised delayed/missing/wrong readiness, invalid JSON/oversize response, early/missing entrypoints, both sibling failures, backend exit during web startup, startup cancellation and repeated signal cleanup. |
+| L04 | Controlled ignored-stop/descendant cases exercised escalation and actual closure; unrelated healthy sentinel listeners survived. Owned-process checks never used a port-kill or process-name scan. |
+| L05 | Actual backend/web started in fixture mode with matching run identities. The browser rendered 36 rows, read both historical record kinds and reconnected on refresh. Stop/restart worked; stored evidence reopened as historical. Service tests independently kept one pipeline through multiple readers/streams. |
+| L06 | Actual PTY `bun run dev --mode fixture` and live startup each stopped on Ctrl+C with exit 130 and `stopped` lifecycle output. A separately owned Bun/Node fixture invocation received native SIGTERM and normalized exit 143, refused a competing CLI with exit 1 / `producer_unavailable`, released its owner marker, closed both listeners and reopened saved history. |
+| L07 | Final primary and credential-free clean-snapshot `bun run check` passed: 262 tests across 12 files, including all 33 launcher/config cases. Clean frozen install and production web build passed. M1-11 evidence owns dependency/source-report details. |
+| L08 | Actual configured Alchemy live combined startup, qualified 36-row analysis, confirmed persistence, API/history retrieval, real browser live-mode/provenance view, and successful shutdown. This is read-only observation, not execution. |
+
+The [native process archive](../evidence/M1-12-local-process-2026-11-18.json) records actual readiness,
+competing CLI failure, SIGTERM exit/cleanup and historical reopen; this is constructed fixture
+process evidence. The [actual live archive](../evidence/M1-11-local-live-2026-11-18.json) separately
+records market observation. [M1-11 evidence](M1-11-local-api-sse-and-browser.md#implementation-evidence)
+links exact source/runtime metadata and the browser captures. Passing process doubles alone was
+not used as the real-application integration gate. Initial sandbox bind denial was rerun with
+loopback permission and is not a successful test result.
+
+### Limits and handoff
+
+Process-group supervision deliberately supports the verified macOS host; other platforms fail
+explicitly and were not claimed compatible. Grace/force periods bound supervisor policy, not
+arbitrary synchronous I/O or uncatchable OS termination. Killing the supervisor without cleanup can
+leave descendants/owner metadata; the launcher does not steal ownership or delete evidence/journals.
+No automatic restart, daemon installation, Anvil, hosted deployment or CI was added.
+
+All owned QA applications were stopped. The user subsequently requested the completion commit
+with “commit” on 2026-11-18. No push was authorized. Later work requires its own scope and authorization.

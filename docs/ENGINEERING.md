@@ -13,8 +13,8 @@ authorize code or dependency installation.
 | Contracts and local forks | Solidity, Foundry, Anvil | Compiler/dependency versions, router APIs, and local execution design |
 | TypeScript tests | Vitest 5.1.0; offline package tests executed through Node | Additional meaningful checks with approved behavior |
 | Evidence persistence | better-sqlite3 13.2.0 / SQLite 3.54.1 under accepted [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md); backend implementation in M1-10 | Other-platform verification and M3 hardening |
-| Terminal | Next.js, React, Tailwind, shadcn/ui, SSE | Versions, read path, and reconnect semantics |
-| Local runtime topology | UI application + one backend; early embedded SQLite; on-demand Anvil in M2 | Application configuration/lifecycle and later fork toolchain under [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) |
+| Terminal | Next.js 16.4.6 / React 19.3.1 and SSE in M1-11; plain CSS for the minimal browser | Tailwind/shadcn and terminal refinement remain M4 work |
+| Local runtime topology | UI application + one backend and embedded SQLite; macOS foreground launcher in M1-12 | Later fork toolchain under [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) |
 
 Bun manages dependencies and project commands; the backend runs on Node.js under ADR-0001.
 Foundation versions are selected below. Deployment addresses remain unselected.
@@ -47,9 +47,11 @@ still executes on Node. Root `tsconfig.json` checks real tooling under `scripts/
 configuration; package configurations check their source and tests with no emitted artifacts.
 Erasable syntax and explicit module
 semantics match Node's native TypeScript support; type stripping does not replace static checking.
-Future browser packages will select their own module/library settings when approved.
+The web app uses bundler module resolution, ES2024/DOM libraries and React JSX. Its type-check
+helper generates Next production route/ambient types before checking, excludes duplicate dev
+output and disables incremental cache reuse. Generated `next-env.d.ts` is ignored.
 
-Biome currently includes TypeScript and JSON files, respects `.gitignore`, uses two-space
+Biome includes TypeScript, TSX, CSS and JSON files, respects `.gitignore`, uses two-space
 indentation from `.editorconfig`, and leaves Markdown and the generated Bun lockfile outside its
 formatting scope. The root scripts invoke the installed CLI files explicitly through Node;
 Bun remains the package manager and project command entry point. `check:toolchain` rejects a runtime
@@ -74,9 +76,10 @@ deadline, concurrency, retry, cancellation, and sanitized errors in one place; e
 No wallet client or transaction method is exposed. Policy, exact quantities, provenance, and
 eligibility live in immutable observations; no database or long-running collection loop is added.
 
-`bun run check` covers tooling, all three packages, lint/formatting, and offline tests. Explicit
+`bun run check` covers tooling, all packages and the web app, lint/formatting, and offline tests. Explicit
 live commands use the configured endpoint; `bun run check:live` writes ignored integration reports.
-SQLite was deferred from M1-03 and is now implemented in M1-10. Frontend and Foundry remain later work.
+SQLite was deferred from M1-03 and is now implemented in M1-10. M1-11 adds the minimal frontend;
+Foundry remains later work.
 
 ## Quotation integration
 
@@ -174,11 +177,31 @@ power-loss/other-platform behavior. There is no retention, backup/recovery autom
 
 ## Local execution and future releases
 
-[Proposed ADR-0008](adr/0008-local-api-sse-and-process-interface.md) and the proposed
-[M1-11](tasks/M1-11-local-api-sse-and-browser.md) /
-[M1-12](tasks/M1-12-local-startup-readiness-and-shutdown.md) scopes prepare the concrete local
-API/SSE/browser and startup behavior. Their process interface and application responsibilities are review
-proposals, not selected tooling or implemented behavior; frontend dependency pins remain pending.
+[Accepted ADR-0008](adr/0008-local-api-sse-and-process-interface.md) is implemented by
+[M1-11](tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) and
+[M1-12](tasks/M1-12-local-startup-readiness-and-shutdown.md#implementation-evidence): local
+API/SSE/browser, per-database CLI/service producer exclusion, identity-bearing readiness and
+foreground startup/shutdown. The launcher supports the verified macOS host; other platforms fail
+explicitly. The README owns commands, configuration and manual stale-owner precautions.
+
+The private web workspace pins Next.js **16.4.6**, React/react-dom **19.3.1** and their type packages
+at **19.3.0**. No component framework or install-script trust was added. Official
+[Next installation](https://nextjs.org/docs/app/getting-started/installation),
+[Next CLI](https://nextjs.org/docs/app/api-reference/cli/next) and
+[React versions](https://react.dev/versions), registry/installed metadata and actual checks/build
+were consulted on 2026-11-18. These are the tested versions, not a claim of latest releases.
+
+The browser reads public runtime configuration only. Backend/native modules, RPC values and
+database paths never enter its runtime import graph. Current eligibility comes from an uncached
+backend response with conservative request-start expiry; SSE loss/silence or page suspension
+withdraws current presentation. Historical records retain their original evidence and cannot
+restore admission. Backend collection is serial and independent of all HTTP/browser requests.
+
+The offline suite has 262 tests across 12 files and uses at most two workers. Service time-fault
+checks inject an explicit clock instead of widening financial freshness limits. Process tests use
+isolated ports/files and owned child groups. The tasks distinguish controlled faults from actual
+browser/native signals/live RPC evidence and record a clean credential-free frozen install/check
+and production web build.
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) selects separate UI/backend application
 processes on localhost. Collection, RPC, analysis, storage, API, and SSE are backend modules rather

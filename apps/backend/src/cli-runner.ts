@@ -1,25 +1,26 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { parseArgs, parseEnv } from "node:util";
 import { setImmediate as yieldToLoop } from "node:timers/promises";
+import { parseArgs, parseEnv } from "node:util";
 import { DomainError, parseSizes } from "@pooltrace/domain";
 import {
+  type Clock,
+  type Fetch,
   jsonEvidence,
   safeReason,
   systemClock,
-  type Clock,
-  type Fetch,
 } from "@pooltrace/protocols";
-import { collectSnapshot, type Observation } from "./snapshot.ts";
 import {
-  analyzeSnapshot,
-  analysisEligibility,
-  prepareAnalysisForUse,
   type Analysis,
+  analysisEligibility,
+  analyzeSnapshot,
+  prepareAnalysisForUse,
 } from "./analysis.ts";
 import { readConfig } from "./config.ts";
-import { EvidenceStore, databasePath, type SaveReceipt, type Witness } from "./storage/store.ts";
+import { acquireProducer, type ProducerGuard, ProducerOwnershipError } from "./producer-guard.ts";
+import { collectSnapshot, type Observation } from "./snapshot.ts";
 import { StorageError, storageReason } from "./storage/driver.ts";
+import { databasePath, EvidenceStore, type SaveReceipt, type Witness } from "./storage/store.ts";
 
 type Mode = "live" | "fixture";
 type Format = "text" | "json";
@@ -47,6 +48,7 @@ Live settings: root .env, then .env.local, then process environment.
 Keep ETHEREUM_RPC_URL private in environment configuration; no URL argument is accepted.
 Fixture mode needs no valid live URL and never uses it. All fixture state/time is constructed.
 Results rank gross surplus. Transaction costs and net profit remain unavailable.
+A service or CLI already owning the evidence file causes producer_unavailable; never remove an active owner file.
 Persistence: defaults to data/pooltrace.sqlite (live) or data/pooltrace-fixture.sqlite (fixture).
 POOLTRACE_DB_PATH overrides the path through the same root-file/process precedence.
 Exit: 0 usable and saved/help; 1 unusable/runtime/storage failure; 2 usage/configuration; 130 interrupted.
@@ -162,6 +164,8 @@ export interface CliDependencies {
   readonly clock?: Clock;
   readonly fixtureFactory?: () => Promise<{ fetch: Fetch }> | { fetch: Fetch };
   readonly openStore?: (path: string) => EvidenceStore;
+  readonly persistentStore?: EvidenceStore;
+  readonly producerGuard?: ProducerGuard;
 }
 function outcome(
   analysis: Analysis | null,
@@ -287,6 +291,7 @@ export async function runCli(
     sizes: readonly bigint[] | null = null;
   let started = false;
   let store: EvidenceStore | undefined;
+  let guard: ProducerGuard | undefined;
   let collectionRevisionId: string | null = null,
     lastSavedAnalysisRevisionId: string | null = null,
     knownInvalidation: Witness | null = null;
@@ -354,7 +359,11 @@ export async function runCli(
       throw new UsageError("configuration");
     }
     started = true;
-    store = deps.openStore ? deps.openStore(path) : new EvidenceStore(path);
+    guard = deps.producerGuard ?? acquireProducer(path);
+    guard.assertOwned();
+    store =
+      deps.persistentStore ??
+      (deps.openStore ? deps.openStore(guard.dbPath) : new EvidenceStore(guard.dbPath));
     let fetcher = deps.fetch;
     if (mode === "fixture")
       fetcher = (
@@ -435,13 +444,15 @@ export async function runCli(
         reason: storageReason(error),
       };
     const reason =
-      error instanceof StorageError
-        ? storageReason(error)
-        : error instanceof UsageError
-          ? error.reason
-          : error instanceof DomainError
-            ? "size_configuration"
-            : safeReason(error);
+      error instanceof ProducerOwnershipError
+        ? error.reason
+        : error instanceof StorageError
+          ? storageReason(error)
+          : error instanceof UsageError
+            ? error.reason
+            : error instanceof DomainError
+              ? "size_configuration"
+              : safeReason(error);
     const status = deps.signal?.aborted
       ? "cancelled"
       : started
@@ -467,7 +478,8 @@ export async function runCli(
     };
   } finally {
     try {
-      store?.close();
+      if (!deps.persistentStore) store?.close();
+      if (!deps.producerGuard) guard?.release();
     } catch {
       /* Commit acknowledgement remains separate from handle cleanup. */
     }

@@ -44,10 +44,9 @@ access into this milestone. Each task remains separately scoped; later work requ
 - [x] [M1-03: Registry verification and consistent snapshots](tasks/M1-03-registry-and-consistent-snapshots.md).
   State: Done. Scope, approvals, criteria, and offline/live evidence are maintained in the linked record.
 - [x] [M1-04: Quotation, cycle evaluation, and profitability design](tasks/M1-04-quotation-cycles-and-profitability-design.md).
-  State: Done. Research/proposal evidence is maintained in the linked record; ADR-0006 remains Proposed.
-- [ ] M1-05: Implement the approved V2/V3 adapters and cycle analysis.
-  Acceptance: evidence of protocol comparison, correct composition, and all configured route/size
-  evaluations under CR-04 and CR-05.
+  State: Done. Research/design evidence is maintained in the linked record; ADR-0006 is Accepted.
+- [ ] [M1-05: V2/V3 quotation and cycle analysis](tasks/M1-05-quotation-and-cycle-analysis.md).
+  State: Proposed. Scope, approval boundary, criteria, and preparation evidence are maintained in the linked record.
 - [ ] M1-06: Add the runnable CLI and configuration documentation.
   Acceptance: documented real-data and explicit fixture modes, `.env.example`, and states satisfying
   CR-06, CR-09, and CR-11. Use shared backend behavior/API without starting a duplicate collector.

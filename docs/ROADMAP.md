@@ -1,6 +1,6 @@
 # Proposed roadmap
 
-M1-01, the M1-02 design task, and M1-03's registry/snapshot slice are complete. Further
+M1-01 through M1-04 are complete, including accepted registry/snapshot and quotation/profitability designs. Further
 implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
@@ -34,8 +34,9 @@ accepted ADR-0001. [M1-02](tasks/M1-02-registry-and-consistent-snapshots.md) pro
 [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md). The separately approved
 [M1-03 implementation](tasks/M1-03-registry-and-consistent-snapshots.md) has offline and live evidence
 for identity, structural screening, and consistent snapshots; finite-size qualification remains open.
-Quotation/profit semantics also need their own design and
-implementation approvals. Remaining tasks await their own approvals. Detailed work
+[M1-04](tasks/M1-04-quotation-cycles-and-profitability-design.md) produced accepted
+[ADR-0006](adr/0006-quotation-cycles-and-profitability.md) for quotation, qualification, cycles, and
+profitability semantics. M1-05 implementation still requires its own scope and approval. Detailed work
 and acceptance criteria live in the [backlog](BACKLOG.md) and its linked task records.
 
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) selects a local UI application and one

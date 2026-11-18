@@ -1,10 +1,10 @@
 # 0006: Quotations, finite-size admission, and cycle profitability
 
-- Status: Proposed
+- Status: Accepted
 - Proposed on: 2026-11-17
-- Decision accepted by user: Not yet
+- Decision accepted by user: 2026-11-18; “i accept adr6”
 - Related task: [M1-04](../tasks/M1-04-quotation-cycles-and-profitability-design.md)
-- Future implementation: M1-05, separately scoped and approved
+- Future implementation: [M1-05](../tasks/M1-05-quotation-and-cycle-analysis.md), Proposed and awaiting separate approval
 - Requirement IDs: CR-01 through CR-06, CR-09, CR-10 in [CORRECTNESS.md](../CORRECTNESS.md)
 - Supersedes / superseded by: None; extends accepted [ADR-0005](0005-registry-verification-and-consistent-snapshots.md)
 
@@ -15,12 +15,12 @@ leaves finite-size suitability unavailable and workload admission false. M1 now 
 meaning for a qualified quote, a two-pool cycle, its best tested size, and unavailable net profit.
 
 The requirements already select Ethereum USDC/WETH, one V2 pool, V3 fees 500/3000, official V3
-quotation, six configurable USDC amounts, and six directed routes. This proposal preserves those
+quotation, six configurable USDC amounts, and six directed routes. This decision preserves those
 choices and ADR-0005's consistency/failure policy. It does not implement quotations, admit today's
-venues, select an executor, or authorize M1-05. All defaults below are proposed engineering policy;
+venues, select an executor, or authorize M1-05. All defaults below are accepted engineering policy;
 they are neither measured liquidity nor a promise of profitability or provider capacity.
 
-## Proposed decision
+## Decision
 
 ### 1. Amounts, configuration, and deterministic routes
 
@@ -29,7 +29,7 @@ ratios, gas units, wei, and signed surplus. USDC has six verified decimals and W
 identity comes from ADR-0005, never symbols. Number is permitted only for bounded metadata or
 timing, not authoritative amounts. JSON preserves bigint as decimal strings with explicit units.
 
-Propose this initial six-size grid, denominated in **USDC tokens**, not assumed USD value:
+Use this initial six-size grid, denominated in **USDC tokens**, not assumed USD value:
 
 | USDC input | USDC base units |
 | --- | --- |
@@ -138,7 +138,7 @@ new swap-engine implementation or independently tested behavior in M1-04.
 
 ### 5. Finite-size admission and price-impact metric
 
-Propose a maximum **100 bps (1%), inclusive, per leg**, relative to that pool's fee-adjusted
+Use a maximum **100 bps (1%), inclusive, per leg**, relative to that pool's fee-adjusted
 pre-trade marginal output at B. This is a research admission policy, not slippage tolerance,
 an execution price guarantee, or a measured liquidity floor. Keep it fixed in policy revision
 `quotation-v1`; revising it requires review and fresh qualification.
@@ -154,7 +154,7 @@ Define `n/d` as output base units per input base unit before fees:
 These are raw-unit ratios. Inverting the direction requires inverting the ratio; decimals are
 applied only when explicitly converting token units. V3's representation follows
 [TickMath's price definition](https://raw.githubusercontent.com/Uniswap/v3-core/main/contracts/libraries/TickMath.sol).
-The following admission metric and threshold are this proposal's policy, not a copied UI metric.
+The following admission metric and threshold are this decision's policy, not a copied UI metric.
 
 For input A, fee f in millionths (V2=3000; V3=500 or 3000), and full-input output q, define:
 
@@ -225,7 +225,7 @@ gas price. EIP-1559's effective price includes base fee and the permitted priori
 projections are assumptions about execution, not a receipt or inclusion guarantee.
 [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559), [Ethereum gas units](https://ethereum.org/developers/docs/gas/).
 
-Propose the accounting valuation as the **maximum of the three verified pool marginal USDC/WETH
+Use the accounting valuation as the **maximum of the three verified pool marginal USDC/WETH
 ratios at B**, compared exactly. Express its selected ratio n/d in **USDC base units per WETH wei**;
 assume WETH's native-ETH unit correspondence only for this stated valuation model. Then:
 
@@ -262,7 +262,7 @@ Keep ADR-0005's 30,000 ms age, two-block lag, 5,000 ms validation age, 2,000 ms 
 The **quote phase** has its own 20,000 ms monotonic deadline including verification, queued work,
 retries, renewals, and final validation. It does not reset B's timestamp or freshness budget.
 Add a cap of **100 logical RPC reads / at most 200 sends**, including control requests, and retain
-actual counts. These are proposed bounds, not a latency or provider-capacity claim.
+actual counts. These are accepted bounds, not a latency or provider-capacity claim.
 
 Before consuming/starting quote work, renew canonicality if expired. Pause new quote dispatch
 while a required renewal runs; share one concurrency/send budget across quote and control work.
@@ -308,7 +308,7 @@ historical evidence, not restored live eligibility. Storage schema remains M1-09
 
 ## Alternatives considered
 
-| Alternative | Tradeoff and proposed choice |
+| Alternative | Tradeoff and selected choice |
 | --- | --- |
 | Spot-price cycles or fixed WETH second-leg sizes | Easier but omit finite trade behavior or break composition. Use actual integer leg outputs. |
 | Local V3 tick traversal | More control but duplicates a swap engine. Keep the required official quoter and inspect full-fill evidence. |
@@ -322,13 +322,13 @@ historical evidence, not restored live eligibility. Storage schema remains M1-09
 
 ## Consequences and unresolved dependencies
 
-The chosen policy would provide reproducible finite-size comparisons and honest empty/unavailable
+The chosen policy defines reproducible finite-size comparisons and honest empty/unavailable
 results. Full-grid admission and strict time/price limits may often prevent a usable run; that is
 an explicit outcome rather than permission to widen budgets or silently replace the workload.
 Gross-positive output would remain preliminary research, not evidence of estimated net profit,
 transaction success, available inventory, independent market truth, finality, or captured arbitrage.
 
-The user must review these proposed defaults and accept/amend this ADR. M1-05 must then prove the
+The user accepted this policy on 2026-11-18. Separately approved M1-05 work must prove the
 deployed comparison/quoter identities, actual pinned behavior, partial-fill gate, full-grid
 qualification, and operational feasibility. Source branches are mutable; M1-05 should record the
 exact reviewed source revision/package metadata with its integration evidence. No new package
@@ -341,14 +341,17 @@ gross quotation/admission under separately approved M1-05. M1-09 still owns pers
 ## Acceptance and validation criteria
 
 The [M1-05 validation plan](../tasks/M1-04-quotation-cycles-and-profitability-design.md#m1-05-validation-plan)
-specifies offline and live gates. Acceptance of this ADR chooses the proposed arithmetic, grid,
+specifies offline and live gates. Acceptance of this ADR settles the arithmetic, grid,
 quoter, full-fill/impact/workload admission, ranking, cost semantics, and operational budgets.
 It does not establish that any test or new live quote passed, or authorize M1-05 implementation.
 
 ## Approval record
 
 The user approved M1-04's design/research scope on 2026-11-17 with “i accept m1-04”.
-This ADR is **Proposed** and has not been accepted. No M1-05 implementation approval is recorded.
+On 2026-11-18 the user said “i accept adr6”, accepting this ADR's design, including the initial
+six-size grid, full-input and 100 bps impact gates, all-36 workload admission, gross ranking,
+cost/valuation semantics, and operational limits. M1-05 implementation remains separately scoped
+and unapproved; acceptance does not establish runtime or market evidence.
 
 ## Implementation and evidence
 

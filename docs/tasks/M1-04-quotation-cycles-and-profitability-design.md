@@ -3,7 +3,7 @@
 - State: Done
 - Milestone: M1 — local read-only research application
 - Related ADR: [ADR-0005](../adr/0005-registry-verification-and-consistent-snapshots.md)
-- Proposed decision: [ADR-0006 — quotations, finite-size admission, and cycle profitability](../adr/0006-quotation-cycles-and-profitability.md)
+- Accepted decision: [ADR-0006 — quotations, finite-size admission, and cycle profitability](../adr/0006-quotation-cycles-and-profitability.md)
 - Requirement IDs: CR-01, CR-02, CR-03, CR-04, CR-05, CR-06, CR-09, CR-10 in
   [CORRECTNESS.md](../CORRECTNESS.md)
 - Depends on: Completed [M1-03](M1-03-registry-and-consistent-snapshots.md), accepted ADR-0005,
@@ -57,10 +57,10 @@ The Ethereum USDC/WETH workload, selected V2/V3 candidates, Node/Bun toolchain, 
 consistency, and structural-only M1-03 boundary are established requirements or accepted decisions.
 Preserve them; surface a concrete incompatibility for review rather than silently changing scope.
 
-ADR-0006 proposes six inputs from 10 to 5000 USDC, a 100 bps fee-adjusted per-leg impact limit,
+ADR-0006, accepted on 2026-11-18, selects six inputs from 10 to 5000 USDC, a 100 bps fee-adjusted per-leg impact limit,
 QuoterV2 with full-input evidence, all-36 workload admission, deterministic absolute gross-surplus
 ranking, and explicit unavailable initial live net results. Its limits and cost/valuation semantics
-are proposals for user review, not accepted policy, measured liquidity, or successful quote evidence.
+are accepted design policy, not measured liquidity or successful quote evidence.
 
 M1-03 leaves finite-size suitability unavailable and workload admission false. A proposed or
 accepted design does not change those runtime outcomes; M1-05 must implement and verify the
@@ -100,7 +100,7 @@ No application tests or new live/fork checks are part of this design task.
   M1-04 was proposed. This authorizes preparing this task record for review.
 - Design/research-task approval: Granted on 2026-11-17 when the user said “i accept m1-04”.
   This authorizes the documentation/research scope above, not application implementation or live RPC.
-- Design acceptance: Pending; ADR-0006 is Proposed and awaits separate user acceptance.
+- Design acceptance: Granted on 2026-11-18 when the user said “i accept adr6”; recorded in ADR-0006.
 - Implementation approval: Not granted; M1-05 and later tasks remain separately gated.
 
 ## Preparation history
@@ -115,8 +115,10 @@ quotation behavior or integration. Approval would authorize only the documentati
 
 ## M1-05 validation plan
 
-The following checks are **planned**, not executed application tests. They apply only if the user
-accepts/amends ADR-0006 and separately approves a concrete M1-05 implementation scope. Preserve
+The bounded implementation scope is maintained in [M1-05](M1-05-quotation-and-cycle-analysis.md).
+
+The following checks are **planned**, not executed application tests. ADR-0006 is accepted;
+these checks require separately approved M1-05 implementation work. Preserve
 M1-03's passing behavior and explicit unavailable suitability; append linked qualification/analysis
 records rather than rewriting that evidence. Root checks must cover any actually introduced domain
 package as well as protocol/backend code.
@@ -180,6 +182,9 @@ success. M2 separately owns executor/fork/receipt and future live cost-producer 
 
 ## Evidence and handoff
 
+The research/proposal evidence below describes the 2026-11-17 handoff. Subsequent user acceptance
+is recorded in the dated section at the end; no implementation evidence has been added.
+
 Completed on 2026-11-17 under the explicit design/research approval above. The deliverables are
 [proposed ADR-0006](../adr/0006-quotation-cycles-and-profitability.md) and the Q01–Q18/offline/live
 M1-05 validation plan above. Every scope area has an explicit proposal, failure policy, and
@@ -225,3 +230,15 @@ result is claimed. Existing M1-03 evidence retains its original limitations.
 Only documentation changed. No code/scaffolding, packages, dependencies, tests, live RPC/fork calls,
 commits, or pushes were introduced. Review ADR-0006 next; accepting it does not by itself approve
 M1-05. Its concrete implementation scope remains a separate next task.
+
+### ADR acceptance — 2026-11-18
+
+The user said “i accept adr6”, accepting ADR-0006's design. Its status, the ADR index, backlog,
+roadmap, and current state were updated; the technical policy and planned validation remain unchanged.
+M1-05 implementation is still unapproved and has not started. Only documentation changed; no
+code, dependencies, tests, live RPC/fork calls, commits, or pushes were introduced.
+Acceptance-record checks passed: local links/anchors, whitespace, and CR references across
+31 Markdown files; `git diff --check`; six documentation-only changes; unchanged ADR formulas,
+technical values, source links, and Q01–Q18 matrix; Accepted status dated 2026-11-18 with
+implementation still unapproved; and unchanged Git HEAD `70a4d1a`. No behavioral checks were
+rerun for this acceptance update.

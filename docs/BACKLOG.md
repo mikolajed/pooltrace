@@ -53,10 +53,11 @@ access into this milestone. Each task remains separately scoped; later work requ
   State: Done. Scope, approvals, independent expectations, reused coverage, and actual results are in the linked record.
 - [x] [M1-08: Document mathematics, assumptions, commands, and actual milestone evidence](tasks/M1-08-mathematics-and-evidence-documentation.md).
   State: Done. Guide ownership, approvals, worked examples, and actual documentation checks are in the linked record.
-- [ ] M1-09: Propose the minimal SQLite driver/schema/migration design for the first backend slice.
-  Acceptance: backend ownership, exact amount encoding, observation/result provenance, write/read
-  boundaries, persistence failures, and minimal versioned migrations under ADR-0004 are explicit.
+- [x] [M1-09: Minimal SQLite driver, schema, and migration design](tasks/M1-09-minimal-sqlite-design.md).
+  State: Done — design delivery. Research/paper checks and later validation gates are in the linked
+  record; [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md) remains Proposed. No store is implemented.
 - [ ] M1-10: Implement the approved minimal evidence store alongside collection/analysis.
+  State: Unapproved; awaits ADR-0007 review and a separately approved implementation scope.
   Acceptance: observations/quotes/cycles and failure/invalidation evidence survive restart, exact
   values round-trip, and storage success is reported only after a successful commit.
 - [ ] M1-11: Add the approved local API, SSE updates, and minimal read-only browser view.

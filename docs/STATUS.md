@@ -4,20 +4,26 @@ Updated: 2026-11-18.
 
 ## Phase and authorization
 
-**M1-01 through M1-08 are complete. Later work is unapproved.**
+**M1-01 through M1-08 are complete. M1-09 design delivery is complete; ADR-0007 is Proposed.**
 
 The user accepted M1-08's bounded documentation scope on 2026-11-18 with “i accept”. The
 [task record](tasks/M1-08-mathematics-and-evidence-documentation.md) owns approval and actual
 documentation checks; earlier task records retain their own approvals/evidence.
 [WORKFLOW.md](WORKFLOW.md) governs later work. The user separately requested the completed M1-08
 documentation commit, followed by preparation of M1-09's scope. No push is authorized.
+The user approved M1-09 design delivery with “i accept” on 2026-11-18. Its
+[task record](tasks/M1-09-minimal-sqlite-design.md#evidence-and-handoff) owns actual research/paper
+checks. The proposed storage decision and M1-10 implementation remain unaccepted/unapproved.
 
 ## What exists
 
 - Product/correctness/engineering/deployment plans, roadmap/backlog, and accepted ADRs 0001–0006.
+- [Proposed ADR-0007](adr/0007-minimal-sqlite-evidence-store.md) specifies a minimal SQLite
+  evidence store: native-driver recommendation, exact immutable versions, atomic saves, historical
+  reads, migration/failure rules, and proposed CLI persistence. No driver/store is installed.
 - Pinned Bun/Node workspace, strict TypeScript/Biome, viem/Vitest, and **158 passing offline tests**
   across eight files, recorded in M1-07 with a clean frozen-lockfile install without private config.
-  The behavioral suite/install was not repeated for M1-08's Markdown-only changes.
+  The behavioral suite/install was not repeated for M1-08/M1-09's Markdown-only changes.
 - The [analysis guide](ANALYSIS.md) explains implemented mathematics, exact constructed examples,
   result/lifecycle interpretation, and actual archived evidence. Root README remains the command
   reference; source/requirements/ADRs/task records retain their separate authority.
@@ -57,13 +63,16 @@ retain separately gated M1 tasks; executor/Anvil/cost generation remain M2.
 
 ## Next proposed action
 
-Prepare M1-09's bounded SQLite design scope for review. It has not started; no driver/schema,
-migration, dependency, database creation, or implementation is authorized by M1-08 completion.
+Review [ADR-0007: Minimal SQLite evidence store](adr/0007-minimal-sqlite-evidence-store.md).
+If accepted, prepare the bounded M1-10 implementation scope for approval. Do not install the
+driver, open a database, or start implementation before that authorization.
 
 ## Latest handoff
 
 Requested M1-07 completion commit: `99fe048` (`test: complete M1-07 validation and regression coverage`).
-M1-08's guide, scope/approval/evidence, and navigation updates are included in the subsequent
-commit explicitly requested by the user. New help and fixture text/JSON commands passed; exact
-examples and archived provenance were checked. No new live RPC, application/test/configuration/
-evidence change, dependency installation, push, or later implementation was introduced.
+Requested M1-08 documentation commit: `c9414e2` (`docs: complete M1-08 analysis guide and evidence documentation`).
+M1-09's task, Proposed ADR, and navigation/current-state updates are Markdown only; the user
+separately requested their commit with “commit first”. ADR-0007 remains Proposed.
+Official version-specific research and paper/source checks are recorded in the task. Database/
+native-driver behavior remains unverified; there was no database/connection, installation,
+code/test change, new live check, push, or M1-10 implementation.

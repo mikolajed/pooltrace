@@ -12,7 +12,7 @@ authorize code or dependency installation.
 | EVM interaction | viem 2.57.20 installed and verified under accepted [ADR-0005](adr/0005-registry-verification-and-consistent-snapshots.md) and [ADR-0006](adr/0006-quotation-cycles-and-profitability.md) | Reviewed executor integration remains M2 work |
 | Contracts and local forks | Solidity, Foundry, Anvil | Compiler/dependency versions, router APIs, and local execution design |
 | TypeScript tests | Vitest 5.1.0; offline package tests executed through Node | Additional meaningful checks with approved behavior |
-| Evidence persistence | SQLite initially, under [ADR-0003](adr/0003-sqlite-first-and-storage-evolution.md) | Driver, schema, migrations, and writer ownership |
+| Evidence persistence | SQLite initially, under [ADR-0003](adr/0003-sqlite-first-and-storage-evolution.md) | Review Proposed [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md); implementation remains unapproved |
 | Terminal | Next.js, React, Tailwind, shadcn/ui, SSE | Versions, read path, and reconnect semantics |
 | Local runtime topology | UI application + one backend; early embedded SQLite; on-demand Anvil in M2 | Application configuration/lifecycle and later fork toolchain under [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) |
 
@@ -161,6 +161,13 @@ exact amounts and evidence semantics. ADR-0004 moves the reviewed minimal driver
 design into M1; M3 covers richer evidence/replay/recovery. Both require implementation approval.
 Language and storage migrations can proceed independently. Use the storage comparison methodology
 in [BENCHMARKING.md](BENCHMARKING.md) before claiming an improvement.
+
+Completed M1-09 design delivery proposes [ADR-0007](adr/0007-minimal-sqlite-evidence-store.md):
+better-sqlite3 13.2.0 on the unchanged Node pin, immutable exact evidence versions, atomic saves,
+bounded historical reads, and initial migration/failure handling. These are proposed choices;
+no dependency, database, codec, migration, or CLI persistence exists. The task records research
+and paper checks; native loading, effective settings, real-file/process behavior, and proposed
+cli-v2 integration remain separately approved M1-10 gates.
 
 ## Local execution and future releases
 

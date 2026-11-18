@@ -35,8 +35,9 @@ across agent instructions, task plans, and ADRs.
 - **Work on the terminal or logo:** product interface priorities → brand reference → relevant task.
 - **Plan a backend migration:** ADR-0002 → benchmark methodology → the relevant EVO/BENCH tasks and
   later migration ADR. The language direction is accepted; implementation remains separately gated.
-- **Plan storage changes:** ADR-0003 → ADR-0004 for early persistence timing/ownership → M1/M3/STORE
-  tasks → storage benchmark methodology. Future stores, formats, providers, and schemas remain open.
+- **Plan storage changes:** ADR-0003 → ADR-0004 for early persistence timing/ownership →
+  [Proposed ADR-0007](adr/0007-minimal-sqlite-evidence-store.md) and M1-09 evidence → M1-10/M3/STORE
+  tasks → storage benchmark methodology. No store is implemented; future stores/formats remain open.
 - **Plan runtime or deployment:** ADR-0004 → deployment plan → relevant M1/M2 or future DEP tasks.
   Local architecture is selected; pipeline/hosting implementation is not authorized.
 

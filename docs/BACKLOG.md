@@ -47,9 +47,8 @@ access into this milestone. Each task remains separately scoped; later work requ
   State: Done. Research/design evidence is maintained in the linked record; ADR-0006 is Accepted.
 - [x] [M1-05: V2/V3 quotation and cycle analysis](tasks/M1-05-quotation-and-cycle-analysis.md).
   State: Done. Scope, approvals, criteria, and offline/live evidence are maintained in the linked record.
-- [ ] M1-06: Add the runnable CLI and configuration documentation.
-  Acceptance: documented real-data and explicit fixture modes, `.env.example`, and states satisfying
-  CR-06, CR-09, and CR-11. Use shared backend behavior/API without starting a duplicate collector.
+- [ ] [M1-06: Runnable CLI and configuration documentation](tasks/M1-06-cli-and-configuration.md).
+  State: Proposed. Scope, approval boundary, criteria, and preparation evidence are maintained in the linked record.
 - [ ] M1-07: Validate arithmetic, token ordering, rounding, composition, and snapshot failures.
   Acceptance: meaningful checks for CR-01 through CR-05 and evidence reporting under CR-10.
 - [ ] M1-08: Document mathematics, assumptions, commands, and actual milestone evidence.

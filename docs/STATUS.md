@@ -30,6 +30,8 @@ Only the user creates commits.
   `bun run check:quotes:live` harnesses use the ignored private environment file; setup is in the
   [README](../README.md#development-setup). There is no fallback provider or implicit fixture mode.
 - The supplied perched kingfisher reference remains unchanged.
+- A proposed [M1-06 CLI/configuration scope](tasks/M1-06-cli-and-configuration.md) is ready for
+  review; implementation remains unapproved and has not started.
 
 ## Remaining boundaries
 
@@ -47,10 +49,11 @@ UI/backend services retain their separately gated M1 tasks; executor/Anvil/cost 
 
 ## Next proposed action
 
-Review M1-05's implementation and evidence, then prepare a bounded M1-06 CLI/configuration scope
-for separate approval. M1-06 has not started; persistence and browser tasks remain on the backlog.
+Review the [M1-06 CLI/configuration scope](tasks/M1-06-cli-and-configuration.md) and separately
+approve it before implementation. Persistence and browser tasks remain on the backlog.
 
 ## Latest handoff
 
-M1-05 is complete with passing offline/live and clean-install checks. Changes remain uncommitted;
-Git HEAD is the user's `0ec2e80`. No agent commit/push or subsequent task work occurred.
+The user's M1-05 commit `5987f92` is present. The requested M1-06 scope document and backlog/current
+state links are prepared for review and remain uncommitted. No M1-06 implementation, new RPC
+validation, agent commit, or push occurred during preparation.

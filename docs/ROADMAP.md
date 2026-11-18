@@ -56,6 +56,12 @@ store, exact immutable history, atomic saves and cli-v2; its evidence separates 
 faults, offline/process checks, and actual live runs. API/browser access and process lifecycle
 remain separately gated M1-11/M1-12.
 
+Proposed [M1-11](tasks/M1-11-local-api-sse-and-browser.md) and
+[M1-12](tasks/M1-12-local-startup-readiness-and-shutdown.md) now have reviewable scopes under
+[proposed ADR-0008](adr/0008-local-api-sse-and-process-interface.md). M1-11 supplies the individual
+applications/API/browser; M1-12 adds their combined startup workflow using the same process interface.
+M1-12's final validation depends on the actual M1-11 apps, not process fixtures alone.
+
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) selects a local UI application and one
 backend process with collection/analysis/RPC/API modules. Review a minimal SQLite schema/driver and
 persist observations/results from the first working backend. Add a narrow API/SSE/browser view and

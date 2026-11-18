@@ -18,6 +18,9 @@ technical conventions belong in engineering; task plans and evidence belong in t
 ## Essential operating rules
 
 - Preserve user work. Use Bun for package management and project commands.
+- Keep agent assignments, implementation branch assignments, and work scheduling in the chat.
+  ADRs and task records describe architecture, deliverables, dependencies, and evidence independently
+  of how the work is assigned or scheduled.
 - Treat Pooltrace as an ongoing product. Scope and scheduling boundaries apply to individual
   milestones, not to the project's lifetime or future capabilities.
 - Requested documentation work and read-only inspection may proceed within the user's request.

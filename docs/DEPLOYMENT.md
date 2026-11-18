@@ -140,6 +140,11 @@ capabilities when selecting the CI platform; no such protection is configured he
 
 ## Decisions still open
 
+[Proposed ADR-0008](adr/0008-local-api-sse-and-process-interface.md) now scopes the minimal local
+API/SSE/browser process interface and foreground launcher for separate M1-11/M1-12 review. It
+specifies proposed readiness identity, ownership, deadlines, shutdown, and the real-app integration
+gate; neither the design nor implementation is accepted yet. Hosted release gates remain separate.
+
 Runtime pins and the minimal SQLite driver/schema/journal settings are selected and validated in
 their task records. Endpoint/process supervision, API contracts, and fork lifecycle details still
 require their relevant scopes/ADRs. Hosting,

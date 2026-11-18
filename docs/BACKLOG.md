@@ -59,12 +59,12 @@ access into this milestone. Each task remains separately scoped; later work requ
 - [x] [M1-10: Minimal SQLite evidence store](tasks/M1-10-minimal-evidence-store.md).
   State: Done. Exact evidence/history storage, cli-v2, native/offline/process/live validation,
   clean installation, approvals, and limitations are in the linked record.
-- [ ] M1-11: Add the approved local API, SSE updates, and minimal read-only browser view.
-  Acceptance: UI reads backend-owned results/history, displays provenance/age/unavailable states,
-  and can reconnect/refresh without restarting collection. Rich terminal work remains in M4.
-- [ ] M1-12: Add the approved local application startup/readiness/shutdown workflow.
-  Acceptance: one command starts UI/backend, individual commands remain usable, failures are clear,
-  and shutdown touches only owned processes. Quotations do not require Anvil.
+- [ ] [M1-11: Local API, SSE updates, and minimal read-only browser](tasks/M1-11-local-api-sse-and-browser.md).
+  State: Proposed. Scope, approval boundary, and planned validation are in the linked record;
+  [proposed ADR-0008](adr/0008-local-api-sse-and-process-interface.md) owns the shared design.
+- [ ] [M1-12: Local startup, readiness, and shutdown](tasks/M1-12-local-startup-readiness-and-shutdown.md).
+  State: Proposed. Scope, approval boundary, and planned validation are in the linked record.
+  Combined-workflow validation depends on the actual M1-11 applications.
 
 ## M2 — executor and local forks; approval pending
 

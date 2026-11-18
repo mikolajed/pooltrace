@@ -8,7 +8,7 @@ across agent instructions, task plans, and ADRs.
 | File | Owns | Update when |
 | --- | --- | --- |
 | [../README.md](../README.md) | Public introduction and navigation | The project's entry points change |
-| [../AGENTS.md](../AGENTS.md) | Short agent entry point and approval guardrail | Agent navigation changes |
+| [../AGENTS.md](../AGENTS.md) | Short agent entry point, operating rules, and approval guardrail | Agent navigation or operating instructions change |
 | [PRODUCT.md](PRODUCT.md) | Product purpose, ongoing vision, milestone workloads, interface priorities | The user changes product direction or milestone scope |
 | [CORRECTNESS.md](CORRECTNESS.md) | Stable financial, state, execution, and evidence requirements | A requirement is clarified or explicitly changed |
 | [ANALYSIS.md](ANALYSIS.md) | Explanation of implemented read-only calculations, assumptions, worked examples, result interpretation, and evidence reading paths | Implemented behavior or the reader's interpretation path changes |
@@ -41,6 +41,10 @@ across agent instructions, task plans, and ADRs.
   M3/STORE tasks → storage benchmark methodology. Future stores/formats remain open.
 - **Plan runtime or deployment:** ADR-0004 → deployment plan → relevant M1/M2 or future DEP tasks.
   Local architecture is selected; pipeline/hosting implementation is not authorized.
+- **Review local API/browser and startup work:** M1-11/M1-12's proposed task scopes →
+  [proposed ADR-0008](adr/0008-local-api-sse-and-process-interface.md) for API/SSE, producer ownership,
+  process interface, application responsibilities, and integration gate. Preparation is complete;
+  design acceptance and implementation remain separately pending.
 
 ## Consistency rules
 

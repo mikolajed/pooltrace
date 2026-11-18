@@ -174,6 +174,12 @@ power-loss/other-platform behavior. There is no retention, backup/recovery autom
 
 ## Local execution and future releases
 
+[Proposed ADR-0008](adr/0008-local-api-sse-and-process-interface.md) and the proposed
+[M1-11](tasks/M1-11-local-api-sse-and-browser.md) /
+[M1-12](tasks/M1-12-local-startup-readiness-and-shutdown.md) scopes prepare the concrete local
+API/SSE/browser and startup behavior. Their process interface and application responsibilities are review
+proposals, not selected tooling or implemented behavior; frontend dependency pins remain pending.
+
 [ADR-0004](adr/0004-local-processes-and-gated-deployment.md) selects separate UI/backend application
 processes on localhost. Collection, RPC, analysis, storage, API, and SSE are backend modules rather
 than independent services. The backend owns SQLite access; Anvil is a separate on-demand process

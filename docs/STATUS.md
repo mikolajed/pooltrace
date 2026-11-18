@@ -4,17 +4,24 @@ Updated: 2026-11-18.
 
 ## Phase and authorization
 
-**M1-01 through M1-10 are complete. Later work remains unapproved.**
+**M1-01 through M1-10 are complete. M1-11/M1-12 scopes and ADR-0008 are prepared for review;
+their implementation remains unapproved.**
 
 The user accepted ADR-0007 with “i accept adr7”, then approved M1-10 with “i accept m1-10” on
 2026-11-18 after its scope was committed. The [M1-10 task](tasks/M1-10-minimal-evidence-store.md)
 owns approval, actual implementation/native/offline/process/live evidence, and limitations.
 Earlier records retain their own evidence. [WORKFLOW.md](WORKFLOW.md) governs later work;
-no M1-11 or push is authorized. The user separately requested the completed M1-10 commit.
+no later implementation or push is authorized. The user separately requested the completed M1-10
+commit. On 2026-11-18, “ok do it” approved the recommendation to prepare M1-11/M1-12 scopes and
+their shared process interface; it did not accept the subsequently authored design or implementation.
 
 ## What exists
 
 - Product/correctness/engineering/deployment plans, roadmap/backlog, and accepted ADRs 0001–0007.
+- Proposed [ADR-0008](adr/0008-local-api-sse-and-process-interface.md) and task scopes for
+  [M1-11](tasks/M1-11-local-api-sse-and-browser.md) /
+  [M1-12](tasks/M1-12-local-startup-readiness-and-shutdown.md) define application responsibilities,
+  CLI/service ownership, current/history/SSE semantics, process interface, and workflow validation.
 - [Accepted ADR-0007](adr/0007-minimal-sqlite-evidence-store.md) specifies a minimal SQLite
   evidence store: native driver, exact immutable versions, atomic saves, historical reads,
   migration/failure rules, and CLI persistence. M1-10 implements the backend-owned embedded store
@@ -67,8 +74,9 @@ failure, power loss, other-platform compatibility, and performance remain unveri
 
 ## Next proposed action
 
-Prepare M1-11's bounded local API/SSE/minimal browser scope for review when requested.
-It has not been prepared or started. Completion of M1-10 does not authorize it.
+Review proposed ADR-0008 and both task scopes. Design acceptance and implementation approval remain
+separate. M1-11 delivers the individual applications and M1-12 delivers their combined launcher;
+M1-12 needs the actual M1-11 applications for final validation. Implementation has not started.
 
 ## Latest handoff
 
@@ -77,5 +85,12 @@ Requested M1-08 documentation commit: `c9414e2` (`docs: complete M1-08 analysis 
 Requested M1-09 design commit: `8360629` (`docs: complete M1-09 SQLite evidence-store design`).
 Requested acceptance/scope commit: `07660ec` (`docs: accept ADR-0007 and prepare M1-10 implementation scope`).
 The user requested a completion commit for M1-10's implementation, tests, two new actual live
-report archives, and documentation updates. No later task, push, API/UI, service, fork, or execution
-was introduced.
+report archives, and documentation updates. At that handoff, no later task, push, API/UI, service,
+fork, or execution was introduced.
+
+Latest documentation handoff: M1-11/M1-12 scopes and proposed ADR-0008 describe component
+responsibilities, process interfaces, deliverables, dependencies, and validation. The linked task
+records own preparation evidence and documentation checks; application/runtime checks are planned,
+not executed. Agent coordination guidance lives in [AGENTS.md](../AGENTS.md).
+The user explicitly requested committing this documentation checkpoint on 2026-11-18. ADR-0008
+and both implementation scopes remain Proposed; this commit request does not authorize implementation.

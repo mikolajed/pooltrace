@@ -30,6 +30,7 @@ Small refactors within an accepted design need no separate ADR.
 | [0005](0005-registry-verification-and-consistent-snapshots.md) | Registry verification and consistent snapshots | Accepted | [M1-02](../tasks/M1-02-registry-and-consistent-snapshots.md); completed [M1-03 implementation](../tasks/M1-03-registry-and-consistent-snapshots.md) |
 | [0006](0006-quotation-cycles-and-profitability.md) | Quotations, finite-size admission, and cycle profitability | Accepted | [M1-04 design](../tasks/M1-04-quotation-cycles-and-profitability-design.md); completed [M1-05 implementation](../tasks/M1-05-quotation-and-cycle-analysis.md) |
 | [0007](0007-minimal-sqlite-evidence-store.md) | Minimal SQLite evidence store | Accepted | Completed [M1-09 design](../tasks/M1-09-minimal-sqlite-design.md) and [M1-10 implementation](../tasks/M1-10-minimal-evidence-store.md#implementation-evidence) |
+| [0008](0008-local-api-sse-and-process-interface.md) | Local API, SSE, and application process interface | Proposed | Proposed [M1-11](../tasks/M1-11-local-api-sse-and-browser.md) / [M1-12](../tasks/M1-12-local-startup-readiness-and-shutdown.md) |
 
 Link requirements from [CORRECTNESS.md](../CORRECTNESS.md) where applicable. An ADR explains how
 to meet them; it does not change them or establish implementation evidence by itself.
@@ -45,5 +46,6 @@ These are topics to investigate, not preaccepted designs:
 - Brand asset production and terminal visual conventions.
 - Concrete Rust migration boundaries and Python research integration under ADR-0002; the selected
   direction does not preaccept those future designs.
-- Concrete UI/backend API and process lifecycle, Anvil orchestration, and future hosting/CI/CD gates
-  under ADR-0004. No CI platform or production deployment is configured.
+- ADR-0008 proposes the minimal M1 UI/backend API, SSE, and process lifecycle under ADR-0004.
+  Anvil orchestration and future hosting/CI/CD gates remain separate upcoming designs. No CI
+  platform or production deployment is configured.

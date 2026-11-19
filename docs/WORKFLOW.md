@@ -3,8 +3,9 @@
 ## Authorization
 
 Implementation requires explicit user approval for a named task, milestone, or otherwise clearly
-bounded change. Current authorizations and evidence are maintained in the relevant task records;
-[STATUS.md](STATUS.md) summarizes the active phase.
+bounded change. Record authorization and evidence in the relevant task record, or use the
+[lightweight documentation path](#work-lifecycle) for small corrections. [STATUS.md](STATUS.md)
+summarizes the active phase.
 
 The product brief is future scope. Backlog entries, roadmap dates, proposed or accepted ADRs, and
 an agent's plan do not authorize implementation. Silence is not approval. Do not create application
@@ -17,9 +18,29 @@ choices independently. Return to the user only when a material design or scope c
 decision. Completing a task does not authorize starting the next one.
 
 Requested documentation changes and read-only inspection can proceed within their stated scope.
-Only the user creates commits. Agents may prepare changes and suggest commit messages, but must
-not commit. Do not push unless the user explicitly asks. Never label agent-written decisions as
-user approvals.
+Create a dedicated task branch before editing, including documentation-only work. Keep each branch
+and PR scoped to one approved change; put unrelated work on a separate branch. Deliver changes
+through a PR to `main`; the user reviews and merges. Do not edit on or deliver directly to `main`.
+
+Before editing, inspect the current branch, working tree, staged changes, and existing worktrees.
+For a new task, fetch `origin` and create the branch from current `origin/main` unless another base
+is explicitly selected. If fetching is unavailable, report that the base could not be refreshed.
+Continue an existing task on its own branch; use a separate checkout/worktree when the current one
+contains unrelated work. Preserve that work rather than carrying it into the new task or discarding it.
+
+Agents must not commit unless the user explicitly instructs them to commit. Implementation
+approval, a requirement to use PRs, and general PR-delivery approval do not imply commit permission.
+Until that instruction arrives, prepare and validate the changes on the task branch and leave them
+uncommitted. Push and PR publication also require the user's authorization. Permission for one
+action or task does not authorize another task, agent approval/merge, auto-merge, repository
+administration, or deployment. Never label agent-written decisions as user approvals.
+
+Unless the user explicitly authorizes a series of commits for a bounded scope, a commit instruction
+covers the currently prepared change only. Later CI or review fixes may be prepared within the
+approved scope, but require another explicit commit instruction before committing. An instruction
+such as "commit and create a PR" authorizes that commit, the necessary task-branch push, and PR
+creation together; "commit" alone does not authorize publication. Do not request permission again
+for an action already covered by the user's instruction.
 
 Future production changes follow the draft gates in [DEPLOYMENT.md](DEPLOYMENT.md). A successful
 build, test run, staging validation, or accepted architecture does not grant release authorization.
@@ -56,7 +77,8 @@ Record relevant validation and material limitations.
 Task: DEP-02
 ```
 
-Replace the example task ID with the actual task. Use the
+Replace the example task ID with the actual task when one exists; omit the task footer for a small
+correction recorded directly in chat and its PR. Use the
 [PR template](pull_request_template.md) for the approved scope, behavior, validation and
 remaining limitations. Replace its prompts with actual evidence; do not report planned checks as
 passed. GitHub [loads this template from the default branch](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository),
@@ -66,12 +88,13 @@ check is currently enforced by CI.
 ## Proposed shared PR contributions
 
 Status: User-requested direction documented on 2026-11-18. ADR-0009 and DEP-02 were subsequently
-approved; CI implementation is in progress. The standing delivery permissions below remain
+approved; the CI implementation was merged in PR #1. The branch-first and human-merge rules above
+are active following the user's 2026-11-19 instruction. The standing delivery permissions below remain
 **proposed, not active**, pending CONTRIB-01 acceptance and verified setup. The user wants CI prioritized before M2 so several
 agent tools, including Claude, Codex/GPT, Grok or later tools, can contribute changes for human
 review. No tool's GitHub integration, bot identity, subscription or cloud environment is assumed
-available. Current commit/push restrictions above still apply until this process is accepted and
-the relevant setup is verified. This documentation request does not authorize remote changes.
+available. Explicit task-specific instructions above can permit a bounded commit/push/PR sequence
+without activating standing permissions or establishing contributor-tool readiness.
 
 ### Common contribution contract
 
@@ -84,10 +107,14 @@ The proposed delivery sequence is:
 ```mermaid
 flowchart LR
     Scope[User approves a bounded task] --> Branch[Isolated checkout and task branch]
-    Branch --> Draft[Draft PR]
+    Branch --> Prepare[Prepare and validate scoped changes]
+    Prepare --> CommitPermission[Explicit user commit permission]
+    CommitPermission --> Commit[Commit approved changes]
+    Commit --> PublishPermission[Explicit user publication permission]
+    PublishPermission --> Draft[Push branch and open or update draft PR]
     Draft --> Checks[Required CI on current candidate]
-    Checks -->|Failure| Fix[Contributor fixes its PR]
-    Fix --> Checks
+    Checks -->|Failure| Fix[Prepare and validate in-scope fixes]
+    Fix --> CommitPermission
     Checks -->|Pass| Ready[Ready for human review]
     Ready --> Review[User reviews behavior and evidence]
     Review -->|Changes requested| Fix
@@ -95,9 +122,10 @@ flowchart LR
 ```
 
 Once explicitly accepted and enabled, a task approval that includes PR delivery would authorize
-the contributor to create commits, push its task branch, open/update its draft PR, inspect CI and
-repair failures within that task. It would not authorize unrelated work, changes to another
-contributor's branch, direct writes to `main`, approval/merge of a PR, enabling auto-merge,
+the contributor to push its task branch, open/update its draft PR, inspect CI and repair failures
+within that task. Creating commits still requires the user's explicit instruction to commit;
+PR-delivery approval alone is insufficient. Delivery permission would not authorize unrelated work,
+changes to another contributor's branch, direct writes to `main`, approval/merge of a PR, enabling auto-merge,
 repository administration, credential provisioning or deployment. A code-task approval without
 PR delivery in its scope would not silently acquire those permissions.
 
@@ -137,8 +165,10 @@ resolve failures within scope, and record unavailable external checks honestly. 
 review requires fresh checks and review under repository protection. If the base branch changes,
 revalidate the combined result before merge; an earlier independent pass is insufficient.
 
-The PR description states the problem, final behavior, linked approved task, actual validation and
-material limitations. Attach concise reports and browser traces/screenshots when they help review.
+The PR description states the problem, final behavior, linked approved task or explicit user-requested
+scope for a small correction, actual validation, and material limitations. If no task or ADR is needed,
+say so in the PR template instead of creating one just to fill its fields. Attach concise reports
+and browser traces/screenshots when they help review.
 Keep routine logs, databases, secrets and repeated output out of Git; selected sanitized milestone
 evidence may remain in `docs/evidence/`. A passing check cannot establish complete requirement
 coverage, financial correctness, security or absence of defects.
@@ -153,6 +183,16 @@ delivery through CONTRIB-01. Hosting/release work retains its own approval gates
 Plan bounded deliverables and any delivery estimates per task or milestone. Do not impose a
 project-wide completion date or permanent feature ceiling. A milestone's scope controls its work;
 it does not exclude separately reviewed capabilities from the product's future.
+
+Small, bounded documentation or policy corrections may use the user's chat instruction as the
+scope/authorization record and the PR description as the validation/handoff record. Until publication
+is authorized, report the prepared diff and actual checks in chat. Do not create a task ID, task
+record, backlog entry, or ADR solely for that correction. Update only affected canonical documents;
+do not change STATUS or other planning records solely to announce the edit. If an existing task
+record applies or the change affects milestone state, update those relevant records within scope.
+Commit, publication, and human-merge rules still apply.
+
+Use the full lifecycle below for substantive implementation or design work:
 
 1. **Prepare.** Select a backlog item and create a detailed task from the
    [template](tasks/TEMPLATE.md) when it is close enough to implementation. State boundaries,

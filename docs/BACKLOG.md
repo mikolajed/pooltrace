@@ -68,8 +68,9 @@ access into this milestone. Each task remains separately scoped; later work requ
 
 ## M2 — executor and local forks; approval pending
 
-PR verification and shared contribution setup below are the next requested priority before M2.
-DEP-02 is now approved and in progress; CONTRIB-01 and M2 work remain unapproved.
+PR verification and contributor onboarding are tracked below. The CI implementation is merged;
+DEP-02 retains its verification evidence and remaining checks. CONTRIB-01 now covers native
+Codex Cloud onboarding, without a custom app/publisher gate. M2 work remains unapproved.
 
 - [ ] M2-01: Propose executor trust-boundary and fork/cost-accounting ADRs.
 - [ ] M2-02: Build the approved single-owner, prefunded executor.
@@ -173,17 +174,16 @@ approved scope. Data-store roles may complement each other; there is no mandator
 ### PR verification and future deployment
 
 The local architecture is accepted in [ADR-0004](adr/0004-local-processes-and-gated-deployment.md).
-[DEPLOYMENT.md](DEPLOYMENT.md) records proposed PR verification and future release gates. The
-repository has no CI workflow; remote bot/hosting setup remains unverified. The user requested documentation
-of CI and shared PR contributions as the next priority. ADR-0009 is accepted and DEP-02 implementation is approved;
-CONTRIB-01 remains proposed. CI can precede hosting decisions in DEP-01.
+[DEPLOYMENT.md](DEPLOYMENT.md) records PR verification and future release gates. CI was implemented
+under accepted ADR-0009 and merged through PR #1. Native Codex Cloud onboarding is CONTRIB-01;
+other tools and hosting remain separately scoped future work.
 
 - [ ] [DEP-02: PR verification and cloud compatibility](tasks/DEP-02-pr-verification-and-cloud-compatibility.md).
   State: In progress; approved by “i accept adr9 and dep2”. CI checks/build, Linux/macOS
   validation, fixture browser smoke, candidate evidence and actual merge enforcement under ADR-0009.
-- [ ] [CONTRIB-01: Shared PR contributor setup](tasks/CONTRIB-01-shared-pr-contributor-setup.md).
-  State: Proposed; follows the CI foundation. Actual selected tool connections/identities, scoped
-  delivery, equivalent checks, human approval and independent revocation; no vendor capability assumed.
+- [ ] [CONTRIB-01: Native Codex Cloud onboarding](tasks/CONTRIB-01-shared-pr-contributor-setup.md).
+  State: In progress. Native environment setup and a real Cloud PR remain unverified; custom
+  app/publisher requirements are removed and other tools remain deferred.
 
 - [ ] DEP-01: Propose hosting, packaging, environment boundaries, and process/data lifecycle ADR.
   Acceptance: UI/backend artifacts, collector ownership, persistent data, optional native fork

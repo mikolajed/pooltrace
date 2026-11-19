@@ -5,10 +5,11 @@ diagnostic CLI access, exact SQLite history, the analysis guide, a minimal local
 combined startup/shutdown. Further implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
-The next user-requested priority is CI and a shared PR contribution workflow before M2. Documentation
-is prepared in [accepted ADR-0009](adr/0009-pr-verification-and-repository-trust.md),
-[DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md) and
-[CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md); ADR-0009 and DEP-02 are approved/in progress, while CONTRIB-01 remains proposed.
+The next arbitrage research increment uses the completed M1 collector. The CI implementation
+is on main. Remaining CI verification and native Codex Cloud onboarding are tracked separately.
+[ADR-0009](adr/0009-pr-verification-and-repository-trust.md) ·
+[DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md) ·
+[CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md).
 
 ## Milestone planning
 
@@ -19,14 +20,18 @@ Review working behavior and evidence as each milestone progresses, then propose 
 [PRODUCT.md](PRODUCT.md) describes the product and current milestone workloads. The sequence below
 is a revisable development plan, not the full extent of Pooltrace's future capabilities.
 
-## Milestone sequence
+## Core milestone sequence
+
+M1–M5 define the core product capabilities. Research tracks can span several core milestones.
+Each track can deliver independently scoped increments and use core capabilities as they become
+available. The results inform which core work to scope next.
 
 | Stage | Sequencing | Outcome | Related work |
 | --- | --- | --- | --- |
 | Setup | Complete | Requirements, documentation system, ADR workflow, backlog, brand reference | SET tasks in [backlog](BACKLOG.md) |
 | M1: Local read-only research application | Complete | One backend, minimal UI/CLI access, verified quotes/cycles, early SQLite | M1 tasks in [backlog](BACKLOG.md) |
-| PR verification and shared contributions | In progress before M2; contributor setup pending | Required checks, cloud compatibility, traceable PR delivery and human merge | DEP-02 and CONTRIB-01 in [backlog](BACKLOG.md) |
-| M2: Executor and fork validation | Builds on verified cycle analysis | Guarded execution, meaningful contract tests, full transaction cost evidence | M2 tasks in [backlog](BACKLOG.md) |
+| PR verification and shared contributions | CI merged, remaining verification and native onboarding in progress | Required checks, cloud compatibility, traceable PR delivery and human merge | DEP-02 and CONTRIB-01 in [backlog](BACKLOG.md) |
+| M2: Executor and fork validation | Early arbitrage research informs scope | Guarded execution, meaningful contract tests, full transaction cost evidence | M2 tasks in [backlog](BACKLOG.md) |
 | M3: Evidence and recovery hardening | Builds on M1 persistence and M2 simulation records | Richer history/replay, schema evolution, backup/restore, recovery | M3 tasks in [backlog](BACKLOG.md) |
 | M4: Research terminal refinement | Builds on the minimal M1 UI and usable evidence | Full route/cost/size inspection, polished states, brand integration | M4 and BR tasks in [backlog](BACKLOG.md) |
 | M5: Documentation and reproducibility | Consolidates a reviewable increment; can be revisited | Reproducible setup, explanations, validation evidence, contributor guidance | M5 tasks in [backlog](BACKLOG.md) |
@@ -103,6 +108,79 @@ changes, without defining a permanent boundary on the product.
 Replan milestone scope or estimates explicitly as needed. Keep approved work correct, usable, and
 documented. Each subsequent implementation scope still requires approval.
 
+## ARB — arbitrage research track
+
+ARB is a core product priority pursued through research milestones of its own. Start with
+the M1 collector and Ethereum quotes. Use each increment to work out whether the next one is
+worth doing and which experiments to prioritize. The research uses live read-only observation
+and local fork experiments. [ARB tasks](BACKLOG.md#arb--arbitrage-research-track).
+
+| Research milestone | Core dependency | Deliverable |
+| --- | --- | --- |
+| Opportunity discovery | Completed M1 collector and quote engine | Measure baseline yield and freshness, compare a bounded pool or size expansion, and identify recurring positive-gross candidates or record the coverage and timing gaps that merit another experiment. |
+| Full-cost validation | Local fork and cost evidence as M2 develops | Shortlist routes and measure quoted versus executed output and net after full transaction costs in recorded fork states. Use the results to refine route selection and M2 scope. |
+| Timing and wider coverage | Fork tooling for intra-block replay, with M3 history/replay where needed | Measure whether added venues or earlier observation expose more candidates. Test public mempool timing in read-only shadow mode if replay finds a recurring signal. |
+
+The live collector selects the provider's latest mined block at the start of an attempt and pins
+all reads to its hash. It sees end-of-block state, so a price gap opened by one swap and closed
+later in the same block can be invisible even at zero head lag. Collection can also finish after
+the head has advanced. One archived CLI run found a best tested gross of −0.024121 USDC on a
+10 USDC input, with costs unavailable. That sample covers three USDC/WETH pools and six sizes.
+Treat competition, limited venue coverage, and sizing as hypotheses to test.
+[Archived CLI run](ANALYSIS.md#reading-an-actual-archived-cli-result).
+
+### Candidate experiments
+
+1. **Measure the baseline and freshness.** Use a predetermined window of consecutive blocks and
+   keep the current pools and sizes as a control. Report how many blocks were seen, qualified,
+   missing, or stale, and how many qualified blocks produced positive gross. Record observed head
+   arrival, quote completion, head lag at completion, and RPC use. If polling misses blocks or
+   leaves too little time to finish, compare new-head-triggered collection with polling on the
+   same workload. Keep hash pinning, reorg handling, and completeness checks.
+2. **Add pools using existing adapters.** Check additional Uniswap V3 USDC/WETH fee tiers first.
+   Verify deployment, fee, token behavior, and finite-size depth before quoting. Compare coverage
+   with the three-pool baseline at identical block hashes and input sizes. Then test a broader size
+   grid around promising routes as a separate experiment. Keep qualification and exact amount
+   accounting in place.
+3. **Add one venue, then consider more hops.** Rank Ethereum venue candidates by overlapping
+   liquidity, swap activity, fees, and the cost of reliable quoting. Evaluate a venue with a
+   compatible pool model first if it has meaningful depth, or evaluate a distinct model such as
+   Curve if the data supports it. Verify the venue's actual quote semantics against deployed
+   behavior. Measure the incremental result on the same blocks before adding vetted token pairs
+   and bounded three-hop USDC cycles. Count added quote calls and gas alongside added candidates.
+   Scope these increments when baseline measurements show where extra coverage may help.
+4. **Replay transaction boundaries before observing pending swaps.** On a local fork of a
+   recorded parent block, replay a block's transactions in canonical order and quote immediately
+   after selected swaps. Compare the same routes before the swap, after it, and at block end.
+   Reconcile the replay with canonical state and record the transaction index. This tests whether
+   gaps existed inside the block. The recorded transaction order supplies hindsight. Measuring
+   when a live observer could detect a gap requires prospective observations.
+5. **Evaluate the public mempool in shadow mode if replay justifies it.** Check feed capabilities
+   and measure first-seen time, simulation completion, and overlap with subsequently mined swaps.
+   Simulate an observed swap followed by a candidate cycle on a fork of the head known at
+   observation time. Record the assumed order and check it against eventual inclusion. Track
+   missing/private order flow where it can be identified, replacements, reverts, reorgs, and
+   opportunities that disappear before analysis finishes. Results are conditional on the feed
+   and assumed ordering. This experiment is read-only against the live network.
+
+### Evidence and decisions at each milestone
+
+- Report the share of qualified states with at least one positive-gross cycle, the distribution
+  of gross USDC after pool fees and price impact, and the best tested size. Record block hashes,
+  pool and size configurations, rejected results, observation latency, and RPC cost. Include
+  zero-yield windows and repeat any promising result on a fresh window.
+- If positive gross repeats with enough margin to justify cost validation, scope a bounded
+  local fork experiment as the relevant M2 capabilities become available. Compare quoted and
+  executed output for shortlisted candidates, apply complete transaction costs in USDC, and
+  include any modeled inclusion payments. Keep net unavailable until matching cost evidence
+  exists. A positive simulated net applies to that fork state and ordering.
+  [CR-06](CORRECTNESS.md#cr-06--net-profitability-and-transaction-costs).
+- Set the sample windows, minimum coverage, latency targets, and resource budget for each
+  experiment. Close each research milestone with reproducible evidence and a decision to
+  continue, revise, or pause that line of work. Use recurring gross margins to prioritize M2
+  validation. Use recurring positive simulated net and measured detection timing to judge
+  further investment. Record remaining uncertainty about inclusion and competition.
+
 ## Planned backend evolution
 
 The accepted direction in [ADR-0002](adr/0002-typescript-first-and-measured-evolution.md) is to start
@@ -156,8 +234,7 @@ branch/PR/review rules, maintained in [WORKFLOW.md](WORKFLOW.md#proposed-shared-
 DEP-02 establishes the CI foundation, Linux/macOS compatibility and fixture integration checks.
 CONTRIB-01 verifies actual selected tool identities/delivery against that foundation. They share
 a final real-PR approval/trigger validation before routine delivery is enabled. Passing CI remains
-evidence for human review rather than authority to merge or deploy. M2-01 follows this setup unless
-the user explicitly reprioritizes work.
+evidence for human review rather than authority to merge or deploy.
 
 ## Future deployment and CI/CD
 

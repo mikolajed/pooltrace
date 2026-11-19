@@ -66,6 +66,22 @@ access into this milestone. Each task remains separately scoped; later work requ
   State: Done. Actual controlled-process and integrated application validation are in the linked
   record, including native signals, owned cleanup and historical reopen.
 
+## ARB — arbitrage research track
+
+Research milestones span the core roadmap. Scope the first increment around the M1 collector.
+Use M2 fork and cost capabilities for candidate validation and draw on M3 evidence and replay
+where useful. [Research milestones](ROADMAP.md#arb--arbitrage-research-track).
+
+- [ ] ARB-01 — Measure baseline route yield and collector freshness on predefined block windows.
+- [ ] ARB-02 — Compare additional pools and size ranges on matched blocks. Evaluate an additional
+  protocol in a later increment if the coverage data warrants it.
+- [ ] ARB-03 — Use fork tooling for intra-block replay and evaluate read-only public mempool
+  observation if replay shows recurring opportunities.
+- [ ] ARB-04 — Use M2 fork and cost evidence to validate recurring candidates if their measured
+  gross margins justify it.
+- [ ] ARB-05 — Record reproducible results and the decision to continue, revise, or pause at
+  each research milestone.
+
 ## M2 — executor and local forks; approval pending
 
 PR verification and contributor onboarding are tracked below. The CI implementation is merged;

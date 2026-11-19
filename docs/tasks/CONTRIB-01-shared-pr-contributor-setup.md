@@ -1,11 +1,40 @@
 # CONTRIB-01: Native Codex Cloud onboarding
 
-- State: In progress — native Cloud setup and a real Cloud PR remain unverified
+- State: Closed — native onboarding direction/documentation delivered; Cloud execution unverified
 - Milestone: Contributor onboarding
 - Related records: [WORKFLOW](../WORKFLOW.md), [DEP-02](DEP-02-pr-verification-and-cloud-compatibility.md),
   [ADR-0009](../adr/0009-pr-verification-and-repository-trust.md)
 - Requirement IDs: CR-09, CR-10
 - Current scope: Codex first; other contributor tools later
+
+## Closeout
+
+Closed on 2026-11-19 following the user's instruction “we need close them”. The native onboarding
+direction and contribution documentation were delivered in the user-merged
+[PR #2](https://github.com/mikolajed/pooltrace/pull/2), head
+`c1bcea12af539713ed93ce4f80b403190cfe9523`, base
+`1d180c208829f3743f8c8d704e57cc485fe9520d`, merge commit
+`d9136c3e7dbd57d05fcf992f4b9d68366e73598d`.
+The [final review-ready CI run](https://github.com/mikolajed/pooltrace/actions/runs/44540774170)
+succeeded for that head; the [PR review](https://github.com/mikolajed/pooltrace/pull/2#pullrequestreview-5977379339)
+records all six jobs passing. Merge/head identities and all six successful jobs were read back during
+closeout. The actual PR author is `mikolajed`; this is local delivery evidence.
+
+Delivered: native Codex selected, custom app/publisher requirements withdrawn, setup instructions
+documented, and explicit commit permission/user review preserved in the merged workflow.
+
+Outstanding: a dedicated published Pooltrace Cloud environment, its actual toolchain/check report,
+and a Cloud-origin PR with creation/update and CI evidence remain unverified. The original
+acceptance boxes below remain unchecked. No Cloud task was launched, and local delivery is not
+Cloud execution evidence. The user's unused app/key removal was not independently verified.
+
+These are documented limits of the closed task, available for a future separately approved
+verification scope. Closure does not activate standing delivery permissions or authorize account
+changes, automatic dispatch, commits/publication, agent merging, or deployment.
+
+Closeout documentation validation: `git diff --check` passed, and 242 local Markdown targets/
+anchors across 15 changed documentation files resolved. No application suite, Cloud task or new
+hosted run was executed for this documentation correction.
 
 ## Outcome
 
@@ -53,8 +82,8 @@ Official guides checked on 2026-11-19:
 - [ ] A Pooltrace Cloud environment is prepared/published with actual toolchain and check evidence.
 - [ ] A real Cloud task produces a PR with recorded origin, author, head/base and required CI results.
 
-Native Cloud validation remains future work. It does not block using the already working local
-Codex branch/PR workflow or merging the documentation correction.
+Native Cloud validation remains unverified at closure. It does not block using the already working
+local Codex branch/PR workflow; the documentation correction has been merged.
 
 ## Approval record
 
@@ -63,10 +92,14 @@ After reviewing the native Cloud capability, the user chose to remove the custom
 and requested simplification of this record. This supersedes the custom-bot/publisher proposal.
 
 The user subsequently authorized “Commit, push, and open the contributor-doc PR”. After discussing
-the related scope, the cleanup is being included in the existing workflow PR #2 rather than opening
+the related scope, the cleanup was included in the existing workflow PR #2 rather than opening
 another PR. This publication instruction does not authorize account changes, automatic task
 dispatch, merge, deployment, or implementation of the product backlog. Later commits still require
 explicit permission; the user performs review/merge.
+
+On 2026-11-19 the user instructed “we need close them” for CONTRIB-01 and DEP-02 and requested
+an AGENTS/workflow rule to prevent missed closeouts. This authorizes closing and reconciling the
+records with the limits above; it does not establish that the unperformed Cloud checks passed.
 
 ## Evidence and handoff
 
@@ -78,7 +111,7 @@ explicit permission; the user performs review/merge.
   passed all six jobs. Attempt 1 failed during Ubuntu package downloads before browser tests;
   that failure is preserved in the PR's validation notes.
 - Local PR delivery is not evidence of Cloud execution. The initial workflow-only head's hosted
-  passes do not cover later contributor-document changes; the combined candidate requires fresh CI,
-  whose actual result is recorded in PR #2 before review readiness.
+  passes do not cover later contributor-document changes. The combined candidate's fresh CI and
+  subsequent user merge are recorded in [closeout](#closeout).
 - No custom publisher or authentication helper was implemented, and no app private key was read
   or used. App/key deletion is the user's action and has not been independently verified.

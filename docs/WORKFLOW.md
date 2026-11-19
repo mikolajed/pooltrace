@@ -90,7 +90,8 @@ check is currently enforced by CI.
 Status: User-requested direction documented on 2026-11-18. ADR-0009 and DEP-02 were subsequently
 approved; the CI implementation was merged in PR #1. The branch-first and human-merge rules above
 are active following the user's 2026-11-19 instruction. The standing delivery permissions below remain
-**proposed, not active**, pending CONTRIB-01 acceptance and verified setup. The user wants CI prioritized before M2 so several
+**proposed, not active**, requiring separate explicit activation and verified setup for the selected
+delivery path. Closing CONTRIB-01 does not activate them. The user wants CI prioritized before M2 so several
 agent tools, including Claude, Codex/GPT, Grok or later tools, can contribute changes for human
 review. No tool's GitHub integration, bot identity, subscription or cloud environment is assumed
 available. Explicit task-specific instructions above can permit a bounded commit/push/PR sequence
@@ -148,8 +149,9 @@ Use traceable authenticated contributor identities, preferably GitHub App instal
 scoped to this repository. Separate independently operated tool credentials so access can be
 revoked independently. A model name is not an authentication mechanism; changing Git commit
 metadata does not select the PR author. One identity can serve several models within one trusted
-tool boundary. Exact apps, names and adapters are selected and verified in
-[CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md).
+tool boundary. [CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md#closeout) records the
+selected native Codex path and its unverified execution limits. Future tool setup must record its
+actual authenticated identity and delivery evidence before that path is called verified.
 
 The user reviews and merges. A second tool may inspect a PR and report findings; that review does
 not replace required CI or the user's decision. A reviewer should reason from requirements and
@@ -175,8 +177,9 @@ coverage, financial correctness, security or absence of defects.
 
 The technical check contract and trust boundaries are accepted in
 [ADR-0009](adr/0009-pr-verification-and-repository-trust.md). Implement and verify them through
-[DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md) before enabling routine PR
-delivery through CONTRIB-01. Hosting/release work retains its own approval gates.
+[DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md). Its closeout and CONTRIB-01's
+closeout retain unverified integration checks; neither enables standing delivery permissions.
+Hosting/release work retains its own approval gates.
 
 ## Work lifecycle
 
@@ -213,6 +216,28 @@ Use the full lifecycle below for substantive implementation or design work:
    outcome, how to use it when applicable, material limitations, and the next proposed action.
    Do not start that next action without approval.
 
+### PR closeout
+
+Before declaring a PR ready for review, reconcile each affected task on that PR's branch:
+
+- Record the user's actual design/implementation approval separately from completion. Reuse
+  existing authorization; do not ask the user to accept an already accepted scope again.
+- Check every acceptance criterion against actual evidence. Record passed, failed, unverified,
+  and superseded items explicitly; unchecked criteria must not disappear behind a green CI result.
+- Update the task state, backlog, current state, and affected roadmap/documentation summaries
+  together. Remove stale blockers and requirements superseded by an explicit user decision while
+  preserving the historical approval and evidence record.
+- State the task disposition and remaining limits in the PR description. Use Done only when
+  acceptance criteria are met. If the user explicitly requests closure with outstanding work,
+  use Closed and list that work in the task's closeout; closure does not make a check pass or
+  authorize starting a follow-up.
+
+When a user merge is observed, verify the merged head and merge commit, then reconcile any
+remaining pre-merge wording before proposing the next task. Prepare needed corrections on a
+task branch under the existing documentation scope; commit/publication permissions still apply.
+A merged PR accepts its delivered changes; it does not establish unperformed validation or grant
+approval for another task. Do not leave a task active solely because its closeout was omitted.
+
 ## Task states
 
 | State | Meaning |
@@ -222,6 +247,7 @@ Use the full lifecycle below for substantive implementation or design work:
 | In progress | Approved work has started |
 | Blocked | Approved work cannot proceed; record the concrete dependency and needed decision |
 | Done | Acceptance criteria are met, evidence is recorded, and limitations are disclosed |
+| Closed | User explicitly requested ending the task with outstanding criteria; delivered work and unverified/superseded items are recorded in its closeout |
 | Cancelled | The user has withdrawn or replaced the task |
 
 ADRs have their own decision states. An accepted ADR can exist alongside a proposed task.

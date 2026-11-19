@@ -84,9 +84,9 @@ where useful. [Research milestones](ROADMAP.md#arb--arbitrage-research-track).
 
 ## M2 — executor and local forks; approval pending
 
-PR verification and contributor onboarding are tracked below. The CI implementation is merged;
-DEP-02 retains its verification evidence and remaining checks. CONTRIB-01 now covers native
-Codex Cloud onboarding, without a custom app/publisher gate. M2 work remains unapproved.
+PR verification and contributor records are closed below at the user's request. CI is merged;
+DEP-02 retains its evidence and unverified stale-base experiment. CONTRIB-01 records the native
+direction and unverified Cloud execution, without a custom app/publisher gate. M2 remains unapproved.
 
 - [ ] M2-01: Propose executor trust-boundary and fork/cost-accounting ADRs.
 - [ ] M2-02: Build the approved single-owner, prefunded executor.
@@ -191,15 +191,16 @@ approved scope. Data-store roles may complement each other; there is no mandator
 
 The local architecture is accepted in [ADR-0004](adr/0004-local-processes-and-gated-deployment.md).
 [DEPLOYMENT.md](DEPLOYMENT.md) records PR verification and future release gates. CI was implemented
-under accepted ADR-0009 and merged through PR #1. Native Codex Cloud onboarding is CONTRIB-01;
-other tools and hosting remain separately scoped future work.
+under accepted ADR-0009 and merged through PR #1. PR #2 delivered the native Codex direction and
+contribution documentation. Both records are closed; their unperformed validation remains visible
+in their closeouts. Other tools and hosting remain separately scoped future work.
 
-- [ ] [DEP-02: PR verification and cloud compatibility](tasks/DEP-02-pr-verification-and-cloud-compatibility.md).
-  State: In progress; approved by “i accept adr9 and dep2”. CI checks/build, Linux/macOS
-  validation, fixture browser smoke, candidate evidence and actual merge enforcement under ADR-0009.
-- [ ] [CONTRIB-01: Native Codex Cloud onboarding](tasks/CONTRIB-01-shared-pr-contributor-setup.md).
-  State: In progress. Native environment setup and a real Cloud PR remain unverified; custom
-  app/publisher requirements are removed and other tools remain deferred.
+- [x] [DEP-02: PR verification and cloud compatibility](tasks/DEP-02-pr-verification-and-cloud-compatibility.md).
+  State: Closed at user request. CI delivery merged; final checks and enforcement evidence are
+  recorded. Stale-base/review-invalidation validation remains unverified in the task closeout.
+- [x] [CONTRIB-01: Native Codex Cloud onboarding](tasks/CONTRIB-01-shared-pr-contributor-setup.md).
+  State: Closed at user request. Native direction/documentation merged; actual Cloud environment
+  and Cloud-origin PR remain unverified. Closed does not mean all original criteria passed.
 
 - [ ] DEP-01: Propose hosting, packaging, environment boundaries, and process/data lifecycle ADR.
   Acceptance: UI/backend artifacts, collector ownership, persistent data, optional native fork

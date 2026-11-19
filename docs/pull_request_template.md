@@ -6,6 +6,10 @@ See WORKFLOW.md#commit-messages-and-pr-titles. Replace the prompts below. -->
 Describe the problem and resulting behavior. Link the approved task and relevant ADR; state the
 bounded scope of the user's authorization.
 
+For an existing task, state its disposition and reconcile its acceptance criteria, evidence, and
+affected planning records on this branch under
+[PR closeout](https://github.com/mikolajed/pooltrace/blob/main/docs/WORKFLOW.md#pr-closeout).
+
 ## Validation
 
 List the checks actually run and their results. Link hosted runs or selected sanitized evidence

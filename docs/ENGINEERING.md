@@ -219,7 +219,7 @@ release artifacts and verify migration/recovery behavior before a hosted rollout
 
 [Accepted ADR-0009](adr/0009-pr-verification-and-repository-trust.md) defines one check contract for
 all contributors. [DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md#implementation-evidence)
-implements the workflow candidate, an explicit all-required-success gate, syntax/policy validation,
+delivered the merged workflow, an explicit all-required-success gate, syntax/policy validation,
 candidate/native metadata and a real fixture browser/API/native-signal smoke. The initial hosted
 baseline passed all six jobs on GitHub's Ubuntu 24.04 x64 and macOS 15 arm64 runners. The task
 records actual run/candidate IDs separately from local VM results. The user enabled an active

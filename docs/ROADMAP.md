@@ -6,7 +6,8 @@ combined startup/shutdown. Further implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
 The next arbitrage research increment uses the completed M1 collector. The CI implementation
-is on main. Remaining CI verification and native Codex Cloud onboarding are tracked separately.
+is on main. DEP-02 and CONTRIB-01 are closed at the user's request; their closeouts retain the
+unverified stale-base experiment and native Cloud environment/PR as explicit limits.
 [ADR-0009](adr/0009-pr-verification-and-repository-trust.md) ·
 [DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md) ·
 [CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md).
@@ -30,7 +31,7 @@ available. The results inform which core work to scope next.
 | --- | --- | --- | --- |
 | Setup | Complete | Requirements, documentation system, ADR workflow, backlog, brand reference | SET tasks in [backlog](BACKLOG.md) |
 | M1: Local read-only research application | Complete | One backend, minimal UI/CLI access, verified quotes/cycles, early SQLite | M1 tasks in [backlog](BACKLOG.md) |
-| PR verification and shared contributions | CI merged, remaining verification and native onboarding in progress | Required checks, cloud compatibility, traceable PR delivery and human merge | DEP-02 and CONTRIB-01 in [backlog](BACKLOG.md) |
+| PR verification and shared contributions | Records closed at user request with unverified limits | Merged CI, verified local PR delivery and documented native Cloud direction | DEP-02 and CONTRIB-01 closeouts in [backlog](BACKLOG.md) |
 | M2: Executor and fork validation | Early arbitrage research informs scope | Guarded execution, meaningful contract tests, full transaction cost evidence | M2 tasks in [backlog](BACKLOG.md) |
 | M3: Evidence and recovery hardening | Builds on M1 persistence and M2 simulation records | Richer history/replay, schema evolution, backup/restore, recovery | M3 tasks in [backlog](BACKLOG.md) |
 | M4: Research terminal refinement | Builds on the minimal M1 UI and usable evidence | Full route/cost/size inspection, polished states, brand integration | M4 and BR tasks in [backlog](BACKLOG.md) |
@@ -232,13 +233,15 @@ the one selected in ADR-0004.
 The requested contribution direction supports independently operated tools through the same
 branch/PR/review rules, maintained in [WORKFLOW.md](WORKFLOW.md#proposed-shared-pr-contributions).
 DEP-02 establishes the CI foundation, Linux/macOS compatibility and fixture integration checks.
-CONTRIB-01 verifies actual selected tool identities/delivery against that foundation. They share
-a final real-PR approval/trigger validation before routine delivery is enabled. Passing CI remains
-evidence for human review rather than authority to merge or deploy.
+CONTRIB-01 delivered the native onboarding direction/documentation. Both records are closed at
+the user's request with unverified integration checks preserved. Actual native Cloud execution and
+any later contributor path need separately approved verification; standing delivery permissions
+remain inactive. Passing CI remains evidence for human review rather than authority to merge or deploy.
 
 ## Future deployment and CI/CD
 
-Use the implemented localhost architecture. PR verification is in progress; release
+Use the implemented localhost architecture and merged PR verification workflow. Unperformed setup
+checks remain explicit in the closed task records; release
 packaging, isolated staging validation, explicit production authorization, health checks and
 recovery/rollback remain future work. [DEPLOYMENT.md](DEPLOYMENT.md) owns that environment plan.
 

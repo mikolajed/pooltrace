@@ -27,6 +27,9 @@ technical conventions belong in engineering; task plans and evidence belong in t
 - Routine choices within an explicitly approved scope do not require repeated approval.
 - Never invent addresses, APIs, market data, approvals, or test results.
 - Record actual evidence and follow the [handoff rules](docs/WORKFLOW.md#work-lifecycle) for task/status updates.
+- Before declaring a PR ready, reconcile task acceptance criteria, evidence, and affected planning
+  records on its branch. Follow [PR closeout](docs/WORKFLOW.md#pr-closeout) after merge; preserve
+  unverified checks and never leave delivered work marked active through a missed handoff.
 - Use Conventional Commits for commit messages and PR titles; follow the
   [naming conventions and templates](docs/WORKFLOW.md#commit-messages-and-pr-titles).
 - Follow [WORKFLOW.md](docs/WORKFLOW.md#authorization) for branch, commit, push, PR, and merge permissions.

@@ -97,3 +97,9 @@ The contributor cleanup removes the custom app/publisher requirements and keeps 
 onboarding as a small verification task. The user authorized committing/pushing the cleanup; it is
 being delivered in the same PR #2 for one review/merge. Actual latest-head CI belongs on the PR.
 No new product scope starts automatically; M2 executor design remains unapproved.
+
+The user identified repeatable profitable routes as essential to the project. ARB starts with
+read-only opportunity discovery on M1. Its results inform M2 scope, and M2 fork and cost
+capabilities support full-cost validation. Later timing and coverage experiments use replay
+evidence where needed.
+[Arbitrage research track](ROADMAP.md#arb--arbitrage-research-track).

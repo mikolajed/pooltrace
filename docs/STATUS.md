@@ -27,6 +27,13 @@ approval, actual validation and limitations. Earlier task records retain their o
 commit with “commit”; that checkpoint is complete. DEP-02 implementation and publication are now
 approved; later implementation and deployment remain unapproved.
 
+On 2026-11-19 the user selected Codex first and then chose native Codex Cloud onboarding, removing
+the custom app/publisher proposal. [CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md)
+now records the small native setup/PR verification path; other tools follow later. The user handles
+removal of the unused custom app and key. No private key was read or used and no custom adapter
+was implemented. Native Cloud validation remains unverified; the existing local PR workflow is
+usable. User review/merge and explicit commit permission remain required.
+
 ## What exists
 
 - One local backend owns bounded RPC, immutable snapshots/analysis, all 36 route/size outcomes,
@@ -65,34 +72,28 @@ browser refresh/navigation and HTTP/SSE requests do not invoke RPC.
 
 No wallet, executor, transaction submission, fork simulation, full-transaction cost producer,
 benchmark or hosted deployment exists. PR checks run on GitHub; the user enabled main-branch
-protection. Stale-base integration and bot/human approval remain unverified. Executor/Anvil/cost evidence remains M2;
+protection. Stale-base integration remains unverified. Native Cloud execution/PR evidence remains
+CONTRIB-01; a distinct bot-author approval path is not claimed. Executor/Anvil/cost evidence remains M2;
 richer history/replay/recovery/backup remains M3. Provider fallback/gateway and additional chains
 retain their separate backlog scopes. Other runner images/platforms, power loss, network filesystems, exhaustive
 browser suspension/network stress and sustained freshness/performance remain unverified.
 
 ## Latest handoff and next proposed action
 
-M1-11/M1-12 implementation and evidence are committed at `2e5a3fe`. DEP-02 is published on
-`codex/dep-02-ci`. [Task evidence](tasks/DEP-02-pr-verification-and-cloud-compatibility.md#implementation-evidence)
-records actual checks and the exact branch/PR/settings handoff. GitHub is public/personal;
-`Protect main` is active and read back through the connector, which lacks protection administration.
-No bot registration, agent settings change, merge or contributor-tool setup is authorized.
+The connector confirmed [PR #1](https://github.com/mikolajed/pooltrace/pull/1) merged as
+`1d180c208829f3743f8c8d704e57cc485fe9520d`; the CI implementation is on `main`.
+[DEP-02 evidence](tasks/DEP-02-pr-verification-and-cloud-compatibility.md#implementation-evidence)
+retains the detailed platform/gate/protection checks and remaining stale-base verification.
 
-The connector's PR-write access now works. It opened draft PR #1 as authenticated author
-`mikolajed`; this does not prove bot delivery or a distinct human-approval path. The initial
-[hosted run](https://github.com/mikolajed/pooltrace/actions/runs/44422845638) passed all six checks.
-The controlled failing test made `pr-gate` fail, and removing it produced a fresh six-job pass.
-The user requested consolidation with a rebase; historical candidates remain in the evidence
-archive. Rewritten heads require fresh checks; current results belong to the latest PR candidate.
-The observed check source is `pr-gate` from GitHub Actions (app ID `15368`). The user marked the PR
-ready for review; its next run exposed another analysis unit test's host-clock assumption. The
-analysis suite now supplies explicit clock/timestamp inputs, with a regression forbidding fallback
-to the host clock. All 282 tests pass locally; latest hosted results and the requested readiness
-comment belong on the PR. Its failed gate was reported as merge-blocking under the saved ruleset.
-The PR remains unmerged.
+[PR #2](https://github.com/mikolajed/pooltrace/pull/2) groups the workflow/AGENTS corrections and
+the related native contributor-doc cleanup. Its initial workflow-only head was
+`db3e4621259e3b6314a57e09d1104dd346ffeacc`; that candidate's
+[second CI attempt](https://github.com/mikolajed/pooltrace/actions/runs/44519953125/attempts/2)
+passed all six jobs after the first attempt failed during Ubuntu package downloads. These are
+initial-candidate results, not results for the later combined documentation candidate.
+Inspect the latest candidate/checks before user merge; readiness transitions can trigger another run.
 
-Review the latest checks and actual evidence before merging.
-DEP-02 remains In progress until hosted/enforcement acceptance is demonstrated. Select the first two actual contributor tools and
-authorize CONTRIB-01's identity/delivery setup against that CI. The combined
-process remains incomplete until real PR triggers, human approval and enforcement are verified.
-M2 executor design follows this priority and has not started.
+The contributor cleanup removes the custom app/publisher requirements and keeps native Cloud
+onboarding as a small verification task. The user authorized committing/pushing the cleanup; it is
+being delivered in the same PR #2 for one review/merge. Actual latest-head CI belongs on the PR.
+No new product scope starts automatically; M2 executor design remains unapproved.

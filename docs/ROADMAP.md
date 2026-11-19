@@ -28,6 +28,12 @@ M1–M5 define the core product capabilities. Research tracks can span several c
 Each track can deliver independently scoped increments and use core capabilities as they become
 available. The results inform which core work to scope next.
 
+The next proposed sequence is the bounded
+[ARB-01 baseline increment](tasks/ARB-01-baseline-yield-and-freshness.md), its evidence/decision
+closeout, then separately approved M2-01 design. ARB-02 pool/size expansion and ARB-03 timing
+experiments are deferred for later review. ARB-01 includes this increment's ARB-05 reporting;
+it does not complete the entire opportunity-discovery milestone or authorize M2 automatically.
+
 | Stage | Sequencing | Outcome | Related work |
 | --- | --- | --- | --- |
 | Setup | Complete | Requirements, documentation system, ADR workflow, backlog, brand reference | SET tasks in [backlog](BACKLOG.md) |

@@ -76,10 +76,14 @@ PR #1 merged as `1d180c208829f3743f8c8d704e57cc485fe9520d`; PR #2 merged as
 references and outstanding criteria. [PR #3](https://github.com/mikolajed/pooltrace/pull/3)
 merged the arbitrage research roadmap as `244fa0b36d37170a2542c5fdf29cf5dc736cd045`.
 
-The next proposed product task is to scope ARB-01: baseline route yield and collector freshness
-over predefined block windows, using the completed M1 collector. The results inform M2 scope;
-M2 fork and cost capabilities later support full-cost validation.
-[Arbitrage research track](ROADMAP.md#arb--arbitrage-research-track).
-ARB-01 execution and M2 design/implementation remain unapproved. No new product scope starts
-automatically; setup verification is retained as a limit of the closed records rather than an
-active task assignment.
+The user requested starting with ARB-01 after the recommendation to prepare its scope for review.
+The [proposed ARB-01 task](tasks/ARB-01-baseline-yield-and-freshness.md) now defines the frozen M1
+workload, two prospective 128-block windows, bounded head-observation instrumentation, coverage
+and latency targets, resource caps, reproducible reporting and a decision handoff. Preparation is
+documentation only; implementation and live experiment approval await review of that concrete scope.
+
+The proposed sequence is ARB-01 closeout, then separately approved M2-01 design. Further ARB coverage
+and timing experiments are deferred; baseline reporting covers ARB-05's intent for this increment.
+Positive gross is not required to finish a well-accounted baseline. M2 design/implementation remain
+unapproved, and no next task starts automatically. Setup verification remains a limit of the closed
+records rather than an active assignment. [Research track](ROADMAP.md#arb--arbitrage-research-track).

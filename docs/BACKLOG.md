@@ -72,7 +72,9 @@ Research milestones span the core roadmap. Scope the first increment around the 
 Use M2 fork and cost capabilities for candidate validation and draw on M3 evidence and replay
 where useful. [Research milestones](ROADMAP.md#arb--arbitrage-research-track).
 
-- [ ] ARB-01 — Measure baseline route yield and collector freshness on predefined block windows.
+- [ ] [ARB-01: Baseline route yield and collector freshness](tasks/ARB-01-baseline-yield-and-freshness.md).
+  State: Proposed. Concrete two-window protocol and instrumentation scope prepared for review;
+  implementation and live experiment approval remain pending in the linked record.
 - [ ] ARB-02 — Compare additional pools and size ranges on matched blocks. Evaluate an additional
   protocol in a later increment if the coverage data warrants it.
 - [ ] ARB-03 — Use fork tooling for intra-block replay and evaluate read-only public mempool

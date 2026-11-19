@@ -431,12 +431,12 @@ describe("acknowledgement and operational faults (S03–S05, S07–S08)", () => 
     expect(full.saveObservation(observation).reason).toBe("storage_full");
     expect(open(path).list("observations").rows).toHaveLength(0);
   });
-  it("holds a real writer lock, times out, and recovers after killing only the owned writer", async () => {
+  it("holds a real writer lock through GC, times out, and recovers after killing only the owned writer", async () => {
     const path = file();
     open(path).close();
     const child = spawn(
       process.execPath,
-      [new URL("./storage-process.ts", import.meta.url).pathname, "hold", path],
+      ["--expose-gc", new URL("./storage-process.ts", import.meta.url).pathname, "hold", path],
       { stdio: ["ignore", "pipe", "pipe"] },
     );
     try {

@@ -11,6 +11,9 @@ coverage/
 .next/
 apps/web/next-env.d.ts
 *.tsbuildinfo
+ci-results/
+test-results/
+playwright-report/
 
 # Future Foundry output
 contracts/out/

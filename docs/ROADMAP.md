@@ -5,6 +5,11 @@ diagnostic CLI access, exact SQLite history, the analysis guide, a minimal local
 combined startup/shutdown. Further implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
+The next user-requested priority is CI and a shared PR contribution workflow before M2. Documentation
+is prepared in [accepted ADR-0009](adr/0009-pr-verification-and-repository-trust.md),
+[DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md) and
+[CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md); ADR-0009 and DEP-02 are approved/in progress, while CONTRIB-01 remains proposed.
+
 ## Milestone planning
 
 Pooltrace is an ongoing product. Define scope, acceptance criteria, dependencies, and any delivery
@@ -20,6 +25,7 @@ is a revisable development plan, not the full extent of Pooltrace's future capab
 | --- | --- | --- | --- |
 | Setup | Complete | Requirements, documentation system, ADR workflow, backlog, brand reference | SET tasks in [backlog](BACKLOG.md) |
 | M1: Local read-only research application | Complete | One backend, minimal UI/CLI access, verified quotes/cycles, early SQLite | M1 tasks in [backlog](BACKLOG.md) |
+| PR verification and shared contributions | In progress before M2; contributor setup pending | Required checks, cloud compatibility, traceable PR delivery and human merge | DEP-02 and CONTRIB-01 in [backlog](BACKLOG.md) |
 | M2: Executor and fork validation | Builds on verified cycle analysis | Guarded execution, meaningful contract tests, full transaction cost evidence | M2 tasks in [backlog](BACKLOG.md) |
 | M3: Evidence and recovery hardening | Builds on M1 persistence and M2 simulation records | Richer history/replay, schema evolution, backup/restore, recovery | M3 tasks in [backlog](BACKLOG.md) |
 | M4: Research terminal refinement | Builds on the minimal M1 UI and usable evidence | Full route/cost/size inspection, polished states, brand integration | M4 and BR tasks in [backlog](BACKLOG.md) |
@@ -143,12 +149,23 @@ M1-03 keeps RPC access inside the backend behind a distinct module boundary. RPC
 extracting that module into a separate gateway process; the initial application topology remains
 the one selected in ADR-0004.
 
+## PR verification before further feature work
+
+The requested contribution direction supports independently operated tools through the same
+branch/PR/review rules, maintained in [WORKFLOW.md](WORKFLOW.md#proposed-shared-pr-contributions).
+DEP-02 establishes the CI foundation, Linux/macOS compatibility and fixture integration checks.
+CONTRIB-01 verifies actual selected tool identities/delivery against that foundation. They share
+a final real-PR approval/trigger validation before routine delivery is enabled. Passing CI remains
+evidence for human review rather than authority to merge or deploy. M2-01 follows this setup unless
+the user explicitly reprioritizes work.
+
 ## Future deployment and CI/CD
 
-Use the localhost architecture first. Later, introduce reproducible automated checks, release
-artifacts, isolated staging validation, explicit production authorization, health checks, and
-recovery/rollback. [DEPLOYMENT.md](DEPLOYMENT.md) owns the draft environment/pipeline plan.
+Use the implemented localhost architecture. PR verification is in progress; release
+packaging, isolated staging validation, explicit production authorization, health checks and
+recovery/rollback remain future work. [DEPLOYMENT.md](DEPLOYMENT.md) owns that environment plan.
 
-Choose hosting, process management, CI provider, concrete gates, migration procedures, and rollout
-strategy in a future ADR. DEP backlog tasks do not authorize workflows, infrastructure, or a
+ADR-0009 selects GitHub Actions and PR gates. Choose hosting, production process management,
+migration procedures and rollout strategy in a future deployment ADR. DEP backlog tasks do not
+authorize workflows, infrastructure, or a
 production update. Hosting preserves the transaction-execution boundaries of the approved milestone.

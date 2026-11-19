@@ -6,11 +6,11 @@ CI/CD pipeline below are future plans. M1-11/M1-12 implement the local workflow 
 [ADR-0008](adr/0008-local-api-sse-and-process-interface.md); no hosted infrastructure or production
 environment exists.
 
-The next requested priority is PR verification before M2. [Accepted ADR-0009](adr/0009-pr-verification-and-repository-trust.md)
-and approved [DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md) define that setup.
-The candidate passes local macOS/Ubuntu validation and its initial hosted baseline on PR #1.
-Publication and hosted-check fixes are approved. The user enabled the main-branch ruleset;
-agent administration and merging remain unapproved.
+[Accepted ADR-0009](adr/0009-pr-verification-and-repository-trust.md) defines PR verification.
+[DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md#closeout) delivered the merged CI
+workflow with local/hosted Linux/macOS validation and user-configured main protection. DEP-02 and
+CONTRIB-01 are closed at the user's request with unverified integration limits retained. Agent
+administration and merging remain unapproved.
 The shared contribution/authorization policy belongs in
 [WORKFLOW.md](WORKFLOW.md#proposed-shared-pr-contributions).
 
@@ -84,7 +84,7 @@ verified restore, not an assumed copy of a changing file.
 | Environment | Purpose | State |
 | --- | --- | --- |
 | Local development | Run the two applications, early SQLite, and later optional Anvil on localhost | Implemented through M1-12; application, browser, clean build and native shutdown verified on macOS arm64; Anvil remains M2 |
-| Automated verification | Reproducible builds and appropriate offline/integration/fork checks | DEP-02 initial hosted baseline passed; main ruleset active; stale-base integration pending; fork checks remain future M2 |
+| Automated verification | Reproducible builds and appropriate offline/integration/fork checks | CI merged and final candidate passed; main ruleset active; stale-base experiment unverified in DEP-02 closeout; fork checks remain future M2 |
 | Preview/staging | Validate a specific release candidate with isolated configuration and data | Future hosting design; not provisioned |
 | Production | Host a reviewed research application and preserve evidence across updates | Future design; no server or deployment exists |
 
@@ -101,8 +101,8 @@ mainnet contract deployment; any such capability needs a separately reviewed mil
 
 ## PR verification implementation
 
-[DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md#implementation-evidence) is approved
-and implemented before M2:
+[DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md#implementation-evidence) was approved
+and its CI implementation merged before M2:
 credential-free checks/build, Linux/macOS compatibility, automated fixture browser/API smoke,
 candidate metadata and a fail-closed aggregate gate. The user enabled main-branch protection;
 strict settings and a failing PR's blocked state are read back in the task.
@@ -110,18 +110,21 @@ ADR-0009 owns the accepted check contract and trust boundaries. Local macOS/Ubun
 the initial six-job hosted baseline passed with the same source digest. Hosted runners were Ubuntu
 24.04 x64 and macOS 15 arm64; the task retains exact images, runtime/native versions and candidates.
 
-[CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md) then connects actual selected contributor
-tools/identities to that same CI. Verify real PR creation/update events, approval identity and
-revocation before enabling routine delivery. No provider integration or bot identity was configured
-by this work; existing account connections remain unverified. Current human commit/push restrictions remain until the proposed
-delivery policy is explicitly accepted/enabled.
+[CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md#closeout) delivered the native Codex
+direction and setup documentation in PR #2. The user confirmed PR #3 originated in Codex Cloud;
+GitHub independently verifies its author/head/base/merge and six passing jobs. The Cloud
+environment's own setup report and a subsequent Cloud commit/update event were not inspected/tested.
+No custom publisher or distinct bot identity was configured. Both tasks are closed with those limits recorded;
+future contributor verification needs a separately approved scope. Explicit commit/publication
+permission and user review/merge remain required; standing delivery permissions remain inactive.
 
 Read-only GitHub inspection confirmed a public, personally owned repository. The user created
 `Protect main` on 2026-11-19; ruleset readback confirms active default-branch targeting, required
 PRs, resolved conversations, strict `pr-gate` bound to GitHub Actions app `15368`, deletion/force
 push restrictions and no bypass actors. Required approvals remain zero until a distinct bot author
 is verified. The connector can read this public ruleset but lacks protection administration.
-Remaining stale-base and contributor-integration proof belongs in DEP-02/CONTRIB-01. Protection
+The unverified stale-base experiment and Cloud setup-report/update-event gaps remain in the
+closed DEP-02/CONTRIB-01 records. Protection
 settings, provider accounts and secrets are external changes requiring the task's explicit scope.
 Workflow files alone do not establish enforcement. Missing permissions or unavailable plan features
 must remain explicit setup gaps. Hosted staging and release promotion retain the separate gates below.
@@ -192,9 +195,10 @@ readiness, ownership, shutdown, browser/live and clean-build evidence. Hosted re
 Runtime pins and the minimal SQLite driver/schema/journal settings are selected and validated in
 their task records. ADR-0009 is accepted. DEP-02 records selected action/browser pins and local
 Linux/macOS results, hosted baselines and actual protection readback. Stale-base integration and
-contributor identities still require verification in DEP-02/CONTRIB-01.
+Cloud setup-report/update-event gaps remain unverified in their closeouts; PR #3 supplies
+user-confirmed Cloud delivery and verified GitHub CI/merge.
 Fork lifecycle details still require M2 scope/design. Hosting,
 release artifact packaging, staging layout, release checks/budgets, migrations/cutover, and rollback
-procedures require a future deployment ADR. CI workflow YAML is prepared; no Dockerfile or hosted
+procedures require a future deployment ADR. CI workflow YAML is merged; no Dockerfile or hosted
 provisioning script has been added. Official references for future deployment were checked on 2026-11-17; local runtime
 research and actual results are in ADR-0008 and the completed task records.

@@ -199,9 +199,10 @@ CI uses frozen installs, the full checks on Linux/macOS, production build, fixtu
 workflow validation and a gate that requires all dependencies to succeed. It receives no private
 RPC/model/deployment secrets and performs no merge or deployment. The initial hosted baseline
 passed all six checks; protection readback and a blocked failing PR are recorded in the task.
-Stale-base integration remains in DEP-02. Contributor identity/tool setup remains
-[CONTRIB-01](docs/tasks/CONTRIB-01-shared-pr-contributor-setup.md); the proposed standing
-delivery permissions are not enabled by DEP-02.
+DEP-02 and [CONTRIB-01](docs/tasks/CONTRIB-01-shared-pr-contributor-setup.md#closeout) are closed at
+the user's request. PR #3 supplies user-confirmed native Cloud delivery with GitHub-verified CI/merge.
+The stale-base experiment, Cloud setup report and subsequent Cloud update-event proof remain
+unverified in the closeouts. Standing delivery permissions remain inactive.
 
 ## Diagnostic CLI
 

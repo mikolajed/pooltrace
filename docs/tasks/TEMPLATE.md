@@ -43,3 +43,8 @@ Only record actual user authorization. An agent-authored plan is not approval.
 Not started. After approved work, record changed artifacts, commands actually run, passed/failed/
 skipped/unverified checks, remaining limitations, and the next proposed action. Do not automatically
 begin that next action.
+
+Before review readiness, reconcile this record and affected planning summaries on the PR branch.
+At closeout, record the final candidate/PR, delivered scope, criterion dispositions, and remaining
+limits under [PR closeout](../WORKFLOW.md#pr-closeout). Add the verified merge result when observed;
+do not leave obsolete pre-merge wording as current state.

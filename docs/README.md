@@ -41,12 +41,13 @@ across agent instructions, task plans, and ADRs.
   [M1-10 implementation/evidence](tasks/M1-10-minimal-evidence-store.md#implementation-evidence),
   M3/STORE tasks → storage benchmark methodology. Future stores/formats remain open.
 - **Plan runtime or deployment:** ADR-0004 → deployment plan → relevant M1/M2 or future DEP tasks.
-  Local architecture is selected; DEP-02 implementation/publication are approved and hosted CI
-  validation has begun. Repository administration and hosting remain separately gated.
+  Local architecture is selected; DEP-02 CI delivery is merged and its task is closed with
+  unverified limits recorded. Repository administration and hosting remain separately gated.
 - **Set up PR verification and contributor tools:** proposed shared policy in WORKFLOW →
   [accepted ADR-0009](adr/0009-pr-verification-and-repository-trust.md) → DEP-02 for CI/Linux/browser
-  checks and CONTRIB-01 for actual identities/tool connections. DEP-02 is in progress before M2;
-  CONTRIB-01 remains proposed. The ADR owns technical gates; WORKFLOW owns contributor rules, not assignments.
+  checks and CONTRIB-01 for the selected native onboarding path. Both records are closed at the
+  user's request; their closeouts distinguish merged delivery from unverified integration.
+  The ADR owns technical gates; WORKFLOW owns contributor rules, not assignments.
 - **Review local API/browser and startup work:** M1-11/M1-12's approved task scopes →
   [accepted ADR-0008](adr/0008-local-api-sse-and-process-interface.md) for API/SSE, producer ownership,
   process interface, application responsibilities, and integration gate → completed task records

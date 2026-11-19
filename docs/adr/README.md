@@ -31,7 +31,7 @@ Small refactors within an accepted design need no separate ADR.
 | [0006](0006-quotation-cycles-and-profitability.md) | Quotations, finite-size admission, and cycle profitability | Accepted | [M1-04 design](../tasks/M1-04-quotation-cycles-and-profitability-design.md); completed [M1-05 implementation](../tasks/M1-05-quotation-and-cycle-analysis.md) |
 | [0007](0007-minimal-sqlite-evidence-store.md) | Minimal SQLite evidence store | Accepted | Completed [M1-09 design](../tasks/M1-09-minimal-sqlite-design.md) and [M1-10 implementation](../tasks/M1-10-minimal-evidence-store.md#implementation-evidence) |
 | [0008](0008-local-api-sse-and-process-interface.md) | Local API, SSE, and application process interface | Accepted | Completed [M1-11](../tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) / [M1-12](../tasks/M1-12-local-startup-readiness-and-shutdown.md#implementation-evidence) |
-| [0009](0009-pr-verification-and-repository-trust.md) | PR verification and repository trust boundaries | Accepted | [DEP-02](../tasks/DEP-02-pr-verification-and-cloud-compatibility.md) / [CONTRIB-01](../tasks/CONTRIB-01-shared-pr-contributor-setup.md); DEP-02 implementation in progress; CONTRIB-01 setup pending |
+| [0009](0009-pr-verification-and-repository-trust.md) | PR verification and repository trust boundaries | Accepted | [DEP-02](../tasks/DEP-02-pr-verification-and-cloud-compatibility.md#closeout) / [CONTRIB-01](../tasks/CONTRIB-01-shared-pr-contributor-setup.md#closeout); records closed with merged delivery and unverified integration limits |
 
 Link requirements from [CORRECTNESS.md](../CORRECTNESS.md) where applicable. An ADR explains how
 to meet them; it does not change them or establish implementation evidence by itself.
@@ -48,5 +48,7 @@ These are topics to investigate, not preaccepted designs:
 - Concrete Rust migration boundaries and Python research integration under ADR-0002; the selected
   direction does not preaccept those future designs.
 - ADR-0008's minimal M1 UI/backend API, SSE and process lifecycle are implemented. ADR-0009 now
-  selects PR verification and repository trust boundaries; DEP-02 is in progress. Anvil orchestration
-  and hosted release design remain separate. The CI candidate is locally validated; hosted activation and production deployment remain incomplete.
+  selects PR verification and repository trust boundaries. CI is merged and main protection active;
+  PR #3 supplies user-confirmed Cloud delivery and verified CI/merge. DEP-02/CONTRIB-01 closeouts
+  retain unverified stale-base and Cloud setup-report/update-event gaps. Anvil orchestration
+  and hosted release design remain separate; no production deployment exists.

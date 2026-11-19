@@ -1,13 +1,49 @@
 # DEP-02: PR verification and cloud compatibility
 
-- State: In progress
+- State: Closed — merged CI delivery; outstanding validation disclosed below
 - Milestone: Delivery infrastructure, prioritized before M2
 - Related ADRs: [Accepted ADR-0009](../adr/0009-pr-verification-and-repository-trust.md), accepted
   [ADR-0004](../adr/0004-local-processes-and-gated-deployment.md) and
   [ADR-0008](../adr/0008-local-api-sse-and-process-interface.md)
 - Requirement IDs: CR-01, CR-03, CR-06, CR-09, CR-10, CR-11
-- Depends on: Completed M1; acceptance of ADR-0009 and explicit implementation approval.
-  Full bot-authored human-approval validation also needs CONTRIB-01's actual delivery identity.
+- Depends on: Completed M1; accepted ADR-0009 and recorded implementation/publication approval.
+
+## Closeout
+
+Closed on 2026-11-19 following the user's instruction “we need close them”. CI delivery was
+accepted through the user's merge of [PR #1](https://github.com/mikolajed/pooltrace/pull/1),
+head `991420de32dd975934f8e7ee9ab97f599cf99f41`, base
+`2e5a3fe91797fb12d8801dc2d03014a0b6dc9388`, merge commit
+`1d180c208829f3743f8c8d704e57cc485fe9520d`.
+The [final candidate run](https://github.com/mikolajed/pooltrace/actions/runs/44431080875)
+passed all six jobs. The [readiness comment](https://github.com/mikolajed/pooltrace/pull/1#issuecomment-6996206066)
+records 282 tests on each platform and tested merge `793451ab8b1f56d11f8f9d012b7489c534e1271f`.
+Merge/head identities and the six successful jobs were read back during closeout.
+
+Delivered: Linux/macOS checks, production build, fixture browser/native-process smoke, the
+fail-closed gate, candidate evidence, and the user-configured protected-main workflow. Actual
+failed-gate blocking and repair are recorded below; the remaining unchecked criteria are not
+reported as passed.
+
+Outstanding and superseded items:
+
+- CI05's controlled stale-base rejection/combined-base experiment and review-invalidation proof
+  remain unverified. Strict current-base protection was read back; that is not the experiment.
+- Native Cloud PR creation/check/user-merge is demonstrated by user-confirmed PR #3 with six
+  passing jobs. The environment's own setup report and a subsequent Cloud commit/update event
+  were not inspected/tested; [CONTRIB-01's closeout](CONTRIB-01-shared-pr-contributor-setup.md#closeout)
+  records the exact provenance and remaining limits.
+- The custom app/publisher and mandatory distinct-bot onboarding proposal was withdrawn when the
+  user chose native Codex. A distinct-author approval path was not provisioned or proven.
+
+These items remain documented limits of the closed task. Further verification requires its own
+approved scope. Closure does not claim complete contribution-path validation, enable standing
+delivery permissions, or authorize account changes, agent merging, or deployment.
+
+Closeout documentation validation: `git diff --check` passed, and 242 local Markdown targets/
+anchors across 15 changed documentation files resolved. No application suite or new hosted run
+was executed for this documentation correction; the hosted evidence above belongs to the merged
+candidates.
 
 ## Outcome
 
@@ -35,8 +71,8 @@ fixture-integration failures already reported. Required merge checks preserve th
   branch-protection settings. Configure/read back those settings within the user's explicit
   remote-action authorization; do not claim enforcement from a local workflow file.
 - Demonstrate failure blocking, repair, new-commit reruns and current-base integration using an
-  isolated test PR once its publication is authorized. Verify the eventual bot delivery events
-  with CONTRIB-01 before calling the complete contribution process enabled.
+  isolated test PR once its publication is authorized. The original bot-delivery integration
+  premise was superseded by native onboarding; its unverified events are recorded in closeout.
 - Update setup/contribution guidance, actual evidence, backlog and status. Preserve M1's as-of
   reports and distinguish new CI evidence from historical local validation.
 
@@ -64,8 +100,9 @@ eligibility or purchase upgrades. An unavailable protection feature remains an e
 The task's implementation approval must state the permitted PR publication and repository-settings
 actions. Where those are not already authorized, finish the reviewable workflow/settings proposal
 before requesting the missing authorization. Do not request it again for actions already covered.
-Required human approval depends on the real authenticated PR author; coordinate that final proof
-with CONTRIB-01 without making Linux/local verification depend on a model-provider subscription.
+Required GitHub approval depends on the real authenticated PR author. Native onboarding does not
+require a distinct bot author; any future distinct-author approval path needs its own actual proof
+without making Linux/local verification depend on a model-provider subscription.
 
 ## Acceptance criteria
 
@@ -74,15 +111,19 @@ with CONTRIB-01 without making Linux/local verification depend on a model-provid
   SQLite and actual launcher descendants/signals/restart are exercised without platform-test skips.
 - [x] Production web build and real fixture browser/API smoke pass without private configuration,
   live network data or changed freshness/canonicality policies.
-- [ ] A deliberately broken candidate is blocked; failure, cancellation, skip and missing checks
+- [x] A deliberately broken candidate is blocked; failure, cancellation, skip and missing checks
   cannot yield a successful `pr-gate`; a repair/new commit creates fresh verifiable results.
 - [x] Actual main-branch protection references the expected check source/name and current-base
   policy; unsupported account features and enforcement gaps are disclosed.
+- [ ] CI05's controlled stale-base/combined-base experiment and review-invalidation proof.
+  Unverified at closure; protection configuration alone is not this validation.
 - [x] Selected runner/action/browser/dependency inputs, tested candidate and sanitized artifacts
   are recorded; write/RPC/model/deployment secrets are absent from PR verification.
-- [ ] Workflow changes and check exclusions receive human review; no automatic merge or deployment.
-- [ ] Bot-created/updated PRs trigger the same gate and the user can approve the actual author
-  through the CONTRIB-01 integration check, or the remaining dependency is explicitly incomplete.
+- [x] The user reviewed/merged the workflow changes in PR #1; no automatic merge or deployment.
+- [x] Native Cloud PR creation triggers the required gate and the user can merge: PR #3 has
+  user-confirmed Cloud origin and GitHub-verified author, candidate, six passing jobs and merge.
+- [ ] A subsequent Cloud commit/update event is separately verified. Unverified at closure;
+  the former mandatory distinct-bot setup premise was superseded by native onboarding.
 - [x] Task/status/backlog evidence distinguishes local checks, hosted runs and repository settings.
 
 ## Planned validation
@@ -124,6 +165,10 @@ rerun successfully; local fixture processes cannot substitute for real hosted ru
   PR #1 ready, requested a readiness comment, and then said “it is failing checks fix it”. This
   authorizes the scoped test/CI repair and PR comment. The user performed the administration;
   no agent settings change, merge or CONTRIB-01 setup is authorized.
+- Closeout correction: On 2026-11-19 the user instructed “we need close them” for DEP-02 and
+  CONTRIB-01 and requested an AGENTS/workflow rule to prevent missed closeouts. This authorizes
+  the documentation reconciliation; it does not claim unperformed validation or authorize a
+  new implementation, commit, publication, settings change, or agent merge.
 
 ## Preparation evidence and handoff
 
@@ -142,10 +187,10 @@ The user subsequently accepted ADR-0009 and approved this implementation scope a
 
 ## Implementation evidence
 
-Local candidate completed and validated on 2026-11-18–19 Europe/Warsaw; task remains **In progress**
-until hosted/enforcement acceptance is demonstrated. Publication and scoped hosted-check fixes are
-now authorized; agent repository-setting changes and merging remain unapproved. No hosted result is
-claimed from local tests.
+Local candidate completed and validated on 2026-11-18–19 Europe/Warsaw. The evidence below records
+the implementation, hosted iterations and user-configured enforcement chronologically. The
+[closeout](#closeout) records the merged result and remaining validation limits. No hosted result
+is claimed from local tests; no agent repository-setting change or merge was authorized.
 
 ### Delivered candidate
 
@@ -199,11 +244,11 @@ input set excludes generated/dependency output and documentation.
 | CI01 | Local macOS arm64 and clean Ubuntu 24.04 arm64 VM: frozen installs, 281 tests / 13 files, checks and production builds passed. Hosted baseline also passed cold frozen installs and all 281 tests on `ubuntu-24.04` x64 and `macos-15` arm64, plus the Linux production build. Exact candidate/native/image metadata is archived below. |
 | CI02 | All existing 33 launcher/config cases passed on both hosts with no platform skips, including sibling failures, identity/readiness, signals, occupied-port sentinel and ignored-stop descendants. Real browser smoke separately verified actual Bun/app SIGINT and SIGTERM shutdown, marker release, closed listeners and restart/history on both hosts. |
 | CI03 | Final local Chromium smoke passed on macOS (13.7 s) and Ubuntu (10.5 s); hosted Ubuntu x64 baseline passed (17.1 s, no retries/skips/flakes). All verify exact values/units across 36 rows, constructed labels, unavailable costs/net, both history views, refresh, native suspension, conservative withdrawal and restart/historical reads. These are fixture diagnostics. |
-| CI04 | Nineteen gate/workflow regressions passed. Actual gate CLI exits: complete success 0; malformed/missing/failure/cancelled/skipped 1. Hosted probe `80e06f8` failed the isolated assertion on both platforms (all existing 281 tests passed); the other three jobs passed and `pr-gate` exited 1. Repair `af8a61b` removes the probe and restores the exact passing implementation. Fresh repair results are recorded below; actual merge blocking remains unverified. |
+| CI04 | Nineteen gate/workflow regressions passed. Actual gate CLI exits: complete success 0; malformed/missing/failure/cancelled/skipped 1. Hosted probe `80e06f8` failed the isolated assertion on both platforms (all existing 281 tests passed); the other three jobs passed and `pr-gate` exited 1. Repair `af8a61b` removes the probe and restores the exact passing implementation. Later, the protected non-draft PR was reported blocked with a failed gate; final repair `991420d` passed all six jobs. Detailed runs and settings readback are recorded below. |
 | CI05 | Current-candidate metadata verifies exact head/base/tested-merge SHAs and clean checkout. A new probe commit triggered a fresh hosted run. Actual stale-base rejection, combined-base integration and review invalidation remain unverified. |
 | CI06 | Pinned actionlint and workflow policy pass locally and on hosted Ubuntu x64. Hosted logs/metadata inspected, all five diagnostics artifacts uploaded with seven-day expiry. Browser artifact ZIP checksum, actual paths and report/lifecycle attachment inspected; no private configuration or database uploaded. Main protection was subsequently enabled by the user. |
 | CI07 | Initially unprotected. User-created ruleset `27598219` now reads back active on the default branch, strict `pr-gate` bound to GitHub Actions app `15368`, required PRs/resolved threads, deletion/force-push restrictions and no bypass actors. `main` reports `protected: true`; the non-draft PR reports `mergeable_state: blocked` with the latest gate failed. No direct/force write or deletion on main was attempted; stale-base integration and bot approval remain unverified. |
-| CI08 | Pending CONTRIB-01: no bot, credential, selected provider/tool connection, delivery PR or human approval path was provisioned/tested. |
+| CI08 | Local delivery/checks are demonstrated by PRs #1–2. The user confirmed PR #3 originated in Codex Cloud; GitHub readback verifies author/head/base/merge and all six jobs passing on final run attempt 2. Subsequent Cloud commit/update events were not separately tested. The custom-app/distinct-bot proposal was withdrawn; no separate bot-author approval path is claimed. See CONTRIB-01 closeout. |
 
 Initial failures were repaired before the passes above: a YAML `if: false` property bypassed a
 truthiness-based policy test; the checker now rejects any conditional property on required jobs.
@@ -232,8 +277,8 @@ was created on `codex/dep-02-ci` and pushed to origin. The GitHub connector init
 HTTP 403 for PR creation; after access was restored, the user's “try now” retry opened
 [draft PR #1](https://github.com/mikolajed/pooltrace/pull/1). Its title is
 `ci: add required checks and fixture browser verification`, following the requested naming guidance.
-The authenticated author is `mikolajed`, not a bot. The PR was initially draft and remains unmerged; publication
-does not prove CONTRIB-01's distinct bot-author/human-approval path.
+The authenticated author is `mikolajed`, not a bot. The PR was initially draft; its subsequent user
+merge is recorded in the closeout. Publication does not prove a distinct bot-author/human-approval path.
 
 The [initial hosted run](https://github.com/mikolajed/pooltrace/actions/runs/44422845638) passed all
 six jobs on the first attempt. It tested head `5237c41`, base `2e5a3fe` and actual merge checkout
@@ -316,10 +361,10 @@ requires the user's authorization.
 | Required status check | `pr-gate`, strict up-to-date mode; bound to GitHub Actions app `15368` |
 | Review conversations | Require resolution |
 | Direct/force writes and deletion | Disable ordinary direct/force pushes and deletion; no contributor bypass; include administrators where supported |
-| Approving review | Currently zero. Require the user's approval and dismiss stale approvals once CONTRIB-01 proves a distinct bot PR author; the user cannot approve their own authenticated PR. |
+| Approving review | Zero at readback. Human review/merge stays with the user. A GitHub-enforced distinct-author approval path remains unverified and is not a native onboarding prerequisite; the user cannot approve their own authenticated PR. |
 | Merge mechanism | User-initiated merge; no auto-merge. Merge queue is not available to this personal repository under the currently documented eligibility. |
 
-Hosted green baseline, deliberate safe failing-PR/repair checks, stale-base integration, check-source
-binding and actual enforcement are required before this task is Done. CONTRIB-01's bot/human
-approval proof remains a separate unapproved dependency. No provider plan, account purchase,
-protection rule, merge or production change is authorized by publication approval.
+The original full validation plan included stale-base integration and contributor-path proof.
+The task is Closed at the user's request with those limits retained in [closeout](#closeout),
+rather than marked Done with all validation complete. No provider plan, account purchase,
+protection rule, agent merge or production change is authorized by publication or closure.

@@ -4,102 +4,82 @@ Updated: 2026-11-19 (Europe/Warsaw).
 
 ## Phase and authorization
 
-**M1-01 through M1-12 are complete. ADRs 0001–0009 are accepted; DEP-02 is in progress.**
+**M1-01 through M1-12 are complete. ADRs 0001–0009 are accepted. DEP-02 and CONTRIB-01 are
+closed at the user's request, with outstanding validation recorded explicitly.**
 
-The next requested priority is CI and a shared PR workflow before M2. On 2026-11-18 the user said
-“i want to document this so we can set this up”, following discussion of multiple contributor tools
-and bot-authored PRs. [ADR-0009](adr/0009-pr-verification-and-repository-trust.md),
-[DEP-02](tasks/DEP-02-pr-verification-and-cloud-compatibility.md) and
-[CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md) document the intended setup. The user
-subsequently said “i accept adr9 and dep2”, accepting the design and approving bounded DEP-02
-implementation. On 2026-11-19 the user explicitly authorized committing/pushing `codex/dep-02-ci`,
-opening a draft PR and running/fixing DEP-02 hosted checks, with “Do not merge.” CONTRIB-01,
-standing delivery permissions, agent repository administration, merging and deployment remain unapproved.
-The user subsequently created the main-branch ruleset, marked PR #1 ready and requested check fixes
-and a readiness comment. Those scoped fixes and the comment are authorized; do not merge.
+The CI implementation was approved by “i accept adr9 and dep2” and delivered in user-merged
+[PR #1](https://github.com/mikolajed/pooltrace/pull/1). The user selected native Codex onboarding
+and merged its workflow/documentation correction in
+[PR #2](https://github.com/mikolajed/pooltrace/pull/2). On 2026-11-19 the user instructed
+“we need close them” and requested a rule preventing missed closeouts. The
+[DEP-02 closeout](tasks/DEP-02-pr-verification-and-cloud-compatibility.md#closeout) and
+[CONTRIB-01 closeout](tasks/CONTRIB-01-shared-pr-contributor-setup.md#closeout) distinguish merged
+delivery from unperformed validation. They are Closed, not claims that every original check passed.
 
-The user accepted ADR-0008 and approved both implementation scopes with “ok i think we can do it
-now i accept ad8 and m1-11 and m1-12” on 2026-11-18. The completed
-[M1-11 task](tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) and
-[M1-12 task](tasks/M1-12-local-startup-readiness-and-shutdown.md#implementation-evidence) own
-approval, actual validation and limitations. Earlier task records retain their own evidence.
-[WORKFLOW.md](WORKFLOW.md) governs later work. On 2026-11-18 the user requested the completion
-commit with “commit”; that checkpoint is complete. DEP-02 implementation and publication are now
-approved; later implementation and deployment remain unapproved.
-
-On 2026-11-19 the user selected Codex first and then chose native Codex Cloud onboarding, removing
-the custom app/publisher proposal. [CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md)
-now records the small native setup/PR verification path; other tools follow later. The user handles
-removal of the unused custom app and key. No private key was read or used and no custom adapter
-was implemented. Native Cloud validation remains unverified; the existing local PR workflow is
-usable. User review/merge and explicit commit permission remain required.
+The local branch/PR workflow is usable. The user confirmed PR #3 was created in Codex Cloud;
+GitHub readback verifies its author/head/base/merge and six passing jobs on final CI attempt 2.
+The native Cloud delivery path is demonstrated; the environment's own setup report and a subsequent
+Cloud commit/update event were not inspected/tested.
+Standing delivery permissions remain inactive; explicit commit/publication permission and user
+review/merge are still required under [WORKFLOW](WORKFLOW.md). Closing these records does not
+authorize another implementation task, account/settings changes, agent merging, or deployment.
 
 ## What exists
 
 - One local backend owns bounded RPC, immutable snapshots/analysis, all 36 route/size outcomes,
   canonicality/freshness checks, serial collection, exact SQLite evidence, read API and SSE.
 - A minimal Next.js/React browser shows exact gross amounts, unavailable costs/net, provenance,
-  save/connection/collector state, and bounded observation/analysis history. Current presentation
-  expires conservatively; historical evidence never restores live admission.
+  save/connection/collector state, and bounded observation/analysis history. Historical evidence
+  never restores live admission.
 - `bun run dev --mode fixture|live` starts both applications with identity-bearing readiness,
-  isolated configuration and owned shutdown. Individual commands remain available. The foreground
-  launcher/native SQLite are validated on macOS arm64 and Ubuntu 24.04 arm64. Windows is unsupported.
-- The diagnostic live/fixture CLI uses the same backend modules and per-database producer guard.
-  CLI and service cannot produce concurrently on the same evidence file. Both preserve independent
-  calculation/save status and exact confirmed revision IDs.
-- The pinned Bun/Node workspace passes **282 offline tests across 13 files**, type/lint/format
-  checks, a credential-free clean frozen-lockfile installation/check, and the production web build.
-- Actual fixture/live browser and API checks, native SIGINT/130 and SIGTERM/143 shutdown, competing
-  CLI refusal, closed listeners, ownership release and historical reopen are recorded in the tasks.
-  The archived live API event had 36 qualified saved outcomes at block 26444090; its best tested
-  gross was negative and costs/net were unavailable. It is historical evidence now.
-- The [analysis guide](ANALYSIS.md) explains implemented math, lifecycle interpretation and evidence.
-  The [root README](../README.md#local-application) owns setup, commands and recovery boundaries.
-  The supplied perched kingfisher reference remains unchanged.
-- DEP-02's workflow, pinned Actions, fail-closed gate and regression tests, candidate metadata and
-  Chromium fixture smoke passed local validation and the initial six-job hosted baseline on
-  [draft PR #1](https://github.com/mikolajed/pooltrace/pull/1). Hosted Linux x64 and macOS arm64 each
-  passed all 281 tests. The task records exact head/base/merge SHAs, images, native versions and
-  sanitized artifacts separately from local evidence.
-- Commit messages and PR titles use Conventional Commits. AGENTS links to WORKFLOW's naming
-  guidance and commit-message template; GitHub's PR template covers scope, validation and limits.
+  isolated configuration and owned shutdown. The foreground launcher/native SQLite are validated
+  on macOS arm64 and Ubuntu 24.04 arm64. The diagnostic CLI shares backend behavior and exclusive
+  per-database producer ownership. Windows remains unsupported.
+- M1 task evidence records actual fixture/live browser/API checks, native signal shutdown,
+  competing-producer refusal, closed listeners, ownership release and historical reopen. The
+  archived live API event had 36 qualified saved outcomes at block 26444090; its best tested gross
+  was negative and costs/net were unavailable. It is historical evidence.
+- DEP-02 delivered pinned GitHub Actions, Linux/macOS full checks, production build, Chromium
+  fixture smoke, candidate metadata and a fail-closed gate. The final PR #1 candidate passed all
+  six jobs; each platform passed 282 tests across 13 files. The user enabled the protected-main
+  ruleset; a failed current gate was reported as merge-blocking.
+- PR #2 delivered branch-first contribution rules, explicit commit/publication permissions and
+  native onboarding documentation. Its final review-ready CI run succeeded for the merged head.
+- PR #3 supplied user-confirmed Cloud branch/PR delivery and user merge. Its final CI attempt
+  passed all six jobs for head `438e7dd6d26388fd2f6172c0d006fe50caa9b655`; CONTRIB-01 records
+  the Cloud-origin attestation and independently verified GitHub evidence.
+- The [analysis guide](ANALYSIS.md) explains implemented math, interpretation and evidence.
+  The [root README](../README.md#local-application) owns setup/commands. The supplied perched
+  kingfisher reference remains unchanged.
 
 ## Remaining boundaries
 
 Qualification belongs to each observation/input/policy. Reports and screenshots are as-of events,
-not continuing live eligibility, profitability or capture claims. Collection does not depend on
-browser refresh/navigation and HTTP/SSE requests do not invoke RPC.
+not continuing eligibility, profitability or capture claims. Browser/API requests do not invoke RPC.
 
 No wallet, executor, transaction submission, fork simulation, full-transaction cost producer,
-benchmark or hosted deployment exists. PR checks run on GitHub; the user enabled main-branch
-protection. Stale-base integration remains unverified. Native Cloud execution/PR evidence remains
-CONTRIB-01; a distinct bot-author approval path is not claimed. Executor/Anvil/cost evidence remains M2;
-richer history/replay/recovery/backup remains M3. Provider fallback/gateway and additional chains
-retain their separate backlog scopes. Other runner images/platforms, power loss, network filesystems, exhaustive
-browser suspension/network stress and sustained freshness/performance remain unverified.
+benchmark or hosted deployment exists. DEP-02's controlled stale-base/review-invalidation experiment,
+the Cloud environment's own setup report and a subsequent Cloud commit/update event remain
+unverified in the closed records. Native Cloud execution/PR delivery is user-confirmed via PR #3. The custom
+app/publisher proposal was withdrawn; no distinct bot-author approval path is claimed. The user
+handles removal of their unused app/key; removal has not been independently verified.
+
+Executor/Anvil/cost evidence remains M2; richer history/replay/recovery/backup remains M3.
+Provider fallback/gateway and additional chains retain separate scopes. Other runner images,
+power loss, network filesystems, exhaustive browser/network stress and sustained freshness or
+performance remain unverified.
 
 ## Latest handoff and next proposed action
 
-The connector confirmed [PR #1](https://github.com/mikolajed/pooltrace/pull/1) merged as
-`1d180c208829f3743f8c8d704e57cc485fe9520d`; the CI implementation is on `main`.
-[DEP-02 evidence](tasks/DEP-02-pr-verification-and-cloud-compatibility.md#implementation-evidence)
-retains the detailed platform/gate/protection checks and remaining stale-base verification.
+PR #1 merged as `1d180c208829f3743f8c8d704e57cc485fe9520d`; PR #2 merged as
+`d9136c3e7dbd57d05fcf992f4b9d68366e73598d`. Their task closeouts retain final head/base/run
+references and outstanding criteria. [PR #3](https://github.com/mikolajed/pooltrace/pull/3)
+merged the arbitrage research roadmap as `244fa0b36d37170a2542c5fdf29cf5dc736cd045`.
 
-[PR #2](https://github.com/mikolajed/pooltrace/pull/2) groups the workflow/AGENTS corrections and
-the related native contributor-doc cleanup. Its initial workflow-only head was
-`db3e4621259e3b6314a57e09d1104dd346ffeacc`; that candidate's
-[second CI attempt](https://github.com/mikolajed/pooltrace/actions/runs/44519953125/attempts/2)
-passed all six jobs after the first attempt failed during Ubuntu package downloads. These are
-initial-candidate results, not results for the later combined documentation candidate.
-Inspect the latest candidate/checks before user merge; readiness transitions can trigger another run.
-
-The contributor cleanup removes the custom app/publisher requirements and keeps native Cloud
-onboarding as a small verification task. The user authorized committing/pushing the cleanup; it is
-being delivered in the same PR #2 for one review/merge. Actual latest-head CI belongs on the PR.
-No new product scope starts automatically; M2 executor design remains unapproved.
-
-The user identified repeatable profitable routes as essential to the project. ARB starts with
-read-only opportunity discovery on M1. Its results inform M2 scope, and M2 fork and cost
-capabilities support full-cost validation. Later timing and coverage experiments use replay
-evidence where needed.
+The next proposed product task is to scope ARB-01: baseline route yield and collector freshness
+over predefined block windows, using the completed M1 collector. The results inform M2 scope;
+M2 fork and cost capabilities later support full-cost validation.
 [Arbitrage research track](ROADMAP.md#arb--arbitrage-research-track).
+ARB-01 execution and M2 design/implementation remain unapproved. No new product scope starts
+automatically; setup verification is retained as a limit of the closed records rather than an
+active task assignment.

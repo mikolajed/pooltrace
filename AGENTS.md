@@ -26,10 +26,10 @@ technical conventions belong in engineering; task plans and evidence belong in t
 - Requested documentation work and read-only inspection may proceed within the user's request.
 - Routine choices within an explicitly approved scope do not require repeated approval.
 - Never invent addresses, APIs, market data, approvals, or test results.
-- Record actual evidence and update the relevant task and current state before handing off.
+- Record actual evidence and follow the [handoff rules](docs/WORKFLOW.md#work-lifecycle) for task/status updates.
 - Use Conventional Commits for commit messages and PR titles; follow the
   [naming conventions and templates](docs/WORKFLOW.md#commit-messages-and-pr-titles).
-- Only the user creates commits; agents must not commit. Do not push unless the user requests it.
+- Follow [WORKFLOW.md](docs/WORKFLOW.md#authorization) for branch, commit, push, PR, and merge permissions.
 - The proposed shared PR contribution process is in [WORKFLOW.md](docs/WORKFLOW.md#proposed-shared-pr-contributions).
   Its standing delivery permissions remain inactive until explicitly accepted and set up.
 

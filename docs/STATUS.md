@@ -16,7 +16,10 @@ and merged its workflow/documentation correction in
 [CONTRIB-01 closeout](tasks/CONTRIB-01-shared-pr-contributor-setup.md#closeout) distinguish merged
 delivery from unperformed validation. They are Closed, not claims that every original check passed.
 
-The existing local branch/PR workflow is usable. Native Cloud execution remains unverified.
+The local branch/PR workflow is usable. The user confirmed PR #3 was created in Codex Cloud;
+GitHub readback verifies its author/head/base/merge and six passing jobs on final CI attempt 2.
+The native Cloud delivery path is demonstrated; the environment's own setup report and a subsequent
+Cloud commit/update event were not inspected/tested.
 Standing delivery permissions remain inactive; explicit commit/publication permission and user
 review/merge are still required under [WORKFLOW](WORKFLOW.md). Closing these records does not
 authorize another implementation task, account/settings changes, agent merging, or deployment.
@@ -42,6 +45,9 @@ authorize another implementation task, account/settings changes, agent merging, 
   ruleset; a failed current gate was reported as merge-blocking.
 - PR #2 delivered branch-first contribution rules, explicit commit/publication permissions and
   native onboarding documentation. Its final review-ready CI run succeeded for the merged head.
+- PR #3 supplied user-confirmed Cloud branch/PR delivery and user merge. Its final CI attempt
+  passed all six jobs for head `438e7dd6d26388fd2f6172c0d006fe50caa9b655`; CONTRIB-01 records
+  the Cloud-origin attestation and independently verified GitHub evidence.
 - The [analysis guide](ANALYSIS.md) explains implemented math, interpretation and evidence.
   The [root README](../README.md#local-application) owns setup/commands. The supplied perched
   kingfisher reference remains unchanged.
@@ -52,8 +58,9 @@ Qualification belongs to each observation/input/policy. Reports and screenshots 
 not continuing eligibility, profitability or capture claims. Browser/API requests do not invoke RPC.
 
 No wallet, executor, transaction submission, fork simulation, full-transaction cost producer,
-benchmark or hosted deployment exists. DEP-02's controlled stale-base/review-invalidation experiment
-and CONTRIB-01's actual Cloud environment/PR remain unverified in their closed records. The custom
+benchmark or hosted deployment exists. DEP-02's controlled stale-base/review-invalidation experiment,
+the Cloud environment's own setup report and a subsequent Cloud commit/update event remain
+unverified in the closed records. Native Cloud execution/PR delivery is user-confirmed via PR #3. The custom
 app/publisher proposal was withdrawn; no distinct bot-author approval path is claimed. The user
 handles removal of their unused app/key; removal has not been independently verified.
 

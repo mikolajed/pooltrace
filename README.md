@@ -200,8 +200,9 @@ workflow validation and a gate that requires all dependencies to succeed. It rec
 RPC/model/deployment secrets and performs no merge or deployment. The initial hosted baseline
 passed all six checks; protection readback and a blocked failing PR are recorded in the task.
 DEP-02 and [CONTRIB-01](docs/tasks/CONTRIB-01-shared-pr-contributor-setup.md#closeout) are closed at
-the user's request. Their closeouts retain the unverified stale-base experiment and actual native
-Cloud environment/PR. Local PR delivery is demonstrated; standing delivery permissions remain inactive.
+the user's request. PR #3 supplies user-confirmed native Cloud delivery with GitHub-verified CI/merge.
+The stale-base experiment, Cloud setup report and subsequent Cloud update-event proof remain
+unverified in the closeouts. Standing delivery permissions remain inactive.
 
 ## Diagnostic CLI
 

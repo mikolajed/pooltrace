@@ -1,6 +1,6 @@
 # CONTRIB-01: Native Codex Cloud onboarding
 
-- State: Closed — native onboarding direction/documentation delivered; Cloud execution unverified
+- State: Closed — native direction and user-confirmed Cloud PR delivered; evidence limits below
 - Milestone: Contributor onboarding
 - Related records: [WORKFLOW](../WORKFLOW.md), [DEP-02](DEP-02-pr-verification-and-cloud-compatibility.md),
   [ADR-0009](../adr/0009-pr-verification-and-repository-trust.md)
@@ -21,12 +21,23 @@ records all six jobs passing. Merge/head identities and all six successful jobs 
 closeout. The actual PR author is `mikolajed`; this is local delivery evidence.
 
 Delivered: native Codex selected, custom app/publisher requirements withdrawn, setup instructions
-documented, and explicit commit permission/user review preserved in the merged workflow.
+documented, explicit commit permission/user review preserved, and a real user-confirmed Cloud PR.
 
-Outstanding: a dedicated published Pooltrace Cloud environment, its actual toolchain/check report,
-and a Cloud-origin PR with creation/update and CI evidence remain unverified. The original
-acceptance boxes below remain unchecked. No Cloud task was launched, and local delivery is not
-Cloud execution evidence. The user's unused app/key removal was not independently verified.
+Cloud delivery: on 2026-11-19 the user confirmed that
+[PR #3](https://github.com/mikolajed/pooltrace/pull/3), “docs: plan arbitrage research across
+milestones”, was created from a new branch in Codex Cloud and then merged. GitHub readback
+independently confirms author `mikolajed`, branch `codex/arbitrage-research-roadmap`, head
+`438e7dd6d26388fd2f6172c0d006fe50caa9b655`, base
+`d9136c3e7dbd57d05fcf992f4b9d68366e73598d`, and merge commit
+`244fa0b36d37170a2542c5fdf29cf5dc736cd045`.
+The [final CI run, attempt 2](https://github.com/mikolajed/pooltrace/actions/runs/44563523648/attempts/2)
+passed all six jobs for that head. Cloud origin is user-confirmed; the GitHub API does not supply
+the Cloud execution log. This establishes the native Cloud branch/PR/check/user-merge path.
+
+Remaining evidence limits: the Cloud environment's own setup/toolchain/check report was not
+inspected or archived here, and a subsequent Cloud commit/update event was not separately tested.
+The corresponding setup criterion remains unchecked; Cloud execution and PR creation are no
+longer listed as missing. The user's unused app/key removal was not independently verified.
 
 These are documented limits of the closed task, available for a future separately approved
 verification scope. Closure does not activate standing delivery permissions or authorize account
@@ -79,11 +90,13 @@ Official guides checked on 2026-11-19:
 - [x] Native Codex Cloud is the selected onboarding path; custom app/publisher requirements removed.
 - [x] Contributor behavior refers to the canonical workflow and preserves explicit commit permission
   and user review/merge.
-- [ ] A Pooltrace Cloud environment is prepared/published with actual toolchain and check evidence.
-- [ ] A real Cloud task produces a PR with recorded origin, author, head/base and required CI results.
+- [ ] The Cloud environment's setup/toolchain/check report is recorded. PR #3 demonstrates usable
+  Cloud repository access/delivery, but the environment report was not inspected or archived here.
+- [x] A real Cloud task produces a PR with recorded origin, author, head/base and required CI results.
+  User-confirmed Cloud origin for PR #3; GitHub author/head/base/merge and six passing jobs read back.
 
-Native Cloud validation remains unverified at closure. It does not block using the already working
-local Codex branch/PR workflow; the documentation correction has been merged.
+Native Cloud delivery is demonstrated by PR #3 with the evidence limits above. The existing local
+Codex branch/PR workflow is also usable; the documentation correction has been merged.
 
 ## Approval record
 
@@ -101,10 +114,16 @@ On 2026-11-19 the user instructed “we need close them” for CONTRIB-01 and DE
 an AGENTS/workflow rule to prevent missed closeouts. This authorizes closing and reconciling the
 records with the limits above; it does not establish that the unperformed Cloud checks passed.
 
+The user subsequently clarified that a new branch and merged PR had already been created with
+Codex Cloud, identifying PR #3. This supplies the Cloud-origin attestation recorded in closeout;
+GitHub's corresponding PR/CI/merge evidence was then inspected.
+
 ## Evidence and handoff
 
 - Native Cloud support was checked against the official guides. Environment inventory returned a
-  runnable default environment but no dedicated Pooltrace environment; no Cloud task was launched.
+  runnable default environment but no dedicated Pooltrace environment at that earlier inspection;
+  this local session launched no Cloud task. The later user-confirmed PR #3 supplies actual Cloud
+  delivery evidence, as recorded in closeout.
 - Local Codex delivery is independently demonstrated by [PR #2](https://github.com/mikolajed/pooltrace/pull/2),
   authored as `mikolajed` at head `db3e4621259e3b6314a57e09d1104dd346ffeacc`.
   [CI attempt 2](https://github.com/mikolajed/pooltrace/actions/runs/44519953125/attempts/2)

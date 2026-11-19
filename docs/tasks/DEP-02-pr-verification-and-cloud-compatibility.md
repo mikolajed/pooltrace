@@ -29,9 +29,10 @@ Outstanding and superseded items:
 
 - CI05's controlled stale-base rejection/combined-base experiment and review-invalidation proof
   remain unverified. Strict current-base protection was read back; that is not the experiment.
-- Native Cloud creation/update events remain unverified. Local PR delivery is demonstrated by
-  PRs #1–2; [CONTRIB-01's closeout](CONTRIB-01-shared-pr-contributor-setup.md#closeout) records
-  the separate Cloud limit.
+- Native Cloud PR creation/check/user-merge is demonstrated by user-confirmed PR #3 with six
+  passing jobs. The environment's own setup report and a subsequent Cloud commit/update event
+  were not inspected/tested; [CONTRIB-01's closeout](CONTRIB-01-shared-pr-contributor-setup.md#closeout)
+  records the exact provenance and remaining limits.
 - The custom app/publisher and mandatory distinct-bot onboarding proposal was withdrawn when the
   user chose native Codex. A distinct-author approval path was not provisioned or proven.
 
@@ -119,8 +120,10 @@ without making Linux/local verification depend on a model-provider subscription.
 - [x] Selected runner/action/browser/dependency inputs, tested candidate and sanitized artifacts
   are recorded; write/RPC/model/deployment secrets are absent from PR verification.
 - [x] The user reviewed/merged the workflow changes in PR #1; no automatic merge or deployment.
-- [ ] Native Cloud PR creation/update is verified. Unverified at closure; the former mandatory
-  distinct-bot setup premise was superseded by the user's native onboarding choice.
+- [x] Native Cloud PR creation triggers the required gate and the user can merge: PR #3 has
+  user-confirmed Cloud origin and GitHub-verified author, candidate, six passing jobs and merge.
+- [ ] A subsequent Cloud commit/update event is separately verified. Unverified at closure;
+  the former mandatory distinct-bot setup premise was superseded by native onboarding.
 - [x] Task/status/backlog evidence distinguishes local checks, hosted runs and repository settings.
 
 ## Planned validation
@@ -245,7 +248,7 @@ input set excludes generated/dependency output and documentation.
 | CI05 | Current-candidate metadata verifies exact head/base/tested-merge SHAs and clean checkout. A new probe commit triggered a fresh hosted run. Actual stale-base rejection, combined-base integration and review invalidation remain unverified. |
 | CI06 | Pinned actionlint and workflow policy pass locally and on hosted Ubuntu x64. Hosted logs/metadata inspected, all five diagnostics artifacts uploaded with seven-day expiry. Browser artifact ZIP checksum, actual paths and report/lifecycle attachment inspected; no private configuration or database uploaded. Main protection was subsequently enabled by the user. |
 | CI07 | Initially unprotected. User-created ruleset `27598219` now reads back active on the default branch, strict `pr-gate` bound to GitHub Actions app `15368`, required PRs/resolved threads, deletion/force-push restrictions and no bypass actors. `main` reports `protected: true`; the non-draft PR reports `mergeable_state: blocked` with the latest gate failed. No direct/force write or deletion on main was attempted; stale-base integration and bot approval remain unverified. |
-| CI08 | Local user-authored PR delivery/checks are demonstrated by PRs #1–2. Native Cloud creation/update remains unverified. The custom-app/distinct-bot setup proposal was withdrawn; no separate bot-author approval path is claimed. See both task closeouts. |
+| CI08 | Local delivery/checks are demonstrated by PRs #1–2. The user confirmed PR #3 originated in Codex Cloud; GitHub readback verifies author/head/base/merge and all six jobs passing on final run attempt 2. Subsequent Cloud commit/update events were not separately tested. The custom-app/distinct-bot proposal was withdrawn; no separate bot-author approval path is claimed. See CONTRIB-01 closeout. |
 
 Initial failures were repaired before the passes above: a YAML `if: false` property bypassed a
 truthiness-based policy test; the checker now rejects any conditional property on required jobs.

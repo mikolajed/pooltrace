@@ -180,7 +180,10 @@ the explicit scope recorded in DEP-02; no commit, push or PR publication was req
 DEP-02's CI implementation was merged in PR #1. PR #2 delivered the native Codex direction and
 contribution documentation, withdrawing the custom app/publisher onboarding proposal. Both tasks
 were closed at the user's request on 2026-11-19. Their closeouts retain final candidate/CI/merge
-evidence and unverified stale-base and native Cloud checks. Closing the records does not claim the
+evidence and unverified stale-base checks. The user subsequently confirmed PR #3 originated in
+Codex Cloud; GitHub readback verifies its author/head/base/merge and six passing jobs. The Cloud
+environment's own setup report and a subsequent Cloud commit/update event were not inspected/tested.
+Closing the records does not claim the
 combined contribution path is fully verified or activate standing delivery permissions. A
 distinct-author approval path remains conditional on actual identity proof; no such path is claimed.
 Future tool/account setup is not authorized by DEP-02 approval or this ADR.

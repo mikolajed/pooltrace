@@ -49,5 +49,6 @@ These are topics to investigate, not preaccepted designs:
   direction does not preaccept those future designs.
 - ADR-0008's minimal M1 UI/backend API, SSE and process lifecycle are implemented. ADR-0009 now
   selects PR verification and repository trust boundaries. CI is merged and main protection active;
-  DEP-02/CONTRIB-01 closeouts retain unverified stale-base and native Cloud checks. Anvil orchestration
+  PR #3 supplies user-confirmed Cloud delivery and verified CI/merge. DEP-02/CONTRIB-01 closeouts
+  retain unverified stale-base and Cloud setup-report/update-event gaps. Anvil orchestration
   and hosted release design remain separate; no production deployment exists.

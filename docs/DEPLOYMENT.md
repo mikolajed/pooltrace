@@ -111,9 +111,10 @@ the initial six-job hosted baseline passed with the same source digest. Hosted r
 24.04 x64 and macOS 15 arm64; the task retains exact images, runtime/native versions and candidates.
 
 [CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md#closeout) delivered the native Codex
-direction and setup documentation in PR #2. Local user-authored PR delivery/checks are demonstrated;
-actual Cloud environment/execution and Cloud-origin PR events remain unverified. No custom
-publisher or distinct bot identity was configured. Both tasks are closed with those limits recorded;
+direction and setup documentation in PR #2. The user confirmed PR #3 originated in Codex Cloud;
+GitHub independently verifies its author/head/base/merge and six passing jobs. The Cloud
+environment's own setup report and a subsequent Cloud commit/update event were not inspected/tested.
+No custom publisher or distinct bot identity was configured. Both tasks are closed with those limits recorded;
 future contributor verification needs a separately approved scope. Explicit commit/publication
 permission and user review/merge remain required; standing delivery permissions remain inactive.
 
@@ -122,7 +123,8 @@ Read-only GitHub inspection confirmed a public, personally owned repository. The
 PRs, resolved conversations, strict `pr-gate` bound to GitHub Actions app `15368`, deletion/force
 push restrictions and no bypass actors. Required approvals remain zero until a distinct bot author
 is verified. The connector can read this public ruleset but lacks protection administration.
-Unverified stale-base and native Cloud checks are retained in the closed DEP-02/CONTRIB-01 records. Protection
+The unverified stale-base experiment and Cloud setup-report/update-event gaps remain in the
+closed DEP-02/CONTRIB-01 records. Protection
 settings, provider accounts and secrets are external changes requiring the task's explicit scope.
 Workflow files alone do not establish enforcement. Missing permissions or unavailable plan features
 must remain explicit setup gaps. Hosted staging and release promotion retain the separate gates below.
@@ -193,7 +195,8 @@ readiness, ownership, shutdown, browser/live and clean-build evidence. Hosted re
 Runtime pins and the minimal SQLite driver/schema/journal settings are selected and validated in
 their task records. ADR-0009 is accepted. DEP-02 records selected action/browser pins and local
 Linux/macOS results, hosted baselines and actual protection readback. Stale-base integration and
-native Cloud execution remain unverified in their closeouts.
+Cloud setup-report/update-event gaps remain unverified in their closeouts; PR #3 supplies
+user-confirmed Cloud delivery and verified GitHub CI/merge.
 Fork lifecycle details still require M2 scope/design. Hosting,
 release artifact packaging, staging layout, release checks/budgets, migrations/cutover, and rollback
 procedures require a future deployment ADR. CI workflow YAML is merged; no Dockerfile or hosted

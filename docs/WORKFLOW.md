@@ -150,7 +150,8 @@ scoped to this repository. Separate independently operated tool credentials so a
 revoked independently. A model name is not an authentication mechanism; changing Git commit
 metadata does not select the PR author. One identity can serve several models within one trusted
 tool boundary. [CONTRIB-01](tasks/CONTRIB-01-shared-pr-contributor-setup.md#closeout) records the
-selected native Codex path and its unverified execution limits. Future tool setup must record its
+selected native Codex path, user-confirmed Cloud PR delivery and remaining evidence limits.
+Future tool setup must record its
 actual authenticated identity and delivery evidence before that path is called verified.
 
 The user reviews and merges. A second tool may inspect a PR and report findings; that review does

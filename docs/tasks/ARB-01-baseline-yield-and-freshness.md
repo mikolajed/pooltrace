@@ -405,11 +405,10 @@ behavior on other platforms were not separately exercised. Testing is not formal
 Full reproduction requires both local directories and their retained parent link/source proof;
 the selected summary archive alone is not a complete raw dataset.
 
-Disposition: **Done**. Implementation commit and PR delivery are authorized as recorded above.
-The delivered PR candidate and its hosted check results are recorded in the PR description;
-local research acceptance and diagnostic target misses are documented here. No merge is claimed.
-An observed merge and later delivery updates must be reconciled under WORKFLOW;
-no next task starts automatically.
+Disposition: **Done**. Implementation, research evidence and review corrections were delivered in
+user-merged PR #5. The merge closeout below records the final candidate and hosted checks;
+local research acceptance and diagnostic target misses remain documented here.
+No next task starts automatically.
 
 Final documentation verification: `git diff --check` passed; 236 local Markdown targets/anchors
 across nine changed/new documents passed. Task independence, completed acceptance entries, archive
@@ -421,7 +420,8 @@ On 2026-11-20 the user instructed **“Good now fix them all”**, authorizing f
 coverage for the three findings in [PR #5's review](https://github.com/mikolajed/pooltrace/pull/5#pullrequestreview-5993109408).
 This authorizes the bounded corrections, not a new commit, push, merge or live sampling run.
 The user subsequently said **“You froze, you can commit”**, explicitly authorizing the prepared
-review-fix commit. Push/publication, merge and live sampling remain separately gated.
+review-fix commit, then **“Push to remote”**, authorizing its task-branch publication. The user
+performed the merge recorded below. No additional live sampling was authorized or performed.
 
 The runner now applies one fatal RPC classification to pipeline, observer and reconciliation
 failures: authorization, configuration and unsupported reads. Reconciliation preserves the failed
@@ -444,6 +444,23 @@ retained Tini wrapper and subprocess/loopback permission for native process chec
 and all 15 local Markdown targets/anchors in the two updated records passed.
 
 The historical live archives remain unchanged. These checks are offline diagnostics; they do not
-repeat or independently reproduce the historical market experiment. The corrections are prepared
-for the authorized local commit and remain unpublished; current hosted CI must run on their
-published candidate before merge.
+repeat or independently reproduce the historical market experiment. The corrections were
+committed as `a96879ff205c4d09d6a13d9c24d460e554bae749`, published and validated as recorded below.
+
+### Merge closeout
+
+On 2026-11-20 the user reported the merge. GitHub readback confirms that
+[PR #5](https://github.com/mikolajed/pooltrace/pull/5) merged final head
+`a96879ff205c4d09d6a13d9c24d460e554bae749` into `main` at
+`ad8cfc0b53e1fc598932f912a58c42d6bac7b243` (13:37:30 UTC). A fresh fetch independently
+confirmed that merge commit on `origin/main`.
+
+[CI run 44744634645](https://github.com/mikolajed/pooltrace/actions/runs/44744634645) passed all
+six jobs for the final head: Linux/macOS full checks, web build, fixture browser smoke, workflow
+validation and `pr-gate`. All three review threads were resolved before merge. These are the
+delivered candidate's results; the earlier head's passing run is not substituted for them.
+
+ARB-01 remains **Done**. The two-window findings, missed diagnostic targets, interruption/control
+revision and unavailable cost/net evidence remain unchanged. Full historical reproduction still
+requires the retained ignored raw datasets; it was not independently repeated in this environment.
+This documentation-only closeout does not authorize or begin another implementation task.

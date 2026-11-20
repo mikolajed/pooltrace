@@ -7,18 +7,14 @@ Updated: 2026-11-20 (Europe/Warsaw).
 **M1-01 through M1-12 are complete. ADRs 0001–0009 are accepted. DEP-02 and CONTRIB-01 are
 closed at the user's request, with outstanding validation recorded explicitly.**
 
-**ARB-01 is complete locally:** its independent baseline runner/reporting, two measured windows
-and research closeout are delivered with missed diagnostic targets recorded.
-The user separately authorized the implementation commit and PR delivery. The PR description
-records its delivered candidate and hosted checks; no merge is claimed here.
-
-The user subsequently requested all three PR #5 review fixes with “Good now fix them all”.
-Those corrections are prepared locally on the existing task branch and passed `bun run check`
-(310 tests across 14 files, types, lint and formatting). The user authorized committing these
-corrections with “You froze, you can commit”; publication remains separately gated.
-The [task evidence](tasks/ARB-01-baseline-yield-and-freshness.md#pr-5-review-corrections)
-records the fatal-error and cancellation regressions. Earlier hosted checks cover the published
-head only, not these corrections.
+**ARB-01 is complete and merged:** [PR #5](https://github.com/mikolajed/pooltrace/pull/5)
+merged final head `a96879ff205c4d09d6a13d9c24d460e554bae749` as
+`ad8cfc0b53e1fc598932f912a58c42d6bac7b243` on 2026-11-20. GitHub readback and refreshed
+`origin/main` confirm delivery, including all three review corrections. Local checks passed
+310 tests across 14 files, types, lint and formatting; all six hosted jobs passed for that head.
+The [merge closeout](tasks/ARB-01-baseline-yield-and-freshness.md#merge-closeout)
+retains the evidence, missed research targets and reproduction limits. No new implementation
+or live experiment is authorized by this merge.
 
 The CI implementation was approved by “i accept adr9 and dep2” and delivered in user-merged
 [PR #1](https://github.com/mikolajed/pooltrace/pull/1). The user selected native Codex onboarding
@@ -111,8 +107,7 @@ released ownership; exact report reproduction and all 34/35 source snapshot hash
 
 ARB-01 is Done, with its report and this increment's ARB-05 decision record. The research
 recommendation is to revise observation/freshness assumptions before broader yield conclusions;
-no follow-on task is selected or authorized. The user requested PR delivery with “i think you can
-do a pr”, followed by explicit commit approval: “yes commit but good that you asked”. The prepared
-implementation commit, task-branch push and PR delivery are authorized. The PR description owns
-the candidate-specific delivery/check handoff; the user reviews and merges. Setup verification
+no follow-on task is selected or authorized. The implementation and review corrections were
+committed and published under the user's separate instructions, then merged by the user in PR #5.
+The task's merge closeout records the delivered candidate and hosted checks. Setup verification
 remains a limit of the closed records rather than an active assignment.

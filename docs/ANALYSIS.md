@@ -68,6 +68,53 @@ These structural checks precede finite-size qualification. The original snapshot
 `finiteSizeSuitability: unavailable`; linked analysis records add size-specific evidence without
 rewriting the source. [Registry implementation](../packages/protocols/src/registry.ts).
 
+## Baseline research results
+
+The [ARB-01 command](../README.md#arb-01-baseline-research) runs the same collect/analyze/save
+pipeline in one backend process, using its own database and producer guard. Its versioned timing
+journal supplements the existing immutable SQLite evidence without a schema migration. The manifest
+freezes source file hashes/patch identity, actual Node/Bun versions, configured provider labels,
+registry/quotation policies, fixed sizes and experiment settings. No private RPC URL is recorded.
+
+Each predefined window has a denominator of 128 target block heights. Closing canonical headers
+identify the retained hash at each height; unresolved or inconsistent closing headers stay unknown.
+The first attempt for each retained hash is the primary sample, including a failed first attempt.
+Later duplicates cannot improve yield; orphaned hashes and out-of-window attempts remain diagnostics.
+Only a fully admitted primary at the recorded completion time contributes to gross yield. Reports
+recompute that as-of eligibility with its original wall/monotonic times and verify exact stored
+route/input/output/second-leg composition. This retrospective accounting never restores current
+live admission to a saved record.
+
+The headline positive-gross rate is positive-gross primary blocks / qualified primary blocks.
+Qualified coverage is reported separately over all target heights. When no block qualifies, yield
+is unavailable; unobserved/stale/incomplete blocks are not counted as observed zero-yield states.
+The report retains all primary route/size outcomes and reasons, with exact signed USDC base-unit
+distributions and best-tested sizes over eligible samples. Amounts on ineligible rows are diagnostic.
+
+First seen means the local HTTP observer's full header receipt. It does not measure network arrival
+or block creation; a missed head has no invented first-seen time. A receipt after analysis completed
+does not become zero detection latency. Collection, quotes, total completion, age/head lag, observer
+receipt gaps and unknown timing are reported separately. Timing percentiles and amount quantiles
+use nearest rank (`ceil(p*n)`) without interpolation. Invalid clocks exclude affected measurements
+and prevent a qualified-window conclusion. Observer work shares the four-request capacity and
+actual-send budget, with pipeline priority for queued requests, so its overhead is disclosed.
+
+Actual transport sends, retries, logical reads, HTTP/transport failures and pipeline reader outcomes
+remain distinct. Reader outcomes include expected unknown-hash probes and refused dispatches;
+they are not a substitute for actual send counts or provider billing. Canonicality is as of each
+recorded closing check, without a finality guarantee. Zero yield and missed diagnostic targets can
+be valid research findings when the evidence is complete; inadequate coverage limits the economic
+conclusion. Transaction costs/net remain unavailable, and end-of-block observation still misses
+some intra-block activity.
+
+An interrupted final source-tool check can be followed by a separately identified continuation
+only when the first window is fully reconciled and its original source/evidence is verified.
+The continuation collects only the unstarted second window within the original remaining budgets.
+The combined report retains the original failed terminal record and post-interruption proof;
+separate source identities disclose a control-code revision and prevent a matched-source comparison
+claim. Window timing uses each process's own recorded monotonic context; it is not spliced across
+the interruption. No partial window is replaced and no third window is added.
+
 ## Units and exact representation
 
 | Quantity | Representation |

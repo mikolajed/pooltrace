@@ -30,6 +30,9 @@ across agent instructions, task plans, and ADRs.
 - **Use and understand the working slice:** root README setup/commands → analysis guide → linked
   source/ADRs for details and task records for actual evidence.
 - **Start or resume work:** agent entry point → current state → workflow → relevant task and ADRs.
+- **Run or inspect baseline research:** root README research commands → analysis guide's baseline
+  interpretation → ARB-01 task scope and actual evidence. Raw journal/SQLite artifacts are needed
+  for complete offline reproduction; archived summaries describe their coverage and limits.
 - **Review a design:** task scope → linked requirements → proposed ADR and alternatives.
 - **Verify a result:** task evidence → actual artifacts and check output. A checked box alone is
   insufficient evidence of correctness.

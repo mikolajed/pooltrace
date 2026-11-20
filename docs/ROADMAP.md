@@ -2,10 +2,12 @@
 
 M1-01 through M1-12 are complete, including verified snapshots, qualified read-only cycle analysis,
 diagnostic CLI access, exact SQLite history, the analysis guide, a minimal local API/SSE/browser and
-combined startup/shutdown. Further implementation awaits explicit approval.
+combined startup/shutdown. ARB-01's independent baseline is complete, with actual evidence and
+coverage/timing limits in its [task record](tasks/ARB-01-baseline-yield-and-freshness.md).
+Further implementation awaits explicit approval.
 Approval of one task or milestone does not authorize another.
 
-The next arbitrage research increment uses the completed M1 collector. The CI implementation
+The completed ARB-01 baseline uses the M1 collector. The CI implementation
 is on main. DEP-02 and CONTRIB-01 are closed at the user's request; their closeouts retain the
 unverified stale-base experiment and Cloud setup-report/update-event gaps as explicit limits.
 PR #3 supplies user-confirmed native Cloud delivery with verified GitHub CI/merge.
@@ -28,18 +30,18 @@ M1–M5 define the core product capabilities. Research tracks can span several c
 Each track can deliver independently scoped increments and use core capabilities as they become
 available. The results inform which core work to scope next.
 
-The next proposed sequence is the bounded
-[ARB-01 baseline increment](tasks/ARB-01-baseline-yield-and-freshness.md), its evidence/decision
-closeout, then separately approved M2-01 design. ARB-02 pool/size expansion and ARB-03 timing
-experiments are deferred for later review. ARB-01 includes this increment's ARB-05 reporting;
-it does not complete the entire opportunity-discovery milestone or authorize M2 automatically.
+The [ARB-01 baseline increment](tasks/ARB-01-baseline-yield-and-freshness.md) is complete as an
+independently scoped research task with its own evidence, conclusions and acceptance criteria.
+ARB-02 pool/size expansion and ARB-03 timing experiments are deferred for later review.
+ARB-01 includes this increment's ARB-05 reporting. Selection of subsequent work is separate
+from its closeout.
 
 | Stage | Sequencing | Outcome | Related work |
 | --- | --- | --- | --- |
 | Setup | Complete | Requirements, documentation system, ADR workflow, backlog, brand reference | SET tasks in [backlog](BACKLOG.md) |
 | M1: Local read-only research application | Complete | One backend, minimal UI/CLI access, verified quotes/cycles, early SQLite | M1 tasks in [backlog](BACKLOG.md) |
 | PR verification and shared contributions | Records closed at user request with unverified limits | Merged CI, local PR delivery and user-confirmed native Cloud delivery with verified CI/merge | DEP-02 and CONTRIB-01 closeouts in [backlog](BACKLOG.md) |
-| M2: Executor and fork validation | Early arbitrage research informs scope | Guarded execution, meaningful contract tests, full transaction cost evidence | M2 tasks in [backlog](BACKLOG.md) |
+| M2: Executor and fork validation | Scope separately when selected | Guarded execution, meaningful contract tests, full transaction cost evidence | M2 tasks in [backlog](BACKLOG.md) |
 | M3: Evidence and recovery hardening | Builds on M1 persistence and M2 simulation records | Richer history/replay, schema evolution, backup/restore, recovery | M3 tasks in [backlog](BACKLOG.md) |
 | M4: Research terminal refinement | Builds on the minimal M1 UI and usable evidence | Full route/cost/size inspection, polished states, brand integration | M4 and BR tasks in [backlog](BACKLOG.md) |
 | M5: Documentation and reproducibility | Consolidates a reviewable increment; can be revisited | Reproducible setup, explanations, validation evidence, contributor guidance | M5 tasks in [backlog](BACKLOG.md) |

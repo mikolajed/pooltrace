@@ -1,0 +1,1782 @@
+{
+  "format": "arb-01-baseline-archive-v1",
+  "observedOn": "2026-11-20",
+  "origin": "live_observations_now_historical",
+  "complete": true,
+  "workload": {
+    "chainId": 1,
+    "pair": "USDC/WETH",
+    "pools": ["Uniswap V2", "Uniswap V3 500", "Uniswap V3 3000"],
+    "sizesUsdc": ["10", "50", "100", "500", "1000", "5000"],
+    "routeSizeCombinations": 36,
+    "settings": {
+      "blocks": 128,
+      "delayMs": 10000,
+      "pollMs": 2000,
+      "preflightMs": 120000,
+      "preflightSends": 300,
+      "reserveMs": 300000,
+      "reserveSends": 1000,
+      "sends": 20000,
+      "windowMs": 2700000,
+      "windows": 2
+    }
+  },
+  "limits": {
+    "transactionCost": "unavailable",
+    "netProfit": "unavailable",
+    "providerBilling": "unavailable"
+  },
+  "windowSummaries": [
+    {
+      "window": 1,
+      "start": "26452712",
+      "end": "26452839",
+      "armed": {
+        "mono": 9538.803459,
+        "wall": 1795134408311
+      },
+      "denominator": 128,
+      "coverage": {
+        "qualified": 85,
+        "attemptedIneligible": 0,
+        "seenNotAttempted": 43,
+        "notSeenNotAttempted": 0,
+        "canonicalUnknown": 0
+      },
+      "ineligible": {},
+      "observerSeenCanonical": 128,
+      "duplicates": 0,
+      "orphanedAttempts": 0,
+      "attemptsWithoutBlock": 0,
+      "outOfWindowAttempts": 0,
+      "positiveGrossBlocks": 0,
+      "positiveGrossRate": {
+        "numerator": 0,
+        "denominator": 85
+      },
+      "qualifiedCoverage": {
+        "numerator": 85,
+        "denominator": 128
+      },
+      "grossUsdcBase": {
+        "count": 85,
+        "min": "-33924",
+        "p50": "-28588",
+        "p95": "-9772",
+        "max": "-5634",
+        "positive": 0,
+        "zero": 0,
+        "negative": 85
+      },
+      "routes": [
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-64275",
+            "p50": "-41246",
+            "p95": "-31787",
+            "max": "-24562",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-321618",
+            "p50": "-206471",
+            "p95": "-159180",
+            "max": "-123052",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-643844",
+            "p50": "-413552",
+            "p95": "-318969",
+            "max": "-246714",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-3243567",
+            "p50": "-2092151",
+            "p95": "-1619258",
+            "max": "-1258001",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-6547995",
+            "p50": "-4245276",
+            "p95": "-3299546",
+            "max": "-2577077",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-35173071",
+            "p50": "-23664049",
+            "p95": "-18937602",
+            "max": "-15327065",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-61763",
+            "p50": "-61760",
+            "p95": "-59930",
+            "max": "-59918",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-309099",
+            "p50": "-309081",
+            "p95": "-299934",
+            "max": "-299876",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-618911",
+            "p50": "-618875",
+            "p95": "-600581",
+            "max": "-600465",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-3123092",
+            "p50": "-3122914",
+            "p95": "-3031432",
+            "max": "-3030858",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-6317523",
+            "p50": "-6317167",
+            "p95": "-6134172",
+            "max": "-6133049",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-34439335",
+            "p50": "-34437557",
+            "p95": "-33521329",
+            "max": "-33516720",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-45423",
+            "p50": "-28746",
+            "p95": "-9772",
+            "max": "-5634",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-227354",
+            "p50": "-143970",
+            "p95": "-49104",
+            "max": "-28413",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-455317",
+            "p50": "-288551",
+            "p95": "-98819",
+            "max": "-57439",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-2300931",
+            "p50": "-1467184",
+            "p95": "-518600",
+            "max": "-311748",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-4662724",
+            "p50": "-2995436",
+            "p95": "-1098454",
+            "max": "-684874",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-25746791",
+            "p50": "-17418561",
+            "p95": "-7941137",
+            "max": "-5878175",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-47255",
+            "p50": "-30422",
+            "p95": "-11459",
+            "max": "-7473",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-236334",
+            "p50": "-152171",
+            "p95": "-57356",
+            "max": "-37427",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-472824",
+            "p50": "-304499",
+            "p95": "-114871",
+            "max": "-75013",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-2370415",
+            "p50": "-1528810",
+            "p95": "-580698",
+            "max": "-381419",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-4756566",
+            "p50": "-3073410",
+            "p95": "-1177260",
+            "max": "-778729",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-24412204",
+            "p50": "-15998633",
+            "p95": "-6520809",
+            "max": "-4529213",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-59931",
+            "p50": "-58090",
+            "p95": "-58086",
+            "max": "-58086",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-299938",
+            "p50": "-290731",
+            "p95": "-290713",
+            "max": "-290713",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-600588",
+            "p50": "-582174",
+            "p95": "-582139",
+            "max": "-582139",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-3031418",
+            "p50": "-2939371",
+            "p95": "-2939194",
+            "max": "-2939193",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-6134034",
+            "p50": "-5949985",
+            "p95": "-5949630",
+            "max": "-5949629",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-33516236",
+            "p50": "-32597820",
+            "p95": "-32596046",
+            "max": "-32596041",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-62428",
+            "p50": "-39553",
+            "p95": "-29936",
+            "max": "-22708",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-312203",
+            "p50": "-197828",
+            "p95": "-149740",
+            "max": "-113599",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-624564",
+            "p50": "-395812",
+            "p95": "-299637",
+            "max": "-227356",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-3129120",
+            "p50": "-1985368",
+            "p95": "-1504495",
+            "max": "-1143096",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-6273999",
+            "p50": "-3986504",
+            "p95": "-3024770",
+            "max": "-2301986",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 85,
+            "min": "-32000274",
+            "p50": "-20563181",
+            "p95": "-15755011",
+            "max": "-12141584",
+            "positive": 0,
+            "zero": 0,
+            "negative": 85
+          }
+        }
+      ],
+      "timing": {
+        "collectionMs": {
+          "count": 85,
+          "min": 2226.4197080000304,
+          "p50": 3240.8931250000605,
+          "p95": 7507.434166999999,
+          "max": 11716.840417
+        },
+        "quoteMs": {
+          "count": 85,
+          "min": 2541.8025000002235,
+          "p50": 3353.9436660000356,
+          "p95": 7292.126749999996,
+          "max": 11797.941290999996
+        },
+        "completionMs": {
+          "count": 85,
+          "min": 4860.044082999928,
+          "p50": 6489.836500000034,
+          "p95": 13221.266250000015,
+          "max": 16830.13833300001
+        },
+        "firstSeenToCompletionMs": {
+          "count": 85,
+          "min": 4067.0125409998,
+          "p50": 12932.214834000217,
+          "p95": 20018.030749999918,
+          "max": 22960.511583000014
+        },
+        "completionBlockAgeMs": {
+          "count": 85,
+          "min": 7085,
+          "p50": 16312,
+          "p95": 22447,
+          "max": 24920
+        },
+        "completionHeadLag": {
+          "count": 85,
+          "min": 0,
+          "p50": 1,
+          "p95": 1,
+          "max": 1
+        }
+      },
+      "invalidTiming": 0,
+      "firstSeenUnavailable": 0,
+      "clockInvalid": false,
+      "pollReceiptGapMs": {
+        "count": 774,
+        "min": 444.28183399979025,
+        "p50": 1999.950499999919,
+        "p95": 2425.033582999953,
+        "max": 4529.46566700004
+      },
+      "targets": {
+        "observerCoverage": true,
+        "qualifiedCoverage": false,
+        "quoteP95": true,
+        "headLagP95": true
+      },
+      "bestTestedGross": {
+        "block": {
+          "hash": "0x1a8fc51fd7b383733c83bcc58d51cb6f9fd86902177f8962824f03ed2a73aaeb",
+          "number": "26452738",
+          "parentHash": "0xc6adb93429781404e5a82b2f6c818f0965b0b1a09151d2cf17ad0c013f6cea76",
+          "timestamp": "1795134731"
+        },
+        "route": [1, 0],
+        "inputUsdcBase": "10000000",
+        "grossUsdcBase": "-5634"
+      }
+    },
+    {
+      "window": 2,
+      "start": "26452944",
+      "end": "26453071",
+      "armed": {
+        "mono": 15913.99825,
+        "wall": 1795137183509
+      },
+      "denominator": 128,
+      "coverage": {
+        "qualified": 61,
+        "attemptedIneligible": 4,
+        "seenNotAttempted": 62,
+        "notSeenNotAttempted": 1,
+        "canonicalUnknown": 0
+      },
+      "ineligible": {
+        "stale": 2,
+        "validation_unavailable": 2
+      },
+      "observerSeenCanonical": 127,
+      "duplicates": 1,
+      "orphanedAttempts": 0,
+      "attemptsWithoutBlock": 0,
+      "outOfWindowAttempts": 0,
+      "positiveGrossBlocks": 0,
+      "positiveGrossRate": {
+        "numerator": 0,
+        "denominator": 61
+      },
+      "qualifiedCoverage": {
+        "numerator": 61,
+        "denominator": 128
+      },
+      "grossUsdcBase": {
+        "count": 61,
+        "min": "-34107",
+        "p50": "-26492",
+        "p95": "-10001",
+        "max": "-10001",
+        "positive": 0,
+        "zero": 0,
+        "negative": 61
+      },
+      "routes": [
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-59920",
+            "p50": "-37484",
+            "p95": "-25433",
+            "max": "-22891",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-299840",
+            "p50": "-187660",
+            "p95": "-127409",
+            "max": "-114698",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-600288",
+            "p50": "-375928",
+            "p95": "-255426",
+            "max": "-230006",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-3025740",
+            "p50": "-1903993",
+            "p95": "-1301514",
+            "max": "-1174416",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-6112225",
+            "p50": "-3868864",
+            "p95": "-2663980",
+            "max": "-2409799",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [0, 1],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-32989694",
+            "p50": "-21778087",
+            "p95": "-15756669",
+            "max": "-14486324",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-59922",
+            "p50": "-59271",
+            "p95": "-59271",
+            "max": "-59271",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-299891",
+            "p50": "-296635",
+            "p95": "-296635",
+            "max": "-296635",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-600491",
+            "p50": "-593978",
+            "p95": "-593978",
+            "max": "-593978",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-3030807",
+            "p50": "-2998243",
+            "p95": "-2998243",
+            "max": "-2998243",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-6132494",
+            "p50": "-6067363",
+            "p95": "-6067363",
+            "max": "-6067363",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [0, 2],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-33496252",
+            "p50": "-33170116",
+            "p95": "-33170116",
+            "max": "-33170116",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-47089",
+            "p50": "-32511",
+            "p95": "-10023",
+            "max": "-10013",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-235688",
+            "p50": "-162797",
+            "p95": "-50358",
+            "max": "-50308",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-471983",
+            "p50": "-326203",
+            "p95": "-101327",
+            "max": "-101227",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-2384203",
+            "p50": "-1655374",
+            "p95": "-531120",
+            "max": "-530610",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-4829129",
+            "p50": "-3371650",
+            "p95": "-1123448",
+            "max": "-1122402",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 0],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-26573226",
+            "p50": "-19292987",
+            "p95": "-8064242",
+            "max": "-8057986",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-47022",
+            "p50": "-31891",
+            "p95": "-10001",
+            "max": "-10001",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-235170",
+            "p50": "-159516",
+            "p95": "-50066",
+            "max": "-50065",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-470493",
+            "p50": "-319185",
+            "p95": "-100286",
+            "max": "-100285",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-2358613",
+            "p50": "-1602093",
+            "p95": "-507627",
+            "max": "-507622",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-4732602",
+            "p50": "-3219607",
+            "p95": "-1030755",
+            "max": "-1030735",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [1, 2],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-24277959",
+            "p50": "-16714823",
+            "p95": "-5773821",
+            "max": "-5773270",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-60579",
+            "p50": "-60579",
+            "p95": "-59937",
+            "max": "-59927",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-303174",
+            "p50": "-303174",
+            "p95": "-299968",
+            "max": "-299918",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-607055",
+            "p50": "-607055",
+            "p95": "-600643",
+            "max": "-600543",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-3063569",
+            "p50": "-3063569",
+            "p95": "-3031524",
+            "max": "-3031015",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-6197866",
+            "p50": "-6197866",
+            "p95": "-6133821",
+            "max": "-6132773",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 0],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-33816634",
+            "p50": "-33816634",
+            "p95": "-33498215",
+            "max": "-33491786",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "10000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-59914",
+            "p50": "-38085",
+            "p95": "-26081",
+            "max": "-22941",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "50000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-299627",
+            "p50": "-190485",
+            "p95": "-130462",
+            "max": "-114763",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "100000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-599408",
+            "p50": "-381123",
+            "p95": "-261078",
+            "max": "-229679",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "500000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-3003193",
+            "p50": "-1911775",
+            "p95": "-1311560",
+            "max": "-1154565",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "1000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-6021770",
+            "p50": "-3838955",
+            "p95": "-2638546",
+            "max": "-2324562",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        },
+        {
+          "route": [2, 1],
+          "inputUsdcBase": "5000000000",
+          "grossUsdcBase": {
+            "count": 61,
+            "min": "-30724140",
+            "p50": "-19810932",
+            "p95": "-13809684",
+            "max": "-12239974",
+            "positive": 0,
+            "zero": 0,
+            "negative": 61
+          }
+        }
+      ],
+      "timing": {
+        "collectionMs": {
+          "count": 65,
+          "min": 4278.65066699998,
+          "p50": 5518.370165999979,
+          "p95": 13705.707834,
+          "max": 20013.25295799994
+        },
+        "quoteMs": {
+          "count": 64,
+          "min": 5142.419040999957,
+          "p50": 6813.89962500002,
+          "p95": 11036.293042000005,
+          "max": 20005.283375
+        },
+        "completionMs": {
+          "count": 65,
+          "min": 9840.189208000083,
+          "p50": 12394.255957999965,
+          "p95": 24029.70541699999,
+          "max": 30965.115709000034
+        },
+        "firstSeenToCompletionMs": {
+          "count": 65,
+          "min": 10357.192917000037,
+          "p50": 17531.38445799984,
+          "p95": 25651.14366599999,
+          "max": 26420.65320800012
+        },
+        "completionBlockAgeMs": {
+          "count": 64,
+          "min": 13078,
+          "p50": 20829,
+          "p95": 29220,
+          "max": 34186
+        },
+        "completionHeadLag": {
+          "count": 63,
+          "min": 0,
+          "p50": 1,
+          "p95": 2,
+          "max": 2
+        }
+      },
+      "invalidTiming": 0,
+      "firstSeenUnavailable": 0,
+      "clockInvalid": false,
+      "pollReceiptGapMs": {
+        "count": 755,
+        "min": 72.62216699996497,
+        "p50": 1999.5545830000192,
+        "p95": 2567.6930839999986,
+        "max": 11507.371417000017
+      },
+      "targets": {
+        "observerCoverage": true,
+        "qualifiedCoverage": false,
+        "quoteP95": false,
+        "headLagP95": false
+      },
+      "bestTestedGross": {
+        "block": {
+          "hash": "0xd36a119a177d9c81f8a4a44a71a6521c158ef92ad469bddecdea2e17e39734a3",
+          "number": "26453066",
+          "parentHash": "0x76afdba2f1308188823a870c836ec652f4807bbef5e172442cb741cb1caa6a49",
+          "timestamp": "1795138679"
+        },
+        "route": [1, 2],
+        "inputUsdcBase": "10000000",
+        "grossUsdcBase": "-10001"
+      }
+    }
+  ],
+  "rpc": [
+    {
+      "window": 0,
+      "sends": 104,
+      "logicalReads": {
+        "collection": 41,
+        "quotes": 63
+      },
+      "sendsByCategory": {
+        "collection": 41,
+        "quotes": 63
+      },
+      "retrySends": 0,
+      "unresolvedSends": 0,
+      "transportFailures": {},
+      "pipelineReaderOutcomes": {
+        "success": 102,
+        "state_unavailable": 2
+      },
+      "observerFailures": {},
+      "maxActive": 4,
+      "stopReason": "preflight_closed"
+    },
+    {
+      "window": 1,
+      "sends": 9909,
+      "logicalReads": {
+        "control": 2,
+        "observer": 775,
+        "collection": 3485,
+        "quotes": 5391,
+        "reconciliation": 256
+      },
+      "sendsByCategory": {
+        "control": 2,
+        "observer": 775,
+        "collection": 3485,
+        "quotes": 5391,
+        "reconciliation": 256
+      },
+      "retrySends": 0,
+      "unresolvedSends": 0,
+      "transportFailures": {},
+      "pipelineReaderOutcomes": {
+        "success": 8706,
+        "state_unavailable": 170
+      },
+      "observerFailures": {},
+      "maxActive": 4,
+      "stopReason": "malformed"
+    },
+    {
+      "window": 0,
+      "sends": 107,
+      "logicalReads": {
+        "collection": 41,
+        "quotes": 66
+      },
+      "sendsByCategory": {
+        "collection": 41,
+        "quotes": 66
+      },
+      "retrySends": 0,
+      "unresolvedSends": 0,
+      "transportFailures": {},
+      "pipelineReaderOutcomes": {
+        "success": 105,
+        "state_unavailable": 2
+      },
+      "observerFailures": {},
+      "maxActive": 4,
+      "stopReason": "preflight_closed"
+    },
+    {
+      "window": 2,
+      "sends": 7767,
+      "logicalReads": {
+        "control": 2,
+        "observer": 756,
+        "collection": 2669,
+        "quotes": 4106,
+        "reconciliation": 256
+      },
+      "sendsByCategory": {
+        "control": 2,
+        "observer": 764,
+        "collection": 2661,
+        "quotes": 4084,
+        "reconciliation": 256
+      },
+      "retrySends": 14,
+      "unresolvedSends": 0,
+      "transportFailures": {
+        "cancelled": 26
+      },
+      "pipelineReaderOutcomes": {
+        "success": 6599,
+        "state_unavailable": 131,
+        "timeout": 10,
+        "deadline": 6
+      },
+      "observerFailures": {
+        "timeout": 3
+      },
+      "maxActive": 4,
+      "stopReason": "window_end"
+    }
+  ],
+  "runs": [
+    {
+      "runId": "25a541ba-0ce7-4f3d-9891-ef0785efc4a6",
+      "created": {
+        "mono": 791.592167,
+        "wall": 1795134399563
+      },
+      "source": {
+        "files": [
+          {
+            "path": ".bun-version",
+            "sha256": "793de7b6d4c7a5d8dc78b85c58824834f38880e82eb46bf6572fa601c4231503"
+          },
+          {
+            "path": ".node-version",
+            "sha256": "e35f85db6458a3e4736f050ff42d720b39bbff9debe6b50c11e753b3ac2ecc3d"
+          },
+          {
+            "path": "apps/backend/package.json",
+            "sha256": "2b5850cf74cbe170f32b809d8e70b95322fb087754f73cdd4c91003a80a1c969"
+          },
+          {
+            "path": "apps/backend/src/analysis.ts",
+            "sha256": "236118b4dc048b3059ead9f96f631e955fefffd814ed70e8f4da0ad5695efbd8"
+          },
+          {
+            "path": "apps/backend/src/cli-runner.ts",
+            "sha256": "39bf19a1ae717060c0e4bf08e67b504b67b6ab62a5467a5cb79a17abf62d7f77"
+          },
+          {
+            "path": "apps/backend/src/cli.ts",
+            "sha256": "4c798c6d3e2ad322b01f1fa51f5a14921b74d32c9f460fda6d5dda4c7b24a92c"
+          },
+          {
+            "path": "apps/backend/src/config.ts",
+            "sha256": "d0a3de6cb891b53d22acf658f8c1c6f601ff28d6bb7a2b72772f454515f9d217"
+          },
+          {
+            "path": "apps/backend/src/index.ts",
+            "sha256": "caca6ae8b741bb419aa4c1a990b45b54f779225c483cee92508e4f12cb4cbff0"
+          },
+          {
+            "path": "apps/backend/src/local-config.ts",
+            "sha256": "9434127ca3ddf8863df879342606e043c45b3897498c0a5ab0bae72dc601cc14"
+          },
+          {
+            "path": "apps/backend/src/producer-guard.ts",
+            "sha256": "bf85bcf49bb3aff8677dadcbffd7524ea921c57c9809c53536cd500bee378293"
+          },
+          {
+            "path": "apps/backend/src/research.ts",
+            "sha256": "3e846fa48fcc44e6756f2b109912e43d898f8a98baf59d9defc19fdda21fa5f3"
+          },
+          {
+            "path": "apps/backend/src/research/model.ts",
+            "sha256": "0a04da3bd172584cee346c9edb33a2f461e32d1e32e33a90f4d2423ad5a038f9"
+          },
+          {
+            "path": "apps/backend/src/research/report.ts",
+            "sha256": "df5da234f260dbd03eaab9d7d326a77c81361f901fff60fdeee6d99fbae8e0bb"
+          },
+          {
+            "path": "apps/backend/src/research/runner.ts",
+            "sha256": "89f57c1868a07b8a7da498c87ce76cf16d27b92123b2cb4aa3dfe10d7fef6ee3"
+          },
+          {
+            "path": "apps/backend/src/research/transport.ts",
+            "sha256": "f80f30dad6f097bb5cd80abee1b319206e91a474206feca3e87850480ea55bcc"
+          },
+          {
+            "path": "apps/backend/src/server.ts",
+            "sha256": "ae57bbc7e36203ee85048e31a722bc773dce1938adbdfe4420d097311afc9a3c"
+          },
+          {
+            "path": "apps/backend/src/service.ts",
+            "sha256": "79d0a92267a38fa77a7f6c78ee887ea6b3f2e3b8c09b5ce824d82f427babe246"
+          },
+          {
+            "path": "apps/backend/src/snapshot.ts",
+            "sha256": "5f05bb5ee5486a8deb4e456e38a8b8693d4016ad5991e7328b245eecb79058ee"
+          },
+          {
+            "path": "apps/backend/src/storage/codec.ts",
+            "sha256": "4585791ff81a814295460722fa57c206e44fdf229caf9ccea193cb59ba65659f"
+          },
+          {
+            "path": "apps/backend/src/storage/driver.ts",
+            "sha256": "82b919e7e0f8d98fd9f87d875e6a4ad7d9e178dc235904b0b655ed85e53ac2f3"
+          },
+          {
+            "path": "apps/backend/src/storage/evidence.ts",
+            "sha256": "7e42d14710b35a59131d81a164ec2623b6547a89cfd66824396f620ba8a66663"
+          },
+          {
+            "path": "apps/backend/src/storage/schema.ts",
+            "sha256": "c95f1bc1e5204e47d5aa4a303d0d720c7b36db50d4edc2bb11c49e46f72016d2"
+          },
+          {
+            "path": "apps/backend/src/storage/store.ts",
+            "sha256": "1be3960efde576a772111797e2ee1106f79d469c97d76967a1e5d41d12340962"
+          },
+          {
+            "path": "bun.lock",
+            "sha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+          },
+          {
+            "path": "package.json",
+            "sha256": "ce94807c19d4f36bfad0a02f4c40c16f2bf3bd2af7b4a080ebe73c3d10b209cc"
+          },
+          {
+            "path": "packages/domain/package.json",
+            "sha256": "f371f29ea7a857d4a5a5d8ef8bf78c51fa7e7ce4972dca6a7f72cda4d00ae43f"
+          },
+          {
+            "path": "packages/domain/src/index.ts",
+            "sha256": "caa536880dbdd932f09324df1d4fb44dda6a299cf5af327b5b6a7e38bda33d7e"
+          },
+          {
+            "path": "packages/protocols/package.json",
+            "sha256": "2adfc603b38b5160ad18abe70e81a65ceceb277e3f0afcd514ab22181ce28d2e"
+          },
+          {
+            "path": "packages/protocols/src/fixtures.ts",
+            "sha256": "80ccebfe07e59c15689d88ba3cba05eafee3288cb1826acd67da0bf6288aa4f6"
+          },
+          {
+            "path": "packages/protocols/src/index.ts",
+            "sha256": "3df5b628794acfd09a5cf6ad79691a08d87f323bdf42c3094581e559336c60ae"
+          },
+          {
+            "path": "packages/protocols/src/quotes.ts",
+            "sha256": "940b199f2f513ad6c711fbba2e09596d0a3ea12d94a5ecc7dc250241c3210e30"
+          },
+          {
+            "path": "packages/protocols/src/registry.ts",
+            "sha256": "8a70db03960fa37eb7d4160c5a391bf3e0ca537706c36c9d01f07f91cdc54d7d"
+          },
+          {
+            "path": "packages/protocols/src/rpc.ts",
+            "sha256": "f1b54548cfb5312b74de7ff8de7ff5a42222002923090f2c9a405f709661283f"
+          },
+          {
+            "path": "packages/protocols/src/types.ts",
+            "sha256": "842752893131d86ae825d9ea08c16286804cc90e680b4ee612a9ea86b7ad611c"
+          }
+        ],
+        "head": "23264bdd6a4431053d36bac867bc2cd26962056f",
+        "patchSha256": "241b27fefe322592b6fa6325c203afe13efdc6f61046dca05cbb8ac9f7ac533e",
+        "sha256": "e65ce3f6f369b1cb54e22ca11a86b16e0bdd62433918d11e3450a51f3db4aff1"
+      },
+      "runtime": {
+        "bun": "1.3.11",
+        "node": "v26.3.1"
+      },
+      "journalSha256": "1a448eb79463565dc56321e634a2d99e00793d6a827a4bf65a83b5bce476dffb",
+      "databaseSha256": "026a60da0e8a646976e61dace373ae7614fc8bf722ea0b6f8065ab4d6f36eea6",
+      "sourceFilesVerified": 34
+    },
+    {
+      "runId": "91b9a7c3-5761-4952-8f79-7e778513e223",
+      "created": {
+        "mono": 1707.228292,
+        "wall": 1795137169302
+      },
+      "source": {
+        "files": [
+          {
+            "path": ".bun-version",
+            "sha256": "793de7b6d4c7a5d8dc78b85c58824834f38880e82eb46bf6572fa601c4231503"
+          },
+          {
+            "path": ".node-version",
+            "sha256": "e35f85db6458a3e4736f050ff42d720b39bbff9debe6b50c11e753b3ac2ecc3d"
+          },
+          {
+            "path": "apps/backend/package.json",
+            "sha256": "2b5850cf74cbe170f32b809d8e70b95322fb087754f73cdd4c91003a80a1c969"
+          },
+          {
+            "path": "apps/backend/src/analysis.ts",
+            "sha256": "236118b4dc048b3059ead9f96f631e955fefffd814ed70e8f4da0ad5695efbd8"
+          },
+          {
+            "path": "apps/backend/src/cli-runner.ts",
+            "sha256": "39bf19a1ae717060c0e4bf08e67b504b67b6ab62a5467a5cb79a17abf62d7f77"
+          },
+          {
+            "path": "apps/backend/src/cli.ts",
+            "sha256": "4c798c6d3e2ad322b01f1fa51f5a14921b74d32c9f460fda6d5dda4c7b24a92c"
+          },
+          {
+            "path": "apps/backend/src/config.ts",
+            "sha256": "d0a3de6cb891b53d22acf658f8c1c6f601ff28d6bb7a2b72772f454515f9d217"
+          },
+          {
+            "path": "apps/backend/src/index.ts",
+            "sha256": "caca6ae8b741bb419aa4c1a990b45b54f779225c483cee92508e4f12cb4cbff0"
+          },
+          {
+            "path": "apps/backend/src/local-config.ts",
+            "sha256": "9434127ca3ddf8863df879342606e043c45b3897498c0a5ab0bae72dc601cc14"
+          },
+          {
+            "path": "apps/backend/src/producer-guard.ts",
+            "sha256": "bf85bcf49bb3aff8677dadcbffd7524ea921c57c9809c53536cd500bee378293"
+          },
+          {
+            "path": "apps/backend/src/research.ts",
+            "sha256": "6a770a0d0317f31fcea5eb6858c2b977671a96292e368197e0bff12ef0eeb744"
+          },
+          {
+            "path": "apps/backend/src/research/continuation.ts",
+            "sha256": "ced9a099366b6e8d175c8ffaed491bdc1d5d487417624e1ac46187e5e6cce11d"
+          },
+          {
+            "path": "apps/backend/src/research/model.ts",
+            "sha256": "85998d5e8d17372ac7587d3ff6db88aa4780a7ed9611ac7fda4559fcb878c901"
+          },
+          {
+            "path": "apps/backend/src/research/report.ts",
+            "sha256": "d9091709d3819dde65512ec03e81ac3174ffac928ca12629eb155dfbf0bb4fc4"
+          },
+          {
+            "path": "apps/backend/src/research/runner.ts",
+            "sha256": "08f9f2d5c36ba55da1aa1451b723243e52ae63b1992fe2f3bca9fb0a013255a8"
+          },
+          {
+            "path": "apps/backend/src/research/transport.ts",
+            "sha256": "f80f30dad6f097bb5cd80abee1b319206e91a474206feca3e87850480ea55bcc"
+          },
+          {
+            "path": "apps/backend/src/server.ts",
+            "sha256": "ae57bbc7e36203ee85048e31a722bc773dce1938adbdfe4420d097311afc9a3c"
+          },
+          {
+            "path": "apps/backend/src/service.ts",
+            "sha256": "79d0a92267a38fa77a7f6c78ee887ea6b3f2e3b8c09b5ce824d82f427babe246"
+          },
+          {
+            "path": "apps/backend/src/snapshot.ts",
+            "sha256": "5f05bb5ee5486a8deb4e456e38a8b8693d4016ad5991e7328b245eecb79058ee"
+          },
+          {
+            "path": "apps/backend/src/storage/codec.ts",
+            "sha256": "4585791ff81a814295460722fa57c206e44fdf229caf9ccea193cb59ba65659f"
+          },
+          {
+            "path": "apps/backend/src/storage/driver.ts",
+            "sha256": "82b919e7e0f8d98fd9f87d875e6a4ad7d9e178dc235904b0b655ed85e53ac2f3"
+          },
+          {
+            "path": "apps/backend/src/storage/evidence.ts",
+            "sha256": "7e42d14710b35a59131d81a164ec2623b6547a89cfd66824396f620ba8a66663"
+          },
+          {
+            "path": "apps/backend/src/storage/schema.ts",
+            "sha256": "c95f1bc1e5204e47d5aa4a303d0d720c7b36db50d4edc2bb11c49e46f72016d2"
+          },
+          {
+            "path": "apps/backend/src/storage/store.ts",
+            "sha256": "1be3960efde576a772111797e2ee1106f79d469c97d76967a1e5d41d12340962"
+          },
+          {
+            "path": "bun.lock",
+            "sha256": "fc307f44e8a0080bf81dd866bc33ebb7d4cd053d26db66f943f042d5e0cb36e0"
+          },
+          {
+            "path": "package.json",
+            "sha256": "ce94807c19d4f36bfad0a02f4c40c16f2bf3bd2af7b4a080ebe73c3d10b209cc"
+          },
+          {
+            "path": "packages/domain/package.json",
+            "sha256": "f371f29ea7a857d4a5a5d8ef8bf78c51fa7e7ce4972dca6a7f72cda4d00ae43f"
+          },
+          {
+            "path": "packages/domain/src/index.ts",
+            "sha256": "caa536880dbdd932f09324df1d4fb44dda6a299cf5af327b5b6a7e38bda33d7e"
+          },
+          {
+            "path": "packages/protocols/package.json",
+            "sha256": "2adfc603b38b5160ad18abe70e81a65ceceb277e3f0afcd514ab22181ce28d2e"
+          },
+          {
+            "path": "packages/protocols/src/fixtures.ts",
+            "sha256": "80ccebfe07e59c15689d88ba3cba05eafee3288cb1826acd67da0bf6288aa4f6"
+          },
+          {
+            "path": "packages/protocols/src/index.ts",
+            "sha256": "3df5b628794acfd09a5cf6ad79691a08d87f323bdf42c3094581e559336c60ae"
+          },
+          {
+            "path": "packages/protocols/src/quotes.ts",
+            "sha256": "940b199f2f513ad6c711fbba2e09596d0a3ea12d94a5ecc7dc250241c3210e30"
+          },
+          {
+            "path": "packages/protocols/src/registry.ts",
+            "sha256": "8a70db03960fa37eb7d4160c5a391bf3e0ca537706c36c9d01f07f91cdc54d7d"
+          },
+          {
+            "path": "packages/protocols/src/rpc.ts",
+            "sha256": "f1b54548cfb5312b74de7ff8de7ff5a42222002923090f2c9a405f709661283f"
+          },
+          {
+            "path": "packages/protocols/src/types.ts",
+            "sha256": "842752893131d86ae825d9ea08c16286804cc90e680b4ee612a9ea86b7ad611c"
+          }
+        ],
+        "head": "23264bdd6a4431053d36bac867bc2cd26962056f",
+        "patchSha256": "241b27fefe322592b6fa6325c203afe13efdc6f61046dca05cbb8ac9f7ac533e",
+        "sha256": "54bd93db0d89452f7b0f017945b40e5b15f2eadd266d1a4edbe581476a048bbe"
+      },
+      "runtime": {
+        "bun": "1.3.11",
+        "node": "v26.3.1"
+      },
+      "journalSha256": "362486b76e5d2c28d3a316abc41e9c9d528d711cef52c237b5d5a45aaa31affc",
+      "databaseSha256": "2cafdef1232a103dc9dbb2662185b44a1aeb5040348f9b7f7405ade50b67c966",
+      "sourceFilesVerified": 35
+    }
+  ],
+  "interruption": {
+    "priorRunId": "25a541ba-0ce7-4f3d-9891-ef0785efc4a6",
+    "originalTerminal": {
+      "at": {
+        "mono": 1575842.894209,
+        "wall": 1795135974624
+      },
+      "cleanup": true,
+      "kind": "end",
+      "reason": "malformed",
+      "windows": 0
+    },
+    "sourceRecovery": {
+      "format": "arb-01-source-recovery-v1",
+      "verifiedAtMs": 1795136901660,
+      "sourceSha256": "e65ce3f6f369b1cb54e22ca11a86b16e0bdd62433918d11e3450a51f3db4aff1",
+      "journalSha256": "1a448eb79463565dc56321e634a2d99e00793d6a827a4bf65a83b5bce476dffb",
+      "databaseSha256": "026a60da0e8a646976e61dace373ae7614fc8bf722ea0b6f8065ab4d6f36eea6",
+      "cause": "xcode_update_blocked_git",
+      "originalStop": "malformed"
+    },
+    "firstWindowArtifacts": {
+      "journalSha256": "1a448eb79463565dc56321e634a2d99e00793d6a827a4bf65a83b5bce476dffb",
+      "journalTerminalDigest": "74cc82de0abcfc339b3d04cdcbc7aa73e9a048e3cd4a2270784966e2f0f2253d",
+      "databaseSha256": "026a60da0e8a646976e61dace373ae7614fc8bf722ea0b6f8065ab4d6f36eea6"
+    },
+    "sourceComparison": "unchanged_financial_pipeline_control_revision",
+    "matchedSourceComparison": false,
+    "totalSends": 17887,
+    "preflightSends": 211
+  },
+  "rawLocalDirectories": [
+    "data/arb-01-25a541ba-0ce7-4f3d-9891-ef0785efc4a6",
+    "data/arb-01-91b9a7c3-5761-4952-8f79-7e778513e223"
+  ],
+  "reproduction": {
+    "command": "bun run research:arb-01 report --run-dir data/arb-01-91b9a7c3-5761-4952-8f79-7e778513e223",
+    "reportSha256": "4fdb9b4d8ca7ca3b72a14decd26ba87e543b149f68c841887eec81fb81c9e688",
+    "byteForByteVerified": true,
+    "sqliteReadOnly": true
+  },
+  "validation": {
+    "command": "bun run check",
+    "tests": 300,
+    "files": 14,
+    "host": "Darwin arm64",
+    "node": "v26.3.1",
+    "bun": "1.3.11",
+    "typecheck": "passed",
+    "lint": "passed",
+    "format": "passed"
+  },
+  "conclusion": "baseline_inconclusive_or_targets_missed",
+  "recurrence": [],
+  "limitations": [
+    "End-of-block state cannot reveal every intra-block opportunity.",
+    "First seen is local HTTP observer receipt, not network arrival or block creation.",
+    "Observer work shares the RPC budget/concurrency and can affect measured timing.",
+    "Canonicality is as of recorded checks, without a finality or capture guarantee.",
+    "Missing or ineligible blocks do not establish zero market yield.",
+    "Complete reproduction requires the retained journal and SQLite evidence.",
+    "Pipeline reader outcomes include expected unknown-hash capability probes and dispatch refusals; they are separate from actual transport sends.",
+    "The Xcode interruption required a separately identified continuation; financial pipeline files match but control code changed. This is not a matched-source comparison.",
+    "Both local run directories, source snapshots and recovery proof are required for full reproduction; the linked manifest records the parent local path.",
+    "Both windows missed qualified-coverage targets; window 2 also missed quote-latency and head-lag targets."
+  ],
+  "totals": {
+    "targetBlocks": 256,
+    "qualifiedBlocks": 146,
+    "positiveGrossBlocks": 0,
+    "qualifiedRouteSizeResults": 5256,
+    "actualSends": 17887,
+    "preflightSends": 211,
+    "elapsedWallMs": 4401207
+  },
+  "researchDecision": {
+    "recommendation": "revise",
+    "basis": "Qualified coverage missed the predefined target in both windows. Zero positive gross among qualified samples does not cover unsampled or intra-block states.",
+    "taskDisposition": "Done",
+    "followOnTaskSelected": false
+  }
+}

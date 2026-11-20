@@ -13,6 +13,11 @@ permanent feature ceiling.
 
 **M1-01 through M1-12 are complete.**
 
+**ARB-01's independent baseline is complete:** 146 of 256 target blocks qualified across two
+windows, with no positive gross among those samples. Coverage/timing targets were missed as
+recorded in the [research report](docs/evidence/ARB-01-baseline-2026-11-20.md); this is not a claim
+about unsampled blocks or current profitability.
+
 See [current state](docs/STATUS.md) for what exists and the next proposed action. The foundation
 includes a local read-only browser, API/SSE service, combined startup/shutdown, exact SQLite evidence
 history, and an explicit live/fixture CLI over the shared analysis modules. See the [M1-06 record](docs/tasks/M1-06-cli-and-configuration.md) for command
@@ -20,7 +25,7 @@ evidence and the [M1-05 record](docs/tasks/M1-05-quotation-and-cycle-analysis.md
 quotation evidence. Transaction costs, net profit, and execution remain unavailable.
 The [M1-07 record](docs/tasks/M1-07-validation-and-regression-coverage.md#evidence-and-handoff)
 maps independent vectors and controlled failure checks to actual results. The current suite has
-281 passing offline tests; [M1-11](docs/tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) and
+300 passing offline tests across 14 files; [M1-11](docs/tasks/M1-11-local-api-sse-and-browser.md#implementation-evidence) and
 [M1-12](docs/tasks/M1-12-local-startup-readiness-and-shutdown.md#implementation-evidence) record
 clean installation/build, real browser/process checks, and actual live observation evidence.
 Read the [analysis guide](docs/ANALYSIS.md) for implemented math, constructed examples, result
@@ -104,6 +109,51 @@ invoke these shared modules. The pinned
 better-sqlite3 13.2.0 native dependency is verified on macOS arm64 and Ubuntu 24.04 arm64 / Node
 26.3.1; other hosts need their own compatibility checks. The package supplies the tested native binary without an
 additional trusted install script.
+
+## ARB-01 baseline research
+
+ARB-01 measures the existing three-pool, six-size workload without changing collection cadence or
+financial policy. It runs independently of the browser/service and writes a fresh dedicated
+evidence directory. With the [development setup](#development-setup) and private RPC configuration
+in place:
+
+```sh
+bun run research:arb-01 --help
+bun run research:arb-01 run
+```
+
+The command prints its run directory and progress. Both windows are selected prospectively: 128
+consecutive block heights each, at most 45 minutes and 20,000 actual RPC sends per window, plus
+a preflight capped at 2 minutes/300 sends. It keeps the 10-second delay after each attempt and
+observes latest headers every two seconds through the same bounded backend reader. It never
+adds replacement windows to obtain a positive result. Ctrl+C or SIGTERM cancels owned work and
+preserves partial evidence. `--output-dir PATH` selects a new directory; an existing directory is
+refused. The ordinary service/API/browser are not required for the research command.
+
+Generate or reproduce the report offline using the printed directory:
+
+```sh
+bun run research:arb-01 report --run-dir "data/arb-01-<run-id>"
+```
+
+Replace the placeholder with the actual directory name. Reporting validates the hash-chained
+`journal.jsonl`, its manifest, and exact revision references in `evidence.sqlite`, without RPC or
+database writes. It writes `report.json` and `report.md` in that directory. Retain the journal and
+database together; the journal itself contains the manifest. A report of interrupted or
+low-coverage work remains explicitly incomplete/inconclusive. Report generation succeeding does
+not make the experiment complete. A malformed/missing reference fails report generation.
+
+The live command has no fixture or parameter-override mode. Tests inject labeled constructed
+fixtures internally. Exit codes are 0 for a completed run or successful report generation, 1 for
+runtime/evidence/incomplete-run failures, 2 for usage/configuration errors and 130 for interruption.
+If the source-tool check fails only after a fully reconciled first window, a guarded
+`continue --run-dir PATH` command can collect the still-unstarted second window into a new linked
+directory. It requires a verified post-interruption `source-recovery.json` proof, the retained
+source snapshot, unchanged financial pipeline files and the original remaining time/send budget.
+It refuses partial-window replacement and a third window. The original journal is never rewritten;
+the combined report exposes the interruption, separate source identities and control revision.
+The [analysis guide](docs/ANALYSIS.md#baseline-research-results) explains counting, timing and
+interpretation; the [ARB-01 record](docs/tasks/ARB-01-baseline-yield-and-freshness.md) owns actual evidence.
 
 ## Local application
 

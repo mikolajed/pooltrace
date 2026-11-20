@@ -8,9 +8,17 @@ Updated: 2026-11-20 (Europe/Warsaw).
 closed at the user's request, with outstanding validation recorded explicitly.**
 
 **ARB-01 is complete locally:** its independent baseline runner/reporting, two measured windows
-and research closeout are delivered with missed diagnostic targets recorded. Implementation
+and research closeout are delivered with missed diagnostic targets recorded.
 The user separately authorized the implementation commit and PR delivery. The PR description
 records its delivered candidate and hosted checks; no merge is claimed here.
+
+The user subsequently requested all three PR #5 review fixes with “Good now fix them all”.
+Those corrections are prepared locally on the existing task branch and passed `bun run check`
+(310 tests across 14 files, types, lint and formatting). The user authorized committing these
+corrections with “You froze, you can commit”; publication remains separately gated.
+The [task evidence](tasks/ARB-01-baseline-yield-and-freshness.md#pr-5-review-corrections)
+records the fatal-error and cancellation regressions. Earlier hosted checks cover the published
+head only, not these corrections.
 
 The CI implementation was approved by “i accept adr9 and dep2” and delivered in user-merged
 [PR #1](https://github.com/mikolajed/pooltrace/pull/1). The user selected native Codex onboarding

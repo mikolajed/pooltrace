@@ -37,6 +37,9 @@ import { RunTransport } from "./transport.ts";
 import { continuationPlan } from "./continuation.ts";
 import { buildRunReport } from "./report.ts";
 
+const fatalRpcReason = (reason: string | null) =>
+  reason !== null && ["authorization", "configuration", "unsupported"].includes(reason);
+
 export interface ResearchDependencies {
   root: string;
   env: Readonly<Record<string, string | undefined>>;
@@ -96,6 +99,12 @@ export async function runExperiment(deps: ResearchDependencies) {
   let completedWindows = 0;
   let journalFailed = false;
   let cleanup = true;
+  const throwIfCancelled = () => {
+    if (signal.aborted)
+      throw new ResearchError(
+        journalFailed ? "journal_failure" : reason !== "complete" ? reason : "cancelled",
+      );
+  };
   const append = (event: Event, sync = false) => {
     try {
       return journal?.append(event, sync);
@@ -215,8 +224,8 @@ export async function runExperiment(deps: ResearchDependencies) {
       if (value.observation?.chainId !== null && value.observation?.chainId !== 1n)
         throw new ResearchError("configuration");
       if (
-        [...(value.analysis?.observation.requests ?? value.observation?.requests ?? [])].some(
-          (r) => r.outcome === "authorization" || r.outcome === "configuration",
+        [...(value.analysis?.observation.requests ?? value.observation?.requests ?? [])].some((r) =>
+          fatalRpcReason(r.outcome),
         )
       )
         throw new ResearchError("rpc_configuration");
@@ -270,7 +279,7 @@ export async function runExperiment(deps: ResearchDependencies) {
     }
     let previousEnd = continuation?.previousEnd ?? -1n;
     for (let window = continuation ? 2 : 1; window <= settings.windows; window++) {
-      if (signal.aborted) throw new ResearchError("cancelled");
+      throwIfCancelled();
       verifySource();
       const armed = stamp();
       const hardStop = new AbortController();
@@ -337,7 +346,7 @@ export async function runExperiment(deps: ResearchDependencies) {
               latest = value;
             } catch (error) {
               failure = safeReason(error);
-              if (["authorization", "configuration", "unsupported"].includes(failure)) {
+              if (fatalRpcReason(failure)) {
                 reason = "rpc_configuration";
                 controller.abort();
               }
@@ -375,13 +384,13 @@ export async function runExperiment(deps: ResearchDependencies) {
             break;
           }
         }
-        if (signal.aborted)
-          throw new ResearchError(journalFailed ? "journal_failure" : "cancelled");
+        throwIfCancelled();
         if (collectStop.signal.aborted) windowReason = "collection_time_limit";
         else if (transport.sends >= settings.sends - settings.reserveSends)
           windowReason = "collection_send_limit";
         observerStop.abort();
         await observer;
+        throwIfCancelled();
         transport.closing = true;
         for (let height = start; height <= end; height++) {
           let value: Header | null = null;
@@ -389,8 +398,7 @@ export async function runExperiment(deps: ResearchDependencies) {
           try {
             value = await header(height, "reconciliation", hardSignal, true);
           } catch (error) {
-            if (error instanceof ResearchError) throw error;
-            failure = safeReason(error);
+            failure = error instanceof ResearchError ? error.reason : safeReason(error);
           }
           append({
             kind: "canonical",
@@ -400,8 +408,13 @@ export async function runExperiment(deps: ResearchDependencies) {
             header: value,
             reason: failure,
           });
+          // Retain the failed read before stopping the whole experiment. Window-local
+          // budget/time stops and unavailable canonical state remain nonfatal.
+          throwIfCancelled();
+          if (fatalRpcReason(failure)) throw new ResearchError("rpc_configuration");
           if (hardSignal.aborted || transport.sends >= settings.sends) break;
         }
+        throwIfCancelled();
         if (hardStop.signal.aborted) windowReason = "window_time_limit";
         if (transport.sends >= settings.sends) windowReason = "window_send_limit";
         verifySource();
@@ -430,6 +443,7 @@ export async function runExperiment(deps: ResearchDependencies) {
         progress({ phase: "window-closed", window, reason: windowReason, sends: transport.sends });
       }
     }
+    throwIfCancelled();
   } catch (error) {
     reason = journalFailed
       ? "journal_failure"

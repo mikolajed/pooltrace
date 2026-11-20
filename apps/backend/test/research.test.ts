@@ -364,6 +364,157 @@ function liveShapedFixture(): Fetch {
 }
 const fixtureSourceCore = { head: "constructed-test", patchSha256: "0".repeat(64), files: [] };
 const fixtureSource = { ...fixtureSourceCore, sha256: digest(fixtureSourceCore) };
+
+// Inject faults at actual journaled dispatches, so observer/control/pipeline reads cannot
+// accidentally receive a fault intended only for reconciliation (or vice versa).
+async function runWithSendFault(
+  fault: (send: Extract<Event, { kind: "send" }>, requestId: number) => Response | undefined,
+  signal?: AbortSignal,
+) {
+  const root = temporary();
+  const base = liveShapedFixture();
+  let send: Extract<Event, { kind: "send" }> | undefined;
+  const originalAppend = Journal.prototype.append;
+  const append = vi.spyOn(Journal.prototype, "append").mockImplementation(function (
+    this: Journal,
+    event,
+    sync,
+  ) {
+    const hash = originalAppend.call(this, event, sync);
+    if (event.kind === "send") send = event;
+    return hash;
+  });
+  try {
+    const result = await runExperiment({
+      root,
+      env: {},
+      ...(signal ? { signal } : {}),
+      fetch: (url, init, context) => {
+        const request = JSON.parse(String(init.body));
+        const response = send ? fault(send, request.id) : undefined;
+        return response ? Promise.resolve(response) : base(url, init, context);
+      },
+      fixture: {
+        source: fixtureSource,
+        settings: {
+          ...SETTINGS,
+          blocks: 2,
+          delayMs: 20,
+          pollMs: 10,
+          windowMs: 4000,
+          reserveMs: 500,
+          sends: 1000,
+          reserveSends: 50,
+          preflightMs: 2000,
+        },
+      },
+    });
+    expect(result.cleanup).toBe(true);
+    expect(existsSync(join(result.outputDir, "evidence.sqlite.owner"))).toBe(false);
+    return {
+      result,
+      events: readJournal(join(result.outputDir, "journal.jsonl")).events,
+      report: buildReport(result.outputDir),
+    };
+  } finally {
+    append.mockRestore();
+  }
+}
+
+describe("ARB-01 fatal stops and cancellation during reconciliation", () => {
+  it.each(["authorization", "unsupported", "configuration"])(
+    "retains a closing %s failure and stops before another window or dispatch",
+    async (reason) => {
+      let failures = 0;
+      const { result, events, report } = await runWithSendFault((send, id) => {
+        if (send.category !== "reconciliation") return;
+        if (reason === "configuration" && send.method === "eth_chainId") {
+          failures++;
+          return new Response(JSON.stringify({ jsonrpc: "2.0", id, result: "0x2" }));
+        }
+        if (send.method !== "eth_getBlockByNumber") return;
+        failures++;
+        return reason === "authorization"
+          ? new Response("", { status: 403 })
+          : new Response(JSON.stringify({ jsonrpc: "2.0", id, error: { code: -32601 } }));
+      });
+      expect(failures).toBe(1);
+      expect(result).toMatchObject({ reason: "rpc_configuration", windows: 0 });
+      expect(events.filter((e) => e.kind === "window")).toHaveLength(1);
+      expect(events.filter((e) => e.kind === "canonical")).toMatchObject([
+        { window: 1, header: null, reason },
+      ]);
+      const failedRead = events.findIndex((e) => e.kind === "canonical");
+      expect(events.slice(failedRead + 1).some((e) => e.kind === "send")).toBe(false);
+      expect(report.complete).toBe(false);
+      expect(report.terminal).toMatchObject({ reason: "rpc_configuration", windows: 0 });
+      expect(report.rpc.find((r) => r.window === 1)?.stopReason).toBe("rpc_configuration");
+    },
+  );
+
+  it.each([
+    ["collection", -32601],
+    ["collection", -32602],
+    ["quotes", -32601],
+    ["quotes", -32602],
+  ] as const)("stops on unsupported %s reads (RPC %i) after preflight", async (category, code) => {
+    let failures = 0;
+    const { result, events, report } = await runWithSendFault((send, id) => {
+      if (send.window !== 1 || send.category !== category || send.method !== "eth_getCode") return;
+      failures++;
+      return new Response(JSON.stringify({ jsonrpc: "2.0", id, error: { code } }));
+    });
+    expect(failures).toBeGreaterThan(0);
+    expect(result).toMatchObject({ reason: "rpc_configuration", windows: 0 });
+    expect(events.filter((e) => e.kind === "window")).toHaveLength(1);
+    expect(events.filter((e) => e.kind === "attempt" && e.window === 1)).toHaveLength(1);
+    expect(report.complete).toBe(false);
+    expect(report.terminal?.reason).toBe("rpc_configuration");
+    expect(report.rpc.find((r) => r.window === 1)?.pipelineReaderOutcomes.unsupported).toBe(
+      failures,
+    );
+  });
+
+  it.each([1, 2])(
+    "records cancellation during window %i closing reads as incomplete",
+    async (window) => {
+      const stop = new AbortController();
+      let cancelledReads = 0;
+      const { result, events, report } = await runWithSendFault((send) => {
+        if (
+          send.window === window &&
+          send.category === "reconciliation" &&
+          send.method === "eth_getBlockByNumber"
+        ) {
+          cancelledReads++;
+          stop.abort();
+        }
+        return undefined;
+      }, stop.signal);
+      expect(cancelledReads).toBe(1);
+      expect(result).toMatchObject({ reason: "cancelled", windows: window - 1 });
+      expect(events.filter((e) => e.kind === "window")).toHaveLength(window);
+      expect(events.filter((e) => e.kind === "canonical" && e.window === window)).toMatchObject([
+        { header: null, reason: "cancelled" },
+      ]);
+      expect(report.complete).toBe(false);
+      expect(report.terminal).toMatchObject({ reason: "cancelled", windows: window - 1 });
+      expect(report.rpc.find((r) => r.window === window)?.stopReason).toBe("cancelled");
+    },
+  );
+
+  it("keeps missing canonical state nonfatal without claiming complete evidence", async () => {
+    const { result, events, report } = await runWithSendFault((send, id) => {
+      if (send.category !== "reconciliation" || send.method !== "eth_getBlockByNumber") return;
+      return new Response(JSON.stringify({ jsonrpc: "2.0", id, result: null }));
+    });
+    expect(result).toMatchObject({ reason: "complete", windows: 2 });
+    expect(events.filter((e) => e.kind === "canonical")).toHaveLength(4);
+    expect(report.complete).toBe(false);
+    expect(report.windows.every((w) => w.coverage.canonicalUnknown === 2)).toBe(true);
+  });
+});
+
 describe("ARB-01 real pipeline, read-only reporting and ownership integration", () => {
   it("closes two prospective windows, reproduces offline, and rejects a missing SQLite reference", async () => {
     const root = temporary();

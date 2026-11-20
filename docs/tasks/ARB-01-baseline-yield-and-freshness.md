@@ -414,3 +414,36 @@ no next task starts automatically.
 Final documentation verification: `git diff --check` passed; 236 local Markdown targets/anchors
 across nine changed/new documents passed. Task independence, completed acceptance entries, archive
 totals, raw journal/SQLite hashes and absence of producer owner markers were rechecked successfully.
+
+### PR #5 review corrections
+
+On 2026-11-20 the user instructed **“Good now fix them all”**, authorizing fixes and regression
+coverage for the three findings in [PR #5's review](https://github.com/mikolajed/pooltrace/pull/5#pullrequestreview-5993109408).
+This authorizes the bounded corrections, not a new commit, push, merge or live sampling run.
+The user subsequently said **“You froze, you can commit”**, explicitly authorizing the prepared
+review-fix commit. Push/publication, merge and live sampling remain separately gated.
+
+The runner now applies one fatal RPC classification to pipeline, observer and reconciliation
+failures: authorization, configuration and unsupported reads. Reconciliation preserves the failed
+canonical-read event before ending the experiment, so a fatal failure cannot arm another window.
+Whole-experiment cancellation is checked after observer shutdown and during/following closing
+reads, before counting the window as completed. It retains cancellation in the terminal result and
+journal, including during window 2. Window-local limits and unavailable canonical state keep
+their nonfatal behavior.
+
+Ten constructed regressions use actual journaled send categories and the shared pipeline/store.
+They cover closing authorization/unsupported/wrong-chain failures, both unsupported RPC codes in
+collection and quotation, cancellation during each window's closing reads, and a nonfatal missing
+header control. Checks include retained failure events, no subsequent dispatch/window after fatal
+closing errors, terminal/window stop reasons, incomplete reports and released producer ownership.
+Before the fix, nine cases failed and the nonfatal control passed. After the fix,
+`bun run test -- apps/backend/test/research.test.ts` passed **28 tests** on Linux x64,
+Node 26.3.1 and Bun 1.3.11. Full `bun run check` then passed **310 tests across 14 files**,
+toolchain validation, type checking, lint and formatting. These commands used the environment's
+retained Tini wrapper and subprocess/loopback permission for native process checks. `git diff --check`
+and all 15 local Markdown targets/anchors in the two updated records passed.
+
+The historical live archives remain unchanged. These checks are offline diagnostics; they do not
+repeat or independently reproduce the historical market experiment. The corrections are prepared
+for the authorized local commit and remain unpublished; current hosted CI must run on their
+published candidate before merge.

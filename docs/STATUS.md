@@ -1,11 +1,24 @@
 # Current state
 
-Updated: 2026-11-19 (Europe/Warsaw).
+Updated: 2026-11-20 (Europe/Warsaw).
 
 ## Phase and authorization
 
 **M1-01 through M1-12 are complete. ADRs 0001–0009 are accepted. DEP-02 and CONTRIB-01 are
 closed at the user's request, with outstanding validation recorded explicitly.**
+
+**ARB-01 is complete locally:** its independent baseline runner/reporting, two measured windows
+and research closeout are delivered with missed diagnostic targets recorded.
+The user separately authorized the implementation commit and PR delivery. The PR description
+records its delivered candidate and hosted checks; no merge is claimed here.
+
+The user subsequently requested all three PR #5 review fixes with “Good now fix them all”.
+Those corrections are prepared locally on the existing task branch and passed `bun run check`
+(310 tests across 14 files, types, lint and formatting). The user authorized committing these
+corrections with “You froze, you can commit”; publication remains separately gated.
+The [task evidence](tasks/ARB-01-baseline-yield-and-freshness.md#pr-5-review-corrections)
+records the fatal-error and cancellation regressions. Earlier hosted checks cover the published
+head only, not these corrections.
 
 The CI implementation was approved by “i accept adr9 and dep2” and delivered in user-merged
 [PR #1](https://github.com/mikolajed/pooltrace/pull/1). The user selected native Codex onboarding
@@ -51,6 +64,11 @@ authorize another implementation task, account/settings changes, agent merging, 
 - The [analysis guide](ANALYSIS.md) explains implemented math, interpretation and evidence.
   The [root README](../README.md#local-application) owns setup/commands. The supplied perched
   kingfisher reference remains unchanged.
+- ARB-01 adds bounded baseline collection/head observation and exact offline reporting over the
+  same M1 pipeline. Two windows produced 146/256 qualified block samples and 0/146 positive-gross
+  samples. Actual use was 17,887 sends including 211 preflight sends; local checks passed 300 tests
+  across 14 files. The [report](evidence/ARB-01-baseline-2026-11-20.md) preserves coverage/timing
+  misses, the Xcode interruption and guarded continuation, separate source identities and limits.
 
 ## Remaining boundaries
 
@@ -76,10 +94,25 @@ PR #1 merged as `1d180c208829f3743f8c8d704e57cc485fe9520d`; PR #2 merged as
 references and outstanding criteria. [PR #3](https://github.com/mikolajed/pooltrace/pull/3)
 merged the arbitrage research roadmap as `244fa0b36d37170a2542c5fdf29cf5dc736cd045`.
 
-The next proposed product task is to scope ARB-01: baseline route yield and collector freshness
-over predefined block windows, using the completed M1 collector. The results inform M2 scope;
-M2 fork and cost capabilities later support full-cost validation.
-[Arbitrage research track](ROADMAP.md#arb--arbitrage-research-track).
-ARB-01 execution and M2 design/implementation remain unapproved. No new product scope starts
-automatically; setup verification is retained as a limit of the closed records rather than an
-active task assignment.
+The user approved independent ARB-01 on 2026-11-20 with “i accept arb1”. Its
+[task closeout](tasks/ARB-01-baseline-yield-and-freshness.md#research-decision-and-closeout) now
+records completed implementation/evidence and actual criterion dispositions. Window 1 qualified
+85/128 blocks; window 2 qualified 61/128, with four ineligible primaries and one excluded duplicate.
+Both missed the 75% qualified-coverage target; window 2 also missed quote p95 and head-lag targets.
+Zero positive gross in the qualified samples is a bounded finding, not absence of arbitrage in
+unsampled states or net/capture evidence. Costs/net remain unavailable.
+
+The Xcode update interrupted the first run only after all its closing headers were collected.
+The original failed terminal remains intact. After the user completed the update, the full source
+still matched and was preserved; a guarded continuation collected only the unstarted second
+window within the original remaining budget. The combined report discloses different control-code
+source identities rather than claiming a matched-source comparison. Both producers exited and
+released ownership; exact report reproduction and all 34/35 source snapshot hashes passed.
+
+ARB-01 is Done, with its report and this increment's ARB-05 decision record. The research
+recommendation is to revise observation/freshness assumptions before broader yield conclusions;
+no follow-on task is selected or authorized. The user requested PR delivery with “i think you can
+do a pr”, followed by explicit commit approval: “yes commit but good that you asked”. The prepared
+implementation commit, task-branch push and PR delivery are authorized. The PR description owns
+the candidate-specific delivery/check handoff; the user reviews and merges. Setup verification
+remains a limit of the closed records rather than an active assignment.

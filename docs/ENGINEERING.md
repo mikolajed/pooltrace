@@ -137,6 +137,20 @@ output states, and exit codes. Root checks cover the real entry point and shared
 [M1-06 evidence](tasks/M1-06-cli-and-configuration.md#evidence-and-handoff) records offline/process
 cases, real SIGINT, clean installation, and actual read-only live text/JSON runs.
 
+## Baseline research integration
+
+Approved ARB-01 adds a bounded research command inside the backend over the existing CLI pipeline,
+producer guard and evidence store. Optional phase/logical-read hooks and local retry dispatch
+metadata support measurement; absent hooks preserve ordinary service behavior and no dispatch
+metadata enters HTTP bodies or headers. The experiment uses one shared transport send/concurrency
+limit with priority for queued pipeline work, including complete response-body consumption.
+
+Versioned timing/manifest/header artifacts reference exact existing SQLite revisions. The offline
+reporter opens SQLite through the native read-only connection and verifies stored calculations
+and recorded completion-time eligibility; it never restores current live admission or invokes RPC.
+No dependency or schema version changed. The [ARB-01 record](tasks/ARB-01-baseline-yield-and-freshness.md)
+owns protocol settings, actual validation and experiment evidence; the root README owns commands.
+
 ## Language evolution
 
 [ADR-0002](adr/0002-typescript-first-and-measured-evolution.md) records the accepted TypeScript-first
@@ -197,7 +211,7 @@ backend response with conservative request-start expiry; SSE loss/silence or pag
 withdraws current presentation. Historical records retain their original evidence and cannot
 restore admission. Backend collection is serial and independent of all HTTP/browser requests.
 
-The offline suite has 281 tests across 13 files and uses at most two workers. Service time-fault
+The offline suite has 300 tests across 14 files and uses at most two workers. Service time-fault
 checks inject an explicit clock instead of widening financial freshness limits. Process tests use
 isolated ports/files and owned child groups. The tasks distinguish controlled faults from actual
 browser/native signals/live RPC evidence and record a clean credential-free frozen install/check

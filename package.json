@@ -19,6 +19,7 @@
     "check:live": "node scripts/check-live.ts",
     "check:quotes:live": "node scripts/check-quotes-live.ts",
     "cli": "node apps/backend/src/cli.ts",
+    "research:arb-01": "node apps/backend/src/research.ts",
     "dev": "node scripts/local/start.ts",
     "dev:backend": "node apps/backend/src/server.ts",
     "dev:web": "node apps/web/dev.ts",

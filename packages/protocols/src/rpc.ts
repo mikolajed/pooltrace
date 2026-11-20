@@ -30,7 +30,12 @@ const allowedMethods = new Set([
 const hashPattern = /^0x[0-9a-fA-F]{64}$/;
 const quantityPattern = /^0x(?:0|[1-9a-fA-F][0-9a-fA-F]*)$/;
 const dataPattern = /^0x(?:[0-9a-fA-F]{2})*$/;
-export type Fetch = (input: string, init: RequestInit) => Promise<Response>;
+// Local dispatch metadata is never added to the HTTP body or headers.
+export type Fetch = (
+  input: string,
+  init: RequestInit,
+  context?: { retry: number },
+) => Promise<Response>;
 
 async function abortable<T>(promise: Promise<T>, signal: AbortSignal): Promise<T> {
   if (signal.aborted) throw new RpcFailure("cancelled");
@@ -102,6 +107,7 @@ export class RpcSession {
   private readonly maxReads: number;
   private readonly maxSends: number;
   private readonly beforeStateSend: (() => Promise<void>) | undefined;
+  private readonly onLogicalRead: (() => void) | undefined;
   private lastWall: number;
   private lastMono: number;
   private readonly waiting: Array<() => void> = [];
@@ -115,6 +121,7 @@ export class RpcSession {
     maxSends?: number;
     reserveReads?: number;
     beforeStateSend?: () => Promise<void>;
+    onLogicalRead?: () => void;
   }) {
     let parsed: URL;
     try {
@@ -129,6 +136,7 @@ export class RpcSession {
     this.maxSends = options.maxSends ?? Infinity;
     this.reservedReads = options.reserveReads ?? 0;
     this.beforeStateSend = options.beforeStateSend;
+    this.onLogicalRead = options.onLogicalRead;
     if (
       [this.maxReads, this.maxSends].some(
         (n) => n !== Infinity && (!Number.isSafeInteger(n) || n < 1),
@@ -230,6 +238,7 @@ export class RpcSession {
     method: string,
     params: readonly unknown[],
     sent: () => void,
+    retry: number,
   ): Promise<unknown> {
     if (method === "eth_call" || method === "eth_getCode") await this.beforeStateSend?.();
     this.guard();
@@ -241,12 +250,16 @@ export class RpcSession {
     try {
       sent();
       const response = await abortable(
-        this.fetcher(this.url, {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ jsonrpc: "2.0", id, method, params }),
-          signal,
-        }),
+        this.fetcher(
+          this.url,
+          {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ jsonrpc: "2.0", id, method, params }),
+            signal,
+          },
+          { retry },
+        ),
         signal,
       );
       this.guard();
@@ -304,14 +317,20 @@ export class RpcSession {
     }
     if (this.reads >= this.maxReads - this.reservedReads) throw new RpcFailure("budget");
     this.reads++;
+    this.onLogicalRead?.();
     await this.acquire();
     try {
       for (let send = 1; send <= POLICY.maxSends; send++) {
         let sent = false;
         try {
-          const result = await this.send(method, params, () => {
-            sent = true;
-          });
+          const result = await this.send(
+            method,
+            params,
+            () => {
+              sent = true;
+            },
+            send,
+          );
           this.requests.push({ method, send, outcome: "success" });
           return result;
         } catch (error) {

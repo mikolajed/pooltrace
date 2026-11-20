@@ -27,6 +27,7 @@ import {
 } from "./snapshot.ts";
 
 export interface AnalysisOptions {
+  readonly onLogicalRead?: () => void;
   readonly sizes?: readonly string[];
   readonly fetch?: Fetch;
   readonly clock?: Clock;

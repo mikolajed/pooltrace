@@ -64,6 +64,7 @@ export interface Eligibility {
   readonly workloadAdmitted: false;
 }
 export interface Options {
+  readonly onLogicalRead?: () => void;
   readonly clock?: Clock;
   readonly fetch?: Fetch;
   readonly signal?: AbortSignal;

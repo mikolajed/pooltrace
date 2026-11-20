@@ -156,6 +156,8 @@ export interface CliEnvelope {
   };
 }
 export interface CliDependencies {
+  readonly onLogicalRead?: () => void;
+  readonly onPhase?: (phase: "collection" | "quotes" | "revalidation") => void;
   readonly root: string;
   readonly env: Readonly<Record<string, string | undefined>>;
   readonly readFile?: (path: string) => string | undefined;
@@ -375,15 +377,18 @@ export async function runCli(
       ).fetch;
     const options = {
       clock,
+      ...(deps.onLogicalRead ? { onLogicalRead: deps.onLogicalRead } : {}),
       ...(fetcher ? { fetch: fetcher } : {}),
       ...(deps.signal ? { signal: deps.signal } : {}),
     };
+    deps.onPhase?.("collection");
     observation = await collectSnapshot(config, { ...options, origin: mode ?? "live" });
     persistence = store.saveObservation(observation);
     await yieldToLoop();
     collectionRevisionId =
       persistence.status === "saved" ? persistence.observationRevisionId : null;
     if (collectionRevisionId && store.available && observation.registry && !deps.signal?.aborted) {
+      deps.onPhase?.("quotes");
       analysis = await analyzeSnapshot(observation, config, { ...options, sizes: textSizes });
       persistence = store.saveAnalysis(analysis, collectionRevisionId);
       if (persistence.status === "saved")
@@ -397,6 +402,7 @@ export async function runCli(
       !deps.signal?.aborted
     ) {
       const previous = analysis;
+      deps.onPhase?.("revalidation");
       analysis = (await prepareAnalysisForUse(analysis, config, options)).analysis;
       if (analysis !== previous && collectionRevisionId && persistence.analysisRevisionId)
         persistence = store.saveAnalysis(
